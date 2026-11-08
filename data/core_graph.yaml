@@ -1,0 +1,338 @@
+meta:
+  version: "0.2.0-spatial"
+  title: "AI SWISS KNIFE // ONE-PAGE SPATIAL ARCHITECTURE"
+  subtitle: "Minard Token-Pipe Routing • Barycentric Trade-Off Space • Top-Down Modality Matrix"
+
+# ZONE A & B NODES: Providers with Minard Pipe Capacity (TPM) & Triangle Weights [Reasoning, Speed, Quota]
+providers:
+  google-ai-studio:
+    name: "Google AI Studio"
+    short: "Gemini API"
+    url: "https://aistudio.google.com/"
+    base_url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+    tier: "no-card-free"
+    pipe_tpm: 1000000
+    pipe_label: "1,000,000 TPM / 1.5K RPD (Flash)"
+    effective_ctx: "1M tokens (Flash) | 32K TPM cap (Pro)"
+    trains_on_data: "Yes (Exempt in EU/UK/CH)"
+    tri: [0.42, 0.23, 0.35]
+    color: "#38bdf8"
+    gotcha: "Only free cloud API with a 1M TPM pipe capable of 200K+ repo ingestion. Pro is throttled to 2 RPM / 50 RPD; use Flash for agent loops."
+
+  zhipu-bigmodel:
+    name: "Z.ai BigModel"
+    short: "Z.ai GLM"
+    url: "https://open.bigmodel.cn/"
+    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    tier: "no-card-free"
+    pipe_tpm: 500000
+    pipe_label: "5-10 Concurrent / Unlimited Daily Flash"
+    effective_ctx: "128K tokens"
+    trains_on_data: "Standard Free Tier Terms"
+    tri: [0.46, 0.16, 0.38]
+    color: "#34d399"
+    gotcha: "Zero-cost permanent Flash tier (GLM-5.3-Flash / 4.7-Flash) purpose-built for bash/terminal & MCP tool loops."
+
+  mistral-plateforme:
+    name: "Mistral La Plateforme"
+    short: "Mistral AI"
+    url: "https://console.mistral.ai/"
+    base_url: "https://api.mistral.ai/v1"
+    tier: "no-card-free"
+    pipe_tpm: 800000
+    pipe_label: "~1 Billion Tokens/Mo (Experiment)"
+    effective_ctx: "128K-256K tokens"
+    trains_on_data: "Yes (Mandatory on Free Tier)"
+    tri: [0.22, 0.20, 0.58]
+    color: "#fb923c"
+    gotcha: "Largest monthly free token quota on earth + dedicated Codestral FIM & OCR 4 endpoints, but trains on free-tier prompts."
+
+  cerebras-cloud:
+    name: "Cerebras Cloud"
+    short: "Cerebras"
+    url: "https://cloud.cerebras.ai/"
+    base_url: "https://api.cerebras.ai/v1"
+    tier: "no-card-free"
+    pipe_tpm: 600000
+    pipe_label: "1,000,000 Tokens/Day (2,000+ tok/s)"
+    effective_ctx: "8K-128K tokens"
+    trains_on_data: "See Developer Terms"
+    tri: [0.16, 0.56, 0.28]
+    color: "#f472b6"
+    gotcha: "Wafer-scale 2,000+ tok/s throughput destroys latency bottlenecks for JSON routing & high-speed batch extraction."
+
+  openrouter-free:
+    name: "OpenRouter (:free)"
+    short: "OpenRouter"
+    url: "https://openrouter.ai/"
+    base_url: "https://openrouter.ai/api/v1"
+    tier: "freemium-unlock"
+    pipe_tpm: 250000
+    pipe_label: "50 RPD ($0) -> 1,000 RPD ($10 Balance)"
+    effective_ctx: "32K-128K (Host Dependent)"
+    trains_on_data: "Filterable via Privacy Header"
+    tri: [0.48, 0.14, 0.38]
+    color: "#a78bfa"
+    gotcha: "Holding a one-time $10 credit balance unlocks 20x daily quota (1,000 RPD) across 18+ rotating :free frontier models."
+
+  nvidia-nim:
+    name: "NVIDIA NIM"
+    short: "NVIDIA NIM"
+    url: "https://build.nvidia.com/"
+    base_url: "https://integrate.api.nvidia.com/v1"
+    tier: "no-card-free"
+    pipe_tpm: 300000
+    pipe_label: "40 RPM Prototyping Catalog"
+    effective_ctx: "32K-128K tokens"
+    trains_on_data: "No (Prototyping License)"
+    tri: [0.64, 0.18, 0.18]
+    color: "#84cc16"
+    gotcha: "Best zero-cost gateway to test massive open-weight flagships (DeepSeek-V4-Pro, Kimi K3, Nemotron 3)."
+
+  groq-cloud:
+    name: "Groq Cloud"
+    short: "Groq LPU"
+    url: "https://console.groq.com/"
+    base_url: "https://api.groq.com/openai/v1"
+    tier: "no-card-free"
+    pipe_tpm: 8000
+    pipe_label: "8,000 TPM Wall / 1,000 RPD"
+    effective_ctx: "Throttled at 6K-8K TPM on 70B+"
+    trains_on_data: "No"
+    tri: [0.12, 0.76, 0.12]
+    color: "#f87171"
+    gotcha: "TRAP: 6K-8K TPM cap immediately 429s on 20K-token coding agents. Use strictly for Whisper STT (2K RPD) & <1K routers."
+
+  pollinations:
+    name: "Pollinations AI"
+    short: "Pollinations"
+    url: "https://pollinations.ai/"
+    base_url: "https://text.pollinations.ai/openai"
+    tier: "keyless"
+    pipe_tpm: 120000
+    pipe_label: "Keyless Zero-Auth IP Quota"
+    effective_ctx: "Standard"
+    trains_on_data: "Public Community Endpoint"
+    tri: [0.15, 0.30, 0.55]
+    color: "#fbbf24"
+    gotcha: "Zero-signup instant endpoint for Flux image generation and quick text/audio sandboxing."
+
+  unsloth-local:
+    name: "Unsloth Dynamic 3.0"
+    short: "Unsloth Local"
+    url: "https://github.com/unslothai/unsloth"
+    base_url: "http://localhost:8000/v1"
+    tier: "local-weights"
+    pipe_tpm: 950000
+    pipe_label: "Unlimited Local Hardware (UD-GGUF)"
+    effective_ctx: "Smart Auto-Context up to 1M"
+    trains_on_data: "No (100% Air-Gapped Local)"
+    tri: [0.36, 0.14, 0.50]
+    color: "#2dd4bf"
+    gotcha: "UD-Q4_K_XL Dynamic GGUFs fix broken chat templates on Qwen3.8, GLM-5, & Gemma 4; speaks native Anthropic & OpenAI APIs."
+
+# ZONE A: OPINIONATED TASK ROUTES (Used by `./ask route <intent>` & Minard Flow Diagram)
+routes:
+  coding-agent:
+    title: "Agentic Coding & Terminal CLI"
+    load: "~20K tok/step × 15 steps"
+    primary_provider: "zhipu-bigmodel"
+    primary_model: "glm-5.3-flash"
+    benchmark: "84.3% Terminal-Bench 2.1 | 79.0% SWE-bench (DeepSeek-V4-Flash)"
+    fallback_provider: "google-ai-studio"
+    fallback_model: "gemini-3.8-flash"
+    blocked_provider: "groq-cloud"
+    blocked_reason: "8K TPM cap < 20K single agent turn"
+
+  deep-reason:
+    title: "Scientific & PhD Logic Synthesis"
+    load: "High-compute chain-of-thought"
+    primary_provider: "nvidia-nim"
+    primary_model: "moonshotai/kimi-k3"
+    benchmark: "93.5% GPQA Diamond | 56.0% Humanity's Last Exam"
+    fallback_provider: "google-ai-studio"
+    fallback_model: "gemini-2.5-pro"
+    blocked_provider: "pollinations"
+    blocked_reason: "Shared community capacity drops long reasoning chains"
+
+  repo-1m:
+    title: "Full Repo / Multi-PDF Ingestion"
+    load: "100K - 1,000,000 tokens/prompt"
+    primary_provider: "google-ai-studio"
+    primary_model: "gemini-3.8-flash"
+    benchmark: "1M Effective Free Context + 1M TPM Pipe"
+    fallback_provider: "cerebras-cloud"
+    fallback_model: "llama-4-scout"
+    blocked_provider: "groq-cloud"
+    blocked_reason: "Truncated by 8K TPM ceiling"
+
+  fim-ide:
+    title: "IDE Inline Autocomplete (FIM)"
+    load: "<150ms sub-second diffs"
+    primary_provider: "mistral-plateforme"
+    primary_model: "codestral-latest"
+    benchmark: "80+ Language FIM Specialist (1B tok/mo free tier)"
+    fallback_provider: "unsloth-local"
+    fallback_model: "qwen3-coder-next-80b-a3b"
+    blocked_provider: "nvidia-nim"
+    blocked_reason: "Cold-start queue latency too high for keystroke FIM"
+
+  fast-json:
+    title: "Ultra-Fast Intent Router & JSON"
+    load: "2,000+ tok/s structured schema"
+    primary_provider: "cerebras-cloud"
+    primary_model: "qwen-3-32b"
+    benchmark: "2,000+ tok/s wafer-scale structured output"
+    fallback_provider: "groq-cloud"
+    fallback_model: "qwen3.8-27b"
+    blocked_provider: "google-ai-studio"
+    blocked_reason: "15 RPM limit bottlenecks high-QPS micro-routing"
+
+  voice-audio:
+    title: "Real-Time Voice (STT / TTS / Duplex)"
+    load: "<200ms audio stream"
+    primary_provider: "groq-cloud"
+    primary_model: "whisper-large-v3"
+    benchmark: "20 RPM / 2,000 RPD free STT + Fish S2.1 Pro / Voxtral TTS"
+    fallback_provider: "mistral-plateforme"
+    fallback_model: "voxtral-tts"
+    blocked_provider: "cerebras-cloud"
+    blocked_reason: "Text-only inference hardware"
+
+  rag-grounding:
+    title: "Web Grounding, Scrape & Rerank"
+    load: "Low-token Markdown + 32K Rerank"
+    primary_provider: "google-ai-studio"
+    primary_model: "firecrawl-keyless + cohere-rerank-5"
+    benchmark: "7,456 median tok/scrape (Firecrawl) + Embed 5 Pro/Fast shared space"
+    fallback_provider: "mistral-plateforme"
+    fallback_model: "mistral-ocr-4"
+    blocked_provider: "groq-cloud"
+    blocked_reason: "No native search/rerank endpoint"
+
+# ZONE C: TOP-DOWN MODALITY × ACCESS TIER MATRIX (Stone Librande Crossword Grid)
+matrix:
+  columns:
+    - id: "keyless"
+      label: "KEYLESS (0-AUTH)"
+    - id: "no-card-free"
+      label: "NO-CARD FREE API"
+    - id: "freemium-unlock"
+      label: "FREEMIUM / CREDITS"
+    - id: "local-weights"
+      label: "LOCAL OPEN WEIGHTS"
+  rows:
+    - modality: "AGENTIC CODE & REASONING"
+      cells:
+        keyless:
+          title: "Pollinations Text"
+          sub: "Quick sandbox only"
+          badge: "SANDBOX"
+          ref: "pollinations"
+        no-card-free:
+          title: "GLM-5.3-Flash / Gemini 3.8"
+          sub: "84.3% Term-Bench • 1M TPM"
+          badge: "TOP PICK"
+          ref: "zhipu-bigmodel"
+        freemium-unlock:
+          title: "OpenRouter :free ($10)"
+          sub: "DeepSeek-V4 / Kimi K3 (1K RPD)"
+          badge: "20X UNLOCK"
+          ref: "openrouter-free"
+        local-weights:
+          title: "Unsloth UD-Q4_K_XL"
+          sub: "DeepSeek-V4 / Qwen3-Coder-Next"
+          badge: "AIR-GAPPED"
+          ref: "unsloth-local"
+
+    - modality: "FAST ROUTER, FIM & JSON"
+      cells:
+        keyless:
+          title: "—"
+          sub: "No SLA keyless FIM"
+          badge: "EMPTY"
+          ref: null
+        no-card-free:
+          title: "Cerebras Qwen3 / Codestral"
+          sub: "2,000+ tok/s • 1B tok/mo FIM"
+          badge: "SPEED KING"
+          ref: "cerebras-cloud"
+        freemium-unlock:
+          title: "OpenRouter Gemma 4 31B"
+          sub: "1,000 RPD high-density router"
+          badge: "VERIFIED"
+          ref: "openrouter-free"
+        local-weights:
+          title: "Qwen3-0.6B / 4B & UI-TARS"
+          sub: "30.6M DL edge + OSWorld GUI"
+          badge: "ON-DEVICE"
+          ref: "unsloth-local"
+
+    - modality: "VOICE, TTS & MUSIC"
+      cells:
+        keyless:
+          title: "Pollinations Audio"
+          sub: "Basic keyless TTS"
+          badge: "BASIC"
+          ref: "pollinations"
+        no-card-free:
+          title: "Groq Whisper-v3 / Fish S2.1"
+          sub: "2K RPD STT • 83-lang emotive TTS"
+          badge: "PRODUCTION"
+          ref: "groq-cloud"
+        freemium-unlock:
+          title: "Deepgram Nova-3 / Cartesia"
+          sub: "$200 free credits • 40ms Sonic-4"
+          badge: "$200 CREDIT"
+          ref: "groq-cloud"
+        local-weights:
+          title: "Kyutai Moshi / Stable Audio"
+          sub: "<200ms duplex speech • SFX loops"
+          badge: "APACHE-2.0"
+          ref: "unsloth-local"
+
+    - modality: "IMAGE, OCR & VIDEO"
+      cells:
+        keyless:
+          title: "Pollinations FLUX"
+          sub: "Zero-auth image generation"
+          badge: "KEYLESS"
+          ref: "pollinations"
+        no-card-free:
+          title: "Mistral OCR 4 / Gemini Vision"
+          sub: "LaTeX/Table PDF to Markdown"
+          badge: "DOC KING"
+          ref: "mistral-plateforme"
+        freemium-unlock:
+          title: "FLUX 3 Max / Seedance 2.5"
+          sub: "1,139 Elo (12.4s) • Hailuo H3 ($5)"
+          badge: "ARENA #1"
+          ref: "nvidia-nim"
+        local-weights:
+          title: "FLUX.2 Klein / Wan 3.0 Video"
+          sub: "Kontext in-place edit • Colab GPU"
+          badge: "OPEN SOTA"
+          ref: "unsloth-local"
+
+    - modality: "SEARCH, SCRAPE & RERANK"
+      cells:
+        keyless:
+          title: "Firecrawl Keyless / Jina r."
+          sub: "7.4K tok/scrape • URL prefix MD"
+          badge: "ZERO-SDK"
+          ref: "google-ai-studio"
+        no-card-free:
+          title: "Exa 3.0 ($10/mo) / Tavily (1K)"
+          sub: "Neural search + Cohere Rerank 5"
+          badge: "AGENT RAG"
+          ref: "google-ai-studio"
+        freemium-unlock:
+          title: "OpenAlex / Semantic Scholar"
+          sub: "100K req/day free paper graph"
+          badge: "250M PAPERS"
+          ref: "google-ai-studio"
+        local-weights:
+          title: "Cohere Embed 5 Fast / BGE"
+          sub: "98.4% Pro retention vector index"
+          badge: "SHARED SPACE"
+          ref: "unsloth-local"
