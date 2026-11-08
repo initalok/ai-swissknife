@@ -1,13 +1,13 @@
 {
   "version": "0.2.0",
-  "last_checked": "2026-11-08T12:11:03.865885+00:00",
+  "last_checked": "2026-11-08T12:17:54.012178+00:00",
   "repositories": [
     {
       "id": "cybird-free-llm-api",
       "name": "CYBIRD-D/FREE-LLM-API-Provider",
       "url": "https://github.com/CYBIRD-D/FREE-LLM-API-Provider",
-      "raw_readme": "https://raw.githubusercontent.com/CYBIRD-D/FREE-LLM-API-Provider/main/README.md",
-      "last_synced_sha": null
+      "raw_readme": "https://raw.githubusercontent.com/CYBIRD-D/FREE-LLM-API-Provider/main/readme.md",
+      "last_synced_sha": "23e3569e00"
     },
     {
       "id": "cheahjs-free-llm-api",
