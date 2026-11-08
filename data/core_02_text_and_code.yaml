@@ -1,0 +1,117 @@
+pillar_id: "02-text-and-code"
+title: "Pillar 2: Task-Routed Text & Coding Models (Benchmark-Filtered)"
+description: "Curated frontier generalists and niche specialists mapped to verified benchmarks and optimal free upstream gateways."
+tasks:
+  - primary_role: "agentic-terminal-coding"
+    job_description: "Multi-file edits, bash execution, autonomous debugging, and MCP tool loops."
+    models:
+      - name: "DeepSeek-V4-Pro / DeepSeek-V4-Flash"
+        origin_region: "CN"
+        license: "MIT"
+        benchmark_proof: "SWE-bench Verified: 80.6% (V4-Pro), 79.0% (V4-Flash)"
+        recommended_providers: ["nvidia-nim", "openrouter-free", "unsloth-local"]
+        agent_ready: true
+      - name: "GLM-5.3-Flash / GLM-5.2"
+        origin_region: "CN"
+        license: "MIT"
+        benchmark_proof: "Terminal-Bench 2.1: 84.3% (5.3-Flash), 81.0% (5.2); Humanity's Last Exam: 55.3%"
+        recommended_providers: ["zhipu-bigmodel", "openrouter-free", "unsloth-local"]
+        agent_ready: true
+      - name: "Kimi K3 / Kimi K2.6"
+        origin_region: "CN"
+        license: "Open-Weights"
+        benchmark_proof: "Terminal-Bench 2.1: 88.3% (K3); SWE-bench Verified: 80.2% (K2.6)"
+        recommended_providers: ["nvidia-nim", "openrouter-free"]
+        agent_ready: true
+
+  - primary_role: "scientific-deep-reasoning"
+    job_description: "PhD-level logic, math proofs, system architecture, and complex synthesis."
+    models:
+      - name: "Kimi K3"
+        origin_region: "CN"
+        license: "Open-Weights"
+        benchmark_proof: "GPQA Diamond: 93.5%; Humanity's Last Exam: 56.0%"
+        recommended_providers: ["nvidia-nim", "openrouter-free"]
+        agent_ready: true
+      - name: "MiniMax M3"
+        origin_region: "CN"
+        license: "Open-API"
+        benchmark_proof: "GPQA Diamond: 93.0%"
+        recommended_providers: ["openrouter-free"]
+        agent_ready: true
+      - name: "Gemini 2.5 Pro / Gemini 3.8 Flash"
+        origin_region: "US"
+        license: "Proprietary"
+        benchmark_proof: "Top-tier multimodal reasoning + native code execution tool use"
+        recommended_providers: ["google-ai-studio"]
+        agent_ready: true
+
+  - primary_role: "long-context-ingestion"
+    job_description: "Full codebase ingestion, multi-PDF synthesis, and 100K-1M+ token prompts."
+    models:
+      - name: "Gemini 3.8 Flash / Gemini 2.5 Flash"
+        origin_region: "US"
+        license: "Proprietary"
+        benchmark_proof: "1M context window backed by 1M TPM free quota (no 8K TPM wall)"
+        recommended_providers: ["google-ai-studio"]
+        agent_ready: true
+      - name: "Llama 4 Scout"
+        origin_region: "US"
+        license: "Open-Weights"
+        benchmark_proof: "Up to 10M theoretical context; ultra-fast long-context recall on wafer-scale hardware"
+        recommended_providers: ["cerebras-cloud", "openrouter-free"]
+        agent_ready: true
+
+  - primary_role: "niche-fim-autocomplete"
+    job_description: "Sub-200ms IDE inline Fill-in-the-Middle (FIM) tab completion and fast diff refactoring."
+    models:
+      - name: "Codestral / Devstral 2"
+        origin_region: "EU"
+        license: "Apache-2.0 / Proprietary"
+        benchmark_proof: "80+ languages FIM specialist with dedicated free endpoint"
+        recommended_providers: ["mistral-plateforme"]
+        agent_ready: true
+      - name: "Qwen3-Coder-Next (80B MoE / 3B Active)"
+        origin_region: "CN"
+        license: "Apache-2.0"
+        benchmark_proof: "Activates only 3B params per token for near-instant repo-aware autocomplete"
+        recommended_providers: ["openrouter-free", "unsloth-local"]
+        agent_ready: true
+
+  - primary_role: "niche-fast-router-json"
+    job_description: "Sub-second intent classification, structured JSON extraction, and query rewriting."
+    models:
+      - name: "Qwen3.8-27B / Qwen3-32B"
+        origin_region: "CN"
+        license: "Apache-2.0"
+        benchmark_proof: "2,000+ tok/s on Cerebras; rock-solid schema adherence"
+        recommended_providers: ["cerebras-cloud", "groq-cloud", "unsloth-local"]
+        agent_ready: false
+      - name: "Gemma 4 31B-it"
+        origin_region: "US"
+        license: "Open-Weights"
+        benchmark_proof: "High instruction-following density for lightweight routing pipelines"
+        recommended_providers: ["google-ai-studio", "openrouter-free", "unsloth-local"]
+        agent_ready: false
+      - name: "Mistral Small 4 (119B MoE)"
+        origin_region: "EU"
+        license: "Apache-2.0"
+        benchmark_proof: "Fast European multilingual & structured output workhorse"
+        recommended_providers: ["mistral-plateforme"]
+        agent_ready: true
+
+  - primary_role: "niche-edge-and-gui-agents"
+    job_description: "On-device CPU/RAM execution and compact GUI/browser clicking automation."
+    models:
+      - name: "Qwen3-0.6B / Qwen3-4B (Unsloth UD-GGUF)"
+        origin_region: "CN"
+        license: "Apache-2.0"
+        benchmark_proof: "30.6M+ monthly downloads; runs in minimal RAM for local pre-filtering"
+        recommended_providers: ["unsloth-local"]
+        agent_ready: false
+      - name: "UI-TARS / Runner H"
+        origin_region: "CN / EU"
+        license: "Apache-2.0 / API"
+        benchmark_proof: "Outperforms general frontier LLMs on OSWorld desktop/browser GUI grounding"
+        recommended_providers: ["unsloth-local"]
+        agent_ready: true

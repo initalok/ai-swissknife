@@ -1,0 +1,44 @@
+name: Upstream Watch & Knowledge Base Compile
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 06:00 UTC
+  workflow_dispatch:      # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  watch-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Engine Triad (Ingest -> Lint -> Compile)
+        run: |
+          python scripts/engine.py all
+
+      - name: Commit & push if diff detected
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add upstream/sources.json upstream/latest_diff_report.md modules/ README.md
+          if git diff --staged --quiet; then
+            echo "No upstream changes or compilations to commit."
+          else
+            git commit -m "chore(upstream): auto-sync upstream diffs & recompile knowledge base"
+            git push
+          fi

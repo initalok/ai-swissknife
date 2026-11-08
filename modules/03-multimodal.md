@@ -1,0 +1,11 @@
+# Pillar 3: Multimodal Specialty APIs & Open Weights
+> Best-in-class Audio (STT/TTS/Duplex), Document OCR, Image, Video, and Music resources.
+
+| Category | Top Verified Models / APIs | Region | Access Route | Linked Gateways | Benchmark / Niche Edge |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `audio-stt-transcription` | [**Whisper-Large-v3 / Turbo & Deepgram Nova-3**](https://deepgram.com/) | `US` | `api-free + trial-credits` | `groq-cloud` | Groq hosts free Whisper-Large-v3 (20 RPM / 2K RPD); Deepgram gives $200 card-free credits for Nova-3 real-time diarization. |
+| `audio-tts-and-duplex-speech` | [**Fish Audio S2.1 Pro / Mistral Voxtral TTS / Kyutai Moshi & Hibiki**](https://fish.audio/) | `CN / EU` | `api-free + open-weights` | `mistral-plateforme`, `unsloth-local` | Fish S2.1 Pro leads 83-language emotive cloning (fair-use free API); Voxtral & Kyutai Moshi/Hibiki provide Apache-2.0 full-duplex <200ms voice. |
+| `document-vision-ocr` | [**Mistral OCR 4 & Gemini 3.8 Flash Vision**](https://console.mistral.ai/) | `EU / US` | `api-free` | `mistral-plateforme`, `google-ai-studio` | Preserves complex LaTeX math, multi-column tables, and scanned PDFs into clean Markdown better than generic VLMs. |
+| `image-generation-and-editing` | [**FLUX.2 (Klein/Dev/Pro), FLUX.1 Kontext & Qwen Image 3**](https://bfl.ai/) | `EU / CN` | `api-free + open-weights` | `pollinations`, `unsloth-local` | FLUX.1 Kontext edits scenes in-context without LoRAs; FLUX.2 Klein & Qwen Image 3 are Apache-2.0 open weights; Pollinations offers keyless Flux API. |
+| `video-generation-t2v-i2v` | [**FLUX 3 Max, Seedance 2.5, Hailuo H3-Max (Cloud) & Wan 3.0 / LTX 2.3 (Open Weights)**](https://fal.ai/) | `EU / CN` | `trial-credits + open-weights` | `unsloth-local` | FLUX 3 Max & Seedance 2.5 lead Video Arena (~1,139 Elo, 12.4s render); Hailuo H3 renders native stereo audio; Wan 3.0 (Apache-2.0) is #1 for free Kaggle/Colab GPUs. |
+| `music-and-sfx` | [**Stable Audio Open & ElevenLabs Music API**](https://huggingface.co/stabilityai/stable-audio-open-1.0) | `EU / US` | `open-weights + freemium` | `unsloth-local` | Stable Audio Open provides royalty-free open weights for SFX/loops; avoids fragile cookie-scraping wrappers for Suno/Udio. |
