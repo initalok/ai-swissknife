@@ -12,6 +12,7 @@ Commands:
   python ask.py render           # Compile poster.svg, index.html, and README.md
   python ask.py all              # Run ingest -> lint -> render
 """
+import html
 import json
 import math
 import os
@@ -178,8 +179,11 @@ def generate_svg(g):
     routes = g["routes"]
     matrix = g["matrix"]
 
+    def esc(s):
+        return html.escape(str(s)) if s else ""
+
     svg = [
-        '<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 1400 1060" width="100%" height="100%" style="background:#090d16;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;">',
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1060" width="100%" height="100%" style="background:#090d16;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;">',
         '<defs>',
         '  <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">',
         '    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#151f32" stroke-width="1"/>',
@@ -188,8 +192,8 @@ def generate_svg(g):
         '<rect width="1400" height="1060" fill="url(#grid)"/>',
         # Header Banner
         '<rect x="24" y="20" width="1352" height="58" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>',
-        f'<text x="44" y="47" fill="#f8fafc" font-size="18" font-weight="bold" letter-spacing="1.5">{g["meta"]["title"]}</text>',
-        f'<text x="44" y="66" fill="#94a3b8" font-size="11">{g["meta"]["subtitle"]} — [ONE-PAGE ARCHITECTURAL POSTER // {g["meta"]["version"]}]</text>',
+        f'<text x="44" y="47" fill="#f8fafc" font-size="18" font-weight="bold" letter-spacing="1.5">{esc(g["meta"]["title"])}</text>',
+        f'<text x="44" y="66" fill="#94a3b8" font-size="11">{esc(g["meta"]["subtitle"])} — [ONE-PAGE ARCHITECTURAL POSTER // {esc(g["meta"]["version"])}]</text>',
         '<rect x="1170" y="34" width="186" height="30" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>',
         '<text x="1263" y="53" fill="#ecfdf5" font-size="11" font-weight="bold" text-anchor="middle">● 9/9 GATES VERIFIED</text>',
 
@@ -210,22 +214,22 @@ def generate_svg(g):
 
         # Intent Box
         svg.append(f'<rect x="44" y="{y}" width="215" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>')
-        svg.append(f'<text x="54" y="{y+15}" fill="#f1f5f9" font-size="11" font-weight="bold">{r["title"]}</text>')
-        svg.append(f'<text x="54" y="{y+29}" fill="#94a3b8" font-size="9.5">{r["load"]}</text>')
+        svg.append(f'<text x="54" y="{y+15}" fill="#f1f5f9" font-size="11" font-weight="bold">{esc(r["title"])}</text>')
+        svg.append(f'<text x="54" y="{y+29}" fill="#94a3b8" font-size="9.5">{esc(r["load"])}</text>')
 
         # Minard Proportional Flow Pipe
         svg.append(f'<path d="M 259 {y+18} C 310 {y+18}, 320 {y+18}, 370 {y+18}" fill="none" stroke="{color}" stroke-width="{stroke_w}" stroke-opacity="0.85"/>')
-        svg.append(f'<text x="314" y="{y+11}" fill="{color}" font-size="8.5" text-anchor="middle" font-weight="bold">{p_prim["short"]}</text>')
+        svg.append(f'<text x="314" y="{y+11}" fill="{color}" font-size="8.5" text-anchor="middle" font-weight="bold">{esc(p_prim["short"])}</text>')
 
         # Target Model & Benchmark Node
         svg.append(f'<rect x="370" y="{y}" width="245" height="36" rx="4" fill="#0f172a" stroke="{color}" stroke-width="1.2"/>')
-        svg.append(f'<text x="380" y="{y+15}" fill="#f8fafc" font-size="10.5" font-weight="bold">✓ {r["primary_model"]}</text>')
-        svg.append(f'<text x="380" y="{y+29}" fill="#94a3b8" font-size="8.8">{r["benchmark"][:38]}</text>')
+        svg.append(f'<text x="380" y="{y+15}" fill="#f8fafc" font-size="10.5" font-weight="bold">✓ {esc(r["primary_model"])}</text>')
+        svg.append(f'<text x="380" y="{y+29}" fill="#94a3b8" font-size="8.8">{esc(r["benchmark"][:38])}</text>')
 
         # Blocked Trap Callout
         svg.append(f'<rect x="625" y="{y+3}" width="142" height="30" rx="4" fill="#2a1215" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2"/>')
-        svg.append(f'<text x="633" y="{y+16}" fill="#fca5a5" font-size="9" font-weight="bold">✗ {p_blk["short"]}</text>')
-        svg.append(f'<text x="633" y="{y+27}" fill="#f87171" font-size="8">{r["blocked_reason"][:22]}</text>')
+        svg.append(f'<text x="633" y="{y+16}" fill="#fca5a5" font-size="9" font-weight="bold">✗ {esc(p_blk["short"])}</text>')
+        svg.append(f'<text x="633" y="{y+27}" fill="#f87171" font-size="8">{esc(r["blocked_reason"][:22])}</text>')
 
     # ZONE B: Barycentric Trade-Off Triangle (Right Panel)
     svg.extend([
@@ -254,7 +258,7 @@ def generate_svg(g):
         px, py = barycentric_to_xy(p["tri"], top_v, left_v, right_v)
         c = p["color"]
         svg.append(f'<circle cx="{px}" cy="{py}" r="7" fill="{c}" stroke="#090d16" stroke-width="2"/>')
-        svg.append(f'<text x="{px+11}" y="{py+4}" fill="#e2e8f0" font-size="10" font-weight="bold">{p["short"]}</text>')
+        svg.append(f'<text x="{px+11}" y="{py+4}" fill="#e2e8f0" font-size="10" font-weight="bold">{esc(p["short"])}</text>')
 
     # ZONE C: Top-Down Modality Matrix (Bottom Full-Width Panel)
     svg.extend([
@@ -272,13 +276,13 @@ def generate_svg(g):
     for c_idx, col in enumerate(matrix["columns"]):
         cx = x0 + c_idx * col_w
         svg.append(f'<rect x="{cx}" y="{y0}" width="{col_w-10}" height="32" rx="4" fill="#1e293b" stroke="#334155"/>')
-        svg.append(f'<text x="{cx + (col_w-10)//2}" y="{y0+20}" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">{col["label"]}</text>')
+        svg.append(f'<text x="{cx + (col_w-10)//2}" y="{y0+20}" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">{esc(col["label"])}</text>')
 
     # Matrix Rows & Cells
     for r_idx, row in enumerate(matrix["rows"]):
         ry = y0 + 42 + r_idx * row_h
         svg.append(f'<rect x="44" y="{ry}" width="230" height="{row_h-10}" rx="4" fill="#0f172a" stroke="#334155"/>')
-        svg.append(f'<text x="56" y="{ry+36}" fill="#e2e8f0" font-size="11" font-weight="bold">{row["modality"]}</text>')
+        svg.append(f'<text x="56" y="{ry+36}" fill="#e2e8f0" font-size="11" font-weight="bold">{esc(row["modality"])}</text>')
 
         for c_idx, col in enumerate(matrix["columns"]):
             cx = x0 + c_idx * col_w
@@ -288,11 +292,11 @@ def generate_svg(g):
             bg_c = "#0f172a" if ref else "#090d16"
 
             svg.append(f'<rect x="{cx}" y="{ry}" width="{col_w-10}" height="{row_h-10}" rx="4" fill="{bg_c}" stroke="{border_c}" stroke-width="1.2"/>')
-            svg.append(f'<text x="{cx+12}" y="{ry+22}" fill="#f8fafc" font-size="11" font-weight="bold">{cell["title"]}</text>')
-            svg.append(f'<text x="{cx+12}" y="{ry+42}" fill="#94a3b8" font-size="9.5">{cell["sub"]}</text>')
+            svg.append(f'<text x="{cx+12}" y="{ry+22}" fill="#f8fafc" font-size="11" font-weight="bold">{esc(cell["title"])}</text>')
+            svg.append(f'<text x="{cx+12}" y="{ry+42}" fill="#94a3b8" font-size="9.5">{esc(cell["sub"])}</text>')
             # Micro Badge
             svg.append(f'<rect x="{cx+col_w-88}" y="{ry+8}" width="68" height="16" rx="3" fill="#1e293b"/>')
-            svg.append(f'<text x="{cx+col_w-54}" y="{ry+19}" fill="{border_c}" font-size="8" font-weight="bold" text-anchor="middle">{cell["badge"]}</text>')
+            svg.append(f'<text x="{cx+col_w-54}" y="{ry+19}" fill="{border_c}" font-size="8" font-weight="bold" text-anchor="middle">{esc(cell["badge"])}</text>')
 
     svg.append('</svg>')
     with open("poster.svg", "w", encoding="utf-8") as f:
