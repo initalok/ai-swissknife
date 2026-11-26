@@ -1,4 +1,4 @@
-# 🖥️ AI Swiss Knife — Local AI Dimension (`v2.0.0-local`)
+# 🖥️ AI Swiss Knife — Local AI Dimension (`v2.0.1-local`)
 > **Hardware Envelope:** `16GB VRAM + 64GB System RAM (~80 GB Total Pool)` — Pure local model roster verified for 16GB GPU + 64GB DDR5 workstations—split into Pure-VRAM Resident (Zone 1) and Hybrid MoE Offload (Zone 2).
 
 **Navigation:** 🌐 [**Cloud APIs (`README.md`)**](README.md) · 🖥️ **Local Models (`LOCAL_AI.md`)** · 🛠️ [**Backends & Flags (`ECOSYSTEM.md`)**](ECOSYSTEM.md) · 🤖 [**Local Manifest (`llms-local.txt`)**](llms-local.txt)
@@ -29,6 +29,7 @@ flowchart LR
 | :--- | :--- | :--- | :--- |
 | **Looped MoE Coding Star**<br><sub>Zone 1 (`Q3`) & Zone 2 (`Q4`/`Q8`)</sub> | **`Inkling 2 Mini`**<br><sub>**26.4B** total / **3.4B** base (**5.4B** eff.) · **1M ctx**</sub><br><sub>24 layers (middle 12 looped 3×) + `DSpark` drafter</sub> | `US` · `Apache-2.0` + AUP<br><sub><kbd>7.76–22.87 GB</kbd> GGUF (`UD-Q4_K_XL` **17.6 GB** + `639 MB` vision)</sub> | 🏆 **79.2%** SWE-bench Verified, **77.9%** SWE-Pro v2 Hard, **0.703** IPW (*lab-reported*; 20.1 AA Index).<br>⚠️ **Caveats:** Trails `Qwen3.8-27B` on strict chat (`50%` MultiChallenge, `-8.6` AA-Omniscience); requires Unsloth runtime + `--spec-draft-n-max 2`. |
 | **Pure 16GB VRAM Kings**<br><sub>Zone 1 · <= 15 GB Footprint</sub> | **`Qwen3.8-27B`** · `Dense Vision+Text`<br><sub>Beats Flint on Terminal-Bench (**73.0**) & SWE-Pro (**94.9**)</sub><br>**`Gemma 4 (26B-A4B)`** · `Text+Vision Only`<br><sub>**3.8B active** · ~140 tok/s in 16GB VRAM</sub> | `CN` · `Apache-2.0`<br>`US` · `Apache-2.0`<br><sub><kbd>13–15 GB</kbd> (`IQ4_XS` / `UD-IQ3_S`)</sub> | ✅ **`Qwen3.8-27B`** is #1 for strict instruction-following & dense coding.<br>⚠️ **Gemma 4 Audio Trap:** Only `E2B`/`E4B`/`12B` process audio—`26B-A4B` is **Text + Vision only**. |
+| **Harness-Adapted 27B LoRAs**<br><sub>Zone 1 · +304–912 MiB over Base</sub> | **`Qwen3.8-27B-super-adapter`** (`rank-96`)<br><sub>Merged `pi` + `Hermes` + `OpenCode` LoRA (wt ½)</sub><br>**`Qwen3.8-27B-{pi|hermes|opencode}-adapted`** | `HF` · `Apache-2.0`<br><sub><kbd>+304–912 MiB</kbd> GGUF LoRA (`--lora`) or `MLX-6bit` (23.1 GB Mac)</sub> | 🏆 **Thinking On:** **55.5%→63.5%** mean pass@1 (31–48% fewer tool calls). **Thinking Off (`pi`):** **39.2%→64.7%** SWE-Pro hard-51 (56–72% fewer calls).<br>⚠️ Use specialist w/ thinking off, super-adapter w/ thinking on; OOD AutomationBench stays flat; mild pre-tool reasoning leakage (`arXiv:2610.14270`). |
 | **Rescued 180B Frontier Flash**<br><sub>Zone 2 Ceiling · 66–73 GB Total</sub> | **`Qwen3.8-Flash-Next`**<br><sub>**180B** (125B MoE + 51B N-gram + 4B MTP) / **6B active**</sub><br><sub>Unsloth Dynamic v3.1 (`UD-IQ1_S` / `IQ1_M` / `Q2_0`)</sub> | `CN` · `qwen-community-1.0`<br><sub><kbd>66.4–70.5 GB</kbd> + **1.9–2.8 GB** MTP (9–13 GB OS margin)</sub> | 🏆 **91.9** DeepSWE 1.1; 51B N-gram prefetches asynchronously from 64GB DDR5 at near-GPU speed.<br>⚠️ **Hard Cap:** Never load `UD-Q2_K_XL` (79.6 GB) on 16+64 GB—leaves 0 GB for OS/KV cache. |
 | **Hybrid Agentic Coders**<br><sub>Zone 2 · 19–49 GB Sparse MoE</sub> | **`Qwen3-Coder-Next (80B-A3B)`** (~49 GB)<br>**`Recursive Flint (39.8B-A2.5B)`** (~25 GB)<br>**`North-Mini-Code-1.0 (30B-A3B)`** (~19 GB) | `CN/US/CA` · `Apache-2.0`<br><sub><kbd>19–49 GB</kbd> (`UD-Q4_K_XL`) · 2.5B–3B active</sub> | 🏆 `80B-A3B`: 512-expert workhorse; `North-Mini-Code`: multi-harness specialist.<br>⚠️ `Flint` scores (**89.7%** SWE-Pro v2) are *vendor-reported* and trail `Qwen3.8-27B` on Unsloth evals. |
 | **Olympiad Logic, Agents & Speed**<br><sub>Zone 1 & 2 · 4–24 GB</sub> | **`Nemotron-Cascade-2 (30B-A3B)`** (90.9% AIME)<br>**`Meta Muse Glimmer (30B + DFlash)`** (~20 GB)<br>**`Nemotron-3.5-Bolt (74B-A9B)`** (24 GB 2-bit QAT)<br>**`DiffusionGemma (26B-A4B)`** & **`Devstral Small 2`** | `US/EU` · `Apache-2.0` / `OpenMDW`<br><sub><kbd>15–24 GB</kbd> · `DFlash` 16-tok drafter</sub> | 🏆 `Muse Glimmer` (**94.7%** AIME, **65.9%** OSWorld) drafts 16 tokens/pass; `DiffusionGemma` denoises 256-tok blocks in parallel. |
@@ -72,6 +73,12 @@ llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-
 
 # [laya-decision] Zone 1 CPU/NPU (678-846 MB) — convaiinnovations/laya-typed-decisions
 unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888
+
+# [qwen-27b-super-adapter] Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA) — Qwen3.8-27B + harness-hub/Qwen3.8-27B-super-adapter (rank-96 LoRA for pi/Hermes/OpenCode)
+llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0
+
+# [qwen-27b-pi-specialist] Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off) — Qwen3.8-27B + harness-hub/Qwen3.8-27B-pi-adapted (64.7% SWE-Pro hard-51 under pi)
+llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0
 
 ```
 </details>

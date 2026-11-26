@@ -1,5 +1,5 @@
 meta:
-  version: "3.0.0-ecosystem"
+  version: "3.0.1-ecosystem"
   title: "🛠️ AI Swiss Knife — Engineering, Harnesses & Underground Atlas"
   tagline: "Operational brain covering how the AI stack actually runs, connects, optimizes, and ships—from Durable Harnesses and WanGP v20.12 to 2026 llama.cpp flags and OS/Silicon exclusives."
   editorial_note: "Verified against primary GitHub releases, model cards, and arXiv papers through **Nov 2026**. `v1` (`README.md`) and `v2` (`LOCAL_AI.md`) tell you **what** runs; `v3` (`ECOSYSTEM.md`) tells you **how** to run it at peak efficiency."
@@ -12,7 +12,7 @@ domains:
     rows:
       - col1: "**Google Antigravity**<br><sub>`2.0 Desktop` · `CLI` · `SDK`</sub>"
         col2: "Unified Google agentic harness<br><sub>Shared config across GUI + CLI</sub>"
-        col3: "Live w/ **`Gemini 3.8 Flash`** (default) + **`Gemini 4 Neon / Orchestrator / Hydrogen`**; `/agents` parallel subagents, `ctrl+k` approval, `@conversation` cross-import."
+        col3: "Live w/ **`Gemini 4 Hydrogen`** (fast Everyday/Thinking + Task mode), **`3.8 Flash`**, & **`4 Argon/Carbon/Neon`**; `/agents` parallel subagents, `ctrl+k` approval, `@conversation` import."
         col4: "✅ Export directly from AI Studio Build into local Antigravity with full context intact."
       - col1: "**Pi (`v0.83`) & `Durable Pi`**<br><sub>`pi.dev` · `disler/durable-pi`</sub>"
         col2: "MIT minimalist TUI/RPC/SDK +<br><sub>SQLite crash-resumable backend</sub>"
@@ -106,6 +106,10 @@ domains:
         col2: "Zed `ACP` (`Apache-2.0`)<br><sub>Anthropic `MCP`</sub>"
         col3: "**ACP** connects IDEs to external coding agents cleanly; **MCP** connects agents to external tools/data (Zed forwards MCP over ACP)."
         col4: "✅ Use both: ACP for the human review surface, MCP/Skills for agent tool execution."
+      - col1: "**`safeagents` Proxy & Plugins**<br><sub>`huggingface/safeagents`</sub>"
+        col2: "Transparent OpenAI/Anthropic proxy<br><sub>Works w/ Claude Code, Pi, Hermes, OpenCode</sub>"
+        col3: "3-stage guard: request checks, `atif-scan` (10–20ms on Apple Silicon), + optional **Decision Model judge**; Hub plugins (`hf://harness-hub/qwen-safeagents-plugin`, `safeagents-dotenv-plugin`)."
+        col4: "🏆 Audited **1.3M** RL tool calls & blocked **647** suspicious calls during HF harness-adapter training."
 
   - id: "silicon"
     title: "5. OS, Sandboxing & Silicon-Exclusive Stacks"
@@ -150,3 +154,11 @@ domains:
         col2: "Unsloth Anthropic API +<br>`Laya` (`localhost:8888`)"
         col3: "Point `Claude Code` or `OpenCode` to local `Inkling 2 Mini` / `Qwen3.8-27B` while gating shell commands through `laya-typed-decisions`."
         col4: "🛡️ Cap output tokens/turns on `Inkling 2 Mini` to prevent repetitive debug loops."
+      - col1: "**Harnessed Agentic RL Recipe**<br><sub>`OpenEnv` · `Repo2RLEnv` · `AsyncGRPO`</sub>"
+        col2: "[HF Harness Adapters](https://huggingface.co/blog/harness-adapters-at-scale)<br>`Agent Lightning v1.0` (`2608.17528`)"
+        col3: "Trains LoRAs inside the **unmodified shipping harness** via token/logprob proxy (`TRL AsyncGRPOTrainer`, LR `2e-5`, tool bonus `0.1`, `openenv validate` + base-model difficulty filter: **0.81** vs **0.63** reward)."
+        col4: "🧰 Full stack: `Repo2RLEnv`/`Tasksmith` (`SWE-smith`, `TaskTrove`, `termgrade`), `FineEnvs/multi-harness-rl`, & `harness-adapters-trajectories`."
+      - col1: "**Orthogonal Super-Adapters & Leakage**<br><sub>Zero-Training Rank-96 Concat</sub>"
+        col2: "`PEFT cat` · `Task Arithmetic` (`2212.04089`)<br>`TIES` · `KnOTS` · `Leakage` (`2610.14270`)"
+        col3: "Per-harness RL LoRAs have `~0.01–0.02` cosine similarity—concatenating at weight `½` (`rank 96`) merges 3 agents w/ zero retraining. Non-thinking RL induces short pre-tool *thinking leakage*."
+        col4: "⚙️ Serve via `vllm --enable-lora --max-lora-rank 128` or `llama-server --lora`; community `netprojects` MLX/GGUF builds retain MTP (2× decode speed)."

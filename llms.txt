@@ -1,5 +1,5 @@
 # AI Swiss Knife — Cloud Agent Foraging Manifest (llms.txt)
-> Version: 1.1.0 | See `llms-local.txt` for 16GB VRAM + 64GB RAM local models.
+> Version: 1.1.1 | See `llms-local.txt` for 16GB VRAM + 64GB RAM local models.
 
 ## Tier 0: Immediate Keyless Endpoints (Zero Auth / No API Key Needed)
 - LLM Chat (OpenAI-compat): POST https://text.pollinations.ai/openai/chat/completions (model: 'openai')
@@ -14,7 +14,7 @@
 
 ## Tier 2: Verified No-Card Cloud Gateways (Check Env Vars First)
 - [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | default_model:glm-4.7-flash | quota:Completely Free Flash tier (200K ctx / 128K out) | bottleneck:Concurrency cap; GLM-5.x line is billed (never call glm-5.3-flash on $0 balance)
-- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | default_model:gemini-3.8-flash | quota:Dynamic per-project free tier (3.8 Flash / 4 Hydrogen) + Decision 1 (200 RPM / 50K TPM / 10K RPD) | bottleneck:Gemini 2.5 retires Dec 1, 2026; 4 Carbon/Neon/Argon, Batch, & Search Grounding are paid-only
+- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | default_model:gemini-3.8-flash | quota:Free tier: Gemini 4 Hydrogen (Everyday & Thinking), Gemini 3.8 Flash (1M ctx), & Decision 1 (200 RPM / 50K TPM / 10K RPD) | bottleneck:Gemini 2.5 retires Dec 1, 2026; 4 Argon/Carbon/Neon, Batch, & Search Grounding are paid-only
 - [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | default_model:deepseek-ai/deepseek-v4.1-flash | quota:~40 RPM Developer Prototyping Catalog | bottleneck:Non-production license; MoE cold-start queues
 - [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | default_model:openrouter/free | quota:20 RPM · 50 RPD ($0) -> 1,000 RPD (>=10 credits balance) | bottleneck:Negative balance returns 402 even on :free; poll GET /api/v1/key for live quota
 - [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | default_model:qwen/qwen3.8-27b | quota:LLMs: 30 RPM / 1K RPD / 8K TPM / 200K TPD | Whisper: 20 RPM / 2K RPD / 28.8K audio sec/day | bottleneck:Strict 8,000 TPM wall on free LLMs; Llama 3.1/3.3 moved to Contact Sales

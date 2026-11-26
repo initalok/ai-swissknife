@@ -1,5 +1,5 @@
 meta:
-  version: "2.0.0-local"
+  version: "2.0.1-local"
   title: "🖥️ AI Swiss Knife — Local AI Dimension"
   hardware_envelope: "16GB VRAM + 64GB System RAM (~80 GB Total Pool)"
   tagline: "Pure local model roster verified for 16GB GPU + 64GB DDR5 workstations—split into Pure-VRAM Resident (Zone 1) and Hybrid MoE Offload (Zone 2)."
@@ -31,6 +31,16 @@ forage_local_profiles:
     model: "convaiinnovations/laya-typed-decisions"
     runtime: "Unsloth Desktop Decision API (localhost:8888) or laya.cpp"
     launch: "unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
+  qwen-27b-super-adapter:
+    zone: "Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)"
+    model: "Qwen3.8-27B + harness-hub/Qwen3.8-27B-super-adapter (rank-96 LoRA for pi/Hermes/OpenCode)"
+    runtime: "llama-server (--lora) or Mac MLX (netprojects/Qwen3.8-27B-super-adapter-MLX-6bit)"
+    launch: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0"
+  qwen-27b-pi-specialist:
+    zone: "Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)"
+    model: "Qwen3.8-27B + harness-hub/Qwen3.8-27B-pi-adapted (64.7% SWE-Pro hard-51 under pi)"
+    runtime: "llama-server (--lora + enable_thinking:false)"
+    launch: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{\"enable_thinking\": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0"
 
 local_text_code_matrix:
   - col1_role: "**Looped MoE Coding Star**<br><sub>Zone 1 (`Q3`) & Zone 2 (`Q4`/`Q8`)</sub>"
@@ -42,6 +52,11 @@ local_text_code_matrix:
     col2_models: "**`Qwen3.8-27B`** · `Dense Vision+Text`<br><sub>Beats Flint on Terminal-Bench (**73.0**) & SWE-Pro (**94.9**)</sub><br>**`Gemma 4 (26B-A4B)`** · `Text+Vision Only`<br><sub>**3.8B active** · ~140 tok/s in 16GB VRAM</sub>"
     col3_license_mem: "`CN` · `Apache-2.0`<br>`US` · `Apache-2.0`<br><sub><kbd>13–15 GB</kbd> (`IQ4_XS` / `UD-IQ3_S`)</sub>"
     col4_proof_gotcha: "✅ **`Qwen3.8-27B`** is #1 for strict instruction-following & dense coding.<br>⚠️ **Gemma 4 Audio Trap:** Only `E2B`/`E4B`/`12B` process audio—`26B-A4B` is **Text + Vision only**."
+
+  - col1_role: "**Harness-Adapted 27B LoRAs**<br><sub>Zone 1 · +304–912 MiB over Base</sub>"
+    col2_models: "**`Qwen3.8-27B-super-adapter`** (`rank-96`)<br><sub>Merged `pi` + `Hermes` + `OpenCode` LoRA (wt ½)</sub><br>**`Qwen3.8-27B-{pi|hermes|opencode}-adapted`**"
+    col3_license_mem: "`HF` · `Apache-2.0`<br><sub><kbd>+304–912 MiB</kbd> GGUF LoRA (`--lora`) or `MLX-6bit` (23.1 GB Mac)</sub>"
+    col4_proof_gotcha: "🏆 **Thinking On:** **55.5%→63.5%** mean pass@1 (31–48% fewer tool calls). **Thinking Off (`pi`):** **39.2%→64.7%** SWE-Pro hard-51 (56–72% fewer calls).<br>⚠️ Use specialist w/ thinking off, super-adapter w/ thinking on; OOD AutomationBench stays flat; mild pre-tool reasoning leakage (`arXiv:2610.14270`)."
 
   - col1_role: "**Rescued 180B Frontier Flash**<br><sub>Zone 2 Ceiling · 66–73 GB Total</sub>"
     col2_models: "**`Qwen3.8-Flash-Next`**<br><sub>**180B** (125B MoE + 51B N-gram + 4B MTP) / **6B active**</sub><br><sub>Unsloth Dynamic v3.1 (`UD-IQ1_S` / `IQ1_M` / `Q2_0`)</sub>"
