@@ -1,52 +1,28 @@
-← [Ch 02: Local Models](02-local-16vram-64ram.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 04: Harnesses](04-harnesses-protocols.md) →
+← [🏠 Field Book Cover](../README.md) &nbsp;|&nbsp; [🎯 Use-Case Packs](packs/README.md) &nbsp;|&nbsp; [🪦 Graveyard](99-graveyard.md)
 
-# Chapter 03 · Multimodal, Voice, Video & World Models
+# Chapter 03 · Multimodal, Voice, Video, 3D & World Models
 
 > [!IMPORTANT]
-> **Verdict:** Use zero-card cloud APIs for fast audio STT (Groq Whisper), multi-PDF vision (Gemini 3.8 Flash), and keyless FLUX drafts— but pivot immediately to local open weights for RGBA editing, directed multi-speaker TTS, interactive world models, and 1080p video.
-> **Read this chapter if:** You need to decide when to call a free cloud sensory endpoint vs. running local media models inside 16GB VRAM + 64GB RAM.
+> **Verdict:** Use free cloud STT/vision where fast, and pivot locally for RGBA editing, directed multi-speaker TTS, 3D meshes, and 5.9 GB 1080p video.
+> **Read this chapter if:** You are building image, video, audio, OCR, 3D asset, or interactive world pipelines.
 
-```mermaid
-flowchart TD
-    M["🎨 MULTIMODAL WORKLOAD"] --> A["🎙️ Voice & ASR"]
-    M --> B["🖼️ Image & RGBA Edit"]
-    M --> C["🎬 Video & Interactive Worlds"]
-    M --> D["📄 Causal OCR & Visual RAG"]
-    A -->|"Cloud Free"| A1["Groq Whisper (2K RPD) · Fish Free"]
-    A -->|"Local <= 16GB+64GB"| A2["Fish Drama 3 (35B) · Ming-3.0 · Phonon 31M (WebGPU)"]
-    B -->|"Cloud Keyless"| B1["Pollinations FLUX (0-Auth)"]
-    B -->|"Local <= 16GB"| B2["Qwen-Image-2.1 (9.1GB) · FLUX.2 Klein (Apache)"]
-    C -->|"No Free Cloud Video"| C1["WanGP v20.12 (5.9GB H3) · Wan 2.2 · LTX-2.5 · Hy-Nomas"]
-    D -->|"Cloud / Local"| D1["Gemini 3.8 Vision / DeepSeek-OCR 2 (<4GB) + CPU RAG"]
-```
+## 1. Verified Multimodal & 3D Stack
 
-<br>
-
-## 1. Unified Cloud-Free vs. Local Pivot Matrix
-
-| Modality & Job | Top Verified Models | Free Cloud vs. Local Footprint | Why It Wins & License / Hardware Gotcha |
+| Model & Health | Strengths & Proof | License, Footprint & TTL | Hardware / License Gotcha |
 | :--- | :--- | :--- | :--- |
-| **Image Gen & Native RGBA**<br><sub>2048px typography & 10-ref lock</sub> | **`Qwen-Image-2.1` (7B DiT)**<br><sub>#1 VDEBench · Native RGBA layers</sub><br>**`FLUX.2 Klein`** · **`FLUX.1 Kontext`**<br>**`SenseNova-U1.5 (8B)`** (4K infographics) | ☁️ [**Pollinations**](https://pollinations.ai/) (<kbd>Keyless</kbd> FLUX)<br>🖥️ <kbd>8–14 GB VRAM</kbd> (`2.1` = **9.1 GB** Q4) | ✅ Separate `Qwen-Image-2.1` (7B, fits 16GB easily) from `nvidia/Qwen-Image-Flash` (20.4B DiT, needs RAM offload).<br>⚠️ `2.1` is `Qwen Research` (non-commercial); use **`FLUX.2 Klein` (`Apache-2.0`)** commercially. |
-| **Video + Audio & World Models**<br><sub>1080p video & WASD walkable worlds</sub> | **`Wan 2.2 (5B & A14B)`** · `Apache-2.0`<br>**`LTX-2.5 (22B Video+Audio)`** · `Kandinsky 6.0 Lite`<br>**`Tencent Hy-Nomas`** (Interactive World Model) | ☁️ **No Permanent Free Cloud Video**<br><sub>(MiniMax $5 trial only)</sub><br>🖥️ <kbd>5.9–15 GB VRAM</kbd> + 64GB RAM swap | 🏆 **`WanGP v20.12`** Extreme Chunker runs 15s 1080p `Hailuo H3` in **5.9 GB VRAM**.<br>🏆 **`Hy-Nomas`** generates WASD-walkable worlds on 1 GPU (pair w/ `LTX-2.5` for audio). |
-| **Directed Voice, TTS & Duplex**<br><sub>16-speaker acting & 4.9ms WebGPU</sub> | **`Fish Audio Drama 3 (35B-A3B)`** (1245 Elo)<br>**`Ming-3.0-tts`** & **`ZONOS3 Mini`** (43 langs)<br>**`Phonon 31M`** (64.5 MB) · **`Kyutai Moshi`** | ☁️ [**Fish Audio**](https://fish.audio/) (<kbd>No Card</kbd> Fair-Use)<br>🖥️ <kbd>0.06–20 GB</kbd> (`Drama 3` in Zone 2) | 🏆 **`Phonon 31M`** (`Apache-2.0`, English-only; `40M` is `CC BY-NC`) runs in browser WebGPU at **115×–130× RT (4.9ms)**.<br>🏆 **`Drama 3`** (`Fish Community <$500K`) supports 16 speakers + word inpainting via `SGLang-Omni`. |
-| **Speech-to-Text & Alignment**<br><sub>Real-time ASR + word timestamps</sub> | **`Whisper-Large-v3-Turbo`** (`MIT`)<br>**`Qwen3-ASR (1.7B)` + `ForcedAligner-0.6B`**<br>**`Deepgram Nova-3`** (Streaming) | ☁️ [**Groq**](https://console.groq.com/) (**2K RPD / 28.8K s/day**)<br>🖥️ <kbd>2–3 GB VRAM</kbd> (10× real-time) | 🏆 `Qwen3-ASR` + `ForcedAligner` delivers single-pass word timestamps locally.<br>⚠️ Chunk audio files >25 MB before calling Groq. |
-| **Causal OCR, GUI & Visual RAG**<br><sub>PDF reading order & zero-VRAM RAG</sub> | **OCR:** **`DeepSeek-OCR 2 (3B)`** · `olmOCR-2`<br>**GUI:** **`UI-TARS (7B)`** · `North Micro Vision`<br>**RAG:** **`EmbeddingGemma 2`** · **`Qwen3-VL-Embed`** | ☁️ **Gemini 3.8 Vision** / **NIM VLM**<br>🖥️ <kbd>1.5–10 GB</kbd> (Run RAG on CPU RAM) | ✅ `DeepSeek-OCR 2` uses Visual Causal Flow for multi-column tables (<4 GB VRAM). Pin `EmbeddingGemma 2` in 64GB RAM so RAG uses **0 MB VRAM**. |
-
-<details>
-<summary>🛠️ <b>Click to expand Zero-Auth Image & Groq Whisper Quick-Calls</b></summary>
-<br>
-
-```bash
-# 1. Zero-Auth Keyless FLUX Image (Pollinations)
-curl -L "https://image.pollinations.ai/prompt/minimalist_swiss_grid_ai_blueprint?width=1024&height=1024&model=flux&nologo=true" -o blueprint.jpg
-
-# 2. Free Whisper-Large-v3 Audio Transcription (Groq — 2,000 RPD Free)
-curl "https://api.groq.com/openai/v1/audio/transcriptions" \
-  -H "Authorization: Bearer $GROQ_API_KEY" \
-  -F "model=whisper-large-v3" -F "file=@audio.mp3"
-```
-</details>
+| [**Qwen-Image-2.1 (7B DiT)**](https://huggingface.co/Qwen/Qwen-Image-2.1)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 #1 VDEBench; native RGBA layer output and 2048px typography in 9.1 GB VRAM (Q4_K_M via sd.cpp) | `Qwen Research (Non-Commercial)` · <kbd>zone1-16gb-vram</kbd> · ~9.1 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ Non-commercial Qwen Research license; separate from nvidia/Qwen-Image-Flash (20.4B DiT needing RAM offload). |
+| [**FLUX.2 Klein**](https://huggingface.co/black-forest-labs)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 Permissive Apache-2.0 commercial-safe image generator fitting cleanly inside 16GB VRAM | `Apache-2.0` · <kbd>zone1-16gb-vram</kbd> · ~10.0 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ Use FLUX.2 Klein instead of Qwen-Image-2.1 for commercial product graphics. |
+| [**Wan 2.2 (5B & A14B Video)**](https://huggingface.co/Wan-AI)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 Top permissive Apache-2.0 open-weight video model accelerated by WanGP v20.12 MMGP v4 | `Apache-2.0` · <kbd>zone1-2-hybrid</kbd> · ~8.0 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ Wan 3.0 and Wan 2.6 remain closed APIs with no published weights. |
+| [**LTX-2.5 (22B Video + Sync Audio)**](https://huggingface.co/Lightricks)<br><sub>`operational` · 🟢 `Fresh`</sub> | 🏆 Synchronized video + audio generation; pairs with Hy-Nomas for video-conditioned world sound | `LTX-Community` · <kbd>zone2-64gb-hybrid</kbd> · ~14.0 GB<br><sub>Verified `2026-11-26` (TTL 60d)</sub> | ⚠️ Requires 64GB RAM block-swapping on 16GB GPUs; verify LTX Community commercial thresholds. |
+| [**Tencent Hy-Nomas (Interactive World Model)**](https://github.com/Tencent-Hunyuan/Hy-Nomas)<br><sub>`experimental` · 🟢 `Fresh`</sub> | 🏆 Open-weight WASD-walkable interactive world generator with single-GPU inference and LoRA support | `Non-Commercial (PixelUMM)` · <kbd>zone1-16gb-vram</kbd> · ~12.0 GB<br><sub>Verified `2026-11-26` (TTL 21d)</sub> | ⚠️ Uses NVIDIA PixelUMM decoder (non-commercial previs/pitch use only). |
+| [**Fish Audio Drama 3 (35B-A3B TTS)**](https://fish.audio/)<br><sub>`operational` · 🟢 `Fresh`</sub> | 🏆 16-speaker tags, single-word Audio Inpainting, #1 Pronunciation Robustness (93.2%) via SGLang-Omni | `Fish Community (<$500K/yr)` · <kbd>zone2-64gb-hybrid</kbd> · ~20.0 GB<br><sub>Verified `2026-11-26` (TTL 60d)</sub> | ⚠️ Free commercial cap at $500K annual revenue; runs in Zone 2 hybrid on 16GB+64GB. |
+| [**Gradium Phonon 31M WebGPU TTS**](https://github.com/blixt/phonon)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 64.5 MB q8.gguf running inside browser WebGPU at 115-130x real-time with 4.9ms first-audio latency | `Apache-2.0` · <kbd>browser-webgpu</kbd> · ~0.11 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ English-only; larger 5-language Phonon 40M checkpoints are CC BY-NC 4.0 non-commercial. |
+| [**Qwen3-ASR (1.7B) + ForcedAligner-0.6B**](https://huggingface.co/Qwen)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 Local 10x real-time speech recognition with single-pass word-level timestamp alignment | `Apache-2.0` · <kbd>zone1-16gb-vram</kbd> · ~3.0 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ For zero-VRAM cloud bursts, Groq Whisper-Large-v3 offers 2,000 free RPD. |
+| [**DeepSeek-OCR 2 (3B)**](https://huggingface.co/deepseek-ai)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 Visual Causal Flow restores human reading order across multi-column PDFs, LaTeX, and tables | `MIT` · <kbd>zone1-16gb-vram</kbd> · ~3.8 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ Run locally on sensitive PDFs instead of free cloud vision APIs. |
+| [**EmbeddingGemma 2 (Multimodal RAG)**](https://huggingface.co/google)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 Text + image retrieval pinned in 64GB DDR5 RAM so RAG consumes 0 MB VRAM | `Apache-2.0` · <kbd>cpu-ram-0vram</kbd><br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ Keep chunk sizes disciplined when mixing high-res PDF crops with text. |
+| [**Microsoft TRELLIS v1 (3D Asset Gen)**](https://github.com/microsoft/TRELLIS)<br><sub>`mature` · 🟢 `Fresh`</sub> | 🏆 MIT-licensed structured 3D latent asset generator fitting inside 16GB VRAM | `MIT` · <kbd>zone1-16gb-vram</kbd> · ~15.5 GB<br><sub>Verified `2026-11-26` (TTL 120d)</sub> | ⚠️ TRELLIS.2 officially demands 24GB VRAM; stick to TRELLIS v1 or quantized ComfyUI builds on 16GB. |
+| [**Hunyuan3D 2.0 / 2mini (PBR 3D)**](https://github.com/Tencent/Hunyuan3D-2)<br><sub>`operational` · 🟢 `Fresh`</sub> | 🏆 High-detail PBR-textured 3D mesh generation in 6-16 GB VRAM | `Tencent Community (Geo-Restricted)` · <kbd>zone1-16gb-vram</kbd> · ~12.0 GB<br><sub>Verified `2026-11-26` (TTL 60d)</sub> | ⚠️ Tencent Community License is invalid in EU, UK, and South Korea; HY 3D 3.0/3.1 are closed API-only. |
 
 ---
 
-← [Ch 02: Local Models](02-local-16vram-64ram.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 04: Harnesses](04-harnesses-protocols.md) →
+← [🏠 Field Book Cover](../README.md) &nbsp;|&nbsp; [🎯 Use-Case Packs](packs/README.md) &nbsp;|&nbsp; [🪦 Graveyard](99-graveyard.md)

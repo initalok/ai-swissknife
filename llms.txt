@@ -1,40 +1,45 @@
-# AI Swiss Knife — Compact Agent Router (v2.1.0)
-> Local Hardware Envelope: 16GB VRAM + 64GB System RAM (~80 GB Total Pool)
-> Fetch `llms-full.txt` for complete tables or open individual `book/*.md` chapters.
+# AI Swiss Knife — Freshness-Gated Agent Router (3.0.0-modular)
+> Snapshot: 2026-11-26 | Active Agent-Eligible Entities: 88 | Stale/Degraded Auto-Excluded: 0
+> Monitor-only frontier entries (book/08-frontier-watch.md) are intentionally excluded from routing.
 
-## Tier 0: Immediate Keyless Endpoints (No API Key Required)
-- LLM Chat (OpenAI-compat): POST https://text.pollinations.ai/openai/chat/completions (model: 'openai')
-- Image Gen (FLUX): GET https://image.pollinations.ai/prompt/{prompt}?model=flux&nologo=true
-- Web/PDF to Markdown: GET https://r.jina.ai/{target_url}
-- Keyless Search: GET https://s.jina.ai/?q={query}
-- Firecrawl Keyless Skill: GET https://www.firecrawl.dev/agent-onboarding/SKILL.md
-- Academic Papers (100K/day): GET https://api.openalex.org/works?search={query}&filter=is_oa:true&mailto=agent@localhost
+## Active Cloud Gateways (Fresh Only)
+- [google-ai-studio] tier:tier2-cloud-free | env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-3.8-flash | verified:2026-11-26
+- [zhipu-bigmodel] tier:tier2-cloud-free | env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash | verified:2026-11-26
+- [nvidia-nim] tier:tier2-cloud-free | env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash | verified:2026-11-26
+- [openrouter-free] tier:tier2-cloud-free | env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free | verified:2026-11-26
+- [groq-cloud] tier:tier2-cloud-free | env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b | verified:2026-11-26
+- [cloudflare-workers-ai] tier:tier2-cloud-free | env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef | verified:2026-11-26
+- [unsloth-local-api] tier:tier1-local | env:None | base_url:http://localhost:8000/v1 | model:qwen3.8-27b | verified:2026-11-26
+- [pollinations] tier:tier0-keyless | env:None | base_url:https://text.pollinations.ai/openai | model:openai | verified:2026-11-26
 
-## Tier 1: Local Runtime (`python scripts/build.py forage <id> --local`)
-- Unsloth / llama-server: http://localhost:8000/v1 | Local Laya Decisions: http://localhost:8888
-- [qwen-27b-super-adapter] [mature-riced] (Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
-- [qwen-27b-pi-specialist] [mature-riced] (Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
-- [qwen-27b-vram] [mature-riced] (Zone 1 (100% in 16GB VRAM)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
-- [qwen-coder-80b] [mature-riced] (Zone 2 Hybrid (49 GB: 16GB VRAM Attention + 64GB RAM Experts)) -> `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
-- [laya-decision] [mature-riced] (Zone 1 CPU/NPU (678-846 MB)) -> `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
-- [inkling-coding] [cutting-edge] (Zone 1/2 (13-18 GB Looped MoE)) -> `unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2`
-- [qwen-flash-180b] [cutting-edge] (Zone 2 Ceiling (66.4-70.5 GB + MTP)) -> `llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none`
-- [flint-coding] [cutting-edge] (Zone 2 Sweet Spot (25.05 GB)) -> `llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18`
+## Active Local Launch Profiles (16GB VRAM + 64GB RAM)
+- [qwen38-27b-super-adapter] [mature] cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen38-27b-pi-adapted] [mature] cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen3.8-27b] [mature] cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
+- [qwen3-coder-next-80b] [mature] cmd: `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
+- [hermes-4-neutral] [mature] cmd: `llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768`
+- [dolphin-3-r1-24b] [mature] cmd: `llama-server -m Dolphin3.0-R1-Mistral-24B-Q4_K_M.gguf -ngl 99 -fa on -c 32768`
+- [qwen3.8-27b-uncensored] [operational] cmd: `llama-server -m Qwen3.8-27B-Uncensored-IQ4_XS.gguf -ngl 99 -fa on --spec-type draft-mtp --spec-draft-n-max 1 -ctk q8_0 -ctv q8_0`
+- [inkling-2-mini] [experimental] cmd: `unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2`
+- [qwen3.8-flash-next] [experimental] cmd: `llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none`
+- [recursive-flint] [experimental] cmd: `llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18`
+- [laya-decisions] [mature] cmd: `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
 
-## Tier 2: Verified No-Card Cloud Gateways (`python scripts/build.py forage <intent>`)
-- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-3.8-flash
-- [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash
-- [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash
-- [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free
-- [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b
-- [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef
+## Active Cloud Forage Chains
+- coding-agent: google-ai-studio -> zhipu-bigmodel -> openrouter-free -> nvidia-nim -> unsloth-local-api -> pollinations
+- repo-1m: google-ai-studio -> zhipu-bigmodel -> unsloth-local-api
+- deep-reason: nvidia-nim -> google-ai-studio -> openrouter-free -> unsloth-local-api -> pollinations
+- fast-json: groq-cloud -> google-ai-studio -> cloudflare-workers-ai -> unsloth-local-api -> pollinations
+- decision-gate: google-ai-studio -> cloudflare-workers-ai -> unsloth-local-api
+- voice-stt: groq-cloud
 
-## Field Book Chapters
-- [Ch 01: Cloud APIs](book/01-cloud-apis.md): Only 6 cloud gateways remain genuinely card-free as of Nov 2026—pair Google AI Studio (Gemini 4 Hydrogen / 3.8 Flash) and Z.ai (GLM-4.7-Flash) for agent loops, Cloudflare/Google for $0-output System-1 decisions, and keyless Jina/Firecrawl/Exa for RAG.
-- [Ch 02: Local Models](book/02-local-16vram-64ram.md): Separate your local stack into two tracks: Mature & Fully Riced daily drivers (Qwen3.8-27B + Harness Adapters, Qwen3-Coder-Next, Gemma 4) vs. Cutting-Edge experimental architectures (Inkling 2 Mini looped MoE, varloop, DiffusionGemma, Muse Glimmer) that require newer runtimes and stricter turn caps.
-- [Ch 03: Multimodal](book/03-multimodal-sensory.md): Use zero-card cloud APIs for fast audio STT (Groq Whisper), multi-PDF vision (Gemini 3.8 Flash), and keyless FLUX drafts— but pivot immediately to local open weights for RGBA editing, directed multi-speaker TTS, interactive world models, and 1080p video.
-- [Ch 04: Harnesses](book/04-harnesses-protocols.md): Organize harnesses by architectural role: treat Pi / Pi Durable as your minimal building-block kernel, DeepSeek Harness (dsh) as the Cordis plugin-everything platform, and Hermes Agent as the self-improving autonomous daemon—all shielded by safeagents.
-- [Ch 05: Backends & Flags](book/05-backends-flags-silicon.md): Serving kernels and memory flags matter as much as model weights: `--n-cpu-moe` unlocks 64GB RAM MoEs without touching `-ngl`, Unsloth accelerates looped & VRAM-exceeding GGUFs 1.9×–3×, and `WanGP v20.12` squeezes 1080p video into 5.9 GB VRAM.
-- [Ch 06: Harness Adapters & RL](book/06-adaptation-frontier.md): Instead of chasing giant base models, freeze one strong 27B backbone and train lightweight RL LoRA adapters directly inside your unmodified shipping harness— cutting tool calls by 53–73% while gaining +13 to +25 points, and merging orthogonal adapters at rank 96 with zero retraining.
-- [Ch 07: Community IRL](book/07-community-irl.md): The biggest real-world gains rarely come from raw model drops alone—they come from community alt-engines (3×–6× faster on 12–16GB GPUs), discipline skill packs (obra/superpowers), two-pass audit loops, and multi-tool indie pipelines chained together on consumer hardware.
-- [Ch 08: Frontier Watch](book/08-frontier-watch.md) [MONITOR-ONLY]: This chapter tracks the absolute apex of closed and rack-scale AI strictly to monitor capability ceilings, harness/caching breakthroughs, and open-weight trickle-down signals—never mixing paid or datacenter giants into Ch 01 ($0 Cloud) or Ch 02 (16GB+64GB Local).
+## Independent Use-Case Specialist Packs (`python scripts/cli.py query pack <id>`)
+- [pack-app-dev] (fresh) -> book/packs/pack-app-dev.md | active_stack: qwen38-27b-super-adapter, inkling-2-mini, antigravity, pi, mobile-build-mcp, argent-mobile, expo-mcp, safeagents
+- [pack-game-dev] (fresh) -> book/packs/pack-game-dev.md | active_stack: qwen3-coder-next-80b, inkling-2-mini, trellis-v1, hunyuan3d-2, pi, zed-acp, blender-mcp, unity-godot-unreal-mcps, aseprite-mcp, safeagents
+- [pack-promotion] (fresh) -> book/packs/pack-promotion.md | active_stack: google-ai-studio, qwen3.8-27b, hermes-agent, opencode, ai-marketing-skills, product-launch-video-skills, postiz, safeagents
+- [pack-research] (fresh) -> book/packs/pack-research.md | active_stack: google-ai-studio, qwen3.8-27b, hermes-agent, pi-durable, gpt-researcher, deerflow-2, k-dense-skills, exa-search, tavily-search, openalex-arxiv
+- [pack-reverse-eng] (fresh) -> book/packs/pack-reverse-eng.md | active_stack: qwen3.8-27b, qwen3-coder-next-80b, pi, oghidra-mcp, ida-jadx-radare-mcps, safeagents
+- [pack-social-media] (fresh) -> book/packs/pack-social-media.md | active_stack: google-ai-studio, qwen3.8-27b, laya-decisions, hermes-agent, pi-durable, postiz, blader-humanizer, safeagents
+- [pack-uncensored] (fresh) -> book/packs/pack-uncensored.md | active_stack: hermes-4-neutral, qwen3.8-27b-uncensored, gemma-4-26b-heretic, dolphin-3-r1-24b, pi, opencode, safeagents, laya-decisions
+- [pack-video-edit] (fresh) -> book/packs/pack-video-edit.md | active_stack: google-ai-studio, qwen3.8-27b, wan-2.2, ltx-2.5, pi, deepseek-harness, davinci-resolve-mcp, hyperframes-remotion, openmontage-openmotion, wangp-v20
+- [pack-web-dev] (fresh) -> book/packs/pack-web-dev.md | active_stack: qwen3.8-27b, qwen38-27b-super-adapter, google-ai-studio, pi, antigravity, zed-acp, playwright-mcp, context7-mcp, taste-impeccable-skills, safeagents

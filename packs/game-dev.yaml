@@ -1,0 +1,18 @@
+id: pack-game-dev
+title: "Game Development & Local 16GB 3D Assets"
+category: engineering
+lifecycle: operational
+decay_class: operational
+last_verified: "2026-11-26"
+verdict: "Wire sparse coding MoEs directly into Blender, Unity, Godot, Unreal 5.8, or Aseprite MCPs, backed by local 16GB MIT TRELLIS v1 meshes."
+stack:
+  primary_models: [qwen3-coder-next-80b, inkling-2-mini, trellis-v1, hunyuan3d-2]
+  harnesses: [pi, zed-acp]
+  specialist_tools: [blender-mcp, unity-godot-unreal-mcps, aseprite-mcp]
+  safety_layer: [safeagents]
+workflow_steps:
+  - "Generate rapid 3D blockouts locally with MIT TRELLIS v1 (16GB VRAM) or sprites with Aseprite MCP."
+  - "Connect Blender/Unity/Godot/Unreal MCPs to iterate scene hierarchies and gameplay scripts."
+  - "Commit scene binaries before letting agents run bulk mesh or prefab mutations."
+gotchas:
+  - "Hunyuan3D 2.x license is invalid in EU, UK, and South Korea; TRELLIS.2 requires 24GB VRAM officially."
