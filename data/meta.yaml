@@ -1,21 +1,24 @@
-version: "2.0.0-beta.1"
-branch: "v2-beta"
+version: "2.1.0"
+branch: "v2.1-groundwork"
 title: "⚡ AI Swiss Knife — Field Book"
-tagline: "A lean, benchmark-verified, dual-interface resource book for zero-card Cloud APIs, Local 16GB+64GB AI, Multimodal Media, Harnesses, and Agentic RL."
+tagline: "A lean, benchmark-verified, 3-part dual-interface Field Book for Zero-Card Cloud APIs, Local 16GB+64GB AI (Mature vs. Cutting-Edge), Harnesses, RL Adapters, IRL Community Builds, and Frontier Watch."
 hardware_envelope: "16GB VRAM + 64GB System RAM (~80 GB Total Pool)"
 editorial_constitution: >-
-  Every entry is cross-checked against primary documentation (Nov 2026), carries an explicit trade-off (`⚠️ Gotcha`),
-  and obeys a strict 4-column visual grid. Dead tiers and hardware-wall models are blocked by CI in the Graveyard.
+  Every actionable entry is verified against primary documentation (Nov 2026), carries an explicit trade-off (`⚠️ Gotcha`),
+  and obeys a strict 4-column grid. Dead tiers and >80 GB local walls are blocked by CI in the Graveyard; apex closed/rack models stay isolated in Ch 08 (Frontier Watch).
 
 compass_mermaid: |
   flowchart LR
       START["🎯 YOUR NEED"] --> CLOUD["🌐 Zero-Card Cloud?<br/>Ch 01: 6 Gateways · 4 Hydrogen · RAG"]
-      START --> LOCAL["🖥️ Local 16GB+64GB?<br/>Ch 02: Inkling 2 Mini · Qwen3.8 · Laya"]
+      START --> LOCAL["🖥️ Local 16GB+64GB?<br/>Ch 02: Mature Riced vs Cutting-Edge"]
       START --> MEDIA["🎨 Voice / Image / Video?<br/>Ch 03: Qwen-Img-2.1 · WanGP · Drama 3"]
-      CLOUD & LOCAL & MEDIA --> RUN["🛠️ How to Run & Adapt?"]
-      RUN --> CH4["Ch 04: Harnesses & safeagents"]
-      RUN --> CH5["Ch 05: Backends & 2026 Flags"]
-      RUN --> CH6["Ch 06: Harnessed RL & Frontier"]
+      CLOUD & LOCAL & MEDIA --> ENGINE["🛠️ Engine Room"]
+      ENGINE --> CH4["Ch 04: Pi · DeepSeek Harness · Hermes"]
+      ENGINE --> CH5["Ch 05: Backends & 2026 Flags"]
+      ENGINE --> CH6["Ch 06: Harness Adapters & RL"]
+      ENGINE --> FIELD["🌍 Field & Horizon"]
+      FIELD --> CH7["Ch 07: Community IRL Builds"]
+      FIELD --> CH8["Ch 08: Frontier Watch (Monitor-Only)"]
 
 chapters:
   - "data/01_cloud.yaml"
@@ -24,5 +27,7 @@ chapters:
   - "data/04_harnesses.yaml"
   - "data/05_backends.yaml"
   - "data/06_adaptation.yaml"
+  - "data/07_community_irl.yaml"
+  - "data/08_frontier_watch.yaml"
 
 graveyard_file: "data/99_graveyard.yaml"

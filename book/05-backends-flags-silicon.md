@@ -1,4 +1,4 @@
-← [Ch 04: Harnesses](04-harnesses-protocols.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 06: Adaptation & RL](06-adaptation-frontier.md) →
+← [Ch 04: Harnesses](04-harnesses-protocols.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 06: Harness Adapters & RL](06-adaptation-frontier.md) →
 
 # Chapter 05 · Backends, Quantization & 2026 Flag Bible
 
@@ -64,4 +64,4 @@ llama-server -m Qwen3.8-27B-IQ4_XS.gguf \
 
 ---
 
-← [Ch 04: Harnesses](04-harnesses-protocols.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 06: Adaptation & RL](06-adaptation-frontier.md) →
+← [Ch 04: Harnesses](04-harnesses-protocols.md) &nbsp;|&nbsp; [🏠 Cover](../README.md) &nbsp;|&nbsp; [Ch 06: Harness Adapters & RL](06-adaptation-frontier.md) →

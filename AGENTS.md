@@ -1,14 +1,14 @@
-# AI Swiss Knife — Agent Operating & Foraging Protocol (`v2.0.0-beta.1`)
+# AI Swiss Knife — Agent Operating & Foraging Protocol (`v2.1.0`)
 
-This repository is a dual-interface AI Field Book compiled from modular YAML sources (`data/*.yaml`):
-- **Humans** navigate the One-Page Cover (`README.md`) and 6 uniform 5-beat chapters (`book/01..06-*.md`) + Graveyard (`book/99-graveyard.md`).
-- **AI Agents** read `llms.txt` (compact router) or `llms-full.txt` (complete index), or invoke `scripts/build.py forage`.
+3-Part, 8-Chapter + Graveyard dual-interface AI Field Book compiled from modular YAML (`data/*.yaml`):
+- **Humans:** One-Page Cover (`README.md`) -> Part I (`book/01..03`), Part II (`book/04..06`), Part III (`book/07` IRL Builds & `book/08` Monitor-Only Frontier Watch), & Appendix (`book/99-graveyard.md`).
+- **AI Agents:** Read `llms.txt` (compact router) or `llms-full.txt` (complete index), or run `scripts/build.py forage`.
 
 ## Autonomous Foraging CLI
 - Cloud/local/keyless auto-routing: `python scripts/build.py forage <intent>` (`coding-agent`, `repo-1m`, `deep-reason`, `fast-json`, `decision-gate`, `voice-stt`)
-- Local 16GB VRAM + 64GB RAM launch profiles: `python scripts/build.py forage <profile> --local` (`inkling-coding`, `qwen-27b-super-adapter`, `qwen-27b-pi-specialist`, `qwen-27b-vram`, `qwen-flash-180b`, `flint-coding`, `laya-decision`)
+- Local 16GB VRAM + 64GB RAM profiles (Mature vs. Cutting-Edge): `python scripts/build.py forage --local`
 
 ## Maintainer Invariants
 1. Never hand-edit `README.md`, `book/*.md`, `llms.txt`, or `llms-full.txt`. Edit `data/*.yaml` only.
-2. Obey the **4-Column Table Law** (`c1`..`c4`) and **5-Beat Chapter Contract** (`docs/DESIGN_SYSTEM.md`).
-3. Run `python scripts/build.py all` before committing; `.github/workflows/ci_lint.yml` blocks any doc drift or Graveyard leak.
+2. Obey the **4-Column Law**, **5-Beat Chapter Contract**, and keep paid/rack-scale models strictly inside `Ch 08` (`monitor_only: true`).
+3. Run `python scripts/build.py all` before committing; `.github/workflows/ci_lint.yml` enforces zero doc drift.
