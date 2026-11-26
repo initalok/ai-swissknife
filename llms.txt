@@ -1,4 +1,4 @@
-# AI Swiss Knife — Compact Agent Router (v2.0.0-beta.1)
+# AI Swiss Knife — Compact Agent Router (v2.1.0)
 > Local Hardware Envelope: 16GB VRAM + 64GB System RAM (~80 GB Total Pool)
 > Fetch `llms-full.txt` for complete tables or open individual `book/*.md` chapters.
 
@@ -12,13 +12,14 @@
 
 ## Tier 1: Local Runtime (`python scripts/build.py forage <id> --local`)
 - Unsloth / llama-server: http://localhost:8000/v1 | Local Laya Decisions: http://localhost:8888
-- [inkling-coding] (Zone 1/2 (13-18 GB)) -> `unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2`
-- [qwen-27b-super-adapter] (Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
-- [qwen-27b-pi-specialist] (Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
-- [qwen-27b-vram] (Zone 1 (100% in 16GB VRAM)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
-- [qwen-flash-180b] (Zone 2 Ceiling (66.4-70.5 GB + MTP)) -> `llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none`
-- [flint-coding] (Zone 2 Sweet Spot (25.05 GB)) -> `llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18`
-- [laya-decision] (Zone 1 CPU/NPU (678-846 MB)) -> `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
+- [qwen-27b-super-adapter] [mature-riced] (Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen-27b-pi-specialist] [mature-riced] (Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen-27b-vram] [mature-riced] (Zone 1 (100% in 16GB VRAM)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
+- [qwen-coder-80b] [mature-riced] (Zone 2 Hybrid (49 GB: 16GB VRAM Attention + 64GB RAM Experts)) -> `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
+- [laya-decision] [mature-riced] (Zone 1 CPU/NPU (678-846 MB)) -> `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
+- [inkling-coding] [cutting-edge] (Zone 1/2 (13-18 GB Looped MoE)) -> `unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2`
+- [qwen-flash-180b] [cutting-edge] (Zone 2 Ceiling (66.4-70.5 GB + MTP)) -> `llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none`
+- [flint-coding] [cutting-edge] (Zone 2 Sweet Spot (25.05 GB)) -> `llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18`
 
 ## Tier 2: Verified No-Card Cloud Gateways (`python scripts/build.py forage <intent>`)
 - [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-3.8-flash
@@ -30,8 +31,10 @@
 
 ## Field Book Chapters
 - [Ch 01: Cloud APIs](book/01-cloud-apis.md): Only 6 cloud gateways remain genuinely card-free as of Nov 2026—pair Google AI Studio (Gemini 4 Hydrogen / 3.8 Flash) and Z.ai (GLM-4.7-Flash) for agent loops, Cloudflare/Google for $0-output System-1 decisions, and keyless Jina/Firecrawl/Exa for RAG.
-- [Ch 02: Local Models](book/02-local-16vram-64ram.md): Never spill dense >16GB models into system RAM (the PCIe cliff). Keep dense 24B–27B brains + Harness Adapters 100% inside 16GB VRAM (Zone 1), and exploit your 64GB DDR5 RAM exclusively for sparse MoEs activating 2.5B–6B parameters per token (Zone 2).
+- [Ch 02: Local Models](book/02-local-16vram-64ram.md): Separate your local stack into two tracks: Mature & Fully Riced daily drivers (Qwen3.8-27B + Harness Adapters, Qwen3-Coder-Next, Gemma 4) vs. Cutting-Edge experimental architectures (Inkling 2 Mini looped MoE, varloop, DiffusionGemma, Muse Glimmer) that require newer runtimes and stricter turn caps.
 - [Ch 03: Multimodal](book/03-multimodal-sensory.md): Use zero-card cloud APIs for fast audio STT (Groq Whisper), multi-PDF vision (Gemini 3.8 Flash), and keyless FLUX drafts— but pivot immediately to local open weights for RGBA editing, directed multi-speaker TTS, interactive world models, and 1080p video.
-- [Ch 04: Harnesses](book/04-harnesses-protocols.md): The model gets the credit, but the harness decides whether multi-hour agent loops finish cleanly or burn tokens. Pair modular harnesses (Antigravity, Pi/Durable Pi, Zed ACP) with on-demand Skills, retrieval Context Archival, and a `safeagents` proxy.
+- [Ch 04: Harnesses](book/04-harnesses-protocols.md): Organize harnesses by architectural role: treat Pi / Pi Durable as your minimal building-block kernel, DeepSeek Harness (dsh) as the Cordis plugin-everything platform, and Hermes Agent as the self-improving autonomous daemon—all shielded by safeagents.
 - [Ch 05: Backends & Flags](book/05-backends-flags-silicon.md): Serving kernels and memory flags matter as much as model weights: `--n-cpu-moe` unlocks 64GB RAM MoEs without touching `-ngl`, Unsloth accelerates looped & VRAM-exceeding GGUFs 1.9×–3×, and `WanGP v20.12` squeezes 1080p video into 5.9 GB VRAM.
-- [Ch 06: Adaptation & RL](book/06-adaptation-frontier.md): Freezing a strong 27B base model and training lightweight RL LoRA adapters inside the unmodified shipping harness delivers double-digit pass@1 gains while slashing tool calls by more than half—and orthogonal LoRAs merge with zero retraining.
+- [Ch 06: Harness Adapters & RL](book/06-adaptation-frontier.md): Instead of chasing giant base models, freeze one strong 27B backbone and train lightweight RL LoRA adapters directly inside your unmodified shipping harness— cutting tool calls by 53–73% while gaining +13 to +25 points, and merging orthogonal adapters at rank 96 with zero retraining.
+- [Ch 07: Community IRL](book/07-community-irl.md): The biggest real-world gains rarely come from raw model drops alone—they come from community alt-engines (3×–6× faster on 12–16GB GPUs), discipline skill packs (obra/superpowers), two-pass audit loops, and multi-tool indie pipelines chained together on consumer hardware.
+- [Ch 08: Frontier Watch](book/08-frontier-watch.md) [MONITOR-ONLY]: This chapter tracks the absolute apex of closed and rack-scale AI strictly to monitor capability ceilings, harness/caching breakthroughs, and open-weight trickle-down signals—never mixing paid or datacenter giants into Ch 01 ($0 Cloud) or Ch 02 (16GB+64GB Local).

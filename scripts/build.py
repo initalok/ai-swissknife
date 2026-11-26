@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-AI Swiss Knife Field Book Engine (v2.0.0-beta.1)
+AI Swiss Knife Field Book Engine (v2.1.0)
 Commands:
   python scripts/build.py lint                      # Enforce 5-beat schema, 4-col law & scoped Graveyards
   python scripts/build.py compile                   # Build README.md, book/*.md, llms.txt, llms-full.txt
   python scripts/build.py sync                      # Pull upstream repos & filter Graveyard URLs
   python scripts/build.py forage <intent>           # Cloud/local/keyless auto-foraging
-  python scripts/build.py forage <profile> --local  # Local 16GB+64GB launch command
+  python scripts/build.py forage <profile> --local  # Local 16GB+64GB launch command (Mature vs Cutting-Edge)
   python scripts/build.py all [--sync]              # Run [optional sync ->] lint -> compile
 """
 import json
@@ -106,7 +106,6 @@ def cmd_lint():
             if req not in ch:
                 errors.append(f"[{cid}] Missing required 5-beat field '{req}'")
 
-        # Scoped provider & forage validation for Ch 01 Cloud
         if cid == "01-cloud":
             provs = ch.get("providers", {})
             req_p = {"name", "url", "base_url", "tier", "default_model", "quota", "bottleneck", "effective_context", "trains_on_data"}
@@ -123,16 +122,23 @@ def cmd_lint():
                     if ref not in provs:
                         errors.append(f"[01-cloud] Forage route '{intent}' references unknown provider '{ref}'")
 
-        # Scoped local profile validation for Ch 02 Local
         if cid == "02-local":
             for pid, p in ch.get("forage_local_profiles", {}).items():
+                if p.get("track") not in ("mature-riced", "cutting-edge"):
+                    errors.append(f"[02-local] Local profile '{pid}' missing valid track ('mature-riced'|'cutting-edge')")
                 blob = f"{p.get('model', '')} {p.get('launch', '')}".lower()
                 for pat in local_bans:
                     if pat in blob:
                         errors.append(f"[02-local] Local profile '{pid}' matches Local Graveyard ban '{pat}'")
 
-        # Enforce 4-column law & scoped Graveyard bans on recommended columns (c1..c3)
-        active_bans = cloud_bans if cid == "01-cloud" else (local_bans if cid in ("02-local", "03-multimodal") else [])
+        # Enforce Graveyard bans strictly on actionable recommendation chapters (Ch 08 monitor_only is isolated)
+        active_bans = []
+        if not ch.get("monitor_only"):
+            if cid == "01-cloud":
+                active_bans = cloud_bans
+            elif cid in ("02-local", "03-multimodal"):
+                active_bans = local_bans
+
         for sec in ch.get("sections", []):
             if len(sec.get("headers", [])) != 4:
                 errors.append(f"[{cid}] Section '{sec.get('heading')}' violates strict 4-column law")
@@ -177,6 +183,12 @@ def render_chapter(ch, breadcrumb):
         f"> **Read this chapter if:** {ch['read_if']}",
         "",
     ]
+    if ch.get("monitor_only"):
+        lines.extend([
+            "> [!NOTE]",
+            "> **Monitor-Only Radar:** Entries below track the paid/rack-scale capability frontier for research and trickle-down signals. They are intentionally excluded from `Ch 01` ($0 Cloud) and `Ch 02` (16GB VRAM + 64GB RAM Local).",
+            "",
+        ])
     if ch.get("mermaid"):
         lines.extend(["```mermaid", ch["mermaid"].rstrip(), "```", "", "<br>", ""])
 
@@ -225,15 +237,16 @@ def render_cover(meta, chapters):
         meta["compass_mermaid"].rstrip(),
         "```",
         "",
-        "## 📖 Field Book Contents",
+        "## 📖 Field Book Contents (3 Parts · 8 Chapters + Graveyard)",
         "",
         "| Chapter | Part | Scope & Core Verdict | Direct Link |",
         "| :--- | :--- | :--- | :--- |",
     ]
     for ch in chapters:
         clean_name = ch["short_title"].split(": ")[-1]
+        badge = " `MONITOR-ONLY`" if ch.get("monitor_only") else ""
         lines.append(
-            f"| **{ch['number']} · {clean_name}** | `{ch['part']}` | {ch['verdict']} | [**Open Chapter →**]({ch['output_file']}) |"
+            f"| **{ch['number']} · {clean_name}**{badge} | `{ch['part']}` | {ch['verdict']} | [**Open Chapter →**]({ch['output_file']}) |"
         )
     lines.append(
         "| **99 · The Graveyard** | `APPENDIX` | Machine-enforced cut list of dead cloud tiers & >80 GB local walls. | [**Inspect Cuts →**](book/99-graveyard.md) |"
@@ -242,10 +255,10 @@ def render_cover(meta, chapters):
         "",
         "## 🤖 Dual-Interface CLI & Agent Self-Foraging",
         "```bash",
-        "python scripts/build.py forage coding-agent             # Cloud/local/keyless auto-foraging",
-        "python scripts/build.py forage inkling-coding --local   # Local 16GB+64GB launch profile",
-        "python scripts/build.py forage qwen-27b-super-adapter --local",
-        "python scripts/build.py all                             # Lint + compile Cover, Book, & llms*.txt",
+        "python scripts/build.py forage coding-agent                   # Cloud/local/keyless auto-foraging",
+        "python scripts/build.py forage qwen-27b-super-adapter --local # Track A: Mature Riced 16GB VRAM",
+        "python scripts/build.py forage inkling-coding --local         # Track B: Cutting-Edge Looped MoE",
+        "python scripts/build.py all                                   # Lint + compile Cover, Book, & llms*.txt",
         "```",
         "",
         "---",
@@ -263,7 +276,7 @@ def render_graveyard(chapters, graveyard):
         "# 🪦 Appendix · The Graveyard (Machine-Enforced Cut List)",
         "",
         "> [!WARNING]",
-        "> Every pattern below is automatically blocked by `scripts/build.py lint` and `.github/workflows/ci_lint.yml`.",
+        "> Every pattern below is automatically blocked on actionable chapters by `scripts/build.py lint` and `.github/workflows/ci_lint.yml`.",
         "",
         "## 🌐 Cloud API Graveyard",
     ]
@@ -295,7 +308,7 @@ def render_llms(meta, chapters):
         "- Unsloth / llama-server: http://localhost:8000/v1 | Local Laya Decisions: http://localhost:8888",
     ]
     for pid, p in local.get("forage_local_profiles", {}).items():
-        compact.append(f"- [{pid}] ({p['zone']}) -> `{p['launch']}`")
+        compact.append(f"- [{pid}] [{p.get('track', 'local')}] ({p['zone']}) -> `{p['launch']}`")
 
     compact.append("\n## Tier 2: Verified No-Card Cloud Gateways (`python scripts/build.py forage <intent>`)")
     for pid, p in cloud.get("providers", {}).items():
@@ -305,8 +318,9 @@ def render_llms(meta, chapters):
     compact.append("\n## Field Book Chapters")
     full = [f"# AI Swiss Knife — Full Machine-Readable Index (v{meta['version']})\n"]
     for ch in chapters:
-        compact.append(f"- [{ch['short_title']}]({ch['output_file']}): {ch['verdict']}")
-        full.append(f"## {ch['title']}\nVerdict: {ch['verdict']}\n")
+        tag = " [MONITOR-ONLY]" if ch.get("monitor_only") else ""
+        compact.append(f"- [{ch['short_title']}]({ch['output_file']}){tag}: {ch['verdict']}")
+        full.append(f"## {ch['title']}{tag}\nVerdict: {ch['verdict']}\n")
         for sec in ch.get("sections", []):
             full.append(f"### {sec['heading']}")
             for r in sec.get("rows", []):
@@ -316,7 +330,7 @@ def render_llms(meta, chapters):
 
 
 def cmd_compile():
-    print("==> [COMPILE] Generating README.md, book/01..06 + 99-graveyard, llms.txt, & llms-full.txt...")
+    print("==> [COMPILE] Generating README.md, book/01..08 + 99-graveyard, llms.txt, & llms-full.txt...")
     meta, chapters, graveyard = load_book()
     os.makedirs("book", exist_ok=True)
 
@@ -345,10 +359,11 @@ def cmd_forage(intent=None, local_mode=False):
         if not intent or intent not in profiles:
             print("Available Local 16GB+64GB Profiles (`--local`):")
             for k, v in profiles.items():
-                print(f"  python scripts/build.py forage {k:<24} --local  # {v['zone']}")
+                track = v.get("track", "local")
+                print(f"  python scripts/build.py forage {k:<24} --local  # [{track}] {v['zone']}")
             return
         p = profiles[intent]
-        print(f"# [LOCAL FORAGER] {intent} | {p['zone']} | Runtime: {p['runtime']}")
+        print(f"# [LOCAL FORAGER] {intent} | Track: {p.get('track')} | {p['zone']} | Runtime: {p['runtime']}")
         print(p["launch"])
         return
 

@@ -5,88 +5,107 @@ short_title: "Ch 02: Local Models"
 output_file: "book/02-local-16vram-64ram.md"
 part: "PART I: MODELS & ACCESS"
 verdict: >-
-  Never spill dense >16GB models into system RAM (the PCIe cliff). Keep dense 24B–27B brains + Harness Adapters 100% inside 16GB VRAM (Zone 1),
-  and exploit your 64GB DDR5 RAM exclusively for sparse MoEs activating 2.5B–6B parameters per token (Zone 2).
-read_if: "You are selecting local LLMs, coding adapters, or System-1 decision models for a 16GB GPU + 64GB RAM workstation (or Apple Silicon Mac)."
+  Separate your local stack into two tracks: Mature & Fully Riced daily drivers (Qwen3.8-27B + Harness Adapters, Qwen3-Coder-Next, Gemma 4)
+  vs. Cutting-Edge experimental architectures (Inkling 2 Mini looped MoE, varloop, DiffusionGemma, Muse Glimmer) that require newer runtimes and stricter turn caps.
+read_if: "You are selecting local LLMs, harness LoRA adapters, or System-1 decision models for a 16GB GPU + 64GB RAM workstation (or Apple Silicon Mac)."
 
 mermaid: |
   flowchart LR
-      subgraph Z1 ["⚡ ZONE 1: 100% IN 16GB VRAM (<= 15 GB)"]
-          Z1A["💻 Coding & Strict Chat<br/>Inkling 2 Mini (UD-Q3) · Qwen3.8-27B<br/>+ HF Rank-96 Super-Adapter (+912 MiB)"]
-          Z1B["🧠 Vision, Audio & Decisions<br/>Gemma 4 (26B-A4B Vis / 12B Audio)<br/>Devstral Small 2 · Laya (678–846 MB)"]
+      subgraph MATURE ["🔧 TRACK A: MATURE & FULLY RICED (DAILY DRIVERS)"]
+          M1["⚡ Zone 1 (16GB VRAM)<br/>Qwen3.8-27B + HF Harness LoRAs (+304–912 MiB)<br/>Gemma 4 (26B-A4B Vis / 12B Audio) · Devstral 2"]
+          M2["🚀 Zone 2 (64GB Hybrid)<br/>Qwen3-Coder-Next (80B-A3B · 49 GB)<br/>North-Mini-Code (30B) · Nemotron-Cascade-2"]
       end
-      subgraph Z2 ["🚀 ZONE 2: 16GB VRAM + 64GB RAM HYBRID (18–73 GB)"]
-          Z2A["🔥 Frontier Sparse MoE Coding<br/>Qwen3.8-Flash-Next (180B: IQ1_M/Q2_0)<br/>Qwen3-Coder-Next (80B) · Inkling 2 Mini (Q4)"]
-          Z2B["🔬 Olympiad Logic & Speed MoEs<br/>Recursive Flint (39.8B-A2.5B) · North-Mini-Code<br/>Muse Glimmer (DFlash) · Nemotron-Cascade-2"]
+      subgraph EDGE ["🧪 TRACK B: CUTTING-EDGE LOCAL (HIGH UPSIDE / NEW RUNTIMES)"]
+          E1["⚡ Zone 1/2 Looped MoE<br/>Inkling 2 Mini (26.4B / 5.4B eff. + DSpark)<br/>TML-d24-varloop (Dynamic Depth)"]
+          E2["🚀 Zone 2 Frontier & Diffusion<br/>Qwen3.8-Flash-Next (180B: IQ1_M / Q2_0)<br/>Recursive Flint · Muse Glimmer (DFlash) · DiffusionGemma"]
       end
+      SYS1["⚖️ SYSTEM-1 DECISIONS (CPU/NPU)<br/>Laya (678–846 MB) · Custom 16K Clef-Head"]
+      MATURE & EDGE -.-> SYS1
 
 forage_local_profiles:
-  inkling-coding:
-    zone: "Zone 1/2 (13-18 GB)"
-    model: "unsloth/Inkling-2-Mini-GGUF (UD-Q3_K_XL or UD-Q4_K_XL + mmproj)"
-    runtime: "Unsloth Runtime / Fork (b12631+) — stock llama.cpp lacks looped-layer root GGUF support"
-    launch: "unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2"
   qwen-27b-super-adapter:
+    track: "mature-riced"
     zone: "Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)"
     model: "Qwen3.8-27B + harness-hub/Qwen3.8-27B-super-adapter (rank-96 LoRA for pi/Hermes/OpenCode)"
     runtime: "llama-server (--lora) or Mac MLX (netprojects/Qwen3.8-27B-super-adapter-MLX-6bit)"
     launch: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0"
   qwen-27b-pi-specialist:
+    track: "mature-riced"
     zone: "Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)"
     model: "Qwen3.8-27B + harness-hub/Qwen3.8-27B-pi-adapted (64.7% SWE-Pro hard-51 under pi)"
     runtime: "llama-server (--lora + enable_thinking:false)"
     launch: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{\"enable_thinking\": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0"
   qwen-27b-vram:
+    track: "mature-riced"
     zone: "Zone 1 (100% in 16GB VRAM)"
     model: "unsloth/Qwen3.8-27B-GGUF (IQ4_XS / UD-IQ3_S)"
     runtime: "llama-server (CUDA + Flash Attention)"
     launch: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0"
+  qwen-coder-80b:
+    track: "mature-riced"
+    zone: "Zone 2 Hybrid (49 GB: 16GB VRAM Attention + 64GB RAM Experts)"
+    model: "unsloth/Qwen3-Coder-Next-GGUF (UD-Q4_K_XL)"
+    runtime: "llama-server (--n-cpu-moe sweep)"
+    launch: "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0"
+  laya-decision:
+    track: "mature-riced"
+    zone: "Zone 1 CPU/NPU (678-846 MB)"
+    model: "convaiinnovations/laya-typed-decisions"
+    runtime: "Unsloth Desktop Decision API (localhost:8888) or laya.cpp"
+    launch: "unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
+  inkling-coding:
+    track: "cutting-edge"
+    zone: "Zone 1/2 (13-18 GB Looped MoE)"
+    model: "unsloth/Inkling-2-Mini-GGUF (UD-Q3_K_XL or UD-Q4_K_XL + mmproj)"
+    runtime: "Unsloth Runtime (b12631+) or Basalt 0.5.5+ — stock llama.cpp lacks looped-layer root GGUF support"
+    launch: "unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2"
   qwen-flash-180b:
+    track: "cutting-edge"
     zone: "Zone 2 Ceiling (66.4-70.5 GB + MTP)"
     model: "unsloth/Qwen3.8-Flash-Next-GGUF (UD-IQ1_S / UD-IQ1_M / UD-Q2_0)"
     runtime: "llama-server / Unsloth Dynamic v3.1 (51B N-gram prefetched in 64GB RAM)"
     launch: "llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none"
   flint-coding:
+    track: "cutting-edge"
     zone: "Zone 2 Sweet Spot (25.05 GB)"
     model: "unsloth/Recursive-Flint-GGUF (UD-Q4_K_XL)"
     runtime: "llama-server (Hybrid MoE Offload)"
     launch: "llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18"
-  laya-decision:
-    zone: "Zone 1 CPU/NPU (678-846 MB)"
-    model: "convaiinnovations/laya-typed-decisions"
-    runtime: "Unsloth Desktop Decision API (localhost:8888) or laya.cpp"
-    launch: "unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
 
 sections:
-  - heading: "1. Local Text, Coding & Reasoning Roster (Zone 1 & Zone 2)"
-    headers: ["Role & Memory Zone", "Verified Local Models", "Origin, License & Footprint", "Benchmark Proof & Hardware Gotcha"]
+  - heading: "1. Track A · Mature & Fully Riced (Battle-Tested Daily Drivers)"
+    headers: ["Role & Memory Zone", "Verified Mature Stack", "Origin, License & Footprint", "Benchmark Proof & Tuning Gotcha"]
     rows:
-      - c1: "**Looped MoE Coding Star**<br><sub>Zone 1 (`Q3`) & Zone 2 (`Q4`/`Q8`)</sub>"
-        c2: "**`Inkling 2 Mini`**<br><sub>**26.4B** total / **3.4B** base (**5.4B** eff.) · **1M ctx**</sub><br><sub>24 layers (middle 12 looped 3×) + `DSpark` drafter</sub>"
-        c3: "`US` · `Apache-2.0` + AUP<br><sub><kbd>7.76–22.87 GB</kbd> GGUF (`UD-Q4_K_XL` **17.6 GB** + `639 MB` vision)</sub>"
-        c4: "🏆 **79.2%** SWE-bench Verified, **77.9%** SWE-Pro v2 Hard, **0.703** IPW (*lab-reported*; 20.1 AA Index).<br>⚠️ Trails `Qwen3.8-27B` on strict chat (`50%` MultiChallenge, `-8.6` AA-Omniscience); requires Unsloth runtime + `--spec-draft-n-max 2`."
-      - c1: "**Pure 16GB VRAM Kings**<br><sub>Zone 1 · <= 15 GB Footprint</sub>"
-        c2: "**`Qwen3.8-27B`** · `Dense Vision+Text`<br><sub>Beats Flint on Terminal-Bench (**73.0**) & SWE-Pro (**94.9**)</sub><br>**`Gemma 4 (26B-A4B)`** · `Text+Vision Only`<br><sub>**3.8B active** · ~140 tok/s in 16GB VRAM</sub>"
-        c3: "`CN` · `Apache-2.0`<br>`US` · `Apache-2.0`<br><sub><kbd>13–15 GB</kbd> (`IQ4_XS` / `UD-IQ3_S`)</sub>"
-        c4: "✅ **`Qwen3.8-27B`** is #1 for strict instruction-following & dense coding.<br>⚠️ **Gemma 4 Audio Trap:** Only `E2B`/`E4B`/`12B` process audio—`26B-A4B` is **Text + Vision only**."
-      - c1: "**Harness-Adapted 27B LoRAs**<br><sub>Zone 1 · +304–912 MiB over Base</sub>"
-        c2: "**`Qwen3.8-27B-super-adapter`** (`rank-96`)<br><sub>Merged `pi` + `Hermes` + `OpenCode` LoRA (wt ½)</sub><br>**`Qwen3.8-27B-{pi|hermes|opencode}-adapted`**"
-        c3: "`HF` · `Apache-2.0`<br><sub><kbd>+304–912 MiB</kbd> GGUF (`--lora`) or `MLX-6bit` (Mac)</sub>"
-        c4: "🏆 **Thinking On:** **55.5%→63.5%** mean pass@1 (**31–48%** fewer tool calls). **Thinking Off (`pi`):** **39.2%→64.7%** SWE-Pro hard-51 (**56–72%** fewer calls).<br>⚠️ Pick specialist w/ thinking off, super-adapter w/ thinking on; mild pre-tool reasoning leakage (`arXiv:2610.14270`)."
-      - c1: "**Rescued 180B Frontier Flash**<br><sub>Zone 2 Ceiling · 66–73 GB Total</sub>"
+      - c1: "**Riced 27B + Harness LoRAs**<br><sub>Zone 1 · 100% in 16GB VRAM</sub>"
+        c2: "**`Qwen3.8-27B`** (Base Vision+Text)<br>+ **`Qwen3.8-27B-{pi|hermes|opencode}-adapted`**<br>+ **`Qwen3.8-27B-super-adapter`** (`rank-96`)"
+        c3: "`CN/HF` · `Apache-2.0`<br><sub><kbd>14–15 GB</kbd> (`IQ4_XS`) + <kbd>304–912 MiB</kbd> LoRA (`--lora`) or Mac `MLX-6bit`</sub>"
+        c4: "🏆 **Thinking Off (`pi`):** **39.2%→64.7%** SWE-Pro hard-51 (**56–72%** fewer tool calls). **Thinking On (`super`):** **55.5%→63.5%** mean pass@1.<br>⚠️ Adapters were RL-trained on BF16; verify quant fidelity (`Q8_0`/`IQ4_XS`) and expect mild pre-tool reasoning leakage (`arXiv:2610.14270`)."
+      - c1: "**Mature Hybrid MoE Coders**<br><sub>Zone 2 · 19–49 GB Sparse MoE</sub>"
+        c2: "**`Qwen3-Coder-Next (80B-A3B)`** (~49 GB)<br>**`North-Mini-Code-1.0 (30B-A3B)`** (~19 GB)<br>**`Nemotron-Cascade-2 (30B-A3B)`** (90.9% AIME)"
+        c3: "`CN/CA/US` · `Apache-2.0` / `NVIDIA Open`<br><sub><kbd>19–49 GB</kbd> (`UD-Q4_K_XL`) · 3B active</sub>"
+        c4: "🏆 Standard `llama.cpp` / `ik_llama.cpp` support with predictable `--n-cpu-moe` sweeps and zero custom kernel breakage.<br>⚠️ Always keep `-ngl 99` so Attention + KV stay on GPU."
+      - c1: "**Fast General, Vision & Audio**<br><sub>Zone 1 · 8–15 GB VRAM</sub>"
+        c2: "**`Gemma 4 (26B-A4B)`** · `Text+Vision Only`<br><sub>**3.8B active** · ~140 tok/s in 16GB VRAM</sub><br>**`Gemma 4 (12B)`** (Audio+Vis) · **`Devstral Small 2`**"
+        c3: "`US/EU` · `Apache-2.0`<br><sub><kbd>8–15 GB</kbd> (`Q4_K_M` / `IQ4_XS`)</sub>"
+        c4: "✅ Zero-drama daily generalists across `llama.cpp`, `vLLM`, and `MLX`.<br>⚠️ **Gemma 4 Audio Trap:** Only `E2B`/`E4B`/`12B` process audio—`26B-A4B` is **Text + Vision only**."
+
+  - heading: "2. Track B · Cutting-Edge Local (Experimental Architectures & High Upside)"
+    headers: ["Experimental Frontier", "Cutting-Edge Local Models", "Origin, License & Footprint", "Why Watch / Test + Early-Adopter Gotcha"]
+    rows:
+      - c1: "**Looped Transformer MoEs**<br><sub>Zone 1 (`Q3`) & Zone 2 (`Q4`/`NVFP4`)</sub>"
+        c2: "**`Inkling 2 Mini`** (**26.4B** / **3.4B** base / **5.4B** eff.)<br><sub>Middle 12 layers looped 3× + `DSpark` drafter · 1M ctx</sub><br>**`TML-d24-varloop-research`** (variable loops)"
+        c3: "`US` · `Apache-2.0` + AUP<br><sub><kbd>7.76–22.87 GB</kbd> (`UD-Q4_K_XL` **17.6 GB** + `639 MB` vision)</sub>"
+        c4: "🏆 **79.2%** SWE-bench Verified, **48.2%** DeepSWE v1.1, **0.703** IPW (*lab-reported*). Runs up to **60 tok/s** on 16GB RTX 5060 Ti via `Basalt`.<br>⚠️ Needs Unsloth/Basalt runtime; can loop while debugging (cap turns/tokens); weaker factual recall & non-English; sandbox file ops."
+      - c1: "**180B N-Gram Prefetch Ceiling**<br><sub>Zone 2 Ceiling · 66–73 GB Total</sub>"
         c2: "**`Qwen3.8-Flash-Next`**<br><sub>**180B** (125B MoE + 51B N-gram + 4B MTP) / **6B active**</sub><br><sub>Unsloth Dynamic v3.1 (`UD-IQ1_S` / `IQ1_M` / `Q2_0`)</sub>"
         c3: "`CN` · `qwen-community-1.0`<br><sub><kbd>66.4–70.5 GB</kbd> + **1.9–2.8 GB** MTP (9–13 GB OS margin)</sub>"
-        c4: "🏆 **91.9** DeepSWE 1.1; 51B N-gram prefetches asynchronously from 64GB DDR5 at near-GPU speed.<br>⚠️ **Hard Cap:** Never load `UD-Q2_K_XL` (79.6 GB) on 16+64 GB—leaves 0 GB for OS/KV cache."
-      - c1: "**Hybrid Agentic Coders**<br><sub>Zone 2 · 19–49 GB Sparse MoE</sub>"
-        c2: "**`Qwen3-Coder-Next (80B-A3B)`** (~49 GB)<br>**`Recursive Flint (39.8B-A2.5B)`** (~25 GB)<br>**`North-Mini-Code-1.0 (30B-A3B)`** (~19 GB)"
-        c3: "`CN/US/CA` · `Apache-2.0`<br><sub><kbd>19–49 GB</kbd> (`UD-Q4_K_XL`) · 2.5B–3B active</sub>"
-        c4: "🏆 `80B-A3B`: 512-expert workhorse; `North-Mini-Code`: multi-harness specialist.<br>⚠️ `Flint` scores (**89.7%** SWE-Pro v2) are *vendor-reported* and trail `Qwen3.8-27B` on Unsloth evals."
-      - c1: "**Olympiad Logic, Agents & Speed**<br><sub>Zone 1 & 2 · 4–24 GB</sub>"
-        c2: "**`Nemotron-Cascade-2 (30B-A3B)`** (90.9% AIME)<br>**`Meta Muse Glimmer (30B + DFlash)`** (~20 GB)<br>**`Nemotron-3.5-Bolt (74B-A9B)`** (24 GB 2-bit QAT)<br>**`DiffusionGemma (26B-A4B)`** & **`Devstral Small 2`**"
-        c3: "`US/EU` · `Apache-2.0` / `OpenMDW`<br><sub><kbd>15–24 GB</kbd> · `DFlash` 16-tok drafter</sub>"
-        c4: "🏆 `Muse Glimmer` (**94.7%** AIME, **65.9%** OSWorld) drafts 16 tokens/pass; `DiffusionGemma` denoises 256-tok blocks in parallel."
+        c4: "🏆 **91.9** DeepSWE 1.1; 51B N-gram table prefetches asynchronously from 64GB DDR5 at near-GPU speed.<br>⚠️ **Hard Cap:** Never load `UD-Q2_K_XL` (79.6 GB) on 16+64 GB—leaves 0 GB for OS/KV."
+      - c1: "**Block-Diffusion & Native 2-Bit**<br><sub>Zone 2 · 18–25 GB</sub>"
+        c2: "**`Meta Muse Glimmer (30B + DFlash)`** (~20 GB)<br>**`DiffusionGemma (26B-A4B)`** (256-tok parallel)<br>**`Recursive Flint (39.8B-A2.5B)`** · **`Nemotron Bolt 74B`**"
+        c3: "`US` · `Apache-2.0` / `OpenMDW`<br><sub><kbd>18–25 GB</kbd> (`DFlash` 16-tok drafter / 2-bit QAT)</sub>"
+        c4: "🏆 `Muse Glimmer` (**94.7%** AIME) drafts 16 tokens/pass; `DiffusionGemma` denoises parallel blocks.<br>⚠️ `Flint` scores (**89.7%** SWE-Pro v2) are *vendor-reported* and trail `Qwen3.8-27B` on Unsloth evals."
 
-  - heading: "2. System-1 Local Decision Models (Non-Autoregressive)"
+  - heading: "3. System-1 Local Decision Models (Non-Autoregressive)"
     headers: ["Role & Job", "Verified Local Models", "Memory & Latency", "Wiring & Calibration Gotcha"]
     rows:
       - c1: "**Zero-Token Agent Gates**<br><sub>Tool safety, trace audit, memory</sub>"
@@ -99,12 +118,15 @@ sections:
         c4: "🏆 1-epoch 4-bit LoRA (`r=16`/`64`) lifts routing accuracy from ~35% zero-shot to **78%–81%** with zero output tokens generated."
 
 drawers:
-  - summary: "Click to expand Local 16GB+64GB Launch Profiles (`forage --local`)"
+  - summary: "Click to expand Local Foraging Commands (Mature Riced vs. Cutting-Edge)"
     lang: "bash"
     code: |
-      # Print any pre-tuned launch command directly from the catalog:
-      python scripts/build.py forage inkling-coding --local
+      # Track A: Mature & Fully Riced Daily Drivers
       python scripts/build.py forage qwen-27b-super-adapter --local
       python scripts/build.py forage qwen-27b-pi-specialist --local
-      python scripts/build.py forage qwen-flash-180b --local
+      python scripts/build.py forage qwen-coder-80b --local
       python scripts/build.py forage laya-decision --local
+
+      # Track B: Cutting-Edge Local Experiments
+      python scripts/build.py forage inkling-coding --local
+      python scripts/build.py forage qwen-flash-180b --local

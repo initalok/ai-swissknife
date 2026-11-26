@@ -1,9 +1,9 @@
-← [Ch 06: Adaptation & RL](06-adaptation-frontier.md) &nbsp;|&nbsp; [🏠 Cover](../README.md)
+← [Ch 08: Frontier Watch](08-frontier-watch.md) &nbsp;|&nbsp; [🏠 Cover](../README.md)
 
 # 🪦 Appendix · The Graveyard (Machine-Enforced Cut List)
 
 > [!WARNING]
-> Every pattern below is automatically blocked by `scripts/build.py lint` and `.github/workflows/ci_lint.yml`.
+> Every pattern below is automatically blocked on actionable chapters by `scripts/build.py lint` and `.github/workflows/ci_lint.yml`.
 
 ## 🌐 Cloud API Graveyard
 - ❌ **Cerebras Cloud (Legacy 'Free Tier'):** Confirmed Nov 18, 2026: no renewing free tier exists; the $5 / 30-day credit requires a valid payment method.
@@ -22,4 +22,4 @@
 
 ---
 
-← [Ch 06: Adaptation & RL](06-adaptation-frontier.md) &nbsp;|&nbsp; [🏠 Cover](../README.md)
+← [Ch 08: Frontier Watch](08-frontier-watch.md) &nbsp;|&nbsp; [🏠 Cover](../README.md)

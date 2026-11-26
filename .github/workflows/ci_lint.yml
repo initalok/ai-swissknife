@@ -1,9 +1,9 @@
 name: PR & Branch Book Lint + Drift Gate
 on:
   push:
-    branches: [main, v2-beta]
+    branches: [main, "v2*"]
   pull_request:
-    branches: [main, v2-beta]
+    branches: [main]
 
 jobs:
   lint-and-verify-drift:
