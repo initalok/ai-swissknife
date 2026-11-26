@@ -1,40 +1,40 @@
-# Upstream Sync & Diff Report (2026-11-23T07:03:09.762312+00:00)
+# Upstream Sync & Diff Report (2026-11-26T09:33:16.548656+00:00)
 
-## CYBIRD-D/FREE-LLM-API-Provider (`8c0dc7c454` -> `2e2afbea9f`)
-- **New Candidate Links:** 142 *(Blocked 5 Graveyard matches)*
-  + | 21 | Qwen | Qwen3.6 Flash | $0.25 | — | $1.50 | **$1.75** | [Source](https://www.alibabacloud.com/help/en/model-studio/model-pricing) |
-  + | 7 | OpenAI | GPT-6 Luna | $0.10 | $0.01 | $0.50 | **$0.60** | [Source](https://developers.openai.com/api/docs/pricing) |
+## CYBIRD-D/FREE-LLM-API-Provider (`2e2afbea9f` -> `2e2afbea9f`)
+- **New Candidate Links:** 143 *(Blocked 4 Graveyard matches)*
+  + **官方资料：** [安心体验模式](https://docs.volcengine.com/docs/ark/free-tokens-only-mode?lang=zh) · [模型开通与免费额度管理](https://docs.volcengine.com/docs/ark/activation-management?lang=zh)
+  + https://openrouter.ai/collections/free-models </br>
+  + | 56 | OpenAI | GPT-6.2 Sol | $2.00 | $0.10 | $10.00 | **$12.00** | [Source](https://developers.openai.com/api/docs/models/gpt-6.2-sol) |
   + | 39 | DeepSeek | DeepSeek V4 Pro — Peak | $1.32 | $0.044 | $3.96 | **$5.28** | [Source](https://api-docs.deepseek.com/quick_start/pricing/) |
-  + Endpoint (OpenAI-compatible): https://openrouter.ai/api/v1
-  + | 28 | MiniMax | MiniMax M2.7 Highspeed | $0.60 | $0.06 | $2.40 | **$3.00** | [Source](https://platform.minimax.io/docs/guides/pricing-paygo) |
-  + | 75 | OpenAI | GPT-6.2 Astra | $8.00 | $0.40 | $40.00 | **$48.00** | [Source](https://developers.openai.com/api/docs/models/gpt-6.2-astra) |
-  + | 16 | DeepSeek | DeepSeek V4.1 Flash 1017 — Peak | $0.30 | $0.006 | $1.20 | **$1.50** | [Source](https://api-docs.deepseek.com/quick_start/pricing/) |
-  + ~~https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models#rate-limits~~
-  + - [Free-tier model pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Your project's limits in AI Studio](https://aistudio.google.com/rate-limit)
-  + **官方资料：** [免费推理额度说明（2025-12-12 更新）](https://streamlake.com/document/WANQING/mdsor5767ob7s796sp6) · [模型计费说明](https://streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn)
+  + | 77 | Anthropic | Claude Fable 5 | $10.00 | $1.00 | $50.00 | **$60.00** | [Source](https://platform.claude.com/docs/en/about-claude/pricing) |
+  + **官方资料：** [项目仓库](https://github.com/bilibili/Index-Translate) · [免费 API 使用说明](https://github.com/bilibili/Index-Translate#option-1-free-online-api-zero-gpu-setup) · [官方调用脚本](https://github.com/bilibili/Index-Translate/blob/main/inference/llm/call_api.py) · [在线体验](https://index-translate.bilibili.com/)
+  + | 59 | Kimi | Kimi K3.1 Pro | $2.00 | $0.20 | $10.00 | **$12.00** | [Source](https://platform.kimi.ai/) |
+  + | 47 | xAI | Grok 4.7 | $2.00 | $0.50 | $6.00 | **$8.00** | [Source](https://docs.x.ai/developers/pricing) |
+  + https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing </br>
+  + | 11 | MiniMax | MiniMax M3.1 Flash | $0.15 | $0.015 | $0.60 | **$0.75** | [Source](https://www.minimax.io/blog/minimax-m31f) |
 
 ## zebbern/no-cost-ai (`a1e44647ac` -> `a1e44647ac`)
-- **New Candidate Links:** 91 *(Blocked 3 Graveyard matches)*
-  + | [developer.puter.com](https://developer.puter.com/tutorials/free-unlimited-ai-api/) also [introduction](https://docs.puter.com/introduction/)|Too many to list..|None usage is account based|
+- **New Candidate Links:** 93 *(Blocked 1 Graveyard matches)*
+  + | [alpaca_eval](https://tatsu-lab.github.io/alpaca_eval/)  | Instruction‑following ability vs GPT‑4 |
+  + | [runwayml.com](https://runwayml.com/ ) |`Gen-4` a creative assistant built by Runway, helps generate images, videos, and stories. | Unlimited |
+  + | [openrouter.ai/rankings](https://openrouter.ai/rankings)  | Openrouter leaderboard ranking|
   + | [open_llm_leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) | Cross‑domain evals on )4 k open‑source LLMs |
-  + ![No Sign Up Required](https://img.shields.io/badge/No--Signup--Required-darkgreen)
-  + | [sur.pollinations.ai](https://sur.pollinations.ai/) |`openai`, `sur`, `sur-mistral`, `claude`, `mistral`, `mistral-large`, `command-r`, `unity`, `rtist`, `searchgpt`| Unlimited|
+  + ![License](https://img.shields.io/badge/License-MIT-brightgreen)
+  + | [chat4.free2gpt.com](https://chat4.free2gpt.com/) | `gpt-4o-mini`, `wbot-t1-mini`, `wbot-4-347b`, `deepseek-chat`, `deepseek-coder`, `ds-r1-distill-70b`, `wbot-2`, `wbot-2-friend`, `wbot-2-cat-v[...]
   + ![Free‑AI](https://img.shields.io/badge/Free--AI-List-blue)
-  + | [sharedchat.cn](https://sharedchat.cn)|`gpt-4o`, `o3`, `o3-pro`, `o4-mini`, `o4-mini-high`|`Unlimited` but may be hard to get a responce as many others use it aswell but it really does work|
-  + | [g4f.dev](https://g4f.dev/) | `200+ tons of local models`|`Unlimited`|
-  + | [groq.com](https://groq.com) |`15+`| `30 requests` / min, `40 000 tokens` / min|
-  + ![Status](https://img.shields.io/badge/Status-Active-green)
-  + | [ideogram.ai](https://ideogram.ai) | `ideogram-3.0`, `ideogram-3.0-turbo` | 10 credits per week (40 images per week), with Watermark |
+  + | [ai.google.dev](https://ai.google.dev) | | |
+  + *No signup Picture/Video/Chat generation [nocostai.vercel.app](https://nocostai.vercel.app/)*
+  + | [anyapi.ai](https://anyapi.ai) | `meta-llama/llama-3.3-70b-instruct`, `qwen/qwen3-coder`, `qwen/qwq-32b`, `google/gemma-4-it`, `nvidia/nemotron-3-super`, `mistralai/mistral-small-3.1`, `deepseek/deepseek-chat`, `cohere/north-mini-code`, `liquid/lfm-2.5`, `openai/gpt-oss-120b` and many more open-source models via API key | 20 req/min, 200 req/day, no credit card required |
 
 ## eudk/awesome-ai-tools (`626be08c52` -> `626be08c52`)
 - **New Candidate Links:** 871 *(Blocked 0 Graveyard matches)*
-  + - [BlackVault](https://github.com/venkat22022202/black-vault) - Open-source proxy gateway for AI API keys. Generate proxy tokens for agents — BlackVault injects the real key server-side and forwards to OpenAI, Anthropic, Google AI, and Nebius AI. Kill a token for instant revocation.
-  + - [DeepMind](https://deepmind.com/) - Pioneering AI research lab, known for advancements in deep learning and AI for games.
-  + <img src="https://contrib.rocks/image?repo=eudk/awesome-ai-tools" width="500"/>
-  + 11. [DALL-E Prompt Book](https://pitch.com/v/DALL-E-prompt-book-v1-tmd33y) - A collection of prompts for DALL-E image generation.
-  + - **[Riverside.fm](https://riverside.fm/)** - AI-powered platform for recording studio-quality podcasts and videos remotely, with features like real-time transcriptions and easy editing.
-  + - **[Kimi Code](https://www.kimi.com/code)** is a membership benefit; its docs state quota is shared with Kimi membership
-  + - **Core repo**: **[openclaw/openclaw](https://github.com/openclaw/openclaw)**
-  + - [Berrry](https://berrry.app) - AI-powered platform that transforms Twitter posts and Reddit content into functional web applications using code generation.
-  + 20. [Voice Dream](https://www.voicedream.com) - Text-to-speech app for mobile devices.
-  + 2. **[Google Cloud Compute Engine](https://cloud.google.com/compute)** - Google's infrastructure with high-performance GPUs suitable for machine learning.
+  + - **[SwarmVault](https://github.com/swarmclawai/swarmvault)** — Local-first RAG knowledge base compiler inspired by Karpathy's LLM Wiki. Three-layer raw/wiki/schema architecture, persistent markdown wiki, knowledge graph, hybrid SQLite FTS + embeddings, contradiction detection, and a built-in MCP server. MIT.
+  + 21. [YobiYoba](https://www.yobiyoba.com/en/) - The Yobiyoba API provides automatic transcription, real-time processing, audio-text alignment, and lexicon enhancement to enrich your audio transcriptions.
+  + - [levity.ai](https://levity.ai) - Automates data entry, rate lookup, and even drafts email responses—all without leaving your inbox.
+  + - **[Kimi Business](https://platform.kimi.ai/docs/pricing/faq)** exists for enterprise users via contact sales
+  + - **[Cursor](https://www.cursor.com/)** - A **VS Code-inspired** AI-powered code editor that provides **real-time code suggestions, error detection, debugging assistance, and AI-generated explanations**. Built for **AI-first software development**.
+  + - [fathom.video](https://fathom.video) - Records, transcribes, highlights, and summarizes your meetings.
+  + 14. [Dialogflow](https://cloud.google.com/dialogflow) - Google's conversational AI API.
+  + - **[LM Studio](https://lmstudio.ai/)** - LM Studio provides a versatile environment for fine-tuning, deploying, and using language models. Ideal for developers and researchers, it supports running large language models on local hardware, making it a strong choice for custom model training and deployment without relying on cloud-based solutions.
+  + <a href="https://claude.com/product/claude-code" target="_blank">
+  + - [Wisecut](https://www.wisecutvideo.com) - AI video editing with auto subtitles.

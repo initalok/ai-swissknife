@@ -1,116 +1,75 @@
-# ⚡ AI Swiss Knife (`v1.0.0`)
-> A lean, benchmark-filtered, upstream-synced directory of zero-cost AI APIs, frontier open weights, and agent grounding tools.
+# ⚡ AI Swiss Knife (`v1.1.0`)
+> A lean, benchmark-filtered, upstream-synced directory of zero-card AI APIs, System-1 decision models, and agent grounding tools.
+
+**Dimensions:** 🌐 **Cloud APIs (`README.md`)** · 🖥️ [**Local AI: 16GB VRAM + 64GB RAM (`LOCAL_AI.md`)**](LOCAL_AI.md) · 🛠️ [**Harnesses, Backends & Flags (`ECOSYSTEM.md`)**](ECOSYSTEM.md) · 🤖 [**Agent Manifest (`llms.txt`)**](llms.txt)
 
 > [!IMPORTANT]
-> **Editorial Standard:** Every endpoint in this repository is verified live, requires **zero credit card** to start, and is stress-tested against real multi-step agent workloads (~20K tokens/step). Dead, bait-and-switch, or card-gated tiers are actively stripped to the [Graveyard](#-5-the-graveyard-what-we-cut--why).
+> **Editorial Standard:** Every cloud endpoint below is verified live as of **Nov 2026**, requires **zero credit card** to start, and is stress-tested against real agent workloads (~20K tokens/step). Card-gated trials (`Cerebras`, `Mistral`, `Brave`) and retired endpoints (`GitHub Models`, `Gemini 2.5`) are enforced in the [Graveyard](#-5-the-graveyard-what-we-cut--why).
 
 ---
 
-## 🧭 1. The Routing Circuit: Where Should Your Workload Go?
-*Visualizing why thin TPM pipes (like Groq's 8K cap) choke on 20K-token coding agent turns, while wide pipelines (Google 1M TPM, Z.ai Unlimited Flash, Mistral 1B/mo) sustain autonomous loops.*
+## 🧭 1. The Cloud Routing Circuit (Verified Card-Free Survivors)
+*Only **6 gateways** remain genuinely card-free (`Google AI Studio`, `Z.ai BigModel`, `OpenRouter :free`, `Groq`, `NVIDIA NIM`, `Cloudflare Workers AI`).*
 
 ```mermaid
 flowchart LR
-    subgraph INTENT ["1. YOUR WORKLOAD"]
+    subgraph INTENT ["1. CLOUD WORKLOAD"]
         A["🤖 Coding Agent<br/>(20K tok/step)"]
-        B["📚 Full Repo / PDF<br/>(100K–1M tok)"]
-        C["🔬 PhD Logic / Math<br/>(Deep CoT)"]
-        D["⚡ Fast JSON / Router<br/>(<200ms TTFT)"]
+        B["🔬 500B+ Reasoning<br/>(DeepSeek / Nemotron)"]
+        C["⚖️ System-1 Decisions<br/>($0 Output Tokens)"]
+        D["⚡ Fast Micro-Route<br/>(<6K tok / Whisper)"]
     end
-
-    subgraph PIPE ["2. FREE QUOTA PIPE"]
-        P1["🟢 Z.ai BigModel<br/>Unlimited Flash / 5-10 Conc."]
-        P2["🔵 Google AI Studio<br/>1,000,000 TPM / 1.5K RPD"]
-        P3["🟣 NVIDIA NIM / OpenRouter<br/>40 RPM / 1K RPD ($10 bal)"]
-        P4["🟠 Cerebras Wafer-Scale<br/>1M Tok/Day @ 2,000 tok/s"]
-        TRAP["🔴 Groq Cloud<br/>❌ 8K TPM Wall (Chokes on 20K)"]
+    subgraph PIPE ["2. VERIFIED NO-CARD GATEWAY"]
+        P1["🔵 Google AI Studio<br/>Gemini 3.8 Flash (1M ctx)"]
+        P2["🟢 Z.ai BigModel<br/>GLM-4.7-Flash (200K Free)"]
+        P3["🟣 NVIDIA NIM / OpenRouter<br/>40 RPM / 1K RPD (10 Cr)"]
+        P4["🟠 Cloudflare / Decision 1<br/>Clef · Clairic · 10K RPD"]
+        TRAP["🔴 Groq Cloud<br/>8K TPM Wall (STT / <6K only)"]
     end
-
-    A ==>|"Primary (84.3% Term-Bench)"| P1
-    A -.->|"Fallback"| P2
-    A x--x|"429 Error on Step 1"| TRAP
-    B ==>|"Only True 1M Free Pipe"| P2
-    C ==>|"Kimi K3 (93.5% GPQA)"| P3
-    D ==>|"Qwen3-32B"| P4
+    A ==>|"Primary"| P1
+    A -.->|"Free 200K Fallback"| P2
+    A x--x|"429 on 20K Prompts"| TRAP
+    B ==>|"DeepSeek-V4.1-Flash"| P3
+    C ==>|"Single-Pass Probs"| P4
+    D ==>|"Qwen3.8-27B / Whisper"| TRAP
 ```
-
 <br>
 
-## ⚡ 2. Task-Routed Intelligence Matrix (Text & Code)
+## ⚡ 2. Task-Routed Cloud Intelligence & Decision Matrix
 
 | Task & Workload | Primary Winner & Proof | Free Gateway & Quota Pipe | The Catch (`Gotcha` & Privacy) |
 | :--- | :--- | :--- | :--- |
-| **Autonomous Coding**<br><sub>Multi-file edits, Bash, MCP loops</sub> | **`GLM-5.3-Flash`** · `MIT`<br><sub>🏆 **84.3%** Terminal-Bench 2.1</sub><br>**`DeepSeek-V4-Pro`** · `MIT`<br><sub>🏆 **80.6%** SWE-bench Verified</sub> | [**Z.ai BigModel**](https://open.bigmodel.cn/)<br><sub><kbd>No Card</kbd> Unlimited daily Flash tokens</sub><br>[**OpenRouter `:free`**](https://openrouter.ai/)<br><sub><kbd>$10 Bal</kbd> Unlocks 1,000 RPD (vs 50)</sub> | ⚠️ **Z.ai** caps at 5–10 concurrent streams.<br>🔒 **Privacy:** Standard free-tier logging; use **Unsloth Local** (`UD-Q4_K_XL`) for private repos. |
-| **Massive Context (1M)**<br><sub>Whole codebase / multi-PDF ingest</sub> | **`Gemini 3.8 Flash`**<br><sub>🏆 True **1M** effective free context</sub><br>**`Llama 4 Scout`**<br><sub>🏆 High-speed long-context recall</sub> | [**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> **1,000,000 TPM** · 1,500 RPD</sub><br>[**Cerebras Cloud**](https://cloud.cerebras.ai/)<br><sub><kbd>No Card</kbd> **1,000,000 TPD** · 30 RPM</sub> | ⚠️ **Google Pro Trap:** `Gemini Pro` is throttled to **2 RPM / 50 RPD** on free tier—always use `Flash` for agent loops.<br>🔒 **Trains on data** outside EU/UK/CH. |
-| **PhD Logic & Math**<br><sub>Architecture, proofs, synthesis</sub> | **`Kimi K3`** · `Open`<br><sub>🏆 **93.5%** GPQA · **56.0%** HLE</sub><br>**`MiniMax M3`**<br><sub>🏆 **93.0%** GPQA Diamond</sub> | [**NVIDIA NIM**](https://build.nvidia.com/)<br><sub><kbd>No Card</kbd> ~40 RPM Dev Catalog</sub><br>[**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> `Gemini 2.5 Pro` (50 RPD)</sub> | ⚠️ **NIM** is non-production prototyping only and can cold-start queue on massive MoE weights. |
-| **FIM & Fast Router**<br><sub><150ms IDE tab-complete & JSON</sub> | **`Codestral`** · `80+ Lang FIM`<br><sub>🏆 Dedicated low-latency FIM endpoint</sub><br>**`Qwen3-32B` / `Gemma 4 31B`**<br><sub>🏆 **2,000+ tok/s** schema extraction</sub> | [**Mistral Plateforme**](https://console.mistral.ai/)<br><sub><kbd>No Card</kbd> **~1 Billion tok/mo** free</sub><br>[**Cerebras**](https://cloud.cerebras.ai/) & [**Groq**](https://console.groq.com/)<br><sub><kbd>No Card</kbd> 1M TPD (Cerebras) / 1K RPD (Groq)</sub> | ⚠️ **Groq 8K TPM Wall:** Never send >6K token prompts to Groq free tier.<br>🔒 **Mistral** free tier requires mandatory opt-in to model training. |
-| **Edge & GUI Agents**<br><sub>On-device RAM & desktop clicking</sub> | **`Qwen3-0.6B / 4B`** · `Apache-2.0`<br><sub>🏆 30.6M+ monthly downloads</sub><br>**`UI-TARS` / `Runner H`**<br><sub>🏆 Beats frontier LLMs on OSWorld GUI</sub> | [**Unsloth Local (`UD-GGUF`)**](https://github.com/unslothai/unsloth)<br><sub><kbd>Local</kbd> `unsloth start claude|opencode`</sub> | ✅ **Zero Cloud Leak:** Calibrated `UD-Q4_K_XL` quants fix broken chat templates on Qwen3.8, GLM-5, & Gemma 4. |
+| **Autonomous Coding**<br><sub>Multi-file edits, Bash, MCP loops</sub> | **`Gemini 3.8 Flash`** · `1M ctx`<br><sub>🏆 Default Antigravity SDK coder · tunable thinking</sub><br>**`GLM-4.7-Flash`** · `MIT`<br><sub>🏆 **79.5** τ²-Bench · 200K ctx / 128K out</sub> | [**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> Free per-project tier</sub><br>[**Z.ai BigModel**](https://open.bigmodel.cn/)<br><sub><kbd>No Card</kbd> Completely Free Flash tier</sub> | ⚠️ **Z.ai Fix:** Only `glm-4.7-flash` is permanently free (`glm-5.x` is billed).<br>💡 **Cheap Cloud:** `Inkling 2 Mini` on OpenRouter (`io.net`) is **$0.08/M in, $0.35/M out**. |
+| **Frontier Heavyweights**<br><sub>500B+ MoEs & PhD reasoning</sub> | **`DeepSeek-V4.1-Flash`** · `552B`<br><sub>🏆 Frontier open VLM/coder (8B active)</sub><br>**`Nemotron-3.5-Super-VL`** · `120B`<br><sub>🏆 & `Inkling 2 Small` / `Kimi` via `:free`</sub> | [**NVIDIA NIM**](https://build.nvidia.com/)<br><sub><kbd>No Card</kbd> ~40 RPM Dev Catalog</sub><br>[**OpenRouter `:free`**](https://openrouter.ai/)<br><sub><kbd>10 Cr</kbd> Unlocks **1,000 RPD** (vs 50)</sub> | ⚠️ **NIM** is prototyping-only with occasional MoE cold-start queues.<br>⚠️ **OpenRouter** returns `402` even on `:free` if balance goes negative. |
+| **System-1 Decision & Extract**<br><sub>Single-pass probabilities ($0 out)</sub> | **`Gemini Decision 1`**<br><sub>🏆 Up to **1,000** typed questions/pass (multimodal)</sub><br>**`Clairic` / `Clef` / `Clef-Omni`**<br><sub>🏆 Zero-output extraction, 64-step forecasts, audio/video</sub> | [**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> **200 RPM · 50K TPM · 10K RPD**</sub><br>[**Cloudflare Workers AI**](https://developers.cloudflare.com/workers-ai/)<br><sub><kbd>No Card</kbd> **10,000 Neurons/day** free</sub> | ✅ **Zero Output Tokens Billed:** Ideal for agent safety gates, routing, and structured span extraction.<br>⚠️ Cloudflare retired legacy models Nov 20, 2026 (`HTTP 410`). |
+| **Fast Micro-Routers (<6K)**<br><sub>Sub-second JSON & small prompts</sub> | **`qwen/qwen3.8-27b`**<br><sub>🏆 Verified active on Groq free LPU</sub><br>**`gpt-oss-120b` / `gpt-oss-20b`**<br><sub>🏆 Ultra-fast structured transforms</sub> | [**Groq Cloud**](https://console.groq.com/)<br><sub><kbd>No Card</kbd> **30 RPM · 1K RPD · 200K TPD**</sub><br>[**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> `Gemini 3.5 Flash-Lite` / `4 Hydrogen`</sub> | ⚠️ **Groq 8K TPM Wall:** Strictly for <6K token prompts (429s on coding agents). Llama 3.1/3.3 moved to Contact Sales. |
 
 <details>
-<summary>🛠️ <b>Click to expand Ready-to-Use <code>.env</code> Endpoints & Autonomous Agent Foraging Commands</b></summary>
+<summary>🛠️ <b>Click to expand Ready-to-Use <code>.env</code> Endpoints & Agent Foraging Commands</b></summary>
 <br>
 
 ```bash
-# Let the repo automatically probe your environment keys, local Unsloth server, or keyless fallbacks:
 python scripts/build.py forage coding-agent
-python scripts/build.py forage repo-1m
+python scripts/build.py forage decision-gate
 
-# Manual Primary (Z.ai) + Fallback (Google 1M TPM) + Emergency Keyless (Pollinations)
-export OPENAI_API_BASE="https://open.bigmodel.cn/api/paas/v4/"
-export OPENAI_MODEL="glm-5.3-flash"
-export FALLBACK_API_BASE="https://generativelanguage.googleapis.com/v1beta/openai/"
-export FALLBACK_MODEL="gemini-3.8-flash"
+export OPENAI_API_BASE="https://generativelanguage.googleapis.com/v1beta/openai/"
+export OPENAI_MODEL="gemini-3.8-flash"
+export FALLBACK_API_BASE="https://open.bigmodel.cn/api/paas/v4/"
+export FALLBACK_MODEL="glm-4.7-flash"
 export KEYLESS_API_BASE="https://text.pollinations.ai/openai"
 ```
 </details>
 
 ---
 
-## 🎨 3. Multimodal & Sensory Stack (Cloud Free vs. Open-Weights)
+## 🎨 3. Multimodal & Sensory Stack (Cloud Free vs. Local Pivot)
 
-> [!TIP]
-> **Why Empty Space Matters Here:** Free cloud GPUs for heavy Video and Music generation rarely exist without watermarks or tiny credit caps. The matrix below explicitly maps **when to use a free cloud API** (Voice STT/TTS, OCR, Flux Images) vs. **when to pivot immediately to Apache-2.0 Open Weights** (`Wan 3.0`, `Kyutai Moshi`, `Stable Audio`) on local or free Colab/Kaggle GPUs.
-
-```mermaid
-flowchart TD
-    M["🎨 Multimodal Workload"] --> A["🎙️ Voice & Duplex Speech"]
-    M --> B["📄 Document Vision & OCR"]
-    M --> C["🖼️ Image & In-Context Edit"]
-    M --> D["🎬 Video & Music Generation"]
-    A -->|"Free Cloud API"| A1["Groq: Whisper-Large-v3 (2K RPD)<br/>Fish Audio: S2.1 Pro (Fair-Use Free)"]
-    A -->|"Local <200ms Duplex"| A2["Kyutai Moshi / Hibiki & Voxtral (Apache-2.0)"]
-    B -->|"Free Cloud API"| B1["Mistral OCR 4 (1B tok/mo)<br/>Gemini 3.8 Flash Vision (1M TPM)"]
-    C -->|"Keyless Cloud API"| C1["Pollinations: FLUX Endpoint (0-Auth)"]
-    C -->|"Local / Weights"| C2["FLUX.2 Klein & Qwen Image 3 (Apache-2.0)"]
-    D -->|"Trial Credits Only"| D1["MiniMax Hailuo H3 ($5) / fal.ai (FLUX 3 Max)"]
-    D -->|"True Free Route"| D2["Wan 3.0 & Stable Audio Open (Colab / Local)"]
-```
-
-<br>
-
-| Modality & Job | Top Verified Models | Free Cloud Route & Quota | Open-Weight / Local Alternative & Gotcha |
+| Modality & Job | Top Verified Models | Free Cloud Route & Quota | Local Pivot (`LOCAL_AI.md`) & Gotcha |
 | :--- | :--- | :--- | :--- |
-| **Speech-to-Text (STT)**<br><sub>Real-time transcription & diarization</sub> | **`Whisper-Large-v3` / `Turbo`**<br><sub>🏆 Sub-second multilingual ASR</sub><br>**`Deepgram Nova-3`**<br><sub>🏆 Best streaming speaker diarization</sub> | [**Groq Cloud**](https://console.groq.com/)<br><sub><kbd>No Card</kbd> **20 RPM · 2,000 RPD** free</sub><br>[**Deepgram**](https://deepgram.com/)<br><sub><kbd>No Card</kbd> **$200** starter credit pool</sub> | ⚙️ **Local:** `faster-whisper` / `whisper.cpp`<br>⚠️ **Gotcha:** Groq enforces ~25MB audio file limits; chunk long recordings first. |
-| **Voice TTS & Duplex**<br><sub>Cloning, agents, & live translation</sub> | **`Fish Audio S2.1 Pro`**<br><sub>🏆 83-language emotive prosody</sub><br>**`Mistral Voxtral` / `Sonic 4`**<br><sub>🏆 ~40ms–200ms voice agent latency</sub> | [**Fish Audio**](https://fish.audio/)<br><sub><kbd>No Card</kbd> Fair-use free API tier</sub><br>[**Mistral Plateforme**](https://console.mistral.ai/)<br><sub><kbd>No Card</kbd> Free Experiment tier quota</sub> | ⚙️ **Open Weights:** [**Kyutai `Moshi` & `Hibiki`**](https://kyutai.org/) (`Apache-2.0` full-duplex speech)<br>⚠️ **Gotcha:** ElevenLabs free tier blocks commercial API cloning. |
-| **Document OCR & Vision**<br><sub>LaTeX math, multi-column PDFs, tables</sub> | **`Mistral OCR 4`**<br><sub>🏆 Beats generic VLMs on complex tables</sub><br>**`Gemini 3.8 Flash Vision`**<br><sub>🏆 1M context multi-PDF ingestion</sub> | [**Mistral Plateforme**](https://console.mistral.ai/)<br><sub><kbd>No Card</kbd> Included in ~1B tok/mo tier</sub><br>[**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> 15 RPM · 1,500 RPD</sub> | ⚙️ **Open Weights:** `Qwen-VL` / `olmOCR` via **Unsloth Local**<br>⚠️ **Gotcha:** Redact sensitive PII before sending to free cloud OCR tiers. |
-| **Image & Scene Editing**<br><sub>Photorealism, typography, in-place edit</sub> | **`FLUX.2` & `FLUX.1 Kontext`**<br><sub>🏆 In-context editing without LoRAs</sub><br>**`Qwen Image 3` / `Seedream 5`**<br><sub>🏆 Best bilingual text & layout control</sub> | [**Pollinations AI**](https://pollinations.ai/)<br><sub><kbd>Keyless</kbd> Zero-auth `Flux` REST URL</sub><br>[**HF Serverless**](https://huggingface.co/)<br><sub><kbd>No Card</kbd> Rate-limited open inference</sub> | ⚙️ **Open Weights:** **`FLUX.2 Klein`** & **`Qwen Image 3`** (`Apache-2.0`)<br>⚠️ **Gotcha:** Pollinations is a shared public pool; add retry backoff. |
-| **Video & Music / SFX**<br><sub>T2V, I2V, synchronized stereo audio</sub> | **`FLUX 3 Max` & `Seedance 2.5`**<br><sub>🏆 Tied #1 Elo (~1,139); 12.4s render</sub><br>**`Hailuo H3-Max` / `Wan 3.0`**<br><sub>🏆 Native stereo audio (`H3`) · #1 Open (`Wan`)</sub> | [**MiniMax API**](https://www.minimax.io/)<br><sub><kbd>Trial</kbd> **$5** free signup credits</sub><br>**No Permanent Free Cloud Video API** | ⚙️ **Open Weights:** **`Wan 3.0`**, **`LTX 2.3`** (Video) & **`Stable Audio Open`** (SFX)<br>⚠️ **Gotcha:** Avoid fragile unofficial Suno/Udio cookie scrapers. |
-
-<details>
-<summary>🛠️ <b>Click to expand Multimodal Quick-Call Snippets (Zero-Auth FLUX Image & Groq Whisper STT)</b></summary>
-<br>
-
-```bash
-# 1. Zero-Auth Keyless FLUX Image Generation (Pollinations - No API Key Needed)
-curl -L "https://image.pollinations.ai/prompt/minimalist_swiss_grid_architecture_diagram?width=1024&height=1024&model=flux&nologo=true" -o diagram.jpg
-
-# 2. Free Whisper-Large-v3 Audio Transcription (Groq Cloud - 2,000 RPD Free)
-curl "https://api.groq.com/openai/v1/audio/transcriptions" \
-  -H "Authorization: Bearer $GROQ_API_KEY" \
-  -F "model=whisper-large-v3" \
-  -F "file=@audio.mp3"
-```
-</details>
+| **Speech-to-Text (STT)**<br><sub>Real-time transcription & diarization</sub> | **`Whisper-Large-v3` / `Turbo`**<br><sub>🏆 Sub-second multilingual ASR</sub><br>**`Deepgram Nova-3`**<br><sub>🏆 Best streaming speaker diarization</sub> | [**Groq Cloud**](https://console.groq.com/)<br><sub><kbd>No Card</kbd> **20 RPM · 2K RPD · 28.8K sec/day**</sub><br>[**Deepgram**](https://deepgram.com/)<br><sub><kbd>No Card</kbd> **$200** starter credit pool</sub> | ⚙️ **Local (`v2`):** `Qwen3-ASR (1.7B)` + `ForcedAligner-0.6B` or `Whisper-v3-Turbo`.<br>⚠️ Chunk audio files >25 MB before calling Groq. |
+| **Voice TTS & Duplex**<br><sub>Cloning, acting, & live agents</sub> | **`Fish Audio S2.1 / Drama 3`**<br><sub>🏆 Multi-speaker acting & audio inpainting</sub><br>**`Kyutai Moshi` / `Phonon 31M`**<br><sub>🏆 <100ms duplex & WebGPU synthesis</sub> | [**Fish Audio**](https://fish.audio/)<br><sub><kbd>No Card</kbd> Fair-use free API tier</sub><br>[**Pollinations Audio**](https://pollinations.ai/)<br><sub><kbd>Keyless</kbd> Zero-auth sandbox TTS</sub> | ⚙️ **Local (`v2`):** `Fish Drama 3` (35B-A3B, <$500K commercial), `Ming-3.0-tts`, or `Phonon 31M` (64.5 MB, 130× RT WebGPU). |
+| **Document OCR & Vision**<br><sub>LaTeX math, multi-column PDFs, tables</sub> | **`Gemini 3.8 Flash Vision`**<br><sub>🏆 1M context multi-PDF & media ingest</sub><br>**`DeepSeek-OCR 2 (3B)`**<br><sub>🏆 Human reading-order Visual Causal Flow</sub> | [**Google AI Studio**](https://aistudio.google.com/)<br><sub><kbd>No Card</kbd> Free per-project tier</sub><br>[**NVIDIA NIM**](https://build.nvidia.com/)<br><sub><kbd>No Card</kbd> `DeepSeek-V4.1-Flash` VLM</sub> | ⚙️ **Local (`v2`):** `DeepSeek-OCR 2` (<4 GB VRAM) or `olmOCR-2`.<br>⚠️ Redact PII before calling free cloud vision APIs. |
+| **Image & Video Synthesis**<br><sub>Keyless images vs. local video GPUs</sub> | **`FLUX` / `Qwen-Image-2.1`**<br><sub>🏆 Native RGBA & 2048px text rendering</sub><br>**`Hailuo H3` / `Wan 2.2` / `LTX-2.5`**<br><sub>🏆 Top video + synchronized audio</sub> | [**Pollinations AI**](https://pollinations.ai/)<br><sub><kbd>Keyless</kbd> Zero-auth `Flux` REST URL</sub><br>[**MiniMax API**](https://www.minimax.io/)<br><sub><kbd>Trial</kbd> **$5** free signup credits</sub> | ⚙️ **Local (`v2`/`v3`):** No permanent free cloud video API exists—run `Wan 2.2` / `H3` / `LTX-2.5` locally via **`WanGP v20.12`** (5.9 GB Extreme Chunker). |
 
 ---
 
@@ -118,47 +77,32 @@ curl "https://api.groq.com/openai/v1/audio/transcriptions" \
 
 | Grounding Role | Tool & Endpoint | Verified Free Quota | Why It Wins & Technical Gotcha |
 | :--- | :--- | :--- | :--- |
-| **Keyless Web Scraper**<br><sub>Clean Markdown for LLM context</sub> | [**Firecrawl (`Keyless` & API)**](https://www.firecrawl.dev/)<br><sub>🏆 Lowest token bloat in benchmarks</sub> | <kbd>Keyless</kbd> Daily per-IP free quota<br><sub>+ **500 credits** on standard signup</sub> | ✅ **7,456 median tokens/task** (vs 15K+ on raw HTML scrapers).<br>⚠️ Keyless mode is IP-rate-limited; use API key for concurrency. |
-| **Zero-SDK URL / PDF Reader**<br><sub>Instant prefix conversion</sub> | [**Jina Reader (`r.jina.ai`)**](https://jina.ai/reader/)<br><sub>🏆 Zero-install URL-to-Markdown</sub> | <kbd>Keyless</kbd> Free rate-limited prefix<br><sub>+ **10,000,000 free tokens** w/ API key</sub> | ✅ Prepend `https://r.jina.ai/` to any URL or PDF link.<br>⚠️ Use `https://s.jina.ai/?q=query` for keyless web search. |
-| **Neural & Deep Agent Search**<br><sub>Semantic web retrieval</sub> | [**Exa 3.0 (`Lite` / `Deep`)**](https://exa.ai/)<br><sub>🏆 Built natively for autonomous agents</sub> | <kbd>No Card</kbd> **$10/mo recurring credits**<br><sub>+ $10 bonus (~2,500 `Lite` searches/mo)</sub> | ✅ Controllable reasoning effort (`Lite` @ $4/1k vs `Deep Search`).<br>⚠️ Capped at **10 QPS** on the free tier. |
-| **Pre-Chunked RAG Search**<br><sub>Factual snippet injection</sub> | [**Tavily Search API**](https://tavily.com/)<br><sub>🏆 Skips custom HTML chunking pipelines</sub> | <kbd>No Card</kbd> **1,000 credits/mo forever**<br><sub>Researcher Plan (+ Free Student Tier)</sub> | ✅ Returns scored, pre-chunked context blocks ready for prompt injection.<br>⚠️ `advanced` depth costs 2 credits/call vs 1 for `basic`. |
-| **Embeddings & Reranking**<br><sub>Two-stage vector + probability filter</sub> | [**Cohere `Embed 5` & `Rerank 5`**](https://cohere.com/)<br><sub>🏆 Shared `Pro`/`Fast` embedding space</sub> | <kbd>No Card</kbd> **1,000 calls/mo** (Trial Key)<br><sub>10 Rerank/min · 20 Chat/min</sub> | ✅ Index offline w/ `Embed 5 Pro`, query w/ `Embed 5 Fast` (98.4% retention), filter via `Rerank 5` (32K ctx, JSON/YAML native). |
+| **Keyless Web Scraper**<br><sub>Clean Markdown for LLM context</sub> | [**Firecrawl (`Keyless` & API)**](https://www.firecrawl.dev/)<br><sub>🏆 Lowest token bloat (**7,456** med. tok/task)</sub> | <kbd>Keyless</kbd> Official agent onboarding skill<br><sub>+ **500 credits** on signup</sub> | ✅ Ships `agent-onboarding/SKILL.md` for zero-key foraging.<br>⚠️ Keyless mode is IP-rate-limited; pass API key for burst jobs. |
+| **Zero-SDK URL / PDF Reader**<br><sub>Instant prefix conversion</sub> | [**Jina Reader (`r.jina.ai`)**](https://jina.ai/reader/)<br><sub>🏆 Zero-install URL-to-Markdown</sub> | <kbd>Keyless</kbd> Free rate-limited prefix<br><sub>+ **10,000,000 free tokens** w/ API key</sub> | ✅ Prepend `https://r.jina.ai/` to any URL/PDF or `https://s.jina.ai/?q=` for keyless search. |
+| **Neural & Deep Agent Search**<br><sub>Semantic web retrieval</sub> | [**Exa 3.0 (`Lite` / `Deep`)**](https://exa.ai/)<br><sub>🏆 Built natively for autonomous agents</sub> | <kbd>No Card</kbd> **$10/mo recurring credits**<br><sub>+ $10 bonus (**10 QPS** search / **100 QPS** contents)</sub> | ✅ Resets 1st of every month (~2,500 Lite searches) + supports **50 concurrent agent runs**. |
+| **Pre-Chunked RAG Search**<br><sub>Factual snippet injection</sub> | [**Tavily Search API**](https://tavily.com/)<br><sub>🏆 Skips custom HTML chunking pipelines</sub> | <kbd>No Card</kbd> **1,000 credits/mo forever**<br><sub>+ Keyless mode for Hermes Agent</sub> | ✅ Pre-scored context chunks ready for prompt injection.<br>⚠️ `advanced` depth costs 2 credits vs 1 for `basic`. |
+| **Embeddings & Reranking**<br><sub>Two-stage vector + probability filter</sub> | [**Cohere `Embed 5` & `Rerank 5`**](https://cohere.com/)<br><sub>🏆 Shared `Pro`/`Fast` embedding space</sub> | <kbd>No Card</kbd> **1,000 calls/mo** (Trial Key)<br><sub>10 Rerank/min · 20 Chat/min</sub> | ✅ Index w/ `Embed 5 Pro`, query w/ `Fast` (98.4% retention), rerank via `Rerank 5` (32K ctx, JSON/YAML). |
 | **Academic & Paper Graph**<br><sub>Citations, abstracts, open PDFs</sub> | [**OpenAlex**](https://openalex.org/) + [**arXiv API**](https://arxiv.org/help/api/)<br><sub>🏆 250M+ scholarly works & citations</sub> | <kbd>Keyless</kbd> **100,000 requests/day**<br><sub>100% free forever</sub> | ✅ Pass `?mailto=you@domain.com` in OpenAlex URLs to enter the fast polite pool with zero auth keys. |
-
-<details>
-<summary>🛠️ <b>Click to expand Zero-Auth Foraging Snippets (Jina URL-to-Markdown & OpenAlex Paper Graph)</b></summary>
-<br>
-
-```bash
-# 1. Convert any live webpage or PDF into clean LLM Markdown (Zero Auth, Zero SDK)
-curl -s "https://r.jina.ai/https://example.com"
-
-# 2. Query OpenAlex for latest Open-Access papers (100,000 req/day Free Polite Pool)
-curl -s "https://api.openalex.org/works?search=autonomous+coding+agents&filter=is_oa:true&per-page=3&mailto=agent@localhost"
-```
-</details>
 
 ---
 
 ## 🪦 5. The Graveyard (What We Cut & Why)
 
 > [!WARNING]
-> Most `awesome-*` repositories rot because they never delete dead or bait-and-switch endpoints. These entries are tracked in `data/catalog.yaml` so our upstream sync linter **blocks them from ever being re-added**.
+> Enforced by `scripts/build.py lint` & `sync` so dead or card-gated tiers can never creep back in.
 
-* ❌ **GitHub Models (`models.inference.ai.azure.com`):** Officially retired on July 30, 2026. Still listed in 90% of legacy free API repos, but endpoints are dead.
-* ❌ **SambaNova Cloud (Legacy Free Tier):** Restricted free tier access; frontier models (`DeepSeek-V3.1`, `MiniMax-M3`, `Gemma-4-31B`) now require payment method/credits with 30-day deprecations.
-* ❌ **Together AI & Fireworks AI ('Free Tiers'):** Shifted from ongoing free tiers to one-time starter credits or card-gated accounts.
-* ❌ **Brave Search API (Free Tier):** Requires a credit card on file for the free tier (replaced by card-free Firecrawl Keyless, Jina, Exa 3.0, and Tavily).
-* ❌ **Legacy 7B-8B Generalists & `gpt-oss-120b` for Deep Reasoning:** Outclassed on SWE-bench and GPQA Diamond (`gpt-oss` scores <15% on Humanity's Last Exam vs 55%+ for `Kimi K3` / `GLM-5.3`).
+* ❌ **Cerebras Cloud (Legacy 'Free Tier'):** Confirmed Nov 18, 2026: no renewing free tier exists; the $5 / 30-day credit requires a valid payment method.
+* ❌ **Mistral La Plateforme (Legacy 'Free Experiment Tier'):** Current billing docs require pay-as-you-go activation for API keys, disqualifying it from our no-card pool.
+* ❌ **Gemini 2.5 Pro & 2.5 Flash:** Retiring Dec 1, 2026 (auto-routing to Gemini 3.8 Flash / 3.5 Flash-Lite). GCP $300 trials no longer cover Vertex/Gemini.
+* ❌ **GitHub Models (`models.inference.ai.azure.com`):** Officially retired July 30, 2026; endpoints are dead.
+* ❌ **SambaNova Cloud & Together AI ('Free Tiers'):** Restricted free access; frontier weights require payment methods or one-time starter credits.
+* ❌ **Brave Search API (Free Tier):** Requires a credit card on file (replaced by Firecrawl Keyless, Jina, Exa 3.0, and Tavily).
 
 ---
 
-## 🤖 6. Dual-Interface CLI & Agent Self-Foraging (`llms.txt`)
-Point any coding or research agent to [`llms.txt`](llms.txt) or run the built-in CLI:
+## 🤖 6. Unified CLI & Dual-Interface Agent Foraging
 ```bash
-python scripts/build.py forage coding-agent   # Auto-detects working env key, local Unsloth, or keyless fallback
-python scripts/build.py sync                  # Pulls upstream GitHub commits & strips Graveyard links
-python scripts/build.py lint                  # Enforces 4-column layout & relational integrity
-python scripts/build.py compile               # Rebuilds README.md and llms.txt from data/catalog.yaml
-python scripts/build.py all                   # Runs sync -> lint -> compile
+python scripts/build.py forage coding-agent             # Cloud/local/keyless auto-foraging
+python scripts/build.py forage inkling-coding --local   # Local 16GB+64GB launch command
+python scripts/build.py all                             # Sync -> Lint (v1+v2+v3) -> Compile all 5 views
 ```

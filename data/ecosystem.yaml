@@ -1,0 +1,152 @@
+meta:
+  version: "3.0.0-ecosystem"
+  title: "🛠️ AI Swiss Knife — Engineering, Harnesses & Underground Atlas"
+  tagline: "Operational brain covering how the AI stack actually runs, connects, optimizes, and ships—from Durable Harnesses and WanGP v20.12 to 2026 llama.cpp flags and OS/Silicon exclusives."
+  editorial_note: "Verified against primary GitHub releases, model cards, and arXiv papers through **Nov 2026**. `v1` (`README.md`) and `v2` (`LOCAL_AI.md`) tell you **what** runs; `v3` (`ECOSYSTEM.md`) tells you **how** to run it at peak efficiency."
+
+domains:
+  - id: "harnesses"
+    title: "1. Agent Harnesses, IDEs & Durable Execution"
+    subtitle: "The model gets the credit, but the harness decides whether multi-hour agent loops succeed or crash."
+    headers: ["Harness / Platform", "Core Architecture", "Standout Capabilities (Nov 2026)", "Best Pairing & Gotcha"]
+    rows:
+      - col1: "**Google Antigravity**<br><sub>`2.0 Desktop` · `CLI` · `SDK`</sub>"
+        col2: "Unified Google agentic harness<br><sub>Shared config across GUI + CLI</sub>"
+        col3: "Live w/ **`Gemini 3.8 Flash`** (default) + **`Gemini 4 Neon / Orchestrator / Hydrogen`**; `/agents` parallel subagents, `ctrl+k` approval, `@conversation` cross-import."
+        col4: "✅ Export directly from AI Studio Build into local Antigravity with full context intact."
+      - col1: "**Pi (`v0.83`) & `Durable Pi`**<br><sub>`pi.dev` · `disler/durable-pi`</sub>"
+        col2: "MIT minimalist TUI/RPC/SDK +<br><sub>SQLite crash-resumable backend</sub>"
+        col3: "Built-in **`MCP + Codemode`** (JS sandbox without context bloat), `/tree` branching, **atomic shared JSON app state**, background compaction (200K/250K), live mid-run tool hot-swap."
+        col4: "🏆 Thinking Machines' reference harness for `Inkling 2 Mini` (**71.6%** Terminal Bench 2.1)."
+      - col1: "**Zed Editor + `ACP`**<br><sub>Agent Client Protocol (`Apache-2.0`)</sub>"
+        col2: "Native IDE multi-file review UI<br><sub>Zero Zed server telemetry</sub>"
+        col3: "Official **ACP Registry** unifies `Pi`, `Claude Agent`, `Codex`, `Gemini CLI`, `OpenCode`, `Cursor`, & `Poolside` while forwarding local MCP servers."
+        col4: "✅ Eliminates terminal diff blindness when running local or cloud CLI coding agents."
+      - col1: "**OpenCode · Claude Code · OpenClaw**<br><sub>Vendor-agnostic & swarm CLIs</sub>"
+        col2: "Terminal agent loops +<br><sub>Pre/post shell lifecycle hooks</sub>"
+        col3: "`Claude Code` wires cleanly to local models via **Unsloth's Anthropic endpoint**; `OpenCode` pairs cloud planners with local Qwen/Inkling edits."
+        col4: "⚠️ Always wrap destructive bash tools behind a System-1 `Laya` or `Gemini Decision 1` gate."
+
+  - id: "backends"
+    title: "2. Inference Studios, Engines & Low-VRAM Media Backends"
+    subtitle: "Choosing the right serving kernel unlocks 2×–5× speedups and halves VRAM ceilings on 16GB cards."
+    headers: ["Backend / Runtime", "Target Workload", "Key Breakthroughs (Nov 2026)", "Strict Compatibility Gotcha"]
+    rows:
+      - col1: "**Unsloth Runtime & Studio**<br><sub>`v0.1.923-beta` (Tauri + CLI)</sub>"
+        col2: "Local LLMs, Decisions, & RL/LoRA<br><sub>OpenAI + Anthropic API server</sub>"
+        col3: "**1.9×** faster `Inkling 2 Mini`, **3×** faster VRAM-exceeding MoE GGUFs, **4.1×** faster `Laya`, `AsyncGRPO`, retrieval Context Archival, AMD NPU, & `FastWan`."
+        col4: "✅ **Mandatory** for `Inkling 2 Mini` looped-layer GGUFs and self-healing JSON/XML tool calls."
+      - col1: "**`llama.cpp` vs `ik_llama.cpp`**<br><sub>Mainline vs. SOTA Perf Fork</sub>"
+        col2: "GGUF CPU + GPU hybrid inference<br><sub>CUDA, Metal, Vulkan, ROCm</sub>"
+        col3: "`ik_llama.cpp` leads bleeding-edge kernels: **FlashMLA**, **IQK AVX-512 (`HAVE_FANCY_SIMD`)**, Trellis quants (`IQ2_KS`/`IQ3_KT`), dynamic MoE caching."
+        col4: "⚠️ `ik_llama.cpp` is **CPU + NVIDIA CUDA only**; avoid `-rtr` on k-quants w/ MoE offload & avoid raw `f16` `_XL` tensors."
+      - col1: "**`WanGP v20.12` + `MMGP v4`**<br><sub>`deepbeepmeep/WanGP`</sub>"
+        col2: "Low-VRAM Video, Image & Avatars<br><sub>`Wan 2.2`, `H3`, `LTX-2.5`, `SenseNova`</sub>"
+        col3: "**Extreme Chunker** (**5.9 GB VRAM** for 15s 1080p H3), **`pi-H3` DWD** (2–4 steps), **Infinite Sliding Windows**, **`SageGP 1.0.2`**, `Deepy Prime` MCP + `Deepy Apps`."
+        col4: "✅ Install `WGPKernels 1.5.0` & `SageGP 1.0.2` (PyTorch 2.10; Triton 3.6+ for RTX 50xx adaptive Sage2/3)."
+      - col1: "**`ComfyUI v0.46` & `SGLang-Omni`**<br><sub>Node graphs & multimodal serving</sub>"
+        col2: "Custom media pipelines & TTS<br><sub>`Fish Drama 3`, `Qwen-Image-2.1`</sub>"
+        col3: "`ComfyUI v0.46`: `SenseNova`, `RMBG 3.0`, RAFT `Video Deflicker`, `KJNodes` block-swap; `SGLang-Omni` serves `Fish Audio Drama 3`."
+        col4: "💡 Use `stable-diffusion.cpp` for lightweight CLI `Qwen-Image-2.1` (`Q4_K_M`, 9.1 GB VRAM)."
+
+  - id: "flags"
+    title: "3. Acceleration, Quantization & The 2026 Flag Bible"
+    subtitle: "Exact mechanics for maximizing a 16GB VRAM + 64GB RAM workstation without hitting the PCIe cliff."
+    headers: ["Mechanic / Flag", "Exact Syntax / Spec", "What It Does Under the Hood", "Critical Tuning Trap"]
+    rows:
+      - col1: "**The `--n-cpu-moe` Sweep**<br><sub>Zone 2 Hybrid MoE Law</sub>"
+        col2: "`-ngl 99 -fa on --n-cpu-moe N`"
+        col3: "Pins **100% of Attention + KV cache** on your 16GB GPU while pushing only sparse FFN experts of the first `N` layers to 64GB DDR5 RAM."
+        col4: "⚠️ **Never lower `-ngl` on MoEs.** Sweep `N` down by 2 until VRAM spills, then step up by 1–2."
+      - col1: "**Unified Load Mode**<br><sub>Replaces `--no-mmap` / `--mlock`</sub>"
+        col2: "`--load-mode none` or `mlock`<br><sub>Env: `LLAMA_ARG_LOAD_MODE`</sub>"
+        col3: "Replaces deprecated `--no-mmap` / `--mlock` flags in modern `llama.cpp` to prevent OS page-cache thrashing on 64GB RAM loads."
+        col4: "⚠️ If partial MoE offload + CUDA graphs outputs gibberish, add **`-cuda graphs=0`**."
+      - col1: "**KV Cache Quantization**<br><sub>Memory-fitting vs. Speed</sub>"
+        col2: "`-ctk q8_0 -ctv q8_0`<br><sub>Requires `-fa on` (Flash Attn)</sub>"
+        col3: "Halves KV cache VRAM so 24B–27B dense models (`Qwen3.8-27B`) and 120K MoE contexts fit cleanly inside 16GB VRAM."
+        col4: "⚠️ **Not a speed boost:** Keep `f16` KV cache whenever it fits in VRAM; use `q8_0` only to prevent RAM spill."
+      - col1: "**Next-Gen Multi-Token Tech**<br><sub>`DFlash` · `DSpark` · `MTP` · `N-gram`</sub>"
+        col2: "`--spec-draft-n-max 2` (Inkling)<br><sub>`Dynamic v3.1` (`UD-*`) quants</sub>"
+        col3: "`DFlash` drafts **16 tokens/pass** (`Muse Glimmer`/`Bolt`); `DSpark` (1 GB) accelerates `Inkling 2 Mini`; `N-gram` prefetches 51B tables from RAM (`Qwen3.8-Flash`)."
+        col4: "⚠️ On `Inkling 2 Mini`, raising `--spec-draft-n-max` above 2 can degrade looped-layer acceptance."
+    drawer_title: "Click to expand Copy-Paste 2026 Verification & Sweep Commands (16GB VRAM + 64GB RAM)"
+    drawer_code: |
+      # 1. Zone 2 Heavy Coding MoE Sweep (Attention 100% on 16GB GPU, 29 Expert Layers in 64GB RAM)
+      GGML_CUDA_GRAPH_OPT=1 llama-server \
+        -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf \
+        -ngl 99 -fa on -c 120000 --load-mode none \
+        --n-cpu-moe 29 --batch-size 4096 --ubatch-size 4096 \
+        -ctk q8_0 -ctv q8_0 --temp 0
+
+      # 2. Inkling 2 Mini (Looped Transformer via Unsloth Runtime + Vision mmproj)
+      unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2
+
+      # 3. Zone 1 Pure 16GB VRAM Dense Brain (Qwen3.8-27B IQ4_XS + Q8 KV Cache)
+      llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0
+
+  - id: "protocols"
+    title: "4. Protocols, Skills & Context Engineering"
+    subtitle: "How to keep prompt caches warm, stop context rot, and wire tools cleanly across every harness."
+    headers: ["Pattern / Protocol", "Standard / File", "Why It Beats Legacy Approaches", "Production Guardrail"]
+    rows:
+      - col1: "**Progressive Skills (`SKILL.md`)**<br><sub>vs. Bloated MCP Tool Lists</sub>"
+        col2: "`skills/<name>/SKILL.md` +<br><sub>`Pi` / `Antigravity` / `Deepy Skills`</sub>"
+        col3: "Loads instructions & scripts **on demand** instead of stuffing 30+ MCP schemas into the system prompt (which destroys KV prompt caching)."
+        col4: "✅ Use `Pi` **MCP + Codemode** when you need complex multi-tool orchestration in a JS sandbox."
+      - col1: "**Layered Context Files**<br><sub>Global -> Repo -> Subdir</sub>"
+        col2: "`AGENTS.md` · `CLAUDE.md`<br><sub>`llms.txt` · `llms-local.txt`</sub>"
+        col3: "Gives agents deterministic foraging routes and repo invariants in <500 tokens before reading a single source file."
+        col4: "⚠️ Never let `AGENTS.md` grow into a 5,000-token manual—keep micro-details in on-demand skills."
+      - col1: "**Retrieval Context Archival**<br><sub>vs. Lossy Rolling Summaries</sub>"
+        col2: "Unsloth Archival · `Durable Pi`<br><sub>`/tree` + `search_history`</sub>"
+        col3: "Archives old turns to searchable SQLite/vector history at 200K tokens rather than overwriting nuances via destructive summarization."
+        col4: "✅ Pair with `Laya` + `all-MiniLM-L6-v2` (23 MB) for auditable memory invalidation ledgers."
+      - col1: "**`ACP` vs `MCP`**<br><sub>Editor Bridge vs. Tool Bus</sub>"
+        col2: "Zed `ACP` (`Apache-2.0`)<br><sub>Anthropic `MCP`</sub>"
+        col3: "**ACP** connects IDEs to external coding agents cleanly; **MCP** connects agents to external tools/data (Zed forwards MCP over ACP)."
+        col4: "✅ Use both: ACP for the human review surface, MCP/Skills for agent tool execution."
+
+  - id: "silicon"
+    title: "5. OS, Sandboxing & Silicon-Exclusive Stacks"
+    subtitle: "Exploiting hardware-specific accelerators and OS-native sandboxes for safe, fast local execution."
+    headers: ["OS / Silicon Tier", "Key Engines & Kernels", "Exclusive Performance / Safety Edge", "Hardware Reality Check"]
+    rows:
+      - col1: "**Linux (First-Class Host)**<br><sub>CUDA · ROCm · Zen 4/5 AVX-512</sub>"
+        col2: "`Bwrap` Sandbox · `ik_llama.cpp`<br><sub>Kernel Hugepages · `HAVE_FANCY_SIMD`</sub>"
+        col3: "Fastest 64GB DDR5 MoE streaming (AVX-512 IQK kernels) + Unsloth OS-enforced **`Bwrap`** bash/python sandboxing."
+        col4: "✅ Preferred host OS for 16GB NVIDIA + 64GB DDR5 hybrid MoE workstations."
+      - col1: "**NVIDIA Ada / Blackwell**<br><sub>RTX 40xx / 50xx & DGX Spark</sub>"
+        col2: "`NVFP4` · `SageGP 1.0.2`<br><sub>`FlashMLA` · CUDA Graphs</sub>"
+        col3: "RTX 50xx gets native `NVFP4` + adaptive `Sage2/3 GP` precision; RTX 20xx–40xx gain `SageGP` Extreme Chunker kernels for `WanGP`."
+        col4: "⚠️ Update to PyTorch 2.10 + Triton 3.6+ for Blackwell `sage3 gp` adaptive modes."
+      - col1: "**macOS (Apple Silicon)**<br><sub>Unified Memory + `Seatbelt`</sub>"
+        col2: "`MLX` (`mlx-lm` / `mlx-vlm`)<br><sub>Unsloth Mac **2.8×** Speculative</sub>"
+        col3: "Zero PCIe copy bottleneck for MoEs up to unified RAM ceiling + macOS **`Seatbelt`** sandbox."
+        col4: "⚠️ Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified RAM recommended for `Inkling 2 Mini`."
+      - col1: "**AMD NPU, Windows & WebGPU**<br><sub>Tri-Hybrid & Zero-Server Browser</sub>"
+        col2: "Unsloth AMD NPU · Win **`MXC`**<br><sub>WebGPU (`Phonon 31M` / `Laya`)</sub>"
+        col3: "Run `Laya` decisions on AMD NPU/CPU or `Phonon 31M` TTS at **130× RT (4.9ms)** directly in browser WebGPU while GPU stays 100% free."
+        col4: "✅ Windows users get native **`MXC`** sandboxing in Unsloth Studio and Redtash1 one-click `WanGP` builds."
+
+  - id: "frontier"
+    title: "6. Frontier Research & Underground Playbooks"
+    subtitle: "Verified late-2026 breakthroughs shifting how local agents and creative pipelines operate."
+    headers: ["Lead / Playbook", "Primary Source", "Why It Matters Right Now", "How to Experiment Today"]
+    rows:
+      - col1: "**Gradient-Free Self-Rewriting**<br><sub>Weight Editing via Reasoning</sub>"
+        col2: "UIUC (`arXiv:2611.21885`)<br><sub>Published Nov 16–20, 2026</sub>"
+        col3: "Demonstrates an LLM diagnosing failures via pure reasoning and rewriting its own weights across sessions with **zero gradients or training runs**."
+        col4: "🔬 Track for next-gen persistent local agents that permanently patch recurring coding mistakes."
+      - col1: "**Variable-Loop Test-Time Compute**<br><sub>Dynamic Depth per Token</sub>"
+        col2: "`thinkingmachines/TML-d24-varloop-research`"
+        col3: "Companion to `Inkling 2 Mini` allowing you to dial `loop_num_passes` at inference time—trading latency for reasoning depth without swapping models."
+        col4: "🧪 Combine with a `Laya` complexity router to pass easy queries in 1 loop and hard bugs in 3+ loops."
+      - col1: "**Playable Worlds + Auto-Directed Video**<br><sub>`Hy-Nomas` + `Deepy Apps`</sub>"
+        col2: "`Tencent-Hunyuan/Hy-Nomas`<br>`WanGP v20.12 Deepy Apps`"
+        col3: "Generates WASD-navigable interactive worlds on 1 GPU (`Hy-Nomas`) and packages generated video/audio assets into playable 3D `.wgpapp` scenes (`Deepy Apps`)."
+        col4: "🎬 Wire Claude Code / Antigravity into `Deepy Prime` via MCP to auto-direct, inspect frames, and iterate."
+      - col1: "**Zero-Cost Local Claude Code Loop**<br><sub>Anthropic Proxy + Decision Gate</sub>"
+        col2: "Unsloth Anthropic API +<br>`Laya` (`localhost:8888`)"
+        col3: "Point `Claude Code` or `OpenCode` to local `Inkling 2 Mini` / `Qwen3.8-27B` while gating shell commands through `laya-typed-decisions`."
+        col4: "🛡️ Cap output tokens/turns on `Inkling 2 Mini` to prevent repetitive debug loops."
