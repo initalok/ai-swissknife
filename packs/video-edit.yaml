@@ -1,0 +1,17 @@
+id: pack-video-edit
+title: "Video Editing, Motion Graphics & Local AI Footage"
+category: creative
+lifecycle: operational
+decay_class: operational
+last_verified: "2026-11-26"
+verdict: "Use DaVinci Resolve MCP for Studio NLE cuts, Hyperframes/Remotion for code-driven motion graphics, and WanGP v20.12 for 5.9 GB local footage."
+stack:
+  primary_models: [google-ai-studio, qwen3.8-27b, wan-2.2, ltx-2.5]
+  harnesses: [pi, deepseek-harness]
+  specialist_tools: [davinci-resolve-mcp, hyperframes-remotion, openmontage-openmotion, wangp-v20]
+workflow_steps:
+  - "Generate motion graphics and product explainers programmatically with Hyperframes or Remotion Skills."
+  - "Synthesize consistent multi-shot AI footage locally via WanGP v20.12 Extreme Chunker + Wan 2.2 / LTX-2.5."
+  - "Automate final timeline assembly, color, and Fairlight audio through DaVinci Resolve MCP."
+gotchas:
+  - "DaVinci Resolve external scripting/MCP strictly requires paid Resolve Studio 20.x."

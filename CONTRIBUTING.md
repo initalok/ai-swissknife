@@ -1,21 +1,11 @@
-# Contributing to AI Swiss Knife (`v2.0.0-beta`)
+# Contributing to AI Swiss Knife (`v3.0.0-modular`)
 
-Thanks for helping keep this Field Book lean, verified, and zero-rot!
-
-## Core Rule: Edit Data, Never Compiled Markdown
-- **Edit:** `data/01_cloud.yaml` .. `data/06_adaptation.yaml`, `data/99_graveyard.yaml`, or `data/meta.yaml`.
-- **Never hand-edit:** `README.md`, `book/*.md`, `llms.txt`, or `llms-full.txt`.
-
-## Inclusion Bar
-1. **Primary Source Only:** Link official provider docs, Hugging Face model cards, GitHub releases, or arXiv papers.
-2. **Real-World Gotcha Required:** Every row must include its bottleneck, license nuance, or failure mode in `c4`.
-3. **4-Column Law:** Never add a 5th column; stack secondary metadata with `<br><sub>...</sub>`.
-4. **Graveyard Respect:** Dead cloud tiers (`Cerebras`, `Mistral`, `GitHub Models`, `Gemini 2.5`) and >80 GB local walls belong in `data/99_graveyard.yaml`.
-
-## Local Validation Before Opening a PR
+## Architecture Rule: Headless Data -> Dumb Renderers
+1. **Atomic Entities (`entities/*.yaml`):** Define each model, gateway, harness, or MCP once with raw domain fields (`lifecycle`, `decay_class`, `last_verified`, `gotchas`). Never write HTML (`<br>`, `<sub>`, `<kbd>`) inside YAML.
+2. **Independent Use-Case Packs (`packs/*.yaml`):** Create or edit a ~30-line pack referencing existing entity IDs. Packs are auto-discovered—no compiler edits required.
+3. **Verify Before PR:**
 ```zsh
 source .venv/bin/activate
-python scripts/build.py all
-git status
+python scripts/cli.py validate
+python scripts/cli.py build
 ```
-CI (`.github/workflows/ci_lint.yml`) will automatically verify schema compliance, Graveyard enforcement, and zero doc drift.

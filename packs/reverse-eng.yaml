@@ -1,0 +1,18 @@
+id: pack-reverse-eng
+title: "Reverse Engineering & Binary Triage"
+category: engineering
+lifecycle: operational
+decay_class: operational
+last_verified: "2026-11-26"
+verdict: "Run 100% air-gapped local coding weights wired to Ghidra/IDA/JADX/Radare2 MCPs for rapid static triage; keep dynamic debugging human-led."
+stack:
+  primary_models: [qwen3.8-27b, qwen3-coder-next-80b]
+  harnesses: [pi]
+  specialist_tools: [oghidra-mcp, ida-jadx-radare-mcps]
+  safety_layer: [safeagents]
+workflow_steps:
+  - "Load binary or APK inside an isolated offline sandbox with outbound cloud endpoints disabled."
+  - "Attach LLNL OGhidra / GhidraMCP or JADX MCP to bulk-rename functions, trace xrefs, and run MITRE ATT&CK pattern alerts."
+  - "Switch to manual dynamic debugging for packed, virtualized, or anti-debug control flow."
+gotchas:
+  - "Strictly analyze binaries/APKs you own or have explicit legal authorization to audit."

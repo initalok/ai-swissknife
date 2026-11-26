@@ -1,0 +1,18 @@
+id: pack-app-dev
+title: "Mobile App Development (iOS, Android & Expo)"
+category: engineering
+lifecycle: operational
+decay_class: operational
+last_verified: "2026-11-26"
+verdict: "Combine MobileBuildMCP for Apple builds/XCTest/LLDB with Argent for physical USB iOS/Android testing and Expo for unified TypeScript apps."
+stack:
+  primary_models: [qwen38-27b-super-adapter, inkling-2-mini]
+  harnesses: [antigravity, pi]
+  specialist_tools: [mobile-build-mcp, argent-mobile, expo-mcp]
+  safety_layer: [safeagents]
+workflow_steps:
+  - "Bootstrap cross-platform TypeScript apps with Expo and its auto-generated AGENTS.md."
+  - "Run Apple target compilation and XCTest loops via Sentry MobileBuildMCP."
+  - "Attach Argent over USB to test physical devices, inspect HTTP calls, and catch main-thread hangs."
+gotchas:
+  - "MobileBuildMCP stops at Apple simulators/builds; Expo MCP hosted docs search requires a paid plan."

@@ -1,0 +1,20 @@
+name: v3-modular Validate & Drift Gate
+on:
+  push:
+    branches: [main, "v3*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python scripts/cli.py validate
+      - run: python scripts/cli.py build
+      - name: Fail if rendered views drifted from headless entities/packs
+        run: git diff --exit-code README.md book/ llms.txt llms-full.txt dist/registry.json
