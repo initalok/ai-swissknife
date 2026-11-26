@@ -1,4 +1,4 @@
-name: Weekly Upstream Sync, Dual-Graveyard Lint & Multi-View Compile
+name: Weekly Upstream Sync, Book Lint & Compile
 on:
   schedule:
     - cron: '0 6 * * 1'
@@ -15,11 +15,11 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - run: python scripts/build.py all
-      - name: Commit updated upstream state & compiled v1/v2/v3 views
+      - run: python scripts/build.py all --sync
+      - name: Commit updated upstream state & compiled Field Book
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add upstream/sources.json upstream/latest_diff_report.md README.md llms.txt LOCAL_AI.md llms-local.txt ECOSYSTEM.md
-          git diff --staged --quiet || git commit -m "chore(upstream): automated sync, dual-graveyard lint, and v1/v2/v3 compile"
+          git add upstream/sources.json upstream/latest_diff_report.md README.md book/ llms.txt llms-full.txt
+          git diff --staged --quiet || git commit -m "chore(upstream): weekly sync, graveyard filter, and book compile"
           git push

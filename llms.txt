@@ -1,29 +1,37 @@
-# AI Swiss Knife — Cloud Agent Foraging Manifest (llms.txt)
-> Version: 1.1.1 | See `llms-local.txt` for 16GB VRAM + 64GB RAM local models.
+# AI Swiss Knife — Compact Agent Router (v2.0.0-beta.1)
+> Local Hardware Envelope: 16GB VRAM + 64GB System RAM (~80 GB Total Pool)
+> Fetch `llms-full.txt` for complete tables or open individual `book/*.md` chapters.
 
-## Tier 0: Immediate Keyless Endpoints (Zero Auth / No API Key Needed)
+## Tier 0: Immediate Keyless Endpoints (No API Key Required)
 - LLM Chat (OpenAI-compat): POST https://text.pollinations.ai/openai/chat/completions (model: 'openai')
 - Image Gen (FLUX): GET https://image.pollinations.ai/prompt/{prompt}?model=flux&nologo=true
 - Web/PDF to Markdown: GET https://r.jina.ai/{target_url}
-- Keyless Web Search: GET https://s.jina.ai/?q={query}
+- Keyless Search: GET https://s.jina.ai/?q={query}
 - Firecrawl Keyless Skill: GET https://www.firecrawl.dev/agent-onboarding/SKILL.md
 - Academic Papers (100K/day): GET https://api.openalex.org/works?search={query}&filter=is_oa:true&mailto=agent@localhost
 
-## Tier 1: Local Hardware Runtime (See llms-local.txt)
-- Unsloth / llama-server: http://localhost:8000/v1 | Local Decision API (Laya): http://localhost:8888
+## Tier 1: Local Runtime (`python scripts/build.py forage <id> --local`)
+- Unsloth / llama-server: http://localhost:8000/v1 | Local Laya Decisions: http://localhost:8888
+- [inkling-coding] (Zone 1/2 (13-18 GB)) -> `unsloth run unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_XL --spec-draft-n-max 2`
+- [qwen-27b-super-adapter] (Zone 1 (16GB VRAM: Base IQ4_XS + 912 MiB F16 LoRA)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen-27b-pi-specialist] (Zone 1 (16GB VRAM: Base IQ4_XS + 304 MiB F16 LoRA, Thinking Off)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf --chat-template-kwargs '{"enable_thinking": false}' -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen-27b-vram] (Zone 1 (100% in 16GB VRAM)) -> `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
+- [qwen-flash-180b] (Zone 2 Ceiling (66.4-70.5 GB + MTP)) -> `llama-server -m Qwen3.8-Flash-Next-UD-IQ1_M.gguf -ngl 99 -fa on --n-cpu-moe 36 --load-mode none`
+- [flint-coding] (Zone 2 Sweet Spot (25.05 GB)) -> `llama-server -m Recursive-Flint-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 65536 --n-cpu-moe 18`
+- [laya-decision] (Zone 1 CPU/NPU (678-846 MB)) -> `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
 
-## Tier 2: Verified No-Card Cloud Gateways (Check Env Vars First)
-- [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | default_model:glm-4.7-flash | quota:Completely Free Flash tier (200K ctx / 128K out) | bottleneck:Concurrency cap; GLM-5.x line is billed (never call glm-5.3-flash on $0 balance)
-- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | default_model:gemini-3.8-flash | quota:Free tier: Gemini 4 Hydrogen (Everyday & Thinking), Gemini 3.8 Flash (1M ctx), & Decision 1 (200 RPM / 50K TPM / 10K RPD) | bottleneck:Gemini 2.5 retires Dec 1, 2026; 4 Argon/Carbon/Neon, Batch, & Search Grounding are paid-only
-- [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | default_model:deepseek-ai/deepseek-v4.1-flash | quota:~40 RPM Developer Prototyping Catalog | bottleneck:Non-production license; MoE cold-start queues
-- [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | default_model:openrouter/free | quota:20 RPM · 50 RPD ($0) -> 1,000 RPD (>=10 credits balance) | bottleneck:Negative balance returns 402 even on :free; poll GET /api/v1/key for live quota
-- [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | default_model:qwen/qwen3.8-27b | quota:LLMs: 30 RPM / 1K RPD / 8K TPM / 200K TPD | Whisper: 20 RPM / 2K RPD / 28.8K audio sec/day | bottleneck:Strict 8,000 TPM wall on free LLMs; Llama 3.1/3.3 moved to Contact Sales
-- [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | default_model:@cf/cloudflare/clef | quota:10,000 Neurons/day free (resets 00:00 UTC) | bottleneck:Legacy catalog hard-retired Nov 20, 2026 (HTTP 410); use for Clef/Clef-Omni/Clairic
+## Tier 2: Verified No-Card Cloud Gateways (`python scripts/build.py forage <intent>`)
+- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-3.8-flash
+- [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash
+- [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash
+- [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free
+- [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b
+- [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef
 
-## Foraging Chains (`python scripts/build.py forage <intent>`)
-- coding-agent (Autonomous Coding & Terminal CLI (~20K tok/step)): google-ai-studio -> zhipu-bigmodel -> openrouter-free -> nvidia-nim -> unsloth-local -> pollinations
-- repo-1m (Massive Repo / Multi-PDF Ingestion (100K-1M tok)): google-ai-studio -> zhipu-bigmodel -> unsloth-local
-- deep-reason (Frontier Logic, Math & Architecture): nvidia-nim -> google-ai-studio -> openrouter-free -> unsloth-local -> pollinations
-- fast-json (Fast Small-Prompt Classification & Schema Output (<6K tok)): groq-cloud -> google-ai-studio -> cloudflare-workers-ai -> unsloth-local -> pollinations
-- decision-gate (System-1 Non-Autoregressive Decisions, Extraction & Safety Gates): google-ai-studio -> cloudflare-workers-ai -> unsloth-local
-- voice-stt (Real-Time Audio Transcription (Whisper-Large-v3)): groq-cloud
+## Field Book Chapters
+- [Ch 01: Cloud APIs](book/01-cloud-apis.md): Only 6 cloud gateways remain genuinely card-free as of Nov 2026—pair Google AI Studio (Gemini 4 Hydrogen / 3.8 Flash) and Z.ai (GLM-4.7-Flash) for agent loops, Cloudflare/Google for $0-output System-1 decisions, and keyless Jina/Firecrawl/Exa for RAG.
+- [Ch 02: Local Models](book/02-local-16vram-64ram.md): Never spill dense >16GB models into system RAM (the PCIe cliff). Keep dense 24B–27B brains + Harness Adapters 100% inside 16GB VRAM (Zone 1), and exploit your 64GB DDR5 RAM exclusively for sparse MoEs activating 2.5B–6B parameters per token (Zone 2).
+- [Ch 03: Multimodal](book/03-multimodal-sensory.md): Use zero-card cloud APIs for fast audio STT (Groq Whisper), multi-PDF vision (Gemini 3.8 Flash), and keyless FLUX drafts— but pivot immediately to local open weights for RGBA editing, directed multi-speaker TTS, interactive world models, and 1080p video.
+- [Ch 04: Harnesses](book/04-harnesses-protocols.md): The model gets the credit, but the harness decides whether multi-hour agent loops finish cleanly or burn tokens. Pair modular harnesses (Antigravity, Pi/Durable Pi, Zed ACP) with on-demand Skills, retrieval Context Archival, and a `safeagents` proxy.
+- [Ch 05: Backends & Flags](book/05-backends-flags-silicon.md): Serving kernels and memory flags matter as much as model weights: `--n-cpu-moe` unlocks 64GB RAM MoEs without touching `-ngl`, Unsloth accelerates looped & VRAM-exceeding GGUFs 1.9×–3×, and `WanGP v20.12` squeezes 1080p video into 5.9 GB VRAM.
+- [Ch 06: Adaptation & RL](book/06-adaptation-frontier.md): Freezing a strong 27B base model and training lightweight RL LoRA adapters inside the unmodified shipping harness delivers double-digit pass@1 gains while slashing tool calls by more than half—and orthogonal LoRAs merge with zero retraining.

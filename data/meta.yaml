@@ -1,0 +1,28 @@
+version: "2.0.0-beta.1"
+branch: "v2-beta"
+title: "⚡ AI Swiss Knife — Field Book"
+tagline: "A lean, benchmark-verified, dual-interface resource book for zero-card Cloud APIs, Local 16GB+64GB AI, Multimodal Media, Harnesses, and Agentic RL."
+hardware_envelope: "16GB VRAM + 64GB System RAM (~80 GB Total Pool)"
+editorial_constitution: >-
+  Every entry is cross-checked against primary documentation (Nov 2026), carries an explicit trade-off (`⚠️ Gotcha`),
+  and obeys a strict 4-column visual grid. Dead tiers and hardware-wall models are blocked by CI in the Graveyard.
+
+compass_mermaid: |
+  flowchart LR
+      START["🎯 YOUR NEED"] --> CLOUD["🌐 Zero-Card Cloud?<br/>Ch 01: 6 Gateways · 4 Hydrogen · RAG"]
+      START --> LOCAL["🖥️ Local 16GB+64GB?<br/>Ch 02: Inkling 2 Mini · Qwen3.8 · Laya"]
+      START --> MEDIA["🎨 Voice / Image / Video?<br/>Ch 03: Qwen-Img-2.1 · WanGP · Drama 3"]
+      CLOUD & LOCAL & MEDIA --> RUN["🛠️ How to Run & Adapt?"]
+      RUN --> CH4["Ch 04: Harnesses & safeagents"]
+      RUN --> CH5["Ch 05: Backends & 2026 Flags"]
+      RUN --> CH6["Ch 06: Harnessed RL & Frontier"]
+
+chapters:
+  - "data/01_cloud.yaml"
+  - "data/02_local.yaml"
+  - "data/03_multimodal.yaml"
+  - "data/04_harnesses.yaml"
+  - "data/05_backends.yaml"
+  - "data/06_adaptation.yaml"
+
+graveyard_file: "data/99_graveyard.yaml"
