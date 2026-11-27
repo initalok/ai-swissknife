@@ -1,52 +1,50 @@
-# ⚡ AI Swiss Knife — Modular Field Book (`v3.0.0-modular`)
-> A pace-layered, headless-first, self-policing AI Field Book for humans and autonomous agents.
+# ⚡ AI Swiss Knife (`v4.0.0-beta`)
+> A lean, Hub-and-Spoke, self-policing AI Field Book with built-in live health, implicit graph state, and freshness-gated agent manifests.
 
-**Snapshot Date:** `2026-11-26` · **Entities:** `89` (`88` agent-eligible) · **Use-Case Packs:** `9` · **Aging/Stale/Degraded:** `0 / 0 / 0`
+**🏠 Hub** &nbsp;·&nbsp; [☁️ Cloud](book/cloud.md) &nbsp;·&nbsp; [🖥️ Local](book/local.md) &nbsp;·&nbsp; [⚙️ Harnesses & RL](book/harnesses-and-rl.md) &nbsp;·&nbsp; [📘 Playbooks](book/playbooks.md) &nbsp;·&nbsp; [🧭 Spokes](book/spokes.md) &nbsp;·&nbsp; [📡 Radar](book/radar.md) &nbsp;·&nbsp; [🪦 Graveyard](book/graveyard.md)
 
-**Agent Manifests (Freshness-Gated):** [`llms.txt`](llms.txt) · [`llms-full.txt`](llms-full.txt) · [`dist/registry.json`](dist/registry.json)
+**Live Pulse (`2026-11-27`):** `31` Core Nodes (`31` agent-eligible) · `3` Deep Playbooks · `4` Upstreamed Spokes · Alerts: `0` Aging / `0` Stale / `0` Upstream / `0` Degraded
 
-## 🧭 The 3-Second Universal Compass
+**Agent Surface (Freshness-Gated):** [`llms.txt`](llms.txt) · [`llms-full.txt`](llms-full.txt) · [`dist/graph.json`](dist/graph.json)
+
+## 🖥️ Start From Your Hardware Profile
+> Entry points below are data-driven (`graph/profiles.yaml`) and expandable without code changes.
+
+| Profile | Hardware Envelope | Active Core Nodes | Jump In |
+| :--- | :--- | :---: | :--- |
+| **Zero-Card Cloud** (`zero-card-cloud`) | Verified $0 cloud gateways, System-1 decisions, and keyless RAG requiring no credit card. | `15` | [**Open Blueprint →**](book/cloud.md) |
+| **16GB VRAM + 64GB RAM Workstation** (`16vram-64ram`) | Zone 1 pure 16GB VRAM dense brains + Zone 2 64GB DDR5 sparse MoE hybrid. | `17` | [**Open Blueprint →**](book/local.md) |
+| **Apple Silicon Mac (Unified Memory / MLX)** (`mac-apple-silicon`) | Unified memory local inference via MLX and llama.cpp Metal (zero PCIe cliff). | `16` | [**Open Blueprint →**](book/local.md) |
+
+## 🧭 Hub-and-Spoke Topology
 
 ```mermaid
 flowchart LR
-    NEED["🎯 YOUR GOAL"] --> P1["PART I: MODELS & ACCESS<br/>Ch 01 Cloud · Ch 02 Local · Ch 03 Media"]
-    NEED --> P2["PART II: ENGINE ROOM<br/>Ch 04 Harnesses · Ch 05 Backends · Ch 06 RL Adapters"]
-    NEED --> PACKS["🎯 9 USE-CASE SPECIALIST PACKS<br/>Web · App · Game · RevEng · Research · Video · Social · Promo · Uncensored"]
-    NEED --> P3["PART III: VOLATILE RADAR<br/>Ch 07 Community IRL · Ch 08 Frontier Watch"]
+    HUB["⚡ OWNED CORE (Canonical Nodes)<br/>Cloud · Local (Mature vs Edge) · Harnesses · RL Adapters"]
+    PB["📘 3 DEEP PLAYBOOKS<br/>Coding & Apps · Research · Local Media Studio"]
+    SP["🧭 4 UPSTREAMED SPOKES<br/>Reverse Eng · Game Dev · Growth & Social · Unfiltered"]
+    RAD["📡 CAPPED 21d RADAR<br/>Monitor-Only Frontier (<=5) · Community IRL (<=5)"]
+    HUB --> PB & SP
+    RAD -.-> HUB
 ```
 
-## 📖 Core Field Book Chapters
+## 🗺️ Directory Map
 
-| Chapter | Part | Focus | Direct Link |
-| :--- | :--- | :--- | :--- |
-| **01 · Cloud APIs & Grounding** | `PART I` | Verified no-card gateways, Gemini 4 Hydrogen, System-1 Decisions & RAG | [**Open →**](book/01-cloud-apis.md) |
-| **02 · Local AI (16GB+64GB)** | `PART I` | **Track A:** Mature Riced (`Qwen3.8+LoRA`) vs **Track B:** Cutting-Edge (`Inkling 2 Mini`) | [**Open →**](book/02-local-16vram-64ram.md) |
-| **03 · Multimodal, 3D & Worlds** | `PART I` | Cloud-free vs local pivot for Image, Video (`WanGP`), Voice (`Drama 3`/`Phonon`) & 3D | [**Open →**](book/03-multimodal-sensory.md) |
-| **04 · Harnesses & Safety** | `PART II` | `Pi` Kernel, `DeepSeek Harness (dsh)`, `Hermes Agent`, `Antigravity` & `safeagents` | [**Open →**](book/04-harnesses-protocols.md) |
-| **05 · Backends & 2026 Flags** | `PART II` | `Unsloth`, `llama/ik_llama`, `WanGP v20.12`, `--n-cpu-moe` & OS/Silicon | [**Open →**](book/05-backends-flags-silicon.md) |
-| **06 · Harness Adapters & RL** | `PART II` | In-Harness `AsyncGRPO`, `OpenEnv`, Rank-96 Super-Adapter & Frontier RL | [**Open →**](book/06-adaptation-rl.md) |
-| **07 · Community IRL Builds** | `PART III` | Consumer 12–16GB engine hacks, `obra/superpowers`, & indie pipelines (`TTL 21d`) | [**Open →**](book/07-community-irl.md) |
-| **08 · Frontier Watch** | `PART III` | `MONITOR-ONLY` apex radar (`Claude Fable/Mythos`, `GPT-6.2`, `Gemini 4 Carbon`, `Qwen4-Max`) | [**Open →**](book/08-frontier-watch.md) |
-| **99 · The Graveyard** | `APPENDIX` | Machine-enforced cut list of dead cloud tiers & >80 GB local walls | [**Inspect →**](book/99-graveyard.md) |
+### Owned Core (Domain-Native Blueprints)
+- **☁️ [Cloud Gateways & Grounding](book/cloud.md)** — Verified zero-card APIs, Gemini 4 Hydrogen, System-1 Decisions & RAG routing circuit.
+- **🖥️ [Local AI Blueprints](book/local.md)** — Track A (*Mature Riced*) vs. Track B (*Cutting-Edge*), hot-swappable LoRAs, & System-1 `Laya 0.5`.
+- **⚙️ [Harnesses, Backends & RL Lab Dossier](book/harnesses-and-rl.md)** — `Pi` Kernel, `DeepSeek Harness`, `Hermes Agent`, `safeagents`, & HF Harness Adapters lab tables.
 
-## 🎯 Independent Use-Case Specialist Packs (`packs/*.yaml`)
+### Horizons & Monitoring
+- **📘 [3 Deep Owned Playbooks](book/playbooks.md)** — End-to-end runbooks for *Coding & Apps*, *Research & Grounding*, and *Local Media Studio*.
+- **🧭 [4 Upstreamed Horizon Spokes](book/spokes.md)** — Lean, live-monitored entry points into *Reverse Engineering*, *Game Dev & 3D*, *Growth & Social*, and *Unfiltered Sovereign*.
+- **📡 [Capped 21-Day Radar](book/radar.md)** — Monitor-Only Frontier Watch & Community IRL Field Log.
+- **🪦 [The Graveyard](book/graveyard.md)** — CI-enforced cut list with live replacement pointers.
 
-| Domain Pack | Category | Live Health | Playbook |
-| :--- | :--- | :--- | :--- |
-| **Mobile App Development (iOS, Android & Expo)** | `engineering` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-app-dev.md) |
-| **Game Development & Local 16GB 3D Assets** | `engineering` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-game-dev.md) |
-| **Product Promotion, Launch Videos & Growth** | `growth` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-promotion.md) |
-| **Deep Research & Cited Literature Synthesis** | `knowledge` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-research.md) |
-| **Reverse Engineering & Binary Triage** | `engineering` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-reverse-eng.md) |
-| **Social Media Automation & Audience Ops** | `growth` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-social-media.md) |
-| **Uncensored & Operator-Aligned Local Stacks** | `specialized` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-uncensored.md) |
-| **Video Editing, Motion Graphics & Local AI Footage** | `creative` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-video-edit.md) |
-| **Web Development & Visual QA** | `engineering` | 🟢 `Fresh` | [**Open Playbook →**](book/packs/pack-web-dev.md) |
-
-## 🤖 Freshness-Gated CLI
+## 🤖 Implicit State CLI
 ```bash
-python scripts/cli.py validate                       # Zero-HTML-leak, ref integrity & Graveyard check
-python scripts/cli.py query pack pack-reverse-eng    # Resolve fresh specialist stack as JSON
-python scripts/cli.py query local --lifecycle mature # Mature Riced local profiles only
-python scripts/cli.py build                          # Validate + compile Book, Packs & llms*.txt
+python scripts/cli.py validate                                   # Canonical URL Law + Budgets + 4-Edge check
+python scripts/cli.py resolve coding-and-apps --profile 16vram-64ram
+python scripts/cli.py resolve reverse-engineering --profile 16vram-64ram
+python scripts/cli.py build                                      # Compile GitHub Views, llms*.txt & graph.json
 ```

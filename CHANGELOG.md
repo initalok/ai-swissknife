@@ -1,14 +1,14 @@
 # Changelog
 
-## [3.0.0-modular] - 2026-11-26
+## [4.0.0-beta] - 2026-11-27
 ### Changed
-- Re-architected into a **Pace-Layered, Headless-First Entity + Pack Registry** (`engine/` + `renderers/` + `entities/` + `packs/` + `feeds/`).
-- Separated `entities/` (atomic headless records with zero HTML/Markdown leaks) from 9 auto-discovered **Use-Case Specialist Packs** (`web-dev`, `app-dev`, `game-dev`, `reverse-eng`, `research`, `video-edit`, `social-media`, `promotion`, `uncensored`).
-- Added **3-Tier Decay TTLs** (`volatile: 21d`, `operational: 60d`, `stable: 120d`), strict `eligible_for_agents` gating on `llms.txt`, and twice-weekly `N=25` rolling LRU health sweeps (`health_digest.yml`) feeding a single rolling GitHub Issue.
-- Added Track A **Mature Riced** vs Track B **Cutting-Edge** local split, `Pi` + `DeepSeek Harness (dsh)` + `Hermes Agent`, full HF Harness Adapters & In-Harness RL stack, `Ch 07 Community IRL`, and `Ch 08 Monitor-Only Frontier Watch`.
+- Rebuilt into a lean **7-file Hub-and-Spoke Architecture** (`graph/` + `core/` + `surfaces/`) balancing multi-horizon coverage with strict maintainability.
+- Built in **4 engine invariants**: Canonical URL Law, 4 inline typed edges (`runs_on`, `adapts`, `guards`, `supersedes`) with transitive `reverify_upstream` alerts, Hard Complexity Budgets (`<=5` Frontier, `<=5` Community, `<=2` entry points/Spoke), and Rolling `N=20` multi-source probes (GitHub + HF + HTTP).
+- Replaced uniform 4-column tables with **3 Polymorphic GitHub View Archetypes** (Hub Dashboard, Domain-Native Core Blueprints & HF RL Lab Dossier with full-width TB2.1 lift tables, and Playbook/Spoke Runbooks).
+- Updated live ground truth: mainline `llama.cpp` (#32218) Inkling looped-layer support, `NandhaKishorM/laya` 0.5, `earendil-works/pi` (+ `pi-durable`), `getsentry/MobileBuildMCP`, `hiteshK03/davinci-resolve-mcp` Free bridge, and `Securelayer7` 26 MB Qwen3.8-27B uncensored LoRA.
 
 ## [2.0.0-beta.1] - 2026-11-26
-- Initial unified 6-Chapter + Graveyard Field Book.
+- Initial unified Field Book & CI drift gate.
 
 ## [1.0.0-core] - 2026-11-08
 - Initial Cloud API directory.
