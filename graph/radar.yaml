@@ -1,0 +1,72 @@
+# Hard-capped by CI: <=5 Frontier (Monitor-Only), <=5 Community IRL, 21-day TTL
+frontier:
+  - id: claude-fable-mythos-52
+    name: "Claude Fable 5.2 & Mythos 5.2"
+    last_verified: "2026-11-27"
+    url: "https://www.anthropic.com/"
+    signal: "1M ctx / 128K out; 10-12 hr autonomous audits, 89.3% OSWorld 2.1, 69.9% FrontierSWE v2, & 1,000-agent Lean proofs."
+    gotchas: ["Paid API / Enterprise only; monitor-only ceiling tracker."]
+
+  - id: gpt-62-astra-sol
+    name: "GPT-6.2 Astra & GPT-6.2 Sol"
+    last_verified: "2026-11-27"
+    url: "https://openai.com/"
+    signal: "API caching breakthrough: adjust reasoning effort & toggle tools mid-conversation without breaking prompt cache."
+    gotchas: ["Track cache-preserving effort/tool switching as a future local vLLM/llama.cpp harness pattern."]
+
+  - id: gemini-4-carbon-argon
+    name: "Gemini 4 Carbon & 4 Argon"
+    last_verified: "2026-11-27"
+    url: "https://deepmind.google/"
+    signal: "53.9% AutomationBench autonomous workflow ceiling powering Spark Task mode; Gemini 4 Hydrogen already trickled down to Free Tier."
+    gotchas: ["Pro/Ultra and paid API only."]
+
+  - id: qwen4-max-24t
+    name: "Qwen4-Max (2.4T)"
+    last_verified: "2026-11-27"
+    url: "https://qwenlm.github.io/"
+    signal: "2.4T params, 1M ctx, 262K CoT; Alibaba explicitly confirmed smaller open-weight Qwen4 models are coming next."
+    gotchas: ["#1 local watchlist signal to potentially supersede Qwen3.8-27B."]
+
+  - id: deepseek-v41-flash
+    name: "DeepSeek-V4.1-Flash (552B) & Pending V4.1-Pro"
+    last_verified: "2026-11-27"
+    url: "https://www.deepseek.com/"
+    signal: "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving 1/4 HBM KV cache footprint."
+    gotchas: ["Exceeds 16GB+64GB local memory; watch for smaller asymmetric KV-compressed open checkpoints."]
+
+community:
+  - id: obra-superpowers
+    name: "obra/superpowers (+ Hermes Port)"
+    last_verified: "2026-11-27"
+    url: "https://github.com/obra/superpowers"
+    signal: "15 discipline skills enforcing Brainstorm -> Spec -> Red/Green TDD -> Fresh Subagent -> Verification for 2+ hr runs."
+    gotchas: ["Use Hermes-native tool mapping when running on Hermes Agent."]
+
+  - id: disler-durable-pi
+    name: "disler/durable-pi (Multi-Device Durable Agent Showcase)"
+    last_verified: "2026-11-27"
+    url: "https://github.com/disler/durable-pi"
+    signal: "Crash-resumable SQLite agent network over Pi with atomic shared state and live tool hot-swapping."
+    gotchas: ["First-party @earendil-works/pi-durable also ships inside the main Pi monorepo."]
+
+  - id: davinci-free-bridge
+    name: "hiteshK03/davinci-resolve-mcp (Free Resolve Internal Bridge)"
+    last_verified: "2026-11-27"
+    url: "https://github.com/hiteshK03/davinci-resolve-mcp"
+    signal: "Unlocks 155/162 DaVinci Resolve MCP tools even on the Free edition via internal script bridging."
+    gotchas: ["External official API remains Studio-only; verify bridge compatibility across Resolve updates."]
+
+  - id: hy-nomas-worlds
+    name: "Tencent-Hunyuan/Hy-Nomas (Interactive Walkable Worlds)"
+    last_verified: "2026-11-27"
+    url: "https://github.com/Tencent-Hunyuan/Hy-Nomas"
+    signal: "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio."
+    gotchas: ["Uses NVIDIA PixelUMM decoder (non-commercial previs/pitch use only)."]
+
+  - id: phonon-webgpu
+    name: "Gradium Phonon 31M (Browser WebGPU TTS)"
+    last_verified: "2026-11-27"
+    url: "https://github.com/blixt/phonon"
+    signal: "64.5 MB Apache-2.0 GGUF hitting 115-130x real-time (4.9ms latency) directly in browser WebGPU at 0 GPU server cost."
+    gotchas: ["English-only; larger 5-language Phonon 40M checkpoints are CC BY-NC 4.0."]
