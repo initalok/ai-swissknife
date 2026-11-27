@@ -1,0 +1,18 @@
+name: Report Outdated Info or Broken Link
+description: Flag a free tier change, archived repository, or outdated benchmark.
+labels: ["stale-report"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Affected page or tool
+      placeholder: "e.g., reference/cloud-free-tiers.md — Groq Cloud"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What changed? (Include primary source URL)
+      placeholder: "Link to official docs, changelog, or issue proving the change."
+    validations:
+      required: true

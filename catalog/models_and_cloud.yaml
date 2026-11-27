@@ -1,0 +1,392 @@
+routing_chains:
+  coding-agent: [google-ai-studio, zhipu-bigmodel, openrouter-free, nvidia-nim, pollinations]
+  long-context-1m: [google-ai-studio, zhipu-bigmodel]
+  deep-reasoning: [nvidia-nim, google-ai-studio, openrouter-free, pollinations]
+  fast-json-and-stt: [groq-cloud, google-ai-studio, cloudflare-workers-ai, pollinations]
+  decision-gate: [google-ai-studio, cloudflare-workers-ai]
+
+entries:
+  # --- ZERO-CARD CLOUD GATEWAYS ---
+  - id: google-ai-studio
+    kind: gateway
+    category: cloud
+    name: "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)"
+    summary: "Google's primary card-free developer gateway, now serving Gemini 4 Hydrogen with a 1,048,576-token unified context window, multimodal inputs, and four thinking levels alongside Gemini Decision 1."
+    when_to_use: "Default zero-card cloud gateway for multi-step coding agents, full-repository ingestion, and multimodal reasoning."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://aistudio.google.com/"
+    env_key: GEMINI_API_KEY
+    base_url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+    default_model: "gemini-4-hydrogen"
+    quota: "No card: Free Tier (gemini-4-hydrogen 1M unified ctx, implicit caching) + Decision 1 (200 RPM / 10K RPD)"
+    capabilities: [coding, research, media, social]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Free Tier prompts are used to improve products outside EU/UK/CH; redact credentials and sensitive data."
+      - "Search Grounding, Maps Grounding, Batch API, and explicit context caching are paid-tier only on Gemini 4 Hydrogen."
+      - "Passing thinking_level=minimal or out-of-range temperature/top_p/top_k returns HTTP 400 on gemini-4-hydrogen."
+
+  - id: zhipu-bigmodel
+    kind: gateway
+    category: cloud
+    name: "Z.ai BigModel (GLM-4.7-Flash)"
+    summary: "Card-free Chinese developer API offering a permanently free MIT-licensed GLM-4.7-Flash endpoint with a 200K context window and 128K output cap."
+    when_to_use: "Secondary no-card backup for long-context coding and tool-use loops when Google AI Studio rate limits are reached."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://open.bigmodel.cn/"
+    env_key: ZHIPU_API_KEY
+    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    default_model: "glm-4.7-flash"
+    quota: "No card: permanently free GLM-4.7-Flash tier (200K ctx / 128K out)"
+    capabilities: [coding]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Only glm-4.7-flash is permanently free; the newer GLM-5.x models are billed and fail on $0 accounts."
+
+  - id: nvidia-nim
+    kind: gateway
+    category: cloud
+    name: "NVIDIA NIM Developer Catalog"
+    summary: "Serverless prototyping catalog hosting rack-scale open-weight models—including 552B DeepSeek-V4.1-Flash and Nemotron-3.5-Super-VL—without requiring a credit card."
+    when_to_use: "Testing giant 300B-550B open-weight models that cannot fit inside consumer workstation memory."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://build.nvidia.com/"
+    env_key: NVIDIA_API_KEY
+    base_url: "https://integrate.api.nvidia.com/v1"
+    default_model: "deepseek-ai/deepseek-v4.1-flash"
+    quota: "No card: ~40 RPM developer prototyping catalog"
+    capabilities: [coding, research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Restricted to developer prototyping rather than production traffic, with occasional cold-start queues on large MoEs."
+
+  - id: openrouter-free
+    kind: gateway
+    category: cloud
+    name: "OpenRouter (:free Routes)"
+    summary: "Unified OpenAI-compatible router aggregating community-sponsored free model endpoints behind one API key."
+    when_to_use: "Quick model comparisons and light fallback routing across diverse open weights."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://openrouter.ai/"
+    env_key: OPENROUTER_API_KEY
+    base_url: "https://openrouter.ai/api/v1"
+    default_model: "openrouter/free"
+    quota: "20 RPM, 50 RPD ($0 balance) -> 1,000 RPD (>=10 credits balance)"
+    capabilities: [coding, research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "50 RPD on unverified $0 accounts runs out in roughly three multi-step coding tasks; negative balances return HTTP 402 even on :free routes."
+
+  - id: groq-cloud
+    kind: gateway
+    category: cloud
+    name: "Groq Cloud LPU"
+    summary: "Ultra-low-latency LPU inference offering free tiers for compact LLMs (qwen/qwen3.8-27b, gpt-oss-120b) and high-quota Whisper-Large-v3 speech transcription."
+    when_to_use: "Sub-second small-prompt JSON routing (<6K tokens) and free audio transcription (2,000 requests/day)."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://console.groq.com/"
+    env_key: GROQ_API_KEY
+    base_url: "https://api.groq.com/openai/v1"
+    default_model: "qwen/qwen3.8-27b"
+    quota: "No card: LLMs 30 RPM / 1K RPD / 8K TPM; Whisper 2K RPD / 28.8K audio sec/day"
+    capabilities: [fast-json, media]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Strict 8,000 TPM cap on free LLMs causes immediate HTTP 429 failures on 20K-token coding agent prompts."
+
+  - id: cloudflare-workers-ai
+    kind: gateway
+    category: cloud
+    name: "Cloudflare Workers AI (Clef & Clairic)"
+    summary: "Edge inference offering 10,000 daily free Neurons for non-autoregressive Clef decision models and Clairic structured extraction."
+    when_to_use: "Zero-output-token edge classification, moderation, and typed span extraction."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://developers.cloudflare.com/workers-ai/"
+    env_key: CLOUDFLARE_API_TOKEN
+    base_url: "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1"
+    default_model: "@cf/cloudflare/clef"
+    quota: "No card: 10,000 Neurons/day free (resets 00:00 UTC)"
+    capabilities: [decisions]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410)."
+
+  - id: pollinations
+    kind: gateway
+    category: cloud
+    name: "Pollinations AI"
+    summary: "Keyless community OpenAI-compatible text and FLUX image endpoint requiring zero signup or authentication."
+    when_to_use: "Last-resort keyless fallback for ephemeral sandbox testing where no API keys exist."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: stable
+    last_verified: "2026-11-27"
+    url: "https://pollinations.ai/"
+    env_key: null
+    base_url: "https://text.pollinations.ai/openai"
+    default_model: "openai"
+    quota: "Keyless fair-use IP quota (text and image)"
+    capabilities: [coding]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Shared public community service; never transmit private code, credentials, or personal data."
+
+  # --- GROUNDING & SEARCH ---
+  - id: firecrawl
+    kind: tool
+    category: grounding
+    name: "Firecrawl"
+    summary: "Clean webpage-to-Markdown crawler with an agent onboarding skill and low token overhead on OpenBenchmarks."
+    when_to_use: "Converting modern JavaScript-rendered documentation pages into clean Markdown for RAG or research."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    url: "https://www.firecrawl.dev/"
+    quota: "Keyless onboarding skill + 500 starter credits"
+    capabilities: [research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Keyless usage is strictly IP-rate-limited; create a free key for multi-page crawls."
+
+  - id: jina-reader
+    kind: tool
+    category: grounding
+    name: "Jina Reader (r.jina.ai / s.jina.ai)"
+    summary: "Zero-SDK URL prefix service turning web pages and PDFs into clean Markdown, with a matching search prefix."
+    when_to_use: "Instant one-line URL reading in shell scripts and lightweight agents."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    url: "https://jina.ai/reader/"
+    quota: "Keyless prefix + 10M free tokens with free API key"
+    capabilities: [research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Unauthenticated prefix requests throttle quickly under automated batch loops."
+
+  - id: exa-search
+    kind: tool
+    category: grounding
+    name: "Exa 3.0 Neural Search"
+    summary: "Semantic web search API built for AI retrieval, renewing $10/month in free credits on the 1st of every month."
+    when_to_use: "High-precision web discovery for deep research agents and technical literature scouting."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    url: "https://exa.ai/"
+    quota: "No card: $10/mo recurring credits (~2,500 Lite searches)"
+    capabilities: [research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Deep research search modes exhaust monthly free credits much faster than Lite searches."
+
+  - id: openalex
+    kind: tool
+    category: grounding
+    name: "OpenAlex Academic Graph"
+    summary: "Open scholarly index covering 250M+ academic works, citation graphs, and open-access PDF links with zero API keys required."
+    when_to_use: "Primary literature review, DOI verification, and academic citation mapping."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    url: "https://openalex.org/"
+    quota: "Keyless: 100,000 requests/day forever"
+    capabilities: [research]
+    edges:
+      runs_on: [zero-card-cloud]
+    limitations:
+      - "Include ?mailto=you@domain.com in queries to enter the fast polite pool."
+
+  # --- LOCAL MODELS (MATURE DAILY DRIVERS, EXPERIMENTAL, DECISIONS, MEDIA) ---
+  - id: qwen3.8-27b
+    kind: model
+    category: local-mature
+    name: "Qwen3.8-27B (Dense Vision + Text)"
+    summary: "Apache-2.0 27B dense model serving as the primary 16GB VRAM and Apple Silicon coding backbone, hosting both Hugging Face's RL harness adapters and compact uncensored LoRAs."
+    when_to_use: "Daily-driver local coding, strict instruction following, and single-backbone multi-LoRA serving."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "14.5 GB (IQ4_XS, Zone 1 16GB VRAM) / ~16 GB (Mac MLX 4-bit)"
+    url: "https://huggingface.co/Qwen/Qwen3.8-27B"
+    capabilities: [coding, research, reverse-eng, social, unfiltered]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    launch_recipe: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000"
+    mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000"
+    limitations:
+      - "On 16GB GPUs, keep quantization at IQ4_XS with Q8 KV cache so weights never spill over PCIe."
+      - "Avoid Ollama's /v1/chat/completions endpoint with qwen3.8:27b due to reported hangs; use llama-server or mlx_lm.server."
+
+  - id: qwen3-coder-next
+    kind: model
+    category: local-mature
+    name: "Qwen3-Coder-Next (80B-A3B Sparse MoE)"
+    summary: "Sparse 512-expert Mixture-of-Experts coding model activating only 3B parameters per token, making 80B-class capacity practical in 16GB VRAM + 64GB DDR5 hybrid mode."
+    when_to_use: "Larger repository reasoning and multi-file refactoring on 16GB GPU + 64GB RAM workstations or 64GB+ Macs."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "49 GB (UD-Q4_K_XL, Zone 2 16GB VRAM + 64GB RAM)"
+    url: "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF"
+    capabilities: [coding, reverse-eng, game-dev]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    launch_recipe: "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0"
+    limitations:
+      - "Keep -ngl 99 so Attention and KV cache stay on GPU; offload cold experts only via --n-cpu-moe."
+
+  - id: gemma-4
+    kind: model
+    category: local-mature
+    name: "Gemma 4 Family (26B-A4B Vision & 12B Tri-Modal)"
+    summary: "Fast Apache-2.0 open-weight family offering ~140 tok/s text+vision throughput on 16GB VRAM (26B-A4B) and native local audio understanding (12B)."
+    when_to_use: "High-speed local general chat, vision inspection, or local audio analysis."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "8.5 GB (12B) to 14 GB (26B-A4B, Zone 1 16GB VRAM)"
+    url: "https://ai.google.dev/gemma"
+    capabilities: [coding, research]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Only E2B, E4B, and 12B process audio—the 26B-A4B MoE checkpoint is Text + Vision only."
+
+  - id: hermes-4
+    kind: model
+    category: local-mature
+    name: "NousResearch Hermes 4 (14B / 4.3-36B Neutral)"
+    summary: "Neutral-aligned open-weight models designed to follow operator-defined system prompt policies without baked-in blanket refusals."
+    when_to_use: "Self-hosted deployments where you want predictable operator-controlled behavior rather than abliterated weight surgery."
+    evidence_tier: vendor-claim
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "9 GB (14B Q4) / 22 GB (36B Hybrid)"
+    url: "https://huggingface.co/NousResearch/Hermes-4-14B"
+    capabilities: [unfiltered]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    launch_recipe: "llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --port 8000"
+    limitations:
+      - "Always write explicit safety boundaries in your system prompt if exposing the model beyond solo local use."
+
+  - id: inkling-2-mini
+    kind: model
+    category: local-experimental
+    name: "Inkling 2 Mini (26.4B Looped Transformer MoE)"
+    summary: "Experimental looped-layer MoE that iterates its middle 12 layers three times (3.4B base / 5.4B effective active, 1M context), now supported natively in mainline llama.cpp (#32218) alongside Unsloth."
+    when_to_use: "Experimenting with high-efficiency looped coding architectures inside 16GB-18GB memory budgets."
+    evidence_tier: vendor-claim
+    lifecycle: experimental
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: "Apache-2.0 + AUP"
+    footprint: "13-18 GB (UD-Q3/Q4 + DSpark drafter)"
+    url: "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"
+    capabilities: [coding, game-dev]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    launch_recipe: "llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000"
+    limitations:
+      - "Published 79.2% SWE-bench Verified and 48.2% DeepSWE v1.1 scores are lab-reported; trails Qwen3.8-27B on strict chat (50% MultiChallenge)."
+      - "Can enter repetitive debug loops—cap max turns/thinking tokens and run inside a filesystem sandbox."
+
+  - id: laya-05
+    kind: model
+    category: local-decision
+    name: "Laya 0.5 (Multimodal System-1 Decision Model)"
+    summary: "Compact non-autoregressive scorer evaluating up to 64 typed decisions in a single forward pass (<100-500ms on CPU/NPU/WebGPU), with v0.5 adding 73,728-token image/audio/video support."
+    when_to_use: "Fast zero-output-token tool-safety checks, routing gates, and memory verification without occupying GPU VRAM."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "678-846 MB (CPU / NPU / WebGPU)"
+    url: "https://github.com/NandhaKishorM/laya"
+    capabilities: [decisions, safety]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+      guards: ["*"]
+    launch_recipe: "pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
+    limitations:
+      - "Threshold decisions on calibrated probabilities rather than raw confidence scores; the optional vegaml-learn add-on is non-commercial."
+
+  - id: qwen-image-2.1
+    kind: model
+    category: local-media
+    name: "Qwen-Image-2.1 (7B DiT Native RGBA)"
+    summary: "Compact 7B diffusion transformer supporting native transparent RGBA output and clean 2048px typography inside 16GB VRAM."
+    when_to_use: "Non-commercial local design assets, typography, and layered transparent image editing."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: "Qwen Research (Non-Commercial)"
+    footprint: "9.1 GB VRAM (Q4_K_M)"
+    url: "https://huggingface.co/Qwen/Qwen-Image-2.1"
+    capabilities: [media]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Licensed under Qwen Research (non-commercial); use Apache-2.0 FLUX.2 Klein for commercial production assets."
+
+  - id: wan-2.2
+    kind: model
+    category: local-media
+    name: "Wan 2.2 (5B & A14B Open Video)"
+    summary: "Permissive Apache-2.0 open-weight video generation model accelerated cleanly on consumer GPUs through WanGP."
+    when_to_use: "Commercial-safe local video synthesis on 8GB-16GB NVIDIA workstations."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "6-15 GB VRAM via WanGP MMGP v4"
+    url: "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B"
+    capabilities: [media]
+    edges:
+      runs_on: [16vram-64ram]
+    limitations:
+      - "Newer Wan 3.0 and Wan 2.6 releases remain closed cloud APIs with no published local weights."

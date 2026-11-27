@@ -1,0 +1,262 @@
+entries:
+  # --- AGENT HARNESSES ---
+  - id: pi
+    kind: harness
+    category: harness
+    role: "Building-Block Kernel"
+    name: "Pi Coding Agent (+ @earendil-works/pi-durable)"
+    summary: "Minimal, hackable agent loop (TUI, RPC, and SDK) featuring /tree DAG session branching, a built-in MCP + Codemode JavaScript sandbox, and first-party SQLite crash-resumable checkpoints."
+    when_to_use: "When you want full control over context assembly, clean compaction, and the highest-scoring official target for Hugging Face's RL harness adapters."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/earendil-works/pi"
+    capabilities: [coding, research, reverse-eng, game-dev, media, social, unfiltered]
+    edges:
+      runs_on: [zero-card-cloud, 16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Intentionally omits built-in per-tool approval prompts; always pair with safeagents or an OS sandbox."
+
+  - id: deepseek-harness
+    kind: harness
+    category: harness
+    role: "Plugin-Everything Platform"
+    name: "DeepSeek Harness (dsh)"
+    summary: "Cordis-based agent platform where every subsystem—including the agent loop itself—is a hot-swappable plugin, paired with a read-only-by-default sandbox and sub-agent plugins."
+    when_to_use: "Building custom agent loops, interactive Creator Mode plugins, or multi-harness web sessions."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/deepseek-ai/deepseek-harness"
+    capabilities: [coding, media]
+    edges:
+      runs_on: [zero-card-cloud, 16vram-64ram, mac-apple-silicon]
+    launch_recipe: "npx @deepseek-ai/dsh web"
+    limitations:
+      - "Fast-moving developer preview (0.2.3-alpha.2); pin plugin versions against breaking interface changes."
+
+  - id: hermes-agent
+    kind: harness
+    category: harness
+    role: "Self-Improving Daemon"
+    name: "Hermes Agent (v0.23.4)"
+    summary: "Persistent autonomous agent featuring cross-session memory, autonomous skill authoring, cron scheduling, Telegram/ACP bridges, and official Hugging Face harness adapter support."
+    when_to_use: "Always-on background assistants, scheduled research digests, and multi-surface personal operations."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/NousResearch/hermes-agent"
+    capabilities: [coding, research, social]
+    edges:
+      runs_on: [zero-card-cloud, 16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Does not auto-compact aggressively like Pi by default; cap thinking and context lengths on very large repositories."
+
+  - id: opencode
+    kind: harness
+    category: harness
+    role: "Terminal Coding CLI"
+    name: "OpenCode CLI"
+    summary: "Vendor-agnostic terminal coding interface compatible with local OpenAI-compatible servers and backed by an official Hugging Face Qwen3.8-27B harness LoRA."
+    when_to_use: "Straightforward terminal software engineering with zero vendor lock-in."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/anomalyco/opencode"
+    capabilities: [coding, unfiltered]
+    edges:
+      runs_on: [zero-card-cloud, 16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Monitor context growth during multi-hour sessions; compaction is less aggressive than Pi."
+
+  # --- SAFETY BOUNDARY ---
+  - id: safeagents
+    kind: tool
+    category: safety
+    name: "Hugging Face safeagents Proxy"
+    summary: "Transparent OpenAI/Anthropic runtime proxy auditing every tool call via fast local scanning (atif-scan, ~10-20ms on Apple Silicon) and optional decision-model judges."
+    when_to_use: "Mandatory guard layer between autonomous coding harnesses (or unfiltered local models) and shell/filesystem tools."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    url: "https://github.com/huggingface/safeagents"
+    capabilities: [safety]
+    edges:
+      guards: ["*"]
+    evidence_notes:
+      - "Audited 1.3M tool calls and blocked 647 suspicious or reward-hacking calls during Hugging Face's RL adapter training."
+    launch_recipe: "safeagents start http://localhost:8000 --plugin hf://harness-hub/qwen-safeagents-plugin"
+    limitations:
+      - "Configure an explicit domain plugin rather than relying on empty defaults."
+
+  # --- HARNESS ADAPTERS & RL RESEARCH ---
+  - id: qwen38-super-adapter
+    kind: adapter
+    category: rl-research
+    name: "Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)"
+    summary: "Zero-retraining orthogonal rank-96 merge (PEFT combination_type=cat, weight 0.5) combining Pi, Hermes, and OpenCode RL LoRA adapters on one frozen Qwen3.8-27B backbone."
+    when_to_use: "Serving multiple agent harnesses from one frozen 15 GB base model, or running with thinking mode enabled (xhigh)."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "+912 MiB LoRA (+304 MiB for single-harness specialist)"
+    url: "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter"
+    capabilities: [coding, reverse-eng]
+    edges:
+      adapts: [qwen3.8-27b, pi, hermes-agent, opencode]
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    evidence_notes:
+      - "Per-harness RL updates are nearly orthogonal (cosine similarity ~0.01-0.02), allowing rank concatenation without retraining."
+      - "Community testing confirmed transfer onto Qwen3.8 derivatives such as Swift-1.5 and MTP-preserving Apple Silicon MLX builds."
+    eval_tables:
+      - title: "Reproduced SWE-bench Pro & Terminal-Bench 2.1 Results (Qwen3.8-27B)"
+        headers: ["Evaluation Mode", "Base Qwen3.8-27B", "Specialist LoRA", "Rank-96 Super-Adapter", "Tool-Call Reduction"]
+        rows:
+          - ["Thinking Off (mean across 6 harness-bench pairs)", "39.5%", "pi SWE-Pro: 64.7% (vs 39.2%)", "49.0% (beats base 6/6)", "-53% to -73% calls"]
+          - ["Thinking On / xhigh (mean across 6 pairs)", "55.5%", "Trained with thinking off", "63.5% (wins 5/6, ties 1)", "-31% to -48% SWE-Pro"]
+          - ["Cross-Harness Transfer (pi LoRA -> other loops)", "44.8% OC / 46.3% Hermes", "54.0% OC / 56.1% Hermes", "Also transfers to Swift-1.5", "~45% fewer calls"]
+      - title: "Out-of-Distribution Control: 300 AutomationBench Tasks (Non-SWE Agent Loop)"
+        headers: ["Model Variant", "pass@1 (All Assertions)", "vs. Base", "Partial Credit", "vs. Base"]
+        rows:
+          - ["Base Qwen3.8-27B", "23.0%", "—", "62.2%", "—"]
+          - ["pi Specialist (step 160)", "27.0%", "+4.0", "66.2%", "+4.0"]
+          - ["OpenCode Specialist (step 150)", "25.3%", "+2.3", "65.2%", "+3.0"]
+          - ["Rank-96 Merged Super-Adapter", "23.7%", "+0.7", "60.6%", "-1.6"]
+          - ["Hermes Specialist (step 160)", "17.7%", "-5.3", "56.6%", "-5.6"]
+    launch_recipe: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0"
+    mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000"
+    limitations:
+      - "When running a single harness with thinking off, prefer its specialist LoRA (e.g., pi 64.0% vs 46.0% on SWE-bench Pro hard-51)."
+      - "Adapters were trained on BF16 weights; verify GGUF quant fidelity and expect brief pre-tool thinking leakage (arXiv:2610.14270)."
+      - "Merge weight 0.5 was selected using TB2.1, introducing slight optimistic bias on that benchmark; Hermes specialist shows a mild OOD dip on AutomationBench."
+
+  - id: qwen38-abliterated-lora
+    kind: adapter
+    category: rl-research
+    name: "Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)"
+    summary: "Lightweight 26 MB rank-3 LoRA (built on Apple Silicon) removing built-in refusals on top of the exact same frozen Qwen3.8-27B base model."
+    when_to_use: "Authorized security testing, red-teaming, or unfiltered local experimentation without storing a second 15 GB checkpoint."
+    evidence_tier: field-note
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    footprint: "+26 MB LoRA on frozen Qwen3.8-27B"
+    url: "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated"
+    capabilities: [unfiltered]
+    edges:
+      adapts: [qwen3.8-27b]
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Abliterated adapters cannot refuse destructive tool actions; always isolate behind safeagents and Laya 0.5."
+
+  - id: hf-in-harness-rl
+    kind: tool
+    category: rl-research
+    name: "In-Harness RL Recipe (OpenEnv + Harbor + TRL AsyncGRPO)"
+    summary: "Reusable reinforcement-learning pipeline that trains LoRAs directly inside unmodified shipping harnesses via a token/logprob capture proxy rather than re-implementing agent loops."
+    when_to_use: "Reproducing harness-specific RL on your own private repositories or task benchmarks."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    url: "https://huggingface.co/blog/harness-adapters-at-scale"
+    capabilities: [adaptation]
+    evidence_notes:
+      - "openenv validate passed 858 of 1,127 candidate tasks; filtering to tasks the base model solves sometimes (171/442) produced the decisive GRPO reward jump."
+    eval_tables:
+      - title: "TB2.1 Difficulty-Filtering Ablation (Qwen3.8-27B · LoRA AsyncGRPO · 32 tasks/arm · 8xH200 · Base TB2.1: 35.9%)"
+        headers: ["Experimental Arm", "Task Filtering Rule", "Steps Completed", "Train Reward (Steps 1-5 -> Last 5)"]
+        rows:
+          - ["A1 Unvalidated", "24 accepted + 8 failed openenv validate", "40 (timed out at step 48)", "0.64 -> 0.67"]
+          - ["A2 Validated", "32 validated, no difficulty filter", "50 (completed)", "0.56 -> 0.70"]
+          - ["A3 Unqualified", "32 validated base always or never solves", "25 (timed out at step 26)", "0.60 -> 0.63"]
+          - ["A4 Qualified", "32 validated base solves sometimes", "50 (completed)", "0.62 -> 0.81"]
+    limitations:
+      - "Requires all-linear LoRA, learning rate 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and strict exclusion of all-pass/all-fail GRPO tasks."
+
+  # --- INFERENCE & MEDIA RUNTIMES ---
+  - id: llama-cpp
+    kind: runtime
+    category: runtime
+    name: "llama.cpp (Mainline GGUF Engine)"
+    summary: "Universal CUDA, Metal, Vulkan, and ROCm inference server supporting hybrid MoE offloading (--n-cpu-moe), runtime LoRA loading (--lora), and native Inkling looped layers (#32218)."
+    when_to_use: "Primary local LLM server on NVIDIA workstations and cross-platform CLI deployments."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/ggml-org/llama.cpp"
+    capabilities: [coding]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "--no-mmap is deprecated (migrate to --load-mode none); pass -cuda graphs=0 if partial MoE offloading outputs gibberish."
+
+  - id: unsloth-runtime
+    kind: runtime
+    category: runtime
+    name: "Unsloth Runtime & Studio"
+    summary: "Optimized local serving and fine-tuning suite offering fast VRAM-exceeding MoE execution, an Anthropic-compatible local endpoint, Decision API, and OS sandboxes."
+    when_to_use: "Serving Dynamic v3.1 GGUFs, local Laya decision endpoints, or routing Anthropic-protocol clients to local models."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    url: "https://github.com/unslothai/unsloth"
+    capabilities: [coding, decisions]
+    edges:
+      runs_on: [16vram-64ram, mac-apple-silicon]
+    limitations:
+      - "Keep Studio updated alongside mainline llama.cpp when adopting newly released quantization formats."
+
+  - id: mlx-lm
+    kind: runtime
+    category: runtime
+    name: "Apple MLX (mlx-lm)"
+    summary: "Apple's native unified-memory inference framework delivering ~65 tok/s on 4-bit Qwen3.8-27B super-adapter builds with zero PCIe transfer overhead."
+    when_to_use: "Primary local serving engine on Apple Silicon Macs (M-series Mac mini, MacBook Pro, Mac Studio)."
+    evidence_tier: field-note
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-27"
+    license: MIT
+    url: "https://github.com/ml-explore/mlx-lm"
+    capabilities: [coding]
+    edges:
+      runs_on: [mac-apple-silicon]
+    limitations:
+      - "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for comfortable 27B coding sessions."
+
+  - id: wangp
+    kind: runtime
+    category: runtime
+    name: "WanGP v20.12 (MMGP v4 + SageGP 1.0.2)"
+    summary: "Memory-managed local video and image engine whose Extreme Chunker fits 15 seconds of 1080p video into 5.9 GB VRAM while exposing a native MCP interface."
+    when_to_use: "Running Wan 2.2, LTX-2.5, and Qwen-Image-2.1 on 8GB-16GB consumer GPUs."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-27"
+    license: Apache-2.0
+    url: "https://github.com/deepbeepmeep/WanGP"
+    capabilities: [media]
+    edges:
+      runs_on: [16vram-64ram]
+    limitations:
+      - "Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3)."

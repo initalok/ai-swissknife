@@ -1,12 +1,18 @@
-# Contributing to AI Swiss Knife (`v4.0.0-beta`)
+# Contributing to AI Swiss Knife
 
-## Built-In Invariants (Enforced by `scripts/cli.py validate`)
-1. **Canonical URL Law:** Every entry must link directly to a verifiable GitHub repo, Hugging Face repo/collection, or official docs URL (no `/topics/`, generic `/models`, or subreddit homepages).
-2. **Hard Complexity Budgets:** Max 5 Frontier + Max 5 Community items in `graph/radar.yaml`; max 2 canonical entry points + 1 monitored `upstream_hub` per Spoke in `graph/spokes.yaml`.
-3. **Headless Purity:** Zero HTML/Markdown formatting inside `graph/*.yaml`.
-4. **Edit Data Only:** Update `graph/*.yaml`, then run:
+Thank you for helping keep this field guide accurate, calm, and source-verified.
+
+## Editorial & Technical Standards
+1. **Plain English over tag dumps:** Write clear `summary` and `when_to_use` sentences in `catalog/*.yaml`. Never place HTML (`<br>`, `<sub>`, `<kbd>`) inside YAML.
+2. **Name the evidence:** Every entry must carry a valid `evidence_tier` (`primary-eval`, `official-docs`, `vendor-claim`, or `field-note`) and at least one explicit limitation.
+3. **Canonical URLs only:** Link directly to a verifiable GitHub repository, Hugging Face repo, or official documentation URL (no `/topics/`, generic `/models`, or subreddit homepages).
+4. **Edit data, compile docs:** Never hand-edit `README.md`, `STATUS.md`, `docs/`, `guides/`, `reference/`, `research/`, or `llms*.txt`.
+
+## Verification Commands Before Opening a PR
 ```zsh
 source .venv/bin/activate
-python scripts/cli.py validate
-python scripts/cli.py build
+pip install -e .
+python -m unittest discover -s tests -t . -v
+swissknife validate
+swissknife build
 ```

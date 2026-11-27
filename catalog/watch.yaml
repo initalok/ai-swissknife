@@ -1,0 +1,83 @@
+# Hard-capped by automated validation: max 5 frontier (monitor-only), max 5 community, 21-day TTL
+frontier:
+  - id: claude-fable-mythos-52
+    name: "Claude Fable 5.2 & Mythos 5.2"
+    last_verified: "2026-11-27"
+    evidence_tier: vendor-claim
+    url: "https://www.anthropic.com/"
+    summary: "Sets the current ceiling for 10-12 hour autonomous audits (1M ctx / 128K out, 89.3% OSWorld 2.1, 69.9% FrontierSWE v2), with Mythos 5.2 focused on restricted security and Lean proofs."
+    limitations:
+      - "Paid API and enterprise access only; tracked strictly as a capability ceiling."
+
+  - id: gpt-62-astra-sol
+    name: "GPT-6.2 Astra & GPT-6.2 Sol"
+    last_verified: "2026-11-27"
+    evidence_tier: vendor-claim
+    url: "https://openai.com/"
+    summary: "Introduces cache-preserving mid-conversation reasoning-effort and tool toggling—an API caching pattern worth watching for future local vLLM and llama.cpp harnesses."
+    limitations:
+      - "Paid API only; monitor-only."
+
+  - id: gemini-4-carbon-argon
+    name: "Gemini 4 Carbon & 4 Argon"
+    last_verified: "2026-11-27"
+    evidence_tier: vendor-claim
+    url: "https://deepmind.google/"
+    summary: "Leads autonomous workflow execution (53.9% AutomationBench) powering Spark Task mode; its fast sibling Gemini 4 Hydrogen has already trickled down into the free tier."
+    limitations:
+      - "Paid Pro/Ultra and billed API only."
+
+  - id: qwen4-max-24t
+    name: "Qwen4-Max (2.4T)"
+    last_verified: "2026-11-27"
+    evidence_tier: official-docs
+    url: "https://qwenlm.github.io/"
+    summary: "2.4T frontier release (1M context, 262K CoT); Alibaba explicitly confirmed smaller open-weight Qwen4 releases are planned next, making this the top watchlist signal for local workstations."
+    limitations:
+      - "Current 2.4T checkpoint is cloud API only; await smaller open-weight releases."
+
+  - id: deepseek-v41-flash
+    name: "DeepSeek-V4.1-Flash (552B)"
+    last_verified: "2026-11-27"
+    evidence_tier: vendor-claim
+    url: "https://www.deepseek.com/"
+    summary: "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open checkpoints adopting this KV compression."
+    limitations:
+      - "Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API."
+
+community:
+  - id: obra-superpowers-watch
+    name: "obra/superpowers Multi-Harness Discipline Pack"
+    last_verified: "2026-11-27"
+    evidence_tier: field-note
+    url: "https://github.com/obra/superpowers"
+    summary: "Widely adopted 15-skill pack enforcing Brainstorm -> Spec -> Red/Green TDD -> Fresh Subagent -> Verification for 2+ hour autonomous runs across Pi, Hermes, OpenCode, and Claude Code."
+    limitations:
+      - "On Hermes Agent, use the Hermes-native tool mapping port rather than raw Claude Code tool names."
+
+  - id: disler-durable-pi
+    name: "disler/durable-pi Multi-Device Agent Showcase"
+    last_verified: "2026-11-27"
+    evidence_tier: field-note
+    url: "https://github.com/disler/durable-pi"
+    summary: "Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live tool hot-swapping on top of Pi."
+    limitations:
+      - "First-party @earendil-works/pi-durable is now also maintained directly inside the main Pi monorepo."
+
+  - id: hy-nomas-worlds
+    name: "Tencent-Hunyuan/Hy-Nomas Walkable Worlds"
+    last_verified: "2026-11-27"
+    evidence_tier: field-note
+    url: "https://github.com/Tencent-Hunyuan/Hy-Nomas"
+    summary: "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping."
+    limitations:
+      - "Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only)."
+
+  - id: netprojects-mlx-super-adapter
+    name: "Apple Silicon MTP-Preserving MLX Harness Merges"
+    last_verified: "2026-11-27"
+    evidence_tier: field-note
+    url: "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter"
+    summary: "Community MLX-6bit and 4-bit merges of Hugging Face's rank-96 super-adapter preserve Qwen3.8's MTP layer, hitting ~65 tok/s on Apple Silicon unified memory."
+    limitations:
+      - "Verify checksums and benchmark retention on third-party quantized merges before production use."

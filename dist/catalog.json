@@ -1,0 +1,4699 @@
+{
+  "schema_version": "5.0.0-beta.1",
+  "as_of": "2026-11-27",
+  "counts": {
+    "profiles": 3,
+    "entries": 31,
+    "agent_eligible": 31,
+    "external_links": 21,
+    "guides": 3,
+    "specialists": 4,
+    "watch_frontier": 5,
+    "watch_community": 4
+  },
+  "profiles": {
+    "zero-card-cloud": {
+      "id": "zero-card-cloud",
+      "name": "Zero-Card Cloud",
+      "summary": "Verified $0 cloud gateways, non-autoregressive decision endpoints, and keyless RAG requiring no credit card."
+    },
+    "16vram-64ram": {
+      "id": "16vram-64ram",
+      "name": "16GB VRAM + 64GB RAM Workstation",
+      "summary": "Zone 1 pure 16GB VRAM dense models paired with Zone 2 64GB DDR5 sparse MoE offloading."
+    },
+    "mac-apple-silicon": {
+      "id": "mac-apple-silicon",
+      "name": "Apple Silicon Mac (Unified Memory / MLX)",
+      "summary": "Unified memory local inference via Apple MLX and llama.cpp Metal without a PCIe split."
+    }
+  },
+  "indices": {
+    "adapters_for": {
+      "qwen3.8-27b": [
+        "qwen38-super-adapter",
+        "qwen38-abliterated-lora"
+      ],
+      "pi": [
+        "qwen38-super-adapter"
+      ],
+      "hermes-agent": [
+        "qwen38-super-adapter"
+      ],
+      "opencode": [
+        "qwen38-super-adapter"
+      ]
+    },
+    "guards_for": {
+      "*": [
+        "laya-05",
+        "safeagents"
+      ]
+    },
+    "by_profile": {
+      "zero-card-cloud": [
+        "google-ai-studio",
+        "zhipu-bigmodel",
+        "nvidia-nim",
+        "openrouter-free",
+        "groq-cloud",
+        "cloudflare-workers-ai",
+        "pollinations",
+        "firecrawl",
+        "jina-reader",
+        "exa-search",
+        "openalex",
+        "pi",
+        "deepseek-harness",
+        "hermes-agent",
+        "opencode"
+      ],
+      "16vram-64ram": [
+        "qwen3.8-27b",
+        "qwen3-coder-next",
+        "gemma-4",
+        "hermes-4",
+        "inkling-2-mini",
+        "laya-05",
+        "qwen-image-2.1",
+        "wan-2.2",
+        "pi",
+        "deepseek-harness",
+        "hermes-agent",
+        "opencode",
+        "qwen38-super-adapter",
+        "qwen38-abliterated-lora",
+        "llama-cpp",
+        "unsloth-runtime",
+        "wangp"
+      ],
+      "mac-apple-silicon": [
+        "qwen3.8-27b",
+        "qwen3-coder-next",
+        "gemma-4",
+        "hermes-4",
+        "inkling-2-mini",
+        "laya-05",
+        "qwen-image-2.1",
+        "pi",
+        "deepseek-harness",
+        "hermes-agent",
+        "opencode",
+        "qwen38-super-adapter",
+        "qwen38-abliterated-lora",
+        "llama-cpp",
+        "unsloth-runtime",
+        "mlx-lm"
+      ]
+    }
+  },
+  "entries": {
+    "google-ai-studio": {
+      "id": "google-ai-studio",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)",
+      "summary": "Google's primary card-free developer gateway, now serving Gemini 4 Hydrogen with a 1,048,576-token unified context window, multimodal inputs, and four thinking levels alongside Gemini Decision 1.",
+      "when_to_use": "Default zero-card cloud gateway for multi-step coding agents, full-repository ingestion, and multimodal reasoning.",
+      "limitations": [
+        "Free Tier prompts are used to improve products outside EU/UK/CH; redact credentials and sensitive data.",
+        "Search Grounding, Maps Grounding, Batch API, and explicit context caching are paid-tier only on Gemini 4 Hydrogen.",
+        "Passing thinking_level=minimal or out-of-range temperature/top_p/top_k returns HTTP 400 on gemini-4-hydrogen."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://aistudio.google.com/",
+      "capabilities": [
+        "coding",
+        "research",
+        "media",
+        "social"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: Free Tier (gemini-4-hydrogen 1M unified ctx, implicit caching) + Decision 1 (200 RPM / 10K RPD)",
+      "env_key": "GEMINI_API_KEY",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "default_model": "gemini-4-hydrogen",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "zhipu-bigmodel": {
+      "id": "zhipu-bigmodel",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "Z.ai BigModel (GLM-4.7-Flash)",
+      "summary": "Card-free Chinese developer API offering a permanently free MIT-licensed GLM-4.7-Flash endpoint with a 200K context window and 128K output cap.",
+      "when_to_use": "Secondary no-card backup for long-context coding and tool-use loops when Google AI Studio rate limits are reached.",
+      "limitations": [
+        "Only glm-4.7-flash is permanently free; the newer GLM-5.x models are billed and fail on $0 accounts."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://open.bigmodel.cn/",
+      "capabilities": [
+        "coding"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: permanently free GLM-4.7-Flash tier (200K ctx / 128K out)",
+      "env_key": "ZHIPU_API_KEY",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "default_model": "glm-4.7-flash",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "nvidia-nim": {
+      "id": "nvidia-nim",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "NVIDIA NIM Developer Catalog",
+      "summary": "Serverless prototyping catalog hosting rack-scale open-weight models\u2014including 552B DeepSeek-V4.1-Flash and Nemotron-3.5-Super-VL\u2014without requiring a credit card.",
+      "when_to_use": "Testing giant 300B-550B open-weight models that cannot fit inside consumer workstation memory.",
+      "limitations": [
+        "Restricted to developer prototyping rather than production traffic, with occasional cold-start queues on large MoEs."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://build.nvidia.com/",
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: ~40 RPM developer prototyping catalog",
+      "env_key": "NVIDIA_API_KEY",
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "default_model": "deepseek-ai/deepseek-v4.1-flash",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "openrouter-free": {
+      "id": "openrouter-free",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "OpenRouter (:free Routes)",
+      "summary": "Unified OpenAI-compatible router aggregating community-sponsored free model endpoints behind one API key.",
+      "when_to_use": "Quick model comparisons and light fallback routing across diverse open weights.",
+      "limitations": [
+        "50 RPD on unverified $0 accounts runs out in roughly three multi-step coding tasks; negative balances return HTTP 402 even on :free routes."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://openrouter.ai/",
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "20 RPM, 50 RPD ($0 balance) -> 1,000 RPD (>=10 credits balance)",
+      "env_key": "OPENROUTER_API_KEY",
+      "base_url": "https://openrouter.ai/api/v1",
+      "default_model": "openrouter/free",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "groq-cloud": {
+      "id": "groq-cloud",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "Groq Cloud LPU",
+      "summary": "Ultra-low-latency LPU inference offering free tiers for compact LLMs (qwen/qwen3.8-27b, gpt-oss-120b) and high-quota Whisper-Large-v3 speech transcription.",
+      "when_to_use": "Sub-second small-prompt JSON routing (<6K tokens) and free audio transcription (2,000 requests/day).",
+      "limitations": [
+        "Strict 8,000 TPM cap on free LLMs causes immediate HTTP 429 failures on 20K-token coding agent prompts."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://console.groq.com/",
+      "capabilities": [
+        "fast-json",
+        "media"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: LLMs 30 RPM / 1K RPD / 8K TPM; Whisper 2K RPD / 28.8K audio sec/day",
+      "env_key": "GROQ_API_KEY",
+      "base_url": "https://api.groq.com/openai/v1",
+      "default_model": "qwen/qwen3.8-27b",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "cloudflare-workers-ai": {
+      "id": "cloudflare-workers-ai",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "Cloudflare Workers AI (Clef & Clairic)",
+      "summary": "Edge inference offering 10,000 daily free Neurons for non-autoregressive Clef decision models and Clairic structured extraction.",
+      "when_to_use": "Zero-output-token edge classification, moderation, and typed span extraction.",
+      "limitations": [
+        "Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410)."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://developers.cloudflare.com/workers-ai/",
+      "capabilities": [
+        "decisions"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: 10,000 Neurons/day free (resets 00:00 UTC)",
+      "env_key": "CLOUDFLARE_API_TOKEN",
+      "base_url": "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1",
+      "default_model": "@cf/cloudflare/clef",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "pollinations": {
+      "id": "pollinations",
+      "kind": "gateway",
+      "category": "cloud",
+      "name": "Pollinations AI",
+      "summary": "Keyless community OpenAI-compatible text and FLUX image endpoint requiring zero signup or authentication.",
+      "when_to_use": "Last-resort keyless fallback for ephemeral sandbox testing where no API keys exist.",
+      "limitations": [
+        "Shared public community service; never transmit private code, credentials, or personal data."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://pollinations.ai/",
+      "capabilities": [
+        "coding"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "Keyless fair-use IP quota (text and image)",
+      "env_key": null,
+      "base_url": "https://text.pollinations.ai/openai",
+      "default_model": "openai",
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "firecrawl": {
+      "id": "firecrawl",
+      "kind": "tool",
+      "category": "grounding",
+      "name": "Firecrawl",
+      "summary": "Clean webpage-to-Markdown crawler with an agent onboarding skill and low token overhead on OpenBenchmarks.",
+      "when_to_use": "Converting modern JavaScript-rendered documentation pages into clean Markdown for RAG or research.",
+      "limitations": [
+        "Keyless usage is strictly IP-rate-limited; create a free key for multi-page crawls."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://www.firecrawl.dev/",
+      "capabilities": [
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "Keyless onboarding skill + 500 starter credits",
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "jina-reader": {
+      "id": "jina-reader",
+      "kind": "tool",
+      "category": "grounding",
+      "name": "Jina Reader (r.jina.ai / s.jina.ai)",
+      "summary": "Zero-SDK URL prefix service turning web pages and PDFs into clean Markdown, with a matching search prefix.",
+      "when_to_use": "Instant one-line URL reading in shell scripts and lightweight agents.",
+      "limitations": [
+        "Unauthenticated prefix requests throttle quickly under automated batch loops."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://jina.ai/reader/",
+      "capabilities": [
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "Keyless prefix + 10M free tokens with free API key",
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "exa-search": {
+      "id": "exa-search",
+      "kind": "tool",
+      "category": "grounding",
+      "name": "Exa 3.0 Neural Search",
+      "summary": "Semantic web search API built for AI retrieval, renewing $10/month in free credits on the 1st of every month.",
+      "when_to_use": "High-precision web discovery for deep research agents and technical literature scouting.",
+      "limitations": [
+        "Deep research search modes exhaust monthly free credits much faster than Lite searches."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://exa.ai/",
+      "capabilities": [
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "No card: $10/mo recurring credits (~2,500 Lite searches)",
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "openalex": {
+      "id": "openalex",
+      "kind": "tool",
+      "category": "grounding",
+      "name": "OpenAlex Academic Graph",
+      "summary": "Open scholarly index covering 250M+ academic works, citation graphs, and open-access PDF links with zero API keys required.",
+      "when_to_use": "Primary literature review, DOI verification, and academic citation mapping.",
+      "limitations": [
+        "Include ?mailto=you@domain.com in queries to enter the fast polite pool."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://openalex.org/",
+      "capabilities": [
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": null,
+      "footprint": null,
+      "quota": "Keyless: 100,000 requests/day forever",
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "qwen3.8-27b": {
+      "id": "qwen3.8-27b",
+      "kind": "model",
+      "category": "local-mature",
+      "name": "Qwen3.8-27B (Dense Vision + Text)",
+      "summary": "Apache-2.0 27B dense model serving as the primary 16GB VRAM and Apple Silicon coding backbone, hosting both Hugging Face's RL harness adapters and compact uncensored LoRAs.",
+      "when_to_use": "Daily-driver local coding, strict instruction following, and single-backbone multi-LoRA serving.",
+      "limitations": [
+        "On 16GB GPUs, keep quantization at IQ4_XS with Q8 KV cache so weights never spill over PCIe.",
+        "Avoid Ollama's /v1/chat/completions endpoint with qwen3.8:27b due to reported hangs; use llama-server or mlx_lm.server."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "capabilities": [
+        "coding",
+        "research",
+        "reverse-eng",
+        "social",
+        "unfiltered"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "14.5 GB (IQ4_XS, Zone 1 16GB VRAM) / ~16 GB (Mac MLX 4-bit)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+      "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "qwen3-coder-next": {
+      "id": "qwen3-coder-next",
+      "kind": "model",
+      "category": "local-mature",
+      "name": "Qwen3-Coder-Next (80B-A3B Sparse MoE)",
+      "summary": "Sparse 512-expert Mixture-of-Experts coding model activating only 3B parameters per token, making 80B-class capacity practical in 16GB VRAM + 64GB DDR5 hybrid mode.",
+      "when_to_use": "Larger repository reasoning and multi-file refactoring on 16GB GPU + 64GB RAM workstations or 64GB+ Macs.",
+      "limitations": [
+        "Keep -ngl 99 so Attention and KV cache stay on GPU; offload cold experts only via --n-cpu-moe."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF",
+      "capabilities": [
+        "coding",
+        "reverse-eng",
+        "game-dev"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "49 GB (UD-Q4_K_XL, Zone 2 16GB VRAM + 64GB RAM)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "gemma-4": {
+      "id": "gemma-4",
+      "kind": "model",
+      "category": "local-mature",
+      "name": "Gemma 4 Family (26B-A4B Vision & 12B Tri-Modal)",
+      "summary": "Fast Apache-2.0 open-weight family offering ~140 tok/s text+vision throughput on 16GB VRAM (26B-A4B) and native local audio understanding (12B).",
+      "when_to_use": "High-speed local general chat, vision inspection, or local audio analysis.",
+      "limitations": [
+        "Only E2B, E4B, and 12B process audio\u2014the 26B-A4B MoE checkpoint is Text + Vision only."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://ai.google.dev/gemma",
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "8.5 GB (12B) to 14 GB (26B-A4B, Zone 1 16GB VRAM)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "hermes-4": {
+      "id": "hermes-4",
+      "kind": "model",
+      "category": "local-mature",
+      "name": "NousResearch Hermes 4 (14B / 4.3-36B Neutral)",
+      "summary": "Neutral-aligned open-weight models designed to follow operator-defined system prompt policies without baked-in blanket refusals.",
+      "when_to_use": "Self-hosted deployments where you want predictable operator-controlled behavior rather than abliterated weight surgery.",
+      "limitations": [
+        "Always write explicit safety boundaries in your system prompt if exposing the model beyond solo local use."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/NousResearch/Hermes-4-14B",
+      "capabilities": [
+        "unfiltered"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "9 GB (14B Q4) / 22 GB (36B Hybrid)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --port 8000",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "inkling-2-mini": {
+      "id": "inkling-2-mini",
+      "kind": "model",
+      "category": "local-experimental",
+      "name": "Inkling 2 Mini (26.4B Looped Transformer MoE)",
+      "summary": "Experimental looped-layer MoE that iterates its middle 12 layers three times (3.4B base / 5.4B effective active, 1M context), now supported natively in mainline llama.cpp (#32218) alongside Unsloth.",
+      "when_to_use": "Experimenting with high-efficiency looped coding architectures inside 16GB-18GB memory budgets.",
+      "limitations": [
+        "Published 79.2% SWE-bench Verified and 48.2% DeepSWE v1.1 scores are lab-reported; trails Qwen3.8-27B on strict chat (50% MultiChallenge).",
+        "Can enter repetitive debug loops\u2014cap max turns/thinking tokens and run inside a filesystem sandbox."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "experimental",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
+      "capabilities": [
+        "coding",
+        "game-dev"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0 + AUP",
+      "footprint": "13-18 GB (UD-Q3/Q4 + DSpark drafter)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "laya-05": {
+      "id": "laya-05",
+      "kind": "model",
+      "category": "local-decision",
+      "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+      "summary": "Compact non-autoregressive scorer evaluating up to 64 typed decisions in a single forward pass (<100-500ms on CPU/NPU/WebGPU), with v0.5 adding 73,728-token image/audio/video support.",
+      "when_to_use": "Fast zero-output-token tool-safety checks, routing gates, and memory verification without occupying GPU VRAM.",
+      "limitations": [
+        "Threshold decisions on calibrated probabilities rather than raw confidence scores; the optional vegaml-learn add-on is non-commercial."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/NandhaKishorM/laya",
+      "capabilities": [
+        "decisions",
+        "safety"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": [
+          "*"
+        ]
+      },
+      "license": "Apache-2.0",
+      "footprint": "678-846 MB (CPU / NPU / WebGPU)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "qwen-image-2.1": {
+      "id": "qwen-image-2.1",
+      "kind": "model",
+      "category": "local-media",
+      "name": "Qwen-Image-2.1 (7B DiT Native RGBA)",
+      "summary": "Compact 7B diffusion transformer supporting native transparent RGBA output and clean 2048px typography inside 16GB VRAM.",
+      "when_to_use": "Non-commercial local design assets, typography, and layered transparent image editing.",
+      "limitations": [
+        "Licensed under Qwen Research (non-commercial); use Apache-2.0 FLUX.2 Klein for commercial production assets."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1",
+      "capabilities": [
+        "media"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Qwen Research (Non-Commercial)",
+      "footprint": "9.1 GB VRAM (Q4_K_M)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "wan-2.2": {
+      "id": "wan-2.2",
+      "kind": "model",
+      "category": "local-media",
+      "name": "Wan 2.2 (5B & A14B Open Video)",
+      "summary": "Permissive Apache-2.0 open-weight video generation model accelerated cleanly on consumer GPUs through WanGP.",
+      "when_to_use": "Commercial-safe local video synthesis on 8GB-16GB NVIDIA workstations.",
+      "limitations": [
+        "Newer Wan 3.0 and Wan 2.6 releases remain closed cloud APIs with no published local weights."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "capabilities": [
+        "media"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "6-15 GB VRAM via WanGP MMGP v4",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/models_and_cloud.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "pi": {
+      "id": "pi",
+      "kind": "harness",
+      "category": "harness",
+      "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+      "summary": "Minimal, hackable agent loop (TUI, RPC, and SDK) featuring /tree DAG session branching, a built-in MCP + Codemode JavaScript sandbox, and first-party SQLite crash-resumable checkpoints.",
+      "when_to_use": "When you want full control over context assembly, clean compaction, and the highest-scoring official target for Hugging Face's RL harness adapters.",
+      "limitations": [
+        "Intentionally omits built-in per-tool approval prompts; always pair with safeagents or an OS sandbox."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/earendil-works/pi",
+      "capabilities": [
+        "coding",
+        "research",
+        "reverse-eng",
+        "game-dev",
+        "media",
+        "social",
+        "unfiltered"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud",
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": "Building-Block Kernel",
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "deepseek-harness": {
+      "id": "deepseek-harness",
+      "kind": "harness",
+      "category": "harness",
+      "name": "DeepSeek Harness (dsh)",
+      "summary": "Cordis-based agent platform where every subsystem\u2014including the agent loop itself\u2014is a hot-swappable plugin, paired with a read-only-by-default sandbox and sub-agent plugins.",
+      "when_to_use": "Building custom agent loops, interactive Creator Mode plugins, or multi-harness web sessions.",
+      "limitations": [
+        "Fast-moving developer preview (0.2.3-alpha.2); pin plugin versions against breaking interface changes."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "experimental",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/deepseek-ai/deepseek-harness",
+      "capabilities": [
+        "coding",
+        "media"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud",
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": "Plugin-Everything Platform",
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": "npx @deepseek-ai/dsh web",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "hermes-agent": {
+      "id": "hermes-agent",
+      "kind": "harness",
+      "category": "harness",
+      "name": "Hermes Agent (v0.23.4)",
+      "summary": "Persistent autonomous agent featuring cross-session memory, autonomous skill authoring, cron scheduling, Telegram/ACP bridges, and official Hugging Face harness adapter support.",
+      "when_to_use": "Always-on background assistants, scheduled research digests, and multi-surface personal operations.",
+      "limitations": [
+        "Does not auto-compact aggressively like Pi by default; cap thinking and context lengths on very large repositories."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "capabilities": [
+        "coding",
+        "research",
+        "social"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud",
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": "Self-Improving Daemon",
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "opencode": {
+      "id": "opencode",
+      "kind": "harness",
+      "category": "harness",
+      "name": "OpenCode CLI",
+      "summary": "Vendor-agnostic terminal coding interface compatible with local OpenAI-compatible servers and backed by an official Hugging Face Qwen3.8-27B harness LoRA.",
+      "when_to_use": "Straightforward terminal software engineering with zero vendor lock-in.",
+      "limitations": [
+        "Monitor context growth during multi-hour sessions; compaction is less aggressive than Pi."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/anomalyco/opencode",
+      "capabilities": [
+        "coding",
+        "unfiltered"
+      ],
+      "edges": {
+        "runs_on": [
+          "zero-card-cloud",
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": "Terminal Coding CLI",
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "safeagents": {
+      "id": "safeagents",
+      "kind": "tool",
+      "category": "safety",
+      "name": "Hugging Face safeagents Proxy",
+      "summary": "Transparent OpenAI/Anthropic runtime proxy auditing every tool call via fast local scanning (atif-scan, ~10-20ms on Apple Silicon) and optional decision-model judges.",
+      "when_to_use": "Mandatory guard layer between autonomous coding harnesses (or unfiltered local models) and shell/filesystem tools.",
+      "limitations": [
+        "Configure an explicit domain plugin rather than relying on empty defaults."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/huggingface/safeagents",
+      "capabilities": [
+        "safety"
+      ],
+      "edges": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": [
+          "*"
+        ]
+      },
+      "license": "Apache-2.0",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [
+        "Audited 1.3M tool calls and blocked 647 suspicious or reward-hacking calls during Hugging Face's RL adapter training."
+      ],
+      "eval_tables": [],
+      "launch_recipe": "safeagents start http://localhost:8000 --plugin hf://harness-hub/qwen-safeagents-plugin",
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "qwen38-super-adapter": {
+      "id": "qwen38-super-adapter",
+      "kind": "adapter",
+      "category": "rl-research",
+      "name": "Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)",
+      "summary": "Zero-retraining orthogonal rank-96 merge (PEFT combination_type=cat, weight 0.5) combining Pi, Hermes, and OpenCode RL LoRA adapters on one frozen Qwen3.8-27B backbone.",
+      "when_to_use": "Serving multiple agent harnesses from one frozen 15 GB base model, or running with thinking mode enabled (xhigh).",
+      "limitations": [
+        "When running a single harness with thinking off, prefer its specialist LoRA (e.g., pi 64.0% vs 46.0% on SWE-bench Pro hard-51).",
+        "Adapters were trained on BF16 weights; verify GGUF quant fidelity and expect brief pre-tool thinking leakage (arXiv:2610.14270).",
+        "Merge weight 0.5 was selected using TB2.1, introducing slight optimistic bias on that benchmark; Hermes specialist shows a mild OOD dip on AutomationBench."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter",
+      "capabilities": [
+        "coding",
+        "reverse-eng"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [
+          "qwen3.8-27b",
+          "pi",
+          "hermes-agent",
+          "opencode"
+        ],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "+912 MiB LoRA (+304 MiB for single-harness specialist)",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [
+        "Per-harness RL updates are nearly orthogonal (cosine similarity ~0.01-0.02), allowing rank concatenation without retraining.",
+        "Community testing confirmed transfer onto Qwen3.8 derivatives such as Swift-1.5 and MTP-preserving Apple Silicon MLX builds."
+      ],
+      "eval_tables": [
+        {
+          "title": "Reproduced SWE-bench Pro & Terminal-Bench 2.1 Results (Qwen3.8-27B)",
+          "headers": [
+            "Evaluation Mode",
+            "Base Qwen3.8-27B",
+            "Specialist LoRA",
+            "Rank-96 Super-Adapter",
+            "Tool-Call Reduction"
+          ],
+          "rows": [
+            [
+              "Thinking Off (mean across 6 harness-bench pairs)",
+              "39.5%",
+              "pi SWE-Pro: 64.7% (vs 39.2%)",
+              "49.0% (beats base 6/6)",
+              "-53% to -73% calls"
+            ],
+            [
+              "Thinking On / xhigh (mean across 6 pairs)",
+              "55.5%",
+              "Trained with thinking off",
+              "63.5% (wins 5/6, ties 1)",
+              "-31% to -48% SWE-Pro"
+            ],
+            [
+              "Cross-Harness Transfer (pi LoRA -> other loops)",
+              "44.8% OC / 46.3% Hermes",
+              "54.0% OC / 56.1% Hermes",
+              "Also transfers to Swift-1.5",
+              "~45% fewer calls"
+            ]
+          ]
+        },
+        {
+          "title": "Out-of-Distribution Control: 300 AutomationBench Tasks (Non-SWE Agent Loop)",
+          "headers": [
+            "Model Variant",
+            "pass@1 (All Assertions)",
+            "vs. Base",
+            "Partial Credit",
+            "vs. Base"
+          ],
+          "rows": [
+            [
+              "Base Qwen3.8-27B",
+              "23.0%",
+              "\u2014",
+              "62.2%",
+              "\u2014"
+            ],
+            [
+              "pi Specialist (step 160)",
+              "27.0%",
+              "+4.0",
+              "66.2%",
+              "+4.0"
+            ],
+            [
+              "OpenCode Specialist (step 150)",
+              "25.3%",
+              "+2.3",
+              "65.2%",
+              "+3.0"
+            ],
+            [
+              "Rank-96 Merged Super-Adapter",
+              "23.7%",
+              "+0.7",
+              "60.6%",
+              "-1.6"
+            ],
+            [
+              "Hermes Specialist (step 160)",
+              "17.7%",
+              "-5.3",
+              "56.6%",
+              "-5.6"
+            ]
+          ]
+        }
+      ],
+      "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0",
+      "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "qwen38-abliterated-lora": {
+      "id": "qwen38-abliterated-lora",
+      "kind": "adapter",
+      "category": "rl-research",
+      "name": "Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)",
+      "summary": "Lightweight 26 MB rank-3 LoRA (built on Apple Silicon) removing built-in refusals on top of the exact same frozen Qwen3.8-27B base model.",
+      "when_to_use": "Authorized security testing, red-teaming, or unfiltered local experimentation without storing a second 15 GB checkpoint.",
+      "limitations": [
+        "Abliterated adapters cannot refuse destructive tool actions; always isolate behind safeagents and Laya 0.5."
+      ],
+      "evidence_tier": "field-note",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated",
+      "capabilities": [
+        "unfiltered"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [
+          "qwen3.8-27b"
+        ],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": "+26 MB LoRA on frozen Qwen3.8-27B",
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "hf-in-harness-rl": {
+      "id": "hf-in-harness-rl",
+      "kind": "tool",
+      "category": "rl-research",
+      "name": "In-Harness RL Recipe (OpenEnv + Harbor + TRL AsyncGRPO)",
+      "summary": "Reusable reinforcement-learning pipeline that trains LoRAs directly inside unmodified shipping harnesses via a token/logprob capture proxy rather than re-implementing agent loops.",
+      "when_to_use": "Reproducing harness-specific RL on your own private repositories or task benchmarks.",
+      "limitations": [
+        "Requires all-linear LoRA, learning rate 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and strict exclusion of all-pass/all-fail GRPO tasks."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+      "capabilities": [
+        "adaptation"
+      ],
+      "edges": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [
+        "openenv validate passed 858 of 1,127 candidate tasks; filtering to tasks the base model solves sometimes (171/442) produced the decisive GRPO reward jump."
+      ],
+      "eval_tables": [
+        {
+          "title": "TB2.1 Difficulty-Filtering Ablation (Qwen3.8-27B \u00b7 LoRA AsyncGRPO \u00b7 32 tasks/arm \u00b7 8xH200 \u00b7 Base TB2.1: 35.9%)",
+          "headers": [
+            "Experimental Arm",
+            "Task Filtering Rule",
+            "Steps Completed",
+            "Train Reward (Steps 1-5 -> Last 5)"
+          ],
+          "rows": [
+            [
+              "A1 Unvalidated",
+              "24 accepted + 8 failed openenv validate",
+              "40 (timed out at step 48)",
+              "0.64 -> 0.67"
+            ],
+            [
+              "A2 Validated",
+              "32 validated, no difficulty filter",
+              "50 (completed)",
+              "0.56 -> 0.70"
+            ],
+            [
+              "A3 Unqualified",
+              "32 validated base always or never solves",
+              "25 (timed out at step 26)",
+              "0.60 -> 0.63"
+            ],
+            [
+              "A4 Qualified",
+              "32 validated base solves sometimes",
+              "50 (completed)",
+              "0.62 -> 0.81"
+            ]
+          ]
+        }
+      ],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "llama-cpp": {
+      "id": "llama-cpp",
+      "kind": "runtime",
+      "category": "runtime",
+      "name": "llama.cpp (Mainline GGUF Engine)",
+      "summary": "Universal CUDA, Metal, Vulkan, and ROCm inference server supporting hybrid MoE offloading (--n-cpu-moe), runtime LoRA loading (--lora), and native Inkling looped layers (#32218).",
+      "when_to_use": "Primary local LLM server on NVIDIA workstations and cross-platform CLI deployments.",
+      "limitations": [
+        "--no-mmap is deprecated (migrate to --load-mode none); pass -cuda graphs=0 if partial MoE offloading outputs gibberish."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "capabilities": [
+        "coding"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "unsloth-runtime": {
+      "id": "unsloth-runtime",
+      "kind": "runtime",
+      "category": "runtime",
+      "name": "Unsloth Runtime & Studio",
+      "summary": "Optimized local serving and fine-tuning suite offering fast VRAM-exceeding MoE execution, an Anthropic-compatible local endpoint, Decision API, and OS sandboxes.",
+      "when_to_use": "Serving Dynamic v3.1 GGUFs, local Laya decision endpoints, or routing Anthropic-protocol clients to local models.",
+      "limitations": [
+        "Keep Studio updated alongside mainline llama.cpp when adopting newly released quantization formats."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/unslothai/unsloth",
+      "capabilities": [
+        "coding",
+        "decisions"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram",
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "mlx-lm": {
+      "id": "mlx-lm",
+      "kind": "runtime",
+      "category": "runtime",
+      "name": "Apple MLX (mlx-lm)",
+      "summary": "Apple's native unified-memory inference framework delivering ~65 tok/s on 4-bit Qwen3.8-27B super-adapter builds with zero PCIe transfer overhead.",
+      "when_to_use": "Primary local serving engine on Apple Silicon Macs (M-series Mac mini, MacBook Pro, Mac Studio).",
+      "limitations": [
+        "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for comfortable 27B coding sessions."
+      ],
+      "evidence_tier": "field-note",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/ml-explore/mlx-lm",
+      "capabilities": [
+        "coding"
+      ],
+      "edges": {
+        "runs_on": [
+          "mac-apple-silicon"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "MIT",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    "wangp": {
+      "id": "wangp",
+      "kind": "runtime",
+      "category": "runtime",
+      "name": "WanGP v20.12 (MMGP v4 + SageGP 1.0.2)",
+      "summary": "Memory-managed local video and image engine whose Extreme Chunker fits 15 seconds of 1080p video into 5.9 GB VRAM while exposing a native MCP interface.",
+      "when_to_use": "Running Wan 2.2, LTX-2.5, and Qwen-Image-2.1 on 8GB-16GB consumer GPUs.",
+      "limitations": [
+        "Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3)."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-27",
+      "url": "https://github.com/deepbeepmeep/WanGP",
+      "capabilities": [
+        "media"
+      ],
+      "edges": {
+        "runs_on": [
+          "16vram-64ram"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "license": "Apache-2.0",
+      "footprint": null,
+      "quota": null,
+      "env_key": null,
+      "base_url": null,
+      "default_model": null,
+      "role": null,
+      "evidence_notes": [],
+      "eval_tables": [],
+      "launch_recipe": null,
+      "mac_launch_recipe": null,
+      "source_file": "catalog/harnesses_and_tools.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    }
+  },
+  "external_links": [
+    {
+      "key": "guide:coding-and-apps:playwright-mcp",
+      "scope": "guide:coding-and-apps",
+      "name": "Microsoft Playwright MCP",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:coding-and-apps:context7",
+      "scope": "guide:coding-and-apps",
+      "name": "Upstash Context7 (ctx7 & @upstash/context7-pi)",
+      "url": "https://github.com/upstash/context7",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:coding-and-apps:mobile-build-mcp",
+      "scope": "guide:coding-and-apps",
+      "name": "Sentry MobileBuildMCP",
+      "url": "https://github.com/getsentry/MobileBuildMCP",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:coding-and-apps:superpowers",
+      "scope": "guide:coding-and-apps",
+      "name": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:research-and-writing:gpt-researcher",
+      "scope": "guide:research-and-writing",
+      "name": "GPT Researcher",
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:research-and-writing:deerflow",
+      "scope": "guide:research-and-writing",
+      "name": "DeerFlow 2.0",
+      "url": "https://github.com/bytedance/deer-flow",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:local-media-studio:hyperframes",
+      "scope": "guide:local-media-studio",
+      "name": "HeyGen Hyperframes",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:local-media-studio:davinci-mcp-free",
+      "scope": "guide:local-media-studio",
+      "name": "DaVinci Resolve MCP (Free & Studio Bridge)",
+      "url": "https://github.com/hiteshK03/davinci-resolve-mcp",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "guide:local-media-studio:phonon-31m",
+      "scope": "guide:local-media-studio",
+      "name": "Gradium Phonon 31M WebGPU TTS",
+      "url": "https://github.com/blixt/phonon",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:reverse-engineering:ghidra-mcp",
+      "scope": "specialist:reverse-engineering",
+      "name": "LaurieWired GhidraMCP",
+      "url": "https://github.com/LaurieWired/GhidraMCP",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:reverse-engineering:oghidra",
+      "scope": "specialist:reverse-engineering",
+      "name": "LLNL OGhidra",
+      "url": "https://github.com/LLNL/OGhidra",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:reverse-engineering:upstream",
+      "scope": "specialist:reverse-engineering (upstream)",
+      "name": "zhuyansen/awesome-ai-reverse-engineering",
+      "url": "https://github.com/zhuyansen/awesome-ai-reverse-engineering",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:game-dev-3d:unity-mcp",
+      "scope": "specialist:game-dev-3d",
+      "name": "CoplayDev Unity MCP",
+      "url": "https://github.com/CoplayDev/unity-mcp",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:game-dev-3d:blender-mcp",
+      "scope": "specialist:game-dev-3d",
+      "name": "ahujasid Blender MCP",
+      "url": "https://github.com/ahujasid/blender-mcp",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:game-dev-3d:upstream",
+      "scope": "specialist:game-dev-3d (upstream)",
+      "name": "Microsoft TRELLIS v1 (MIT 16GB 3D)",
+      "url": "https://github.com/microsoft/TRELLIS",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:growth-and-social:postiz",
+      "scope": "specialist:growth-and-social",
+      "name": "Postiz",
+      "url": "https://github.com/gitroomhq/postiz-app",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:growth-and-social:humanizer",
+      "scope": "specialist:growth-and-social",
+      "name": "blader/humanizer",
+      "url": "https://github.com/blader/humanizer",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:growth-and-social:upstream",
+      "scope": "specialist:growth-and-social (upstream)",
+      "name": "ericosiu/ai-marketing-skills",
+      "url": "https://github.com/ericosiu/ai-marketing-skills",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:unfiltered-sovereign:hermes-4-neutral",
+      "scope": "specialist:unfiltered-sovereign",
+      "name": "NousResearch Hermes 4 (Neutral Alignment)",
+      "url": "https://huggingface.co/NousResearch/Hermes-4-14B",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:unfiltered-sovereign:qwen38-26mb-lora",
+      "scope": "specialist:unfiltered-sovereign",
+      "name": "Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA",
+      "url": "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    },
+    {
+      "key": "specialist:unfiltered-sovereign:upstream",
+      "scope": "specialist:unfiltered-sovereign (upstream)",
+      "name": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+      "url": "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+      "last_verified": "2026-11-27",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "upstream_alerts": []
+      }
+    }
+  ],
+  "routing_chains": {
+    "coding-agent": [
+      "google-ai-studio",
+      "zhipu-bigmodel",
+      "openrouter-free",
+      "nvidia-nim",
+      "pollinations"
+    ],
+    "long-context-1m": [
+      "google-ai-studio",
+      "zhipu-bigmodel"
+    ],
+    "deep-reasoning": [
+      "nvidia-nim",
+      "google-ai-studio",
+      "openrouter-free",
+      "pollinations"
+    ],
+    "fast-json-and-stt": [
+      "groq-cloud",
+      "google-ai-studio",
+      "cloudflare-workers-ai",
+      "pollinations"
+    ],
+    "decision-gate": [
+      "google-ai-studio",
+      "cloudflare-workers-ai"
+    ]
+  },
+  "guides": {
+    "coding-and-apps": {
+      "id": "coding-and-apps",
+      "type": "guide",
+      "title": "Coding & Apps",
+      "summary": "End-to-end engineering workflow pairing verified models and harnesses with live documentation lookup, browser QA, and Apple mobile build tools.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "google-ai-studio",
+            "name": "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://aistudio.google.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "zhipu-bigmodel",
+            "name": "Z.ai BigModel (GLM-4.7-Flash)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://open.bigmodel.cn/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "nvidia-nim",
+            "name": "NVIDIA NIM Developer Catalog",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://build.nvidia.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "openrouter-free",
+            "name": "OpenRouter (:free Routes)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://openrouter.ai/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "pollinations",
+            "name": "Pollinations AI",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://pollinations.ai/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen3.8-27b",
+            "name": "Qwen3.8-27B (Dense Vision + Text)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:coding",
+            "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen3-coder-next",
+            "name": "Qwen3-Coder-Next (80B-A3B Sparse MoE)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF",
+            "launch_recipe": "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "gemma-4",
+            "name": "Gemma 4 Family (26B-A4B Vision & 12B Tri-Modal)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://ai.google.dev/gemma",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "inkling-2-mini",
+            "name": "Inkling 2 Mini (26.4B Looped Transformer MoE)",
+            "kind": "model",
+            "lifecycle": "experimental",
+            "evidence_tier": "vendor-claim",
+            "match_reason": "capabilities:coding",
+            "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
+            "launch_recipe": "llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "deepseek-harness",
+            "name": "DeepSeek Harness (dsh)",
+            "kind": "harness",
+            "lifecycle": "experimental",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "launch_recipe": "npx @deepseek-ai/dsh web",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "hermes-agent",
+            "name": "Hermes Agent (v0.23.4)",
+            "kind": "harness",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/NousResearch/hermes-agent",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "opencode",
+            "name": "OpenCode CLI",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/anomalyco/opencode",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [
+          {
+            "id": "llama-cpp",
+            "name": "llama.cpp (Mainline GGUF Engine)",
+            "kind": "runtime",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/ggml-org/llama.cpp",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "unsloth-runtime",
+            "name": "Unsloth Runtime & Studio",
+            "kind": "runtime",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/unslothai/unsloth",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "mlx-lm",
+            "name": "Apple MLX (mlx-lm)",
+            "kind": "runtime",
+            "lifecycle": "mature",
+            "evidence_tier": "field-note",
+            "match_reason": "capabilities:coding",
+            "url": "https://github.com/ml-explore/mlx-lm",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "adapters": [
+          {
+            "id": "qwen38-super-adapter",
+            "name": "Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)",
+            "adapts": [
+              "qwen3.8-27b",
+              "pi",
+              "hermes-agent",
+              "opencode"
+            ],
+            "evidence_tier": "primary-eval",
+            "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "guards": [
+          {
+            "id": "laya-05",
+            "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+            "url": "https://github.com/NandhaKishorM/laya",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "safeagents",
+            "name": "Hugging Face safeagents Proxy",
+            "url": "https://github.com/huggingface/safeagents",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ]
+      },
+      "excluded_stale": [],
+      "tools": [
+        {
+          "id": "playwright-mcp",
+          "name": "Microsoft Playwright MCP",
+          "url": "https://github.com/microsoft/playwright-mcp",
+          "summary": "Browser accessibility-tree automation with Planner, Generator, and Healer testing agents.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "context7",
+          "name": "Upstash Context7 (ctx7 & @upstash/context7-pi)",
+          "url": "https://github.com/upstash/context7",
+          "summary": "Injects live version-matched library documentation directly into coding agents.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "mobile-build-mcp",
+          "name": "Sentry MobileBuildMCP",
+          "url": "https://github.com/getsentry/MobileBuildMCP",
+          "summary": "Builds Apple targets, runs XCTest suites, and attaches LLDB (formerly XcodeBuildMCP).",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "superpowers",
+          "name": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "summary": "15 workflow skills enforcing Brainstorm -> Spec -> Red/Green TDD -> Verification before completion.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "steps": [
+        "Choose your inference layer: zero-card Google AI Studio (gemini-4-hydrogen) or local Qwen3.8-27B + HF Harness Adapter.",
+        "Add an explicit instruction in your repository AGENTS.md telling the agent to check Context7 before using fast-moving 2026 framework APIs.",
+        "Wrap shell-capable harnesses behind safeagents (and optionally Laya 0.5) before launching multi-hour autonomous runs.",
+        "Verify web UI behavior with Playwright MCP or Apple builds and XCTest suites with Sentry MobileBuildMCP."
+      ],
+      "limitations": [
+        "Pin local Context7 servers to >= 2.1.3 (CVE-2026-75130); Playwright accessibility snapshots cannot inspect closed Shadow DOM.",
+        "MobileBuildMCP stops at Apple builds and simulators; physical USB Android/iOS UI testing requires separate device tooling."
+      ]
+    },
+    "local-media-studio": {
+      "id": "local-media-studio",
+      "type": "guide",
+      "title": "Local Media Studio",
+      "summary": "Unified local creative pipeline for 16GB video synthesis, transparent RGBA image editing, code-driven motion graphics, NLE automation, and browser voiceovers.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "google-ai-studio",
+            "name": "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:media",
+            "url": "https://aistudio.google.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "groq-cloud",
+            "name": "Groq Cloud LPU",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:media",
+            "url": "https://console.groq.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen-image-2.1",
+            "name": "Qwen-Image-2.1 (7B DiT Native RGBA)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "pinned",
+            "url": "https://huggingface.co/Qwen/Qwen-Image-2.1",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "wan-2.2",
+            "name": "Wan 2.2 (5B & A14B Open Video)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "pinned",
+            "url": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:media",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "deepseek-harness",
+            "name": "DeepSeek Harness (dsh)",
+            "kind": "harness",
+            "lifecycle": "experimental",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:media",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "launch_recipe": "npx @deepseek-ai/dsh web",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [
+          {
+            "id": "wangp",
+            "name": "WanGP v20.12 (MMGP v4 + SageGP 1.0.2)",
+            "kind": "runtime",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "pinned",
+            "url": "https://github.com/deepbeepmeep/WanGP",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "adapters": [],
+        "guards": []
+      },
+      "excluded_stale": [],
+      "tools": [
+        {
+          "id": "hyperframes",
+          "name": "HeyGen Hyperframes",
+          "url": "https://github.com/heygen-com/hyperframes",
+          "summary": "Programmatic HTML-to-MP4 studio ideal for crisp UI demos, explainers, and launch motion graphics.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "davinci-mcp-free",
+          "name": "DaVinci Resolve MCP (Free & Studio Bridge)",
+          "url": "https://github.com/hiteshK03/davinci-resolve-mcp",
+          "summary": "Community internal script bridge exposing 155/162 DaVinci Resolve timeline, color, and audio tools even on the Free edition.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "phonon-31m",
+          "name": "Gradium Phonon 31M WebGPU TTS",
+          "url": "https://github.com/blixt/phonon",
+          "summary": "64.5 MB Apache-2.0 voice synthesis running directly in browser WebGPU at 4.9ms first-audio latency.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "steps": [
+        "Generate deterministic product demos and data graphics in code using HeyGen Hyperframes.",
+        "Produce local AI footage inside 5.9-15 GB VRAM using WanGP v20.12 with Wan 2.2 (Apache-2.0) or Qwen-Image-2.1 (non-commercial).",
+        "Automate timeline cuts and grading via DaVinci Resolve MCP and render fast English voiceovers locally with Phonon 31M."
+      ],
+      "limitations": [
+        "Qwen-Image-2.1 is licensed non-commercially; swap to Apache-2.0 FLUX.2 Klein for commercial graphics.",
+        "Official external DaVinci Resolve scripting remains Studio-only; verify community internal bridge compatibility after Resolve updates."
+      ]
+    },
+    "research-and-writing": {
+      "id": "research-and-writing",
+      "type": "guide",
+      "title": "Research & Writing",
+      "summary": "High-precision literature synthesis combining open academic graphs, semantic search, and cited draft generation.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "google-ai-studio",
+            "name": "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:research",
+            "url": "https://aistudio.google.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "nvidia-nim",
+            "name": "NVIDIA NIM Developer Catalog",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:research",
+            "url": "https://build.nvidia.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "openrouter-free",
+            "name": "OpenRouter (:free Routes)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:research",
+            "url": "https://openrouter.ai/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen3.8-27b",
+            "name": "Qwen3.8-27B (Dense Vision + Text)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:research",
+            "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "gemma-4",
+            "name": "Gemma 4 Family (26B-A4B Vision & 12B Tri-Modal)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:research",
+            "url": "https://ai.google.dev/gemma",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:research",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "hermes-agent",
+            "name": "Hermes Agent (v0.23.4)",
+            "kind": "harness",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:research",
+            "url": "https://github.com/NousResearch/hermes-agent",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [],
+        "adapters": [],
+        "guards": []
+      },
+      "excluded_stale": [],
+      "tools": [
+        {
+          "id": "gpt-researcher",
+          "name": "GPT Researcher",
+          "url": "https://github.com/assafelovic/gpt-researcher",
+          "summary": "Open-source research synthesizer (gptr-mcp and skill) covering both web sources and local PDF/CSV folders.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "deerflow",
+          "name": "DeerFlow 2.0",
+          "url": "https://github.com/bytedance/deer-flow",
+          "summary": "Open-source deep research harness running inside an isolated Docker sandbox.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "steps": [
+        "Gather primary scholarly works and DOIs from OpenAlex (polite pool) and current technical documentation via Exa 3.0 or Firecrawl.",
+        "Run GPT Researcher or DeerFlow 2.0 across retrieved web pages and local PDF/CSV source folders.",
+        "Audit every cited claim, date, and quantitative figure against primary sources before publishing."
+      ],
+      "limitations": [
+        "Never treat autonomous research syntheses as publication-ready without checking primary DOIs and URLs manually."
+      ]
+    }
+  },
+  "specialists": {
+    "game-dev-3d": {
+      "id": "game-dev-3d",
+      "type": "specialist",
+      "title": "Game Development & Local 16GB 3D Assets",
+      "summary": "Connect local sparse coding models to engine MCP bridges and generate MIT-licensed 3D blockout meshes locally inside 16GB VRAM.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "qwen3-coder-next",
+            "name": "Qwen3-Coder-Next (80B-A3B Sparse MoE)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:game-dev",
+            "url": "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF",
+            "launch_recipe": "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "inkling-2-mini",
+            "name": "Inkling 2 Mini (26.4B Looped Transformer MoE)",
+            "kind": "model",
+            "lifecycle": "experimental",
+            "evidence_tier": "vendor-claim",
+            "match_reason": "capabilities:game-dev",
+            "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
+            "launch_recipe": "llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:game-dev",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [],
+        "adapters": [],
+        "guards": [
+          {
+            "id": "laya-05",
+            "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+            "url": "https://github.com/NandhaKishorM/laya",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "safeagents",
+            "name": "Hugging Face safeagents Proxy",
+            "url": "https://github.com/huggingface/safeagents",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ]
+      },
+      "excluded_stale": [],
+      "direct_picks": [
+        {
+          "id": "unity-mcp",
+          "name": "CoplayDev Unity MCP",
+          "url": "https://github.com/CoplayDev/unity-mcp",
+          "summary": "MIT-licensed Unity bridge enabling agents to inspect and modify scene hierarchies and scripts.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "blender-mcp",
+          "name": "ahujasid Blender MCP",
+          "url": "https://github.com/ahujasid/blender-mcp",
+          "summary": "Live Blender integration for constructing, texturing, and iterating 3D scenes from an agent.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "upstream_directory": {
+        "id": "microsoft-trellis",
+        "name": "Microsoft TRELLIS v1 (MIT 16GB 3D)",
+        "url": "https://github.com/microsoft/TRELLIS",
+        "summary": "MIT-licensed structured 3D latent asset generator fitting inside 16GB VRAM.",
+        "evidence_tier": "official-docs",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "operational",
+          "ttl_days": 60,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      "limitations": [
+        "Commit binary scene files before automated MCP edits; TRELLIS.2 requires 24GB VRAM officially (use v1 on 16GB)."
+      ]
+    },
+    "growth-and-social": {
+      "id": "growth-and-social",
+      "type": "specialist",
+      "title": "Social Media, Launch Promotion & Growth",
+      "summary": "Pair persistent agents with an open-source multi-network approval calendar and copy-polishing skills while keeping a human gate on publishing.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "google-ai-studio",
+            "name": "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)",
+            "kind": "gateway",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:social",
+            "url": "https://aistudio.google.com/",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "volatile",
+              "ttl_days": 21,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen3.8-27b",
+            "name": "Qwen3.8-27B (Dense Vision + Text)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:social",
+            "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:social",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "hermes-agent",
+            "name": "Hermes Agent (v0.23.4)",
+            "kind": "harness",
+            "lifecycle": "operational",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:social",
+            "url": "https://github.com/NousResearch/hermes-agent",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [],
+        "adapters": [],
+        "guards": [
+          {
+            "id": "laya-05",
+            "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+            "url": "https://github.com/NandhaKishorM/laya",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "safeagents",
+            "name": "Hugging Face safeagents Proxy",
+            "url": "https://github.com/huggingface/safeagents",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ]
+      },
+      "excluded_stale": [],
+      "direct_picks": [
+        {
+          "id": "postiz",
+          "name": "Postiz",
+          "url": "https://github.com/gitroomhq/postiz-app",
+          "summary": "Self-hostable scheduler for 30+ social networks with REST API, agent CLI, and visual human approval queue.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "humanizer",
+          "name": "blader/humanizer",
+          "url": "https://github.com/blader/humanizer",
+          "summary": "Skill that strips repetitive AI phrasing from drafts before human review.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "upstream_directory": {
+        "id": "ai-marketing-skills",
+        "name": "ericosiu/ai-marketing-skills",
+        "url": "https://github.com/ericosiu/ai-marketing-skills",
+        "summary": "Upstream collection of SEO/AEO, CRO, launch, and growth SKILL.md modules.",
+        "evidence_tier": "official-docs",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "operational",
+          "ttl_days": 60,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      "limitations": [
+        "Always route agent drafts through Postiz's human approval calendar; audit third-party outbound skills for CAN-SPAM and GDPR compliance."
+      ]
+    },
+    "reverse-engineering": {
+      "id": "reverse-engineering",
+      "type": "specialist",
+      "title": "Reverse Engineering & Binary Triage",
+      "summary": "Run air-gapped local coding models wired to decompiler MCPs for rapid static renaming and triage while keeping dynamic debugging human-led.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "qwen3.8-27b",
+            "name": "Qwen3.8-27B (Dense Vision + Text)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:reverse-eng",
+            "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "qwen3-coder-next",
+            "name": "Qwen3-Coder-Next (80B-A3B Sparse MoE)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "official-docs",
+            "match_reason": "capabilities:reverse-eng",
+            "url": "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF",
+            "launch_recipe": "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:reverse-eng",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [],
+        "adapters": [
+          {
+            "id": "qwen38-super-adapter",
+            "name": "Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)",
+            "adapts": [
+              "qwen3.8-27b",
+              "pi",
+              "hermes-agent",
+              "opencode"
+            ],
+            "evidence_tier": "primary-eval",
+            "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "guards": [
+          {
+            "id": "laya-05",
+            "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+            "url": "https://github.com/NandhaKishorM/laya",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "safeagents",
+            "name": "Hugging Face safeagents Proxy",
+            "url": "https://github.com/huggingface/safeagents",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ]
+      },
+      "excluded_stale": [],
+      "direct_picks": [
+        {
+          "id": "ghidra-mcp",
+          "name": "LaurieWired GhidraMCP",
+          "url": "https://github.com/LaurieWired/GhidraMCP",
+          "summary": "Widely adopted Ghidra MCP server for interactive function renaming, xref mapping, and triage.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "oghidra",
+          "name": "LLNL OGhidra",
+          "url": "https://github.com/LLNL/OGhidra",
+          "summary": "Adaptive reverse-engineering loop over Ghidra with automated MITRE ATT&CK malware pattern alerts.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "upstream_directory": {
+        "id": "awesome-ai-reveng",
+        "name": "zhuyansen/awesome-ai-reverse-engineering",
+        "url": "https://github.com/zhuyansen/awesome-ai-reverse-engineering",
+        "summary": "Security-graded catalog of 122 AI reverse-engineering tools (IDA, Binary Ninja, JADX, Radare2).",
+        "evidence_tier": "official-docs",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "operational",
+          "ttl_days": 60,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      "limitations": [
+        "Disable all outbound cloud API endpoints before analyzing proprietary or sensitive binaries.",
+        "Strictly audit binaries or APKs you own or have explicit legal authorization to analyze."
+      ]
+    },
+    "unfiltered-sovereign": {
+      "id": "unfiltered-sovereign",
+      "type": "specialist",
+      "title": "Unfiltered & Operator-Aligned Local Stacks",
+      "summary": "Skip brittle jailbreak prompts: use neutral-aligned Hermes 4 for operator-controlled policies, or load a 26 MB abliterated LoRA on frozen Qwen3.8-27B behind mandatory safety proxies.",
+      "profile_filter": "all",
+      "resolved": {
+        "models_and_gateways": [
+          {
+            "id": "qwen3.8-27b",
+            "name": "Qwen3.8-27B (Dense Vision + Text)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:unfiltered",
+            "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "launch_recipe": "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000",
+            "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "hermes-4",
+            "name": "NousResearch Hermes 4 (14B / 4.3-36B Neutral)",
+            "kind": "model",
+            "lifecycle": "mature",
+            "evidence_tier": "vendor-claim",
+            "match_reason": "capabilities:unfiltered",
+            "url": "https://huggingface.co/NousResearch/Hermes-4-14B",
+            "launch_recipe": "llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --port 8000",
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "harnesses": [
+          {
+            "id": "pi",
+            "name": "Pi Coding Agent (+ @earendil-works/pi-durable)",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:unfiltered",
+            "url": "https://github.com/earendil-works/pi",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "opencode",
+            "name": "OpenCode CLI",
+            "kind": "harness",
+            "lifecycle": "mature",
+            "evidence_tier": "primary-eval",
+            "match_reason": "capabilities:unfiltered",
+            "url": "https://github.com/anomalyco/opencode",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "runtimes": [],
+        "adapters": [
+          {
+            "id": "qwen38-abliterated-lora",
+            "name": "Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)",
+            "adapts": [
+              "qwen3.8-27b"
+            ],
+            "evidence_tier": "field-note",
+            "url": "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated",
+            "launch_recipe": null,
+            "mac_launch_recipe": null,
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ],
+        "guards": [
+          {
+            "id": "laya-05",
+            "name": "Laya 0.5 (Multimodal System-1 Decision Model)",
+            "url": "https://github.com/NandhaKishorM/laya",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "stable",
+              "ttl_days": 120,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          },
+          {
+            "id": "safeagents",
+            "name": "Hugging Face safeagents Proxy",
+            "url": "https://github.com/huggingface/safeagents",
+            "freshness": {
+              "status": "fresh",
+              "effective_status": "fresh",
+              "score": 100,
+              "decay_class": "operational",
+              "ttl_days": 60,
+              "age_days": 0,
+              "consecutive_fails": 0,
+              "upstream_archived": false,
+              "upstream_pushed_at": null,
+              "eligible_for_agents": true,
+              "retirement_candidate": false,
+              "upstream_alerts": []
+            }
+          }
+        ]
+      },
+      "excluded_stale": [],
+      "direct_picks": [
+        {
+          "id": "hermes-4-neutral",
+          "name": "NousResearch Hermes 4 (Neutral Alignment)",
+          "url": "https://huggingface.co/NousResearch/Hermes-4-14B",
+          "summary": "Obeys custom operator system prompts cleanly without weight-surgery degradation.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        },
+        {
+          "id": "qwen38-26mb-lora",
+          "name": "Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA",
+          "url": "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated",
+          "summary": "Rank-3 hot-swappable LoRA sharing the same frozen Qwen3.8-27B base weights.",
+          "evidence_tier": "official-docs",
+          "freshness": {
+            "status": "fresh",
+            "effective_status": "fresh",
+            "score": 100,
+            "decay_class": "operational",
+            "ttl_days": 60,
+            "age_days": 0,
+            "consecutive_fails": 0,
+            "upstream_archived": false,
+            "upstream_pushed_at": null,
+            "eligible_for_agents": true,
+            "retirement_candidate": false,
+            "upstream_alerts": []
+          }
+        }
+      ],
+      "upstream_directory": {
+        "id": "huihui-abliterated",
+        "name": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+        "url": "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+        "summary": "Full abliterated Qwen3.8-27B weights preserving MTP and vision layers.",
+        "evidence_tier": "official-docs",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "operational",
+          "ttl_days": 60,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      "limitations": [
+        "Abliterated weights cannot refuse destructive commands; never wire them to local shell tools without safeagents and Laya 0.5."
+      ]
+    }
+  },
+  "watch": {
+    "frontier": [
+      {
+        "id": "claude-fable-mythos-52",
+        "bucket": "frontier",
+        "name": "Claude Fable 5.2 & Mythos 5.2",
+        "url": "https://www.anthropic.com/",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "vendor-claim",
+        "summary": "Sets the current ceiling for 10-12 hour autonomous audits (1M ctx / 128K out, 89.3% OSWorld 2.1, 69.9% FrontierSWE v2), with Mythos 5.2 focused on restricted security and Lean proofs.",
+        "limitations": [
+          "Paid API and enterprise access only; tracked strictly as a capability ceiling."
+        ],
+        "freshness": {
+          "status": "monitor-only",
+          "effective_status": "monitor-only",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": false,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "gpt-62-astra-sol",
+        "bucket": "frontier",
+        "name": "GPT-6.2 Astra & GPT-6.2 Sol",
+        "url": "https://openai.com/",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "vendor-claim",
+        "summary": "Introduces cache-preserving mid-conversation reasoning-effort and tool toggling\u2014an API caching pattern worth watching for future local vLLM and llama.cpp harnesses.",
+        "limitations": [
+          "Paid API only; monitor-only."
+        ],
+        "freshness": {
+          "status": "monitor-only",
+          "effective_status": "monitor-only",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": false,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "gemini-4-carbon-argon",
+        "bucket": "frontier",
+        "name": "Gemini 4 Carbon & 4 Argon",
+        "url": "https://deepmind.google/",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "vendor-claim",
+        "summary": "Leads autonomous workflow execution (53.9% AutomationBench) powering Spark Task mode; its fast sibling Gemini 4 Hydrogen has already trickled down into the free tier.",
+        "limitations": [
+          "Paid Pro/Ultra and billed API only."
+        ],
+        "freshness": {
+          "status": "monitor-only",
+          "effective_status": "monitor-only",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": false,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "qwen4-max-24t",
+        "bucket": "frontier",
+        "name": "Qwen4-Max (2.4T)",
+        "url": "https://qwenlm.github.io/",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "official-docs",
+        "summary": "2.4T frontier release (1M context, 262K CoT); Alibaba explicitly confirmed smaller open-weight Qwen4 releases are planned next, making this the top watchlist signal for local workstations.",
+        "limitations": [
+          "Current 2.4T checkpoint is cloud API only; await smaller open-weight releases."
+        ],
+        "freshness": {
+          "status": "monitor-only",
+          "effective_status": "monitor-only",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": false,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "deepseek-v41-flash",
+        "bucket": "frontier",
+        "name": "DeepSeek-V4.1-Flash (552B)",
+        "url": "https://www.deepseek.com/",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "vendor-claim",
+        "summary": "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open checkpoints adopting this KV compression.",
+        "limitations": [
+          "Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API."
+        ],
+        "freshness": {
+          "status": "monitor-only",
+          "effective_status": "monitor-only",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": false,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      }
+    ],
+    "community": [
+      {
+        "id": "obra-superpowers-watch",
+        "bucket": "community",
+        "name": "obra/superpowers Multi-Harness Discipline Pack",
+        "url": "https://github.com/obra/superpowers",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "field-note",
+        "summary": "Widely adopted 15-skill pack enforcing Brainstorm -> Spec -> Red/Green TDD -> Fresh Subagent -> Verification for 2+ hour autonomous runs across Pi, Hermes, OpenCode, and Claude Code.",
+        "limitations": [
+          "On Hermes Agent, use the Hermes-native tool mapping port rather than raw Claude Code tool names."
+        ],
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "disler-durable-pi",
+        "bucket": "community",
+        "name": "disler/durable-pi Multi-Device Agent Showcase",
+        "url": "https://github.com/disler/durable-pi",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "field-note",
+        "summary": "Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live tool hot-swapping on top of Pi.",
+        "limitations": [
+          "First-party @earendil-works/pi-durable is now also maintained directly inside the main Pi monorepo."
+        ],
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "hy-nomas-worlds",
+        "bucket": "community",
+        "name": "Tencent-Hunyuan/Hy-Nomas Walkable Worlds",
+        "url": "https://github.com/Tencent-Hunyuan/Hy-Nomas",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "field-note",
+        "summary": "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping.",
+        "limitations": [
+          "Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only)."
+        ],
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "netprojects-mlx-super-adapter",
+        "bucket": "community",
+        "name": "Apple Silicon MTP-Preserving MLX Harness Merges",
+        "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter",
+        "last_verified": "2026-11-27",
+        "evidence_tier": "field-note",
+        "summary": "Community MLX-6bit and 4-bit merges of Hugging Face's rank-96 super-adapter preserve Qwen3.8's MTP layer, hitting ~65 tok/s on Apple Silicon unified memory.",
+        "limitations": [
+          "Verify checksums and benchmark retention on third-party quantized merges before production use."
+        ],
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "upstream_alerts": []
+        }
+      }
+    ]
+  },
+  "retired": [
+    {
+      "category": "cloud",
+      "name": "Cerebras Cloud Legacy Free Tier",
+      "match_pattern": "cerebras.ai",
+      "retired_on": "2026-11-18",
+      "reason": "No renewing free tier exists; the $5 / 30-day credit requires a payment method on file.",
+      "replaced_by": "google-ai-studio"
+    },
+    {
+      "category": "cloud",
+      "name": "Mistral La Plateforme Free Experiment Tier",
+      "match_pattern": "api.mistral.ai",
+      "retired_on": "2026-11-20",
+      "reason": "Current billing rules require pay-as-you-go activation for API keys.",
+      "replaced_by": "zhipu-bigmodel"
+    },
+    {
+      "category": "cloud",
+      "name": "Gemini 2.5 Pro & 2.5 Flash",
+      "match_pattern": "gemini-2.5-pro",
+      "retired_on": "2026-12-01",
+      "reason": "Scheduled retirement on Dec 1, 2026; superseded by Gemini 4 Hydrogen and 3.8 Flash.",
+      "replaced_by": "google-ai-studio"
+    },
+    {
+      "category": "cloud",
+      "name": "GitHub Models (Azure Inference Endpoint)",
+      "match_pattern": "inference.ai.azure.com",
+      "retired_on": "2026-07-30",
+      "reason": "Officially retired July 30, 2026; endpoints are shut down.",
+      "replaced_by": "openrouter-free"
+    },
+    {
+      "category": "cloud",
+      "name": "Brave Search API Free Tier",
+      "match_pattern": "brave.com/search/api",
+      "retired_on": "2026-11-01",
+      "reason": "Requires a credit card on file.",
+      "replaced_by": "exa-search"
+    },
+    {
+      "category": "local",
+      "name": "Wan 3.0, Wan 2.6, & FLUX 3 Video",
+      "match_pattern": "wan 3.0",
+      "retired_on": "2026-11-26",
+      "reason": "Closed cloud APIs with no published local open weights.",
+      "replaced_by": "wan-2.2"
+    },
+    {
+      "category": "local",
+      "name": "Inkling 2 Small (594B) & Inkling Flagship (975B)",
+      "match_pattern": "inkling 2 small",
+      "retired_on": "2026-11-26",
+      "reason": "Require 354-600 GB memory (cloud/API only).",
+      "replaced_by": "inkling-2-mini"
+    },
+    {
+      "category": "local",
+      "name": "GLM-5.3-Flash (320B) & Kimi K2.7-Code (1T)",
+      "match_pattern": "glm-5.3-flash",
+      "retired_on": "2026-11-26",
+      "reason": "Exceed the 16GB VRAM + 64GB RAM local hardware envelope.",
+      "replaced_by": "qwen3-coder-next"
+    },
+    {
+      "category": "local",
+      "name": "Qwen3.8-Flash-Next at UD-Q2_K_XL (79.6 GB)",
+      "match_pattern": "qwen3.8-flash-next-ud-q2_k_xl",
+      "retired_on": "2026-11-26",
+      "reason": "Leaves zero headroom for OS, MTP weights, and KV cache on 16GB+64GB.",
+      "replaced_by": "qwen3.8-27b"
+    }
+  ],
+  "digest": {
+    "aging": [],
+    "stale": [],
+    "reverify-upstream": [],
+    "degraded": [],
+    "retirement_candidates": []
+  }
+}
