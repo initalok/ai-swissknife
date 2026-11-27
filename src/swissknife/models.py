@@ -1,28 +1,33 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from typing import Any, Literal
+from typing import Any
 
-EntryKind = Literal["gateway", "model", "adapter", "harness", "runtime", "tool"]
-Lifecycle = Literal["mature", "experimental", "operational", "monitor-only", "deprecated", "retired"]
-DecayClass = Literal["volatile", "operational", "stable"]
-EvidenceTier = Literal["primary-eval", "official-docs", "vendor-claim", "field-note"]
-
-VALID_KINDS = {"gateway", "model", "adapter", "harness", "runtime", "tool"}
 VALID_LIFECYCLES = {"mature", "experimental", "operational", "monitor-only", "deprecated", "retired"}
 VALID_DECAY_CLASSES = {"volatile", "operational", "stable"}
 VALID_EVIDENCE_TIERS = {"primary-eval", "official-docs", "vendor-claim", "field-note"}
+VALID_DECISION_STATUSES = {"accepted", "superseded", "deprecated"}
 
 
 @dataclass(frozen=True)
-class HardwareProfile:
+class TaxonomyItem:
     id: str
     name: str
     summary: str
+    order: int = 0
 
 
 @dataclass(frozen=True)
-class Edges:
+class Taxonomy:
+    allowed_kinds: list[str]
+    tracks: dict[str, TaxonomyItem]
+    worlds: dict[str, TaxonomyItem]
+    sections: dict[str, TaxonomyItem]
+    non_goals: list[str]
+
+
+@dataclass(frozen=True)
+class Relations:
     runs_on: list[str] = field(default_factory=list)
     adapts: list[str] = field(default_factory=list)
     guards: list[str] = field(default_factory=list)
@@ -32,7 +37,6 @@ class Edges:
 class Entry:
     id: str
     kind: str
-    category: str
     name: str
     summary: str
     when_to_use: str
@@ -42,49 +46,36 @@ class Entry:
     decay_class: str
     last_verified: str
     url: str
+    tags: list[str] = field(default_factory=list)
     capabilities: list[str] = field(default_factory=list)
-    edges: Edges = field(default_factory=Edges)
-    license: str | None = None
-    footprint: str | None = None
-    quota: str | None = None
-    env_key: str | None = None
-    base_url: str | None = None
-    default_model: str | None = None
-    role: str | None = None
-    evidence_notes: list[str] = field(default_factory=list)
-    eval_tables: list[dict[str, Any]] = field(default_factory=list)
-    launch_recipe: str | None = None
-    mac_launch_recipe: str | None = None
+    relations: Relations = field(default_factory=Relations)
+    meta: dict[str, Any] = field(default_factory=dict)
     source_file: str = ""
 
 
 @dataclass(frozen=True)
-class ExternalLink:
+class Slot:
+    id: str
+    title: str
+    role: str
+    primary: str
+    experimental: str | None = None
+    fallbacks: list[str] = field(default_factory=list)
+    decision_id: str | None = None
+    world: str | None = None
+    source_file: str = ""
+
+
+@dataclass(frozen=True)
+class ExternalRef:
     id: str
     name: str
     url: str
     summary: str = ""
-    evidence_tier: str = "official-docs"
 
 
 @dataclass(frozen=True)
-class GuideSpec:
-    id: str
-    title: str
-    summary: str
-    last_verified: str
-    decay_class: str
-    capabilities: list[str]
-    privacy: str
-    require_guard: bool
-    pin_entries: list[str]
-    tools: list[ExternalLink]
-    steps: list[str]
-    limitations: list[str]
-
-
-@dataclass(frozen=True)
-class SpecialistSpec:
+class Specialist:
     id: str
     title: str
     summary: str
@@ -92,9 +83,27 @@ class SpecialistSpec:
     capabilities: list[str]
     privacy: str
     require_guard: bool
-    direct_picks: list[ExternalLink]
-    upstream_directory: ExternalLink
+    direct_picks: list[ExternalRef]
+    upstream_hub: ExternalRef
     guardrails: list[str]
+    source_file: str = ""
+
+
+@dataclass(frozen=True)
+class DecisionRecord:
+    id: str
+    title: str
+    status: str
+    date: str
+    job: str
+    anchor_ids: list[str]
+    alternatives: list[str]
+    rationale: str
+    exceptions: list[str]
+    reversal_trigger: str
+    slot_ids: list[str] = field(default_factory=list)
+    superseded_by: str | None = None
+    source_file: str = ""
 
 
 @dataclass(frozen=True)
@@ -107,11 +116,12 @@ class WatchItem:
     evidence_tier: str
     summary: str
     limitations: list[str]
+    source_file: str = ""
 
 
 @dataclass(frozen=True)
 class RetiredItem:
-    category: str
+    area: str
     name: str
     match_pattern: str
     retired_on: str
@@ -119,8 +129,27 @@ class RetiredItem:
     replaced_by: str | None = None
 
 
+@dataclass(frozen=True)
+class ManagedBlock:
+    directive: str
+    args: dict[str, str]
+    line: int
+
+
+@dataclass(frozen=True)
+class PageDoc:
+    path: str
+    title: str
+    section: str | None
+    summary: str
+    order: int
+    track: str | None = None
+    world: str | None = None
+    blocks: list[ManagedBlock] = field(default_factory=list)
+
+
 @dataclass
-class FreshnessState:
+class Freshness:
     status: str
     effective_status: str
     score: int
@@ -130,21 +159,26 @@ class FreshnessState:
     consecutive_fails: int
     upstream_archived: bool
     upstream_pushed_at: str | None
+    latest_release_tag: str | None
+    release_delta: bool
+    breaking_signal: bool
     eligible_for_agents: bool
     retirement_candidate: bool
+    collection_item_count: int | None = None
     upstream_alerts: list[dict[str, str]] = field(default_factory=list)
 
 
 @dataclass
-class Catalog:
-    profiles: dict[str, HardwareProfile]
+class Workspace:
+    taxonomy: Taxonomy
     entries: dict[str, Entry]
-    routing_chains: dict[str, list[str]]
-    guides: dict[str, GuideSpec]
-    specialists: dict[str, SpecialistSpec]
+    slots: dict[str, Slot]
+    specialists: dict[str, Specialist]
+    decisions: dict[str, DecisionRecord]
     watch_frontier: list[WatchItem]
     watch_community: list[WatchItem]
     retired: list[RetiredItem]
+    pages: list[PageDoc]
     health_state: dict[str, dict[str, Any]]
     load_errors: list[str] = field(default_factory=list)
 

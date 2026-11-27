@@ -1,0 +1,88 @@
+slots:
+  - id: cloud-flagship
+    title: "Zero-Card Cloud Flagship Gateway"
+    role: "Primary $0 card-free API able to sustain ~300K-token coding agent loops and 1M context."
+    primary: google-ai-studio
+    fallbacks: [zhipu-bigmodel, openrouter-free, pollinations]
+    decision_id: adr-why-google-cloud
+    world: cloud
+
+  - id: newcomer-cloud-ide
+    title: "Zero-Install Newcomer Cloud Coding Suite"
+    role: "Fastest 5-minute guided entry into agentic coding with zero hardware requirements."
+    primary: google-antigravity
+    fallbacks: [google-ai-studio]
+    decision_id: adr-why-google-cloud
+
+  - id: local-mature-coder
+    title: "Mature Local Daily-Driver Model"
+    role: "Single frozen open-weight coding backbone fitting inside 16GB VRAM or 32GB+ Apple Silicon."
+    primary: qwen3.8-27b
+    experimental: inkling-2-mini
+    fallbacks: [qwen3-coder-next, gemma-4]
+    decision_id: adr-why-qwen38-27b
+
+  - id: newcomer-local-harness
+    title: "Mature Newcomer Local Coding Harness"
+    role: "Lowest-friction local terminal/desktop harness with built-in permission prompts."
+    primary: opencode
+    fallbacks: [pi]
+    decision_id: adr-why-pi-and-opencode
+
+  - id: dev-harness
+    title: "Flagship Mod-Able Developer Harness"
+    role: "Minimal hackable agent kernel supporting a 6-rung optional ricing ladder."
+    primary: pi
+    experimental: deepseek-harness
+    fallbacks: [opencode, hermes-agent]
+    decision_id: adr-why-pi-and-opencode
+
+  - id: local-runtime
+    title: "Primary Local Inference Runtime"
+    role: "Explicit-control local GGUF/Metal serving engine avoiding silent context truncation."
+    primary: llama-cpp
+    fallbacks: [mlx-lm, unsloth-runtime]
+    decision_id: adr-why-llama-cpp-and-mlx
+
+  - id: turnkey-media
+    title: "Turnkey Low-VRAM Local Media Studio"
+    role: "One-stop guided installer for local image, video, and audio starting at 6 GB VRAM."
+    primary: wangp
+    fallbacks: [comfyui]
+    decision_id: adr-why-wangp-and-comfyui
+    world: gpu-pc
+
+  - id: agent-media-mcp
+    title: "Agent-Driven Programmable Media Control Plane"
+    role: "MCP server letting Pi or OpenCode build, preview, and execute ComfyUI graphs locally or over Tailscale."
+    primary: comfy-mcp
+    fallbacks: [comfyui-mcp, wangp]
+    decision_id: adr-why-wangp-and-comfyui
+
+  - id: runtime-safety
+    title: "Runtime Tool-Call & Sandbox Guard"
+    role: "Mandatory auditing and isolation boundary for autonomous harnesses and unfiltered LoRAs."
+    primary: safeagents
+    fallbacks: [laya-05, gondolin, nono]
+    decision_id: adr-why-sandboxes-and-safety
+
+  - id: knowledge-vault
+    title: "Plain-Markdown Persistent Knowledge Loop"
+    role: "Human-editable Obsidian/Git vault skills and local hybrid retrieval."
+    primary: obsidian-skills
+    fallbacks: [pi-obsidian-memory, qmd-search]
+    decision_id: adr-why-markdown-memory
+
+  - id: mobile-hitl-primary
+    title: "Mobile Human-in-the-Loop Steering Surface"
+    role: "Pocket approvals, voice steering, and remote alerts without brute-forcing LLMs on phone batteries."
+    primary: pi-mobile-voice
+    fallbacks: [pi-mobile-android, pi-durable-telegram, opencode-mobile]
+    decision_id: adr-why-mobile-hitl
+
+  - id: interconnect-fabric
+    title: "Zero-Port Private Interconnect Fabric"
+    role: "Encrypted mesh linking Mac mini, discrete GPU PC, and mobile HITL clients with zero open firewall ports."
+    primary: tailscale-serve
+    fallbacks: [lm-link]
+    decision_id: adr-why-tailscale-and-lm-link

@@ -1,0 +1,261 @@
+entries:
+  - id: wangp
+    kind: runtime
+    name: "WanGP v20.12 (One-Stop Low-VRAM Media Studio)"
+    summary: "Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2.1, FLUX.2), Music, Speech, and 3D inside one browser UI starting at 6 GB VRAM, plus native MCP."
+    when_to_use: "Default turnkey local media setup for newcomers and 6GB-16GB NVIDIA workstations (5.9-14.3 GiB video VRAM vs ComfyUI's 22.7-23.5 GiB)."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/deepbeepmeep/WanGP"
+    tags: [media, newcomer-anchor]
+    capabilities: [media]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: Apache-2.0
+      footprint: "6-15 GB NVIDIA VRAM (MMGP v4 + Extreme Chunker)"
+      last_reviewed_release: "v20.12"
+    limitations:
+      - "Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3)."
+      - "Heavy local video synthesis targets NVIDIA GPUs; Mac users should route heavy video to a remote GPU PC or Comfy Cloud."
+
+  - id: comfyui
+    kind: runtime
+    name: "ComfyUI (Comfy-Org Programmable Node Graph)"
+    summary: "Canonical node-graph media engine (v0.46+) supporting custom multi-stage workflows, RAFT Video Deflicker, Bria RMBG 3.0, and first-party agent automation via MCP."
+    when_to_use: "Developers building reproducible multi-stage media graphs or driving local/remote GPU rendering from Pi."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/Comfy-Org/ComfyUI"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: GPL-3.0
+      footprint: "8-24 GB NVIDIA VRAM (use Comfy-Org INT8 or leejet/ComfyUI-GGUF on 16GB)"
+      last_reviewed_release: "v0.46.0"
+      upstream_docs_url: "https://docs.comfy.org/agent-tools/mcp"
+    limitations:
+      - "Official ComfyUI docs explicitly advise Mac users away from heavy local video on Apple MPS (FP8 crashes MPS); target a remote NVIDIA box or Comfy Cloud."
+      - "For Qwen-Image-2.1 on 16GB NVIDIA cards, use Comfy-Org INT8 or leejet/ComfyUI-GGUF (city96/ComfyUI-GGUF throws unknown architecture)."
+
+  - id: comfy-mcp
+    kind: mcp
+    name: "Comfy-Org Official comfy-mcp (Local & Cloud)"
+    summary: "First-party open-source local MCP server (pip install comfy-mcp, zero account) and hosted Comfy Cloud MCP supporting remote Tailscale GPU hosts via COMFYUI_URL with inline media previews."
+    when_to_use: "Default agent-to-ComfyUI bridge for Pi, OpenCode, and Antigravity across local, Tailscale, or Comfy Cloud backends."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/Comfy-Org/comfy-mcp"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [mac, gpu-pc, cloud]
+    meta:
+      license: MIT
+      last_reviewed_release: "v0.10.0"
+      launch_recipe: "pip install comfy-mcp && COMFYUI_URL=http://127.0.0.1:8188 comfy-mcp"
+      sanity_check: "comfy-mcp --help"
+    limitations:
+      - "On a single 16GB GPU, explicitly unload the local LLM in Pi (/llama) before queuing heavy ComfyUI video workflows."
+
+  - id: comfyui-mcp
+    kind: mcp
+    name: "artokun/comfyui-mcp (Power-User Control Plane)"
+    summary: "Feature-rich community ComfyUI MCP server adding bundled model-family skills, a /system_stats VRAM watchdog (<1 GB warning), explicit VRAM freeing, and autonomous workflow debugging."
+    when_to_use: "Power users wanting automated workflow debugging, Mermaid graph conversion, and active VRAM management on 16GB rigs."
+    evidence_tier: field-note
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/artokun/comfyui-mcp"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+      launch_recipe: "npx -y comfyui-mcp"
+    limitations:
+      - "Community-maintained; verify compatibility alongside Comfy-Org's first-party comfy-mcp updates."
+
+  - id: wan-2.2
+    kind: model
+    name: "Wan 2.2 (5B & A14B Apache-2.0 Video)"
+    summary: "Permissive Apache-2.0 open-weight video synthesis model running smoothly inside 6-15 GB VRAM via WanGP."
+    when_to_use: "Commercial-safe local video generation on consumer NVIDIA GPUs."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: Apache-2.0
+      footprint: "6-15 GB VRAM via WanGP MMGP v4"
+    limitations:
+      - "Newer Wan 3.0 and Wan 2.6 releases remain closed cloud APIs with no published local weights."
+
+  - id: qwen-image-2.1
+    kind: model
+    name: "Qwen-Image-2.1 (7B DiT Native RGBA)"
+    summary: "Compact 7B diffusion transformer supporting native transparent RGBA output and clean 2048px typography inside 16GB VRAM."
+    when_to_use: "Non-commercial design assets, typography, and layered transparent image editing."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Qwen/Qwen-Image-2.1"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: "Qwen Research (Non-Commercial)"
+      footprint: "4.2-9.1 GB VRAM (INT8 / leejet GGUF)"
+    limitations:
+      - "Non-commercial license; swap to Apache-2.0 FLUX.2 Klein for commercial production graphics."
+
+  - id: hyperframes
+    kind: tool
+    name: "HeyGen Hyperframes"
+    summary: "Programmatic HTML-to-MP4 studio producing crisp deterministic UI demos, explainers, and launch motion graphics."
+    when_to_use: "Code-driven product demos and technical videos where diffusion flicker is undesirable."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/heygen-com/hyperframes"
+    tags: [media]
+    capabilities: [media]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Designed for structured UI/data motion graphics rather than photorealistic live-action video."
+
+  - id: phonon-31m
+    kind: tool
+    name: "Gradium Phonon 31M WebGPU TTS"
+    summary: "64.5 MB Apache-2.0 English voice synthesis running directly inside any WebGPU browser at 4.9ms first-audio latency with zero CUDA setup."
+    when_to_use: "Instant zero-install local speech synthesis for students, Mac users, and browser workflows."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/blixt/phonon"
+    tags: [media, newcomer-anchor]
+    capabilities: [media]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+      footprint: "64.5 MB (Browser WebGPU)"
+    limitations:
+      - "Compact English voice model; heavier multilingual dramatic acting requires larger server-side TTS models."
+
+  - id: playwright-mcp
+    kind: mcp
+    name: "Microsoft Playwright MCP"
+    summary: "Official browser accessibility-tree automation server supporting Planner, Generator, and Healer end-to-end QA agents."
+    when_to_use: "Verifying web applications, forms, and visual regressions directly from Pi, OpenCode, or Antigravity."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/microsoft/playwright-mcp"
+    tags: [coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+    limitations:
+      - "Accessibility snapshots cannot inspect inside closed Shadow DOM."
+
+  - id: context7
+    kind: mcp
+    name: "Upstash Context7 (ctx7 & @upstash/context7-pi)"
+    summary: "Injects live, version-matched library documentation directly into coding agents, eliminating stale training-cutoff API hallucinations."
+    when_to_use: "Working with fast-moving web, Python, or mobile SDKs."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/upstash/context7"
+    tags: [coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Pin local Context7 servers to >= 2.1.3 (CVE-2026-75130) and explicitly instruct agents in AGENTS.md to call it."
+
+  - id: mobile-build-mcp
+    kind: mcp
+    name: "Sentry MobileBuildMCP"
+    summary: "Builds Apple iOS/macOS targets, runs XCTest suites, and attaches LLDB directly from coding agents (formerly XcodeBuildMCP)."
+    when_to_use: "Native Apple Swift/iOS/macOS development on Apple Silicon Macs."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/getsentry/MobileBuildMCP"
+    tags: [coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [mac]
+    meta:
+      license: MIT
+    limitations:
+      - "Stops at Apple builds and simulators; physical USB Android/iOS UI testing requires separate device tooling."
+
+  - id: obra-superpowers
+    kind: tool
+    name: "obra/superpowers (15-Skill Engineering Pack)"
+    summary: "High-leverage SKILL.md pack enforcing Brainstorm -> Spec -> Red/Green TDD -> Fresh Subagent -> Verification before claiming completion."
+    when_to_use: "Eliminating agent drift during multi-hour autonomous coding sessions across Pi, OpenCode, Antigravity, and Hermes."
+    evidence_tier: field-note
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/obra/superpowers"
+    tags: [coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "On Hermes Agent, use the Hermes-native tool mapping port rather than raw Claude Code tool names."
+
+  - id: pi-mcp-adapter
+    kind: mcp
+    name: "nicobailon/pi-mcp-adapter (Lazy & Semantic MCP)"
+    summary: "Drop-in Pi MCP replacement adding lazy server startup, 10-minute idle shutdown, OS keychain OAuth, and semantic tool ranking via Jev/Clef (10/11 vs 5/11 across 95 tools)."
+    when_to_use: "Rung 3 of the Pi Ricing Journey once you attach more than 3-4 MCP servers and want zero context bloat."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/nicobailon/pi-mcp-adapter"
+    tags: [coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Automatically replaces Pi's built-in MCP handler upon installation."

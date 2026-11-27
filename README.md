@@ -1,47 +1,91 @@
 # AI Swiss Knife
 
-A practical, source-verified field guide to building with zero-cost cloud APIs, local AI hardware, and open agent harnesses—continuously checked against link rot and outdated advice.
+A practical, source-verified field guide to building with zero-cost cloud APIs, local AI hardware, open agent harnesses, and a private multi-device AI fabric—continuously checked against link rot and upstream drift.
 
+<!-- swissknife:begin status-banner -->
 *Last verified: 2026-11-27 · All tracked links healthy ([System Status](STATUS.md)) · [For AI Agents (`llms.txt`)](llms.txt)*
+<!-- swissknife:end -->
 
-**New to local models or agent harnesses?** Start with [How a Modern AI Stack Fits Together](docs/mental-model.md)—a 3-minute plain-English primer explaining models, runtimes, harnesses, and adapters.
+## Choose Your Track
 
-## Start Here
-
-| If you want to... | Go to |
+| Who you are | Start here |
 | :--- | :--- |
-| Use capable AI APIs right now for **$0 (no credit card)** | [Zero-Card Cloud APIs](reference/cloud-free-tiers.md) |
-| Run AI privately on a **16GB GPU + 64GB RAM** PC or **Apple Silicon Mac** | [Local AI Workstation Guide](guides/local-ai-workstation.md) |
-| Build web, CLI, or mobile software with coding agents | [Coding & Apps](guides/coding-and-apps.md) |
-| Synthesize cited research or build a local media studio | [Research & Writing](guides/research-and-writing.md) · [Local Media Studio](guides/local-media-studio.md) |
-| Explore specialist domains *(Reverse Engineering, Game Dev, Growth, Unfiltered Local)* | [Specialist Domains](guides/specialist-domains.md) |
-| Read primary benchmark evidence or track fast-moving changes | [Harness Adapters Research](research/harness-adapters.md) · [21-Day Watch List](research/watch-list.md) |
+| **New to AI, local models, or a student?** Start with 6 plain-English terms, a 30-second hardware check, and three zero-paralysis first wins ($0 Cloud, first local coding agent, or turnkey local media). | [**Newcomer & Student Onboarding**](docs/start-here-newcomer.md) |
+| **Seasoned developer or systems builder?** Jump straight to agent token math, memory physics, our flagship mod-able `Pi` harness ladder, frozen-base LoRA serving, and machine manifests. | [**Seasoned Developer Fast-Track**](docs/start-here-developer.md) |
+
+---
+
+## Four Compute Worlds (Plus How to Connect Them)
+
+Instead of forcing one machine to do everything, AI Swiss Knife separates work by hardware physics and connects your devices privately when a task calls for a hybrid split.
+
+<!-- swissknife:begin worlds-index -->
+| Compute World | What Its Physics Excels At | Guide |
+| :--- | :--- | :--- |
+| **Zero-Card Cloud** | 1M-token context, 500B+ MoE reasoning, zero-install onboarding, and burst speech/media trials with no credit card. | [Zero-Card Cloud](worlds/cloud.md) |
+| **Apple Silicon Mac** | Silent ~15W always-on control plane, unified-memory MLX inference (no PCIe split), and native Apple/Xcode builds. | [Apple Silicon Mac](worlds/apple-silicon.md) |
+| **Discrete GPU PC (16GB VRAM + 64GB RAM)** | Fast CUDA prefill, hybrid sparse MoE offloading, and all heavy local image, video, and 3D generation. | [Discrete GPU PC (16GB VRAM + 64GB RAM)](worlds/gpu-workstation.md) |
+| **Mobile (Human Communicator & HITL)** | Approval gates, voice steering, camera/share-sheet capture, and zero-port remote pings—never brute-force inference. | [Mobile as Human Communicator (HITL)](worlds/mobile-hitl.md) |
+<!-- swissknife:end -->
+
+Want to bridge your Mac mini, discrete GPU PC, Android phone, and zero-card cloud without opening a single router port? Read [**The Personal AI Fabric**](worlds/personal-ai-fabric.md).
+
+---
 
 ## Full Contents
 
-### Orientation
-- [How a Modern AI Stack Fits Together](docs/mental-model.md) — Plain-English concepts and system layers.
-- [How This Guide Is Maintained](docs/architecture.md) — For contributors: verification rules, data schema, and live link checks.
+### Orientation & Philosophy
+<!-- swissknife:begin nav section=docs -->
+- **[Newcomer & Student Onboarding](docs/start-here-newcomer.md)** — Six essential terms, a 30-second hardware check, and three zero-paralysis first wins ($0 Cloud, Local Coding, or Local Media).
+- **[Seasoned Developer Fast-Track](docs/start-here-developer.md)** — 60-second hardware physics, harness selection leading into Pi's optional 6-rung ricing ladder, frozen-base LoRAs, and machine manifests.
+- **[How a Modern AI Stack Fits Together](docs/mental-model.md)** — A 3-minute plain-English primer explaining models, LoRA adapters, inference runtimes, safety boundaries, and agent harnesses.
+- **[Why This Stack (Decision Records)](docs/why-this-stack.md)** — Transparent architectural decisions explaining why we anchor on Pi, OpenCode, Qwen3.8-27B, llama.cpp/MLX, WanGP/ComfyUI, Mobile HITL, and Tailscale—including valid exceptions and reversal triggers.
+- **[Security & Trust Boundaries](docs/security-and-trust.md)** — Three calm safety habits for newcomers and a six-boundary threat model for connecting Cloud, Mac, GPU PC, Mobile HITL, and Knowledge Vaults.
+- **[How This Guide Is Maintained](docs/architecture.md)** — Maintainer handbook: single-source in-place managed blocks, auto-discovered registry, upstream release momentum watchers, and the sync-upstream agent skill.
+<!-- swissknife:end -->
+
+### Compute Worlds & Fabric
+<!-- swissknife:begin nav section=worlds -->
+- **[Zero-Card Cloud](worlds/cloud.md)** — Verified $0 credit-card-free cloud gateways, coding-agent token math, search grounding APIs, and fallback order.
+- **[Apple Silicon Mac](worlds/apple-silicon.md)** — Running a silent ~15W always-on AI control plane with Apple MLX unified-memory inference, native sandboxes, and honest media limits.
+- **[Discrete GPU PC (16GB VRAM + 64GB RAM)](worlds/gpu-workstation.md)** — Understanding the Zone 1 / Zone 2 memory split, llama-server router flags, Ollama's 4K context trap, and 16GB VRAM coexistence with ComfyUI.
+- **[Mobile as Human Communicator (HITL)](worlds/mobile-hitl.md)** — Using your phone strictly as a Human-in-the-Loop approval gate, voice steering surface, and capture bridge—never as a brute-force LLM runner.
+- **[The Personal AI Fabric](worlds/personal-ai-fabric.md)** — How to connect Zero-Card Cloud, Apple Silicon Mac, Discrete GPU PC, and Mobile HITL privately with zero open router ports.
+<!-- swissknife:end -->
 
 ### Practical Guides
-- [Local AI Workstation Guide](guides/local-ai-workstation.md) — Hardware memory zones, mature vs. experimental tracks, Ollama pitfalls, and CUDA/MLX launch commands.
-- [Coding & Apps](guides/coding-and-apps.md) — End-to-end engineering workflow pairing verified models and harnesses with live documentation lookup, browser QA, and Apple mobile build tools.
-- [Local Media Studio](guides/local-media-studio.md) — Unified local creative pipeline for 16GB video synthesis, transparent RGBA image editing, code-driven motion graphics, NLE automation, and browser voiceovers.
-- [Research & Writing](guides/research-and-writing.md) — High-precision literature synthesis combining open academic graphs, semantic search, and cited draft generation.
-- [Specialist Domains](guides/specialist-domains.md) — Curated starting tools and monitored upstream directories for focused fields.
+<!-- swissknife:begin nav section=guides -->
+- **[Pi Ricing Workshop (Optional 6-Rung Ladder)](guides/pi-workshop.md)** — Progressive, 100% optional journey taking Pi Coding Agent from naked in 5 minutes to adapted local GGUF, sandboxing, smart MCP, durability, mobile HITL, and ComfyUI.
+- **[Coding & Apps](guides/coding-and-apps.md)** — End-to-end web, CLI, and Apple mobile engineering pairing verified models and harnesses with Context7 live docs, Playwright QA, MobileBuildMCP, and TDD skills.
+- **[Local Media Studio (WanGP & ComfyUI)](guides/media-studio.md)** — Unified local creative pipeline separating turnkey low-VRAM generation (WanGP) from programmable agent-driven node graphs (ComfyUI + MCP), plus code motion graphics and WebGPU speech.
+- **[Persistent Context, Memory & Knowledge Loops](guides/memory-and-knowledge.md)** — Four clean layers for durable agent and personal memory using AGENTS.md/SKILL.md, Pi Durable, plain-Markdown Obsidian vaults, local qmd hybrid search, and KV-cache-stable injection.
+- **[Research & Writing](guides/research-and-writing.md)** — Cited literature synthesis combining OpenAlex academic graphs, Exa 3.0 neural search, Firecrawl Markdown extraction, and open research harnesses.
+- **[Specialist Domains](guides/specialist-domains.md)** — Upstream-federated starting stacks (max 2 direct picks + 1 monitored upstream directory) for Reverse Engineering, Game Dev & 3D, Growth & Social, and Unfiltered Local AI.
+<!-- swissknife:end -->
 
 ### Reference
-- [Zero-Card Cloud Free Tiers](reference/cloud-free-tiers.md) — Verified card-free gateways, coding-agent token math, quotas, and fallback order.
-- [Local Models](reference/local-models.md) — Mature daily drivers, experimental architectures, and non-autoregressive decision models.
-- [Harnesses & Inference Runtimes](reference/harnesses-and-runtimes.md) — Agent harnesses, safety proxies, and serving engines.
-- [Retired & Disqualified Tools](reference/retired.md) — What stopped working, why it was cut, and what replaced it.
+<!-- swissknife:begin nav section=reference -->
+- **[Models, Harnesses & Runtimes Reference](reference/models-and-harnesses.md)** — Scannable factual index of all verified local models, agent harnesses, inference runtimes, and safety boundaries.
+- **[Retired & Disqualified Tools](reference/retired.md)** — CI-enforced graveyard recording closed free tiers, archived extensions, and oversized models alongside their active replacements.
+<!-- swissknife:end -->
 
 ### Research & Horizon
-- [Harness Adapters & In-Harness RL](research/harness-adapters.md) — Primary evidence for lightweight per-harness LoRAs, difficulty filtering, and out-of-distribution controls.
-- [21-Day Watch List](research/watch-list.md) — Strictly capped radar of frontier ceilings (monitor-only) and community field observations.
+<!-- swissknife:begin nav section=research -->
+- **[Harness Adapters & In-Harness RL](research/harness-adapters.md)** — Primary empirical evidence showing why lightweight per-harness LoRAs on frozen Qwen3.8-27B outperform larger unadapted checkpoints, including difficulty ablations and AutomationBench controls.
+- **[21-Day Watch List](research/watch-list.md)** — Auto-expiring, hard-capped radar tracking frontier ceilings (monitor-only, excluded from llms.txt) and reproducible community field observations.
+<!-- swissknife:end -->
 
-## Editorial Standards
+---
 
-1. **Every claim names its evidence:** Entries distinguish between *Primary evaluation*, *Official documentation*, *Vendor / lab claim*, and *Field observation*.
-2. **Every tool states its limits:** Nothing is listed without explicit boundary conditions explaining when *not* to use it.
-3. **Stale advice is automatically hidden from agents:** Automated link and review-window checks gate expired entries out of [`llms.txt`](llms.txt) until re-verified. See [System Status](STATUS.md).
+## Editorial Standards & Non-Goals
+
+Every recommendation names its evidence tier (*Primary evaluation*, *Official documentation*, *Vendor / lab claim*, or *Field observation*), states explicit limitations, and explains its falsifiable reversal trigger in [Why This Stack](docs/why-this-stack.md). To stay lean and forward-moving, this project explicitly enforces these boundaries:
+
+<!-- swissknife:begin non-goals -->
+- No enterprise GPU cluster orchestration (multi-node Kubernetes/Slurm farms or commercial MLOps stacks).
+- No brute-force mobile LLM inference (phones are documented strictly as human communicators, HITL gates, and capture surfaces).
+- No paid-only SaaS directories (closed paid frontier models live only on the 21-day monitor-only Watch List).
+- No custom benchmarking or smoke-test frameworks (rely on primary evaluations and 1-line upstream built-in sanity checks).
+- No mirroring upstream installation manuals (own curated paths, cross-tool glue, real-world traps, and canonical upstream deep-links).
+- No museum of legacy options (one active anchor per Workflow Slot; superseded picks move cleanly to Retired and Superseded ADR history).
+<!-- swissknife:end -->

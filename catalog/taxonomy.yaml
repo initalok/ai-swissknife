@@ -1,0 +1,69 @@
+allowed_kinds:
+  - gateway
+  - model
+  - adapter
+  - harness
+  - runtime
+  - tool
+  - mcp
+  - memory
+  - fabric
+  - mobile
+
+tracks:
+  - id: newcomer
+    name: "Newcomer & Student"
+    summary: "Plain-English fundamentals, 30-second hardware check, and three zero-paralysis first-win paths."
+    order: 1
+  - id: developer
+    name: "Seasoned Developer"
+    summary: "Hardware physics, Pi ricing ladder, frozen-base LoRA serving, multi-machine fabric, and machine manifests."
+    order: 2
+
+worlds:
+  - id: cloud
+    name: "Zero-Card Cloud"
+    summary: "1M-token context, 500B+ MoE reasoning, zero-install onboarding, and burst speech/media trials with no credit card."
+    order: 1
+  - id: mac
+    name: "Apple Silicon Mac"
+    summary: "Silent ~15W always-on control plane, unified-memory MLX inference (no PCIe split), and native Apple/Xcode builds."
+    order: 2
+  - id: gpu-pc
+    name: "Discrete GPU PC (16GB VRAM + 64GB RAM)"
+    summary: "Fast CUDA prefill, hybrid sparse MoE offloading, and all heavy local image, video, and 3D generation."
+    order: 3
+  - id: mobile-hitl
+    name: "Mobile (Human Communicator & HITL)"
+    summary: "Approval gates, voice steering, camera/share-sheet capture, and zero-port remote pings—never brute-force inference."
+    order: 4
+
+sections:
+  - id: docs
+    name: "Orientation & Philosophy"
+    summary: "Dual-track onboarding, mental models, transparent decision records, security boundaries, and maintainer architecture."
+    order: 1
+  - id: worlds
+    name: "Compute Worlds & Personal AI Fabric"
+    summary: "Dedicated guides per hardware world plus how to connect them privately without opening firewall ports."
+    order: 2
+  - id: guides
+    name: "Practical Guides"
+    summary: "Goal-driven workflows for Pi ricing, coding & apps, local media, persistent memory, research, and specialists."
+    order: 3
+  - id: reference
+    name: "Reference"
+    summary: "Factual indexes of active local models, harnesses, runtimes, and the CI-enforced retired ledger."
+    order: 4
+  - id: research
+    name: "Research & Horizon"
+    summary: "Primary empirical evidence on harness adapters and the auto-expiring 21-day Watch List."
+    order: 5
+
+non_goals:
+  - "No enterprise GPU cluster orchestration (multi-node Kubernetes/Slurm farms or commercial MLOps stacks)."
+  - "No brute-force mobile LLM inference (phones are documented strictly as human communicators, HITL gates, and capture surfaces)."
+  - "No paid-only SaaS directories (closed paid frontier models live only on the 21-day monitor-only Watch List)."
+  - "No custom benchmarking or smoke-test frameworks (rely on primary evaluations and 1-line upstream built-in sanity checks)."
+  - "No mirroring upstream installation manuals (own curated paths, cross-tool glue, real-world traps, and canonical upstream deep-links)."
+  - "No museum of legacy options (one active anchor per Workflow Slot; superseded picks move cleanly to Retired and Superseded ADR history)."

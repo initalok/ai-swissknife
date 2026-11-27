@@ -1,0 +1,136 @@
+entries:
+  - id: tailscale-serve
+    kind: fabric
+    name: "Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)"
+    summary: "Zero-port WireGuard overlay exposing 127.0.0.1-bound local servers (llama-server, mlx_lm.server, ComfyUI, pi-mobile) privately inside your tailnet with automatic HTTPS and ACL tags."
+    when_to_use: "Developer standard for connecting Mac mini, NVIDIA GPU PC, and Android/iOS phones without opening router ports."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://tailscale.com/kb/1312/serve"
+    tags: [security]
+    capabilities: [fabric]
+    relations:
+      runs_on: [mac, gpu-pc, mobile-hitl]
+    meta:
+      role: "Encrypted Private Mesh (Dev Standard)"
+      launch_recipe: "tailscale serve --bg http://127.0.0.1:8080"
+      sanity_check: "tailscale serve status"
+    limitations:
+      - "Automatic Let's Encrypt HTTPS certificates log machine.<tailnet>.ts.net hostnames in public CT logs; use neutral box names (e.g., box-a)."
+
+  - id: lm-link
+    kind: fabric
+    name: "LM Link (Tailscale tsnet Zero-VPN GPU Sharing)"
+    summary: "Userspace Tailscale mesh built into LM Studio and headless llmster (lms link enable) that projects a remote home GPU onto localhost:1234 on your travel laptop with zero OS VPN setup."
+    when_to_use: "Newcomers and students wanting to borrow their home desktop GPU from a thin laptop without configuring Tailscale ACLs."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://lmstudio.ai/docs/app/basics/lm-link"
+    capabilities: [fabric]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      role: "Zero-Config Userspace GPU Bridge"
+      launch_recipe: "lms link enable"
+    limitations:
+      - "Free during Preview; paid tiers are planned at General Availability (use Tailscale Serve for permanent open control)."
+
+  - id: pi-mobile-voice
+    kind: mobile
+    name: "pi-mobile (Multi-Box Tailscale HTTPS & Voice Mode)"
+    summary: "E2E-encrypted Pi package uniting multiple computers (/remote add box) into one phone queue sorted by 'who needs you', answering any extension dialog with Voice Mode and 2-min desk-idle mute."
+    when_to_use: "Live hands-free HITL steering across a Mac mini, GPU PC, and cloud VM with spoken behavioral summaries and verbal confirmation."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://pi.dev/packages/pi-mobile"
+    tags: [security]
+    capabilities: [mobile-hitl]
+    relations:
+      runs_on: [mobile-hitl, mac, gpu-pc]
+    meta:
+      role: "Live Multi-Box Steering & Voice HITL"
+      license: MIT
+    limitations:
+      - "A paired phone equals shell access on your home machine; keep behind Tailscale ACLs and neutral hostnames."
+
+  - id: pi-mobile-android
+    kind: mobile
+    name: "ayagmar/pi-mobile (Native Android Compose Client)"
+    summary: "Open-source Jetpack Compose Android client bridging to Pi RPC over Tailscale (*.ts.net) with terminal QR pairing, live /tree branch navigation/forking, image uploads, and bash dialog."
+    when_to_use: "Android developers wanting a dedicated native client with full /tree session branching on macOS or Linux hosts."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/ayagmar/pi-mobile"
+    capabilities: [mobile-hitl]
+    relations:
+      runs_on: [mobile-hitl, mac, gpu-pc]
+    meta:
+      role: "Native Android /tree Steering"
+      license: MIT
+    limitations:
+      - "Requires Tailscale active on both host and Android device plus the Node RPC bridge daemon."
+
+  - id: pi-durable-telegram
+    kind: mobile
+    name: "smixs/pi-durable-telegram (Durable Async Telegram Bot)"
+    summary: "SQLite-backed Telegram HITL bridge built directly on @earendil-works/pi-durable using outbound long-polling (zero open ports) with photo, PDF, voice note, and file delivery."
+    when_to_use: "Zero-extra-app async HITL communication, multimodal mobile capture, and crash-resumable remote jobs."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/smixs/pi-durable-telegram"
+    capabilities: [mobile-hitl]
+    relations:
+      runs_on: [mobile-hitl, mac, gpu-pc]
+    meta:
+      role: "Async Messaging HITL (Zero Open Ports)"
+      license: MIT
+    limitations:
+      - "One-command installer configures a Linux systemd user service; run manually or via launchd on macOS, and never run two pollers on one bot token."
+
+  - id: opencode-mobile
+    kind: mobile
+    name: "dzianisv/opencode-mobile (Android HITL Client)"
+    summary: "Open-source Android client (F-Droid/APK) connecting to opencode serve over Tailscale/LAN with native tool-call approval dialogs and Android Keystore authentication."
+    when_to_use: "Mobile approval and monitoring for OpenCode sessions without switching harnesses."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/dzianisv/opencode-mobile"
+    capabilities: [mobile-hitl]
+    relations:
+      runs_on: [mobile-hitl, mac, gpu-pc]
+    meta:
+      role: "OpenCode Mobile Approvals"
+      license: MIT
+    limitations:
+      - "Always configure OPENCODE_SERVER_PASSWORD and route over Tailscale rather than unencrypted LAN."
+
+  - id: ntfy-push
+    kind: mobile
+    name: "ntfy (One-Way HOOTL Awareness Pings)"
+    summary: "Simple HTTP pub-sub push notification server (self-hostable or free 250 msgs/day on ntfy.sh) with up to 3 actionable HTTP buttons."
+    when_to_use: "Notifying your phone the moment an unattended build, ComfyUI render, or nightly audit completes or stalls."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/binwiederhier/ntfy"
+    capabilities: [mobile-hitl]
+    relations:
+      runs_on: [mobile-hitl, mac, gpu-pc, cloud]
+    meta:
+      role: "One-Way HOOTL Finish/Stall Pings"
+      license: Apache-2.0
+    limitations:
+      - "One-way notification channel; pair with Telegram or pi-mobile when you need interactive multi-turn steering."

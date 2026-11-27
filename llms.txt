@@ -1,36 +1,66 @@
-# AI Swiss Knife — Agent Router (v5.0.0-beta.1)
-> Verified: 2026-11-27 | Active entries: 31 | Stale/degraded auto-excluded: 0
+# AI Swiss Knife — Freshness-Gated Agent Router (v6.0.0-beta.1)
+> Verified: 2026-11-27 | Active entries: 57 | Stale/degraded auto-excluded: 0
 > Monitor-only frontier entries (research/watch-list.md) are intentionally excluded.
 
-## Hardware Profiles (`swissknife resolve <target> --profile <id>`)
-- [zero-card-cloud] Zero-Card Cloud: Verified $0 cloud gateways, non-autoregressive decision endpoints, and keyless RAG requiring no credit card.
-- [16vram-64ram] 16GB VRAM + 64GB RAM Workstation: Zone 1 pure 16GB VRAM dense models paired with Zone 2 64GB DDR5 sparse MoE offloading.
-- [mac-apple-silicon] Apple Silicon Mac (Unified Memory / MLX): Unified memory local inference via Apple MLX and llama.cpp Metal without a PCIe split.
+## Compute Worlds (`swissknife query --world <id>`)
+- [cloud] Zero-Card Cloud: 1M-token context, 500B+ MoE reasoning, zero-install onboarding, and burst speech/media trials with no credit card.
+- [mac] Apple Silicon Mac: Silent ~15W always-on control plane, unified-memory MLX inference (no PCIe split), and native Apple/Xcode builds.
+- [gpu-pc] Discrete GPU PC (16GB VRAM + 64GB RAM): Fast CUDA prefill, hybrid sparse MoE offloading, and all heavy local image, video, and 3D generation.
+- [mobile-hitl] Mobile (Human Communicator & HITL): Approval gates, voice steering, camera/share-sheet capture, and zero-port remote pings—never brute-force inference.
+
+## Active Workflow Slots (`swissknife slot <id>`)
+- [agent-media-mcp] -> comfy-mcp (Comfy-Org Official comfy-mcp (Local & Cloud)) | https://github.com/Comfy-Org/comfy-mcp
+- [cloud-flagship] -> google-ai-studio (Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)) | https://aistudio.google.com/
+- [dev-harness] -> pi (Pi Coding Agent (+ @earendil-works/pi-durable)) | https://github.com/earendil-works/pi
+- [interconnect-fabric] -> tailscale-serve (Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)) | https://tailscale.com/kb/1312/serve
+- [knowledge-vault] -> obsidian-skills (Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)) | https://github.com/obsidianmd/obsidian-skills
+- [local-mature-coder] -> qwen3.8-27b (Qwen3.8-27B (Dense Vision + Text)) | https://huggingface.co/Qwen/Qwen3.8-27B
+- [local-runtime] -> llama-cpp (llama.cpp (Mainline GGUF Server & Router)) | https://github.com/ggml-org/llama.cpp
+- [mobile-hitl-primary] -> pi-mobile-voice (pi-mobile (Multi-Box Tailscale HTTPS & Voice Mode)) | https://pi.dev/packages/pi-mobile
+- [newcomer-cloud-ide] -> google-antigravity (Google Antigravity ($0 Individual Tier)) | https://antigravity.google/
+- [newcomer-local-harness] -> opencode (OpenCode CLI & Desktop) | https://github.com/anomalyco/opencode
+- [runtime-safety] -> safeagents (Hugging Face safeagents Proxy) | https://github.com/huggingface/safeagents
+- [turnkey-media] -> wangp (WanGP v20.12 (One-Stop Low-VRAM Media Studio)) | https://github.com/deepbeepmeep/WanGP
 
 ## Active Zero-Card Cloud Gateways
-- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-4-hydrogen | verified:2026-11-27
-- [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash | verified:2026-11-27
-- [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash | verified:2026-11-27
-- [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free | verified:2026-11-27
-- [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b | verified:2026-11-27
-- [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef | verified:2026-11-27
-- [pollinations] env:KEYLESS | base_url:https://text.pollinations.ai/openai | model:openai | verified:2026-11-27
+- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-4-hydrogen | verified:2026-11-28
+- [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash | verified:2026-11-28
+- [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash | verified:2026-11-28
+- [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free | verified:2026-11-28
+- [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b | verified:2026-11-28
+- [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef | verified:2026-11-28
+- [pollinations] env:KEYLESS | base_url:https://text.pollinations.ai/openai | model:openai | verified:2026-11-28
 
-## Active Local Launch Profiles
-- [qwen3.8-27b] (mature, primary-eval) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000`
-- [qwen3.8-27b:mac] (mature, primary-eval) profiles:mac-apple-silicon | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000`
-- [qwen3-coder-next] (mature, official-docs) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
-- [hermes-4] (mature, vendor-claim) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --port 8000`
-- [inkling-2-mini] (experimental, vendor-claim) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000`
-- [laya-05] (mature, official-docs) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
-- [qwen38-super-adapter] (mature, primary-eval) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
-- [qwen38-super-adapter:mac] (mature, primary-eval) profiles:mac-apple-silicon | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000`
+## Active Local Launch Recipes
+- [qwen3.8-27b] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
+- [qwen3.8-27b:mac] (mature, primary-eval) worlds:mac | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080`
+- [qwen3-coder-next] (mature, official-docs) worlds:gpu-pc,mac | cmd: `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080 --temp 0`
+- [hermes-4] (mature, vendor-claim) worlds:gpu-pc,mac | cmd: `llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --host 127.0.0.1 --port 8080`
+- [inkling-2-mini] (experimental, vendor-claim) worlds:gpu-pc,mac | cmd: `llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --host 127.0.0.1 --port 8080`
+- [laya-05] (mature, official-docs) worlds:gpu-pc,mac | cmd: `pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
+- [qwen38-pi-lora] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
+- [qwen38-super-adapter] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
+- [qwen38-super-adapter:mac] (mature, primary-eval) worlds:mac | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080`
 
-## Guides & Specialist Directories
-- [guide:coding-and-apps] guides/coding-and-apps.md
-- [guide:local-media-studio] guides/local-media-studio.md
-- [guide:research-and-writing] guides/research-and-writing.md
-- [specialist:game-dev-3d] guides/specialist-domains.md | upstream: https://github.com/microsoft/TRELLIS
-- [specialist:growth-and-social] guides/specialist-domains.md | upstream: https://github.com/ericosiu/ai-marketing-skills
-- [specialist:reverse-engineering] guides/specialist-domains.md | upstream: https://github.com/zhuyansen/awesome-ai-reverse-engineering
-- [specialist:unfiltered-sovereign] guides/specialist-domains.md | upstream: https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated
+## Handbook Pages
+- [docs/start-here-newcomer.md] Newcomer & Student Onboarding: Six essential terms, a 30-second hardware check, and three zero-paralysis first wins ($0 Cloud, Local Coding, or Local Media).
+- [docs/start-here-developer.md] Seasoned Developer Fast-Track: 60-second hardware physics, harness selection leading into Pi's optional 6-rung ricing ladder, frozen-base LoRAs, and machine manifests.
+- [docs/mental-model.md] How a Modern AI Stack Fits Together: A 3-minute plain-English primer explaining models, LoRA adapters, inference runtimes, safety boundaries, and agent harnesses.
+- [docs/why-this-stack.md] Why This Stack (Decision Records): Transparent architectural decisions explaining why we anchor on Pi, OpenCode, Qwen3.8-27B, llama.cpp/MLX, WanGP/ComfyUI, Mobile HITL, and Tailscale—including valid exceptions and reversal triggers.
+- [docs/security-and-trust.md] Security & Trust Boundaries: Three calm safety habits for newcomers and a six-boundary threat model for connecting Cloud, Mac, GPU PC, Mobile HITL, and Knowledge Vaults.
+- [docs/architecture.md] How This Guide Is Maintained: Maintainer handbook: single-source in-place managed blocks, auto-discovered registry, upstream release momentum watchers, and the sync-upstream agent skill.
+- [guides/pi-workshop.md] Pi Ricing Workshop (Optional 6-Rung Ladder): Progressive, 100% optional journey taking Pi Coding Agent from naked in 5 minutes to adapted local GGUF, sandboxing, smart MCP, durability, mobile HITL, and ComfyUI.
+- [guides/coding-and-apps.md] Coding & Apps: End-to-end web, CLI, and Apple mobile engineering pairing verified models and harnesses with Context7 live docs, Playwright QA, MobileBuildMCP, and TDD skills.
+- [guides/media-studio.md] Local Media Studio (WanGP & ComfyUI): Unified local creative pipeline separating turnkey low-VRAM generation (WanGP) from programmable agent-driven node graphs (ComfyUI + MCP), plus code motion graphics and WebGPU speech.
+- [guides/memory-and-knowledge.md] Persistent Context, Memory & Knowledge Loops: Four clean layers for durable agent and personal memory using AGENTS.md/SKILL.md, Pi Durable, plain-Markdown Obsidian vaults, local qmd hybrid search, and KV-cache-stable injection.
+- [guides/research-and-writing.md] Research & Writing: Cited literature synthesis combining OpenAlex academic graphs, Exa 3.0 neural search, Firecrawl Markdown extraction, and open research harnesses.
+- [guides/specialist-domains.md] Specialist Domains: Upstream-federated starting stacks (max 2 direct picks + 1 monitored upstream directory) for Reverse Engineering, Game Dev & 3D, Growth & Social, and Unfiltered Local AI.
+- [reference/models-and-harnesses.md] Models, Harnesses & Runtimes Reference: Scannable factual index of all verified local models, agent harnesses, inference runtimes, and safety boundaries.
+- [reference/retired.md] Retired & Disqualified Tools: CI-enforced graveyard recording closed free tiers, archived extensions, and oversized models alongside their active replacements.
+- [research/harness-adapters.md] Harness Adapters & In-Harness RL: Primary empirical evidence showing why lightweight per-harness LoRAs on frozen Qwen3.8-27B outperform larger unadapted checkpoints, including difficulty ablations and AutomationBench controls.
+- [research/watch-list.md] 21-Day Watch List: Auto-expiring, hard-capped radar tracking frontier ceilings (monitor-only, excluded from llms.txt) and reproducible community field observations.
+- [worlds/cloud.md] Zero-Card Cloud: Verified $0 credit-card-free cloud gateways, coding-agent token math, search grounding APIs, and fallback order.
+- [worlds/apple-silicon.md] Apple Silicon Mac: Running a silent ~15W always-on AI control plane with Apple MLX unified-memory inference, native sandboxes, and honest media limits.
+- [worlds/gpu-workstation.md] Discrete GPU PC (16GB VRAM + 64GB RAM): Understanding the Zone 1 / Zone 2 memory split, llama-server router flags, Ollama's 4K context trap, and 16GB VRAM coexistence with ComfyUI.
+- [worlds/mobile-hitl.md] Mobile as Human Communicator (HITL): Using your phone strictly as a Human-in-the-Loop approval gate, voice steering surface, and capture bridge—never as a brute-force LLM runner.
+- [worlds/personal-ai-fabric.md] The Personal AI Fabric: How to connect Zero-Card Cloud, Apple Silicon Mac, Discrete GPU PC, and Mobile HITL privately with zero open router ports.

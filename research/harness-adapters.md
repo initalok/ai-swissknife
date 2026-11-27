@@ -1,36 +1,34 @@
+---
+title: "Harness Adapters & In-Harness RL"
+section: research
+summary: "Primary empirical evidence showing why lightweight per-harness LoRAs on frozen Qwen3.8-27B outperform larger unadapted checkpoints, including difficulty ablations and AutomationBench controls."
+order: 1
+---
+
 [Home](../README.md) / Research / Harness Adapters & In-Harness RL
 
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md))*
+<!-- swissknife:begin status-banner -->
+*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+<!-- swissknife:end -->
 
 # Harness Adapters & In-Harness Reinforcement Learning
 
-A central empirical finding in 2026 agent engineering is that **adapting a frozen mid-sized model to a specific harness** often delivers larger accuracy gains and far lower token cost than moving to a heavier unadapted model.
+A central empirical finding in 2026 agent engineering is that **adapting a frozen mid-sized model to a specific harness** often delivers larger accuracy gains and far lower token cost than upgrading to a heavier unadapted model.
 
-> **Note on benchmark comparability:** Vendor-reported scores for `Qwen3.8-27B` are measured on Qwen's own internal harness. In Hugging Face's independent reproduction using the `pi` harness with thinking off, base `Qwen3.8-27B` scored **39% pass@1** on Terminal-Bench 2.1 using **2.9K tokens/task**—and adding an RL-trained LoRA lifted it to **55% pass@1** while cutting usage to **1.5K tokens/task**.
+> **Benchmark comparability note:** Vendor-reported scores for `Qwen3.8-27B` are measured inside Qwen's own internal harness. In Hugging Face's independent reproduction inside unmodified `Pi` (thinking off), base `Qwen3.8-27B` scored **39% pass@1** on Terminal-Bench 2.1 using **2.9K tokens/task**—and attaching an RL-trained LoRA lifted it to **55% pass@1** while cutting usage to **1.5K tokens/task**.
 
 ## Choosing the Right Adapter
 
 ```mermaid
 flowchart TD
     Q1{"Running a single harness<br/>with thinking mode OFF?"}
-    Q1 -- "Yes" --> A1["Use the single-harness Specialist LoRA<br/>(Highest pass@1 on that harness, ~304 MiB)"]
+    Q1 -- "Yes" --> A1["Use the single-harness Specialist LoRA<br/>(Highest pass@1 on that harness, ~304–319 MB)"]
     Q1 -- "No (Thinking ON or multiple harnesses)" --> A2["Use the Rank-96 Merged Super-Adapter<br/>(One adapter across Pi, Hermes, & OpenCode, ~912 MiB)"]
 ```
 
-## Verified Adapters & Methodology
+## Primary Evaluation Evidence (SWE-bench Pro, TB2.1 & AutomationBench OOD Control)
 
-### [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter)
-
-Zero-retraining orthogonal rank-96 merge (PEFT combination_type=cat, weight 0.5) combining Pi, Hermes, and OpenCode RL LoRA adapters on one frozen Qwen3.8-27B backbone.
-
-- **When to use:** Serving multiple agent harnesses from one frozen 15 GB base model, or running with thinking mode enabled (xhigh).
-- **Evidence tier:** Primary evaluation · verified 2026-11-27
-- **Observation:** Per-harness RL updates are nearly orthogonal (cosine similarity ~0.01-0.02), allowing rank concatenation without retraining.
-- **Observation:** Community testing confirmed transfer onto Qwen3.8 derivatives such as Swift-1.5 and MTP-preserving Apple Silicon MLX builds.
-- **Caveat / boundary:** When running a single harness with thinking off, prefer its specialist LoRA (e.g., pi 64.0% vs 46.0% on SWE-bench Pro hard-51).
-- **Caveat / boundary:** Adapters were trained on BF16 weights; verify GGUF quant fidelity and expect brief pre-tool thinking leakage (arXiv:2610.14270).
-- **Caveat / boundary:** Merge weight 0.5 was selected using TB2.1, introducing slight optimistic bias on that benchmark; Hermes specialist shows a mild OOD dip on AutomationBench.
-
+<!-- swissknife:begin eval-tables id=qwen38-super-adapter -->
 **Reproduced SWE-bench Pro & Terminal-Bench 2.1 Results (Qwen3.8-27B)**
 
 | Evaluation Mode | Base Qwen3.8-27B | Specialist LoRA | Rank-96 Super-Adapter | Tool-Call Reduction |
@@ -48,42 +46,35 @@ Zero-retraining orthogonal rank-96 merge (PEFT combination_type=cat, weight 0.5)
 | OpenCode Specialist (step 150) | 25.3% | +2.3 | 65.2% | +3.0 |
 | Rank-96 Merged Super-Adapter | 23.7% | +0.7 | 60.6% | -1.6 |
 | Hermes Specialist (step 160) | 17.7% | -5.3 | 56.6% | -5.6 |
+<!-- swissknife:end -->
 
+## Serving the Rank-96 Super-Adapter
+
+<!-- swissknife:begin recipe id=qwen38-super-adapter -->
 <details>
-<summary>Show serving command (llama-server / vLLM)</summary>
+<summary>Launch command — Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub) (CUDA / llama.cpp / CLI)</summary>
 
 ```bash
-llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0
+llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080
 ```
 
 </details>
 
 <details>
-<summary>Show serving command (Apple Silicon Mac / MLX)</summary>
+<summary>Launch command — Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub) (Apple Silicon / MLX)</summary>
 
 ```bash
-mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000
+mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080
 ```
 
 </details>
+<!-- swissknife:end -->
 
-### [Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated)
+## In-Harness RL Difficulty-Filtering Ablation (`OpenEnv` + `TRL AsyncGRPO`)
 
-Lightweight 26 MB rank-3 LoRA (built on Apple Silicon) removing built-in refusals on top of the exact same frozen Qwen3.8-27B base model.
+Training inside unmodified shipping harnesses via a token/logprob capture proxy depends heavily on filtering out tasks the base model *always* or *never* solves:
 
-- **When to use:** Authorized security testing, red-teaming, or unfiltered local experimentation without storing a second 15 GB checkpoint.
-- **Evidence tier:** Field observation · verified 2026-11-27
-- **Caveat / boundary:** Abliterated adapters cannot refuse destructive tool actions; always isolate behind safeagents and Laya 0.5.
-
-### [In-Harness RL Recipe (OpenEnv + Harbor + TRL AsyncGRPO)](https://huggingface.co/blog/harness-adapters-at-scale)
-
-Reusable reinforcement-learning pipeline that trains LoRAs directly inside unmodified shipping harnesses via a token/logprob capture proxy rather than re-implementing agent loops.
-
-- **When to use:** Reproducing harness-specific RL on your own private repositories or task benchmarks.
-- **Evidence tier:** Primary evaluation · verified 2026-11-27
-- **Observation:** openenv validate passed 858 of 1,127 candidate tasks; filtering to tasks the base model solves sometimes (171/442) produced the decisive GRPO reward jump.
-- **Caveat / boundary:** Requires all-linear LoRA, learning rate 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and strict exclusion of all-pass/all-fail GRPO tasks.
-
+<!-- swissknife:begin eval-tables id=hf-in-harness-rl -->
 **TB2.1 Difficulty-Filtering Ablation (Qwen3.8-27B · LoRA AsyncGRPO · 32 tasks/arm · 8xH200 · Base TB2.1: 35.9%)**
 
 | Experimental Arm | Task Filtering Rule | Steps Completed | Train Reward (Steps 1-5 -> Last 5) |
@@ -92,7 +83,19 @@ Reusable reinforcement-learning pipeline that trains LoRAs directly inside unmod
 | A2 Validated | 32 validated, no difficulty filter | 50 (completed) | 0.56 -> 0.70 |
 | A3 Unqualified | 32 validated base always or never solves | 25 (timed out at step 26) | 0.60 -> 0.63 |
 | A4 Qualified | 32 validated base solves sometimes | 50 (completed) | 0.62 -> 0.81 |
+<!-- swissknife:end -->
+
+## All Tracked Adapters & RL Artifacts
+
+<!-- swissknife:begin table tag=rl-research -->
+| Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
+| :--- | :--- | :--- | :--- | :--- |
+| [Qwen3.8-27B Pi Specialist LoRA (~319 MB)](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF) | Rung 1 of the Pi Ricing Journey when running Pi with thinking mode OFF on local Qwen3.8-27B. | +319 MB LoRA on frozen Qwen3.8-27B | Primary evaluation | HF BF16 vLLM evals jumped 39.2% -> 64.7% SWE-Pro and 39% -> 55% TB2.1, but GGUF quants have not been formally re-evaluated in llama.cpp (Q8_0 stays closer to BF16 than Q4). |
+| [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter) | Serving multiple harnesses from one 15 GB base model, or running with thinking mode enabled (xhigh). | +912 MiB LoRA (+304-319 MiB for single-harness specialist) | Primary evaluation | When running a single harness with thinking off, prefer its specialist LoRA (e.g., pi 64.0% vs 46.0% SWE-Pro hard-51). |
+| [Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated) | Authorized security testing or unfiltered local experimentation without duplicating 15 GB of base weights. | +26 MB LoRA on frozen Qwen3.8-27B | Field observation | Abliterated adapters cannot refuse destructive tool actions; always isolate behind safeagents and Laya 0.5. |
+| [In-Harness RL Recipe & HF Collection (OpenEnv + Harbor + TRL AsyncGRPO)](https://huggingface.co/collections/harness-hub/qwen38-27b-harness-adapters) | Reproducing harness-specific RL on private codebases or tracking newly published harness adapters. | Apache-2.0 | Primary evaluation | Requires all-linear LoRA, LR 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and excluding all-pass/all-fail tasks. |
+<!-- swissknife:end -->
 
 ---
 
-**Continue reading:** [Local AI Workstation Guide](../guides/local-ai-workstation.md) · [21-Day Watch List](watch-list.md)
+**Continue reading:** [Pi Ricing Workshop](../guides/pi-workshop.md) · [21-Day Watch List](watch-list.md)

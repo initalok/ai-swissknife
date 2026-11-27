@@ -1,0 +1,253 @@
+specialists:
+  - id: reverse-engineering
+    title: "Reverse Engineering & Binary Triage"
+    summary: "Run air-gapped local coding models wired to decompiler MCPs for rapid static renaming and triage while keeping dynamic debugging human-led."
+    last_verified: "2026-11-28"
+    constraints:
+      capabilities: [reverse-eng]
+      privacy: local-only
+      require_guard: true
+    direct_picks:
+      - id: ghidra-mcp
+        name: "LaurieWired GhidraMCP"
+        url: "https://github.com/LaurieWired/GhidraMCP"
+        summary: "Interactive Ghidra MCP bridge for function renaming, xref mapping, and triage."
+      - id: oghidra
+        name: "LLNL OGhidra"
+        url: "https://github.com/LLNL/OGhidra"
+        summary: "Adaptive Ghidra analysis loop with automated MITRE ATT&CK pattern alerts."
+    upstream_hub:
+      id: awesome-ai-reveng
+      name: "zhuyansen/awesome-ai-reverse-engineering"
+      url: "https://github.com/zhuyansen/awesome-ai-reverse-engineering"
+      summary: "Security-graded catalog of 122 AI reverse-engineering tools (IDA, Binary Ninja, JADX, Radare2)."
+    guardrails:
+      - "Disable all outbound cloud API endpoints before analyzing proprietary or sensitive binaries."
+      - "Strictly audit binaries or APKs you own or have explicit legal authorization to analyze."
+
+  - id: game-dev-3d
+    title: "Game Development & Local 16GB 3D Assets"
+    summary: "Connect local sparse coding models to engine MCP bridges and generate MIT-licensed 3D blockout meshes locally inside 16GB VRAM."
+    last_verified: "2026-11-28"
+    constraints:
+      capabilities: [game-dev]
+      privacy: any
+      require_guard: true
+    direct_picks:
+      - id: unity-mcp
+        name: "CoplayDev Unity MCP"
+        url: "https://github.com/CoplayDev/unity-mcp"
+        summary: "MIT-licensed Unity bridge enabling agents to inspect and modify scene hierarchies and scripts."
+      - id: blender-mcp
+        name: "ahujasid Blender MCP"
+        url: "https://github.com/ahujasid/blender-mcp"
+        summary: "Live Blender integration for constructing, texturing, and iterating 3D scenes from an agent."
+    upstream_hub:
+      id: microsoft-trellis
+      name: "Microsoft TRELLIS v1 (MIT 16GB 3D)"
+      url: "https://github.com/microsoft/TRELLIS"
+      summary: "MIT-licensed structured 3D latent asset generator fitting inside 16GB VRAM."
+    guardrails:
+      - "Commit binary scene files before automated MCP edits; TRELLIS.2 requires 24GB VRAM officially (use v1 on 16GB)."
+
+  - id: growth-and-social
+    title: "Social Media, Launch Promotion & Growth"
+    summary: "Pair persistent agents with an open-source multi-network approval calendar and copy-polishing skills while keeping a human gate on publishing."
+    last_verified: "2026-11-28"
+    constraints:
+      capabilities: [social]
+      privacy: any
+      require_guard: true
+    direct_picks:
+      - id: postiz
+        name: "Postiz"
+        url: "https://github.com/gitroomhq/postiz-app"
+        summary: "Self-hostable scheduler for 30+ social networks with REST API, agent CLI, and visual human approval queue."
+      - id: humanizer
+        name: "blader/humanizer"
+        url: "https://github.com/blader/humanizer"
+        summary: "Skill that strips repetitive AI phrasing from drafts before human review."
+    upstream_hub:
+      id: ai-marketing-skills
+      name: "ericosiu/ai-marketing-skills"
+      url: "https://github.com/ericosiu/ai-marketing-skills"
+      summary: "Upstream collection of SEO/AEO, CRO, launch, and growth SKILL.md modules."
+    guardrails:
+      - "Always route agent drafts through Postiz's human approval calendar; audit outbound skills for CAN-SPAM and GDPR compliance."
+
+  - id: unfiltered-sovereign
+    title: "Unfiltered & Operator-Aligned Local Stacks"
+    summary: "Skip brittle jailbreak prompts: use neutral-aligned Hermes 4 for operator-controlled policies, or load a 26 MB abliterated LoRA on frozen Qwen3.8-27B behind mandatory safety proxies."
+    last_verified: "2026-11-28"
+    constraints:
+      capabilities: [unfiltered]
+      privacy: local-only
+      require_guard: true
+    direct_picks:
+      - id: hermes-4-neutral
+        name: "NousResearch Hermes 4 (Neutral Alignment)"
+        url: "https://huggingface.co/NousResearch/Hermes-4-14B"
+        summary: "Obeys custom operator system prompts cleanly without weight-surgery degradation."
+      - id: qwen38-26mb-lora
+        name: "Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA"
+        url: "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated"
+        summary: "Rank-3 hot-swappable LoRA sharing the same frozen Qwen3.8-27B base weights."
+    upstream_hub:
+      id: huihui-abliterated
+      name: "huihui-ai/Huihui-Qwen3.8-27B-abliterated"
+      url: "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated"
+      summary: "Full abliterated Qwen3.8-27B weights preserving MTP and vision layers."
+    guardrails:
+      - "Abliterated weights cannot refuse destructive commands; never wire them to local shell tools without safeagents and Laya 0.5."
+
+watch:
+  frontier:
+    - id: claude-fable-mythos-52
+      name: "Claude Fable 5.2 & Mythos 5.2"
+      last_verified: "2026-11-28"
+      evidence_tier: vendor-claim
+      url: "https://www.anthropic.com/"
+      summary: "Sets the current ceiling for 10-12 hour autonomous audits (1M ctx / 128K out, 89.3% OSWorld 2.1, 69.9% FrontierSWE v2), with Mythos 5.2 focused on security and Lean proofs."
+      limitations:
+        - "Paid API and enterprise access only; tracked strictly as a capability ceiling."
+
+    - id: gpt-62-astra-sol
+      name: "GPT-6.2 Astra & GPT-6.2 Sol"
+      last_verified: "2026-11-28"
+      evidence_tier: vendor-claim
+      url: "https://openai.com/"
+      summary: "Introduces cache-preserving mid-conversation reasoning-effort and tool toggling—an API caching pattern worth watching for future local vLLM and llama.cpp harnesses."
+      limitations:
+        - "Paid API only; monitor-only."
+
+    - id: gemini-4-carbon-argon
+      name: "Gemini 4 Carbon & 4 Argon"
+      last_verified: "2026-11-28"
+      evidence_tier: vendor-claim
+      url: "https://deepmind.google/"
+      summary: "Leads autonomous workflow execution (53.9% AutomationBench) powering Spark Task mode; its fast sibling Gemini 4 Hydrogen has already trickled down into the Free Tier."
+      limitations:
+        - "Paid Pro/Ultra and billed API only."
+
+    - id: qwen4-max-24t
+      name: "Qwen4-Max (2.4T)"
+      last_verified: "2026-11-28"
+      evidence_tier: official-docs
+      url: "https://qwenlm.github.io/"
+      summary: "2.4T frontier release (1M ctx, 262K CoT); Alibaba confirmed smaller open-weight Qwen4 releases are planned next, making this the primary reversal-trigger signal for Qwen3.8-27B."
+      limitations:
+        - "Current 2.4T checkpoint is cloud API only; await smaller open-weight checkpoints."
+
+    - id: deepseek-v41-flash
+      name: "DeepSeek-V4.1-Flash (552B)"
+      last_verified: "2026-11-28"
+      evidence_tier: vendor-claim
+      url: "https://www.deepseek.com/"
+      summary: "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open weights adopting this KV compression."
+      limitations:
+        - "Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API."
+
+  community:
+    - id: disler-durable-pi
+      name: "disler/durable-pi Multi-Device Agent Showcase"
+      last_verified: "2026-11-28"
+      evidence_tier: field-note
+      url: "https://github.com/disler/durable-pi"
+      summary: "Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live mid-run tool toggling on top of @earendil-works/pi-durable."
+      limitations:
+        - "Reference architecture; first-party @earendil-works/pi-durable lives inside the main Pi monorepo."
+
+    - id: hy-nomas-worlds
+      name: "Tencent-Hunyuan/Hy-Nomas Walkable Worlds"
+      last_verified: "2026-11-28"
+      evidence_tier: field-note
+      url: "https://github.com/Tencent-Hunyuan/Hy-Nomas"
+      summary: "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping."
+      limitations:
+        - "Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only)."
+
+    - id: awesome-pi-directory
+      name: "shaftoe/awesome-pi-coding-agent (CI-Updated Extension Index)"
+      last_verified: "2026-11-28"
+      evidence_tier: official-docs
+      url: "https://github.com/shaftoe/awesome-pi-coding-agent"
+      summary: "Daily CI-updated community directory indexing the broader Pi extension ecosystem so ai-swissknife can stay focused on its lean 6-rung spine."
+      limitations:
+        - "Audit third-party Pi extensions before granting shell or credential access."
+
+    - id: agent-vault-poc
+      name: "loonshoot/agent_vault (Out-of-Band Mobile Secret Gate POC)"
+      last_verified: "2026-11-28"
+      evidence_tier: field-note
+      url: "https://github.com/loonshoot/agent_vault"
+      summary: "Open-source MCP prototype keeping API keys in 1Password and blocking agent credential requests until approved on your phone with a logged reason."
+      limitations:
+        - "Explicitly prototype-grade; tracked to monitor emerging mobile HITL credential-gating patterns."
+
+retired:
+  - area: cloud
+    name: "Cerebras Cloud Legacy Free Tier"
+    match_pattern: "cerebras.ai"
+    retired_on: "2026-11-18"
+    reason: "No renewing free tier exists; the $5 / 30-day credit requires a payment method on file."
+    replaced_by: google-ai-studio
+  - area: cloud
+    name: "Mistral La Plateforme Free Experiment Tier"
+    match_pattern: "api.mistral.ai"
+    retired_on: "2026-11-20"
+    reason: "Current billing rules require pay-as-you-go activation for API keys."
+    replaced_by: zhipu-bigmodel
+  - area: cloud
+    name: "Gemini 2.5 Pro & 2.5 Flash"
+    match_pattern: "gemini-2.5-pro"
+    retired_on: "2026-12-01"
+    reason: "Scheduled retirement on Dec 1, 2026; superseded by Gemini 4 Hydrogen and 3.8 Flash."
+    replaced_by: google-ai-studio
+  - area: cloud
+    name: "GitHub Models (Azure Inference Endpoint)"
+    match_pattern: "inference.ai.azure.com"
+    retired_on: "2026-07-30"
+    reason: "Officially retired July 30, 2026; endpoints are shut down."
+    replaced_by: openrouter-free
+  - area: cloud
+    name: "Brave Search API Free Tier"
+    match_pattern: "brave.com/search/api"
+    retired_on: "2026-11-01"
+    reason: "Requires a credit card on file."
+    replaced_by: exa-search
+  - area: pi-extension
+    name: "huggingface/pi-llama"
+    match_pattern: "huggingface/pi-llama"
+    retired_on: "2026-11-09"
+    reason: "Archived upstream after llama.cpp router support was built directly into Pi core (/llama)."
+    replaced_by: pi
+  - area: pi-extension
+    name: "cv/pi-ssh-remote"
+    match_pattern: "cv/pi-ssh-remote"
+    retired_on: "2026-11-15"
+    reason: "Archived upstream; replaced by @earendil-works/pi-durable remote ExecutionEnv and Tailscale-native mobile bridges."
+    replaced_by: pi-mobile-voice
+  - area: local
+    name: "Wan 3.0, Wan 2.6, & FLUX 3 Video"
+    match_pattern: "wan 3.0"
+    retired_on: "2026-11-26"
+    reason: "Closed cloud APIs with no published local open weights."
+    replaced_by: wan-2.2
+  - area: local
+    name: "Inkling 2 Small (594B) & Inkling Flagship (975B)"
+    match_pattern: "inkling 2 small"
+    retired_on: "2026-11-26"
+    reason: "Require 354-600 GB memory (cloud/API only)."
+    replaced_by: inkling-2-mini
+  - area: local
+    name: "GLM-5.3-Flash (320B) & Kimi K2.7-Code (1T)"
+    match_pattern: "glm-5.3-flash"
+    retired_on: "2026-11-26"
+    reason: "Exceed the 16GB VRAM + 64GB RAM local hardware envelope."
+    replaced_by: qwen3-coder-next
+  - area: local
+    name: "Qwen3.8-Flash-Next at UD-Q2_K_XL (79.6 GB)"
+    match_pattern: "qwen3.8-flash-next-ud-q2_k_xl"
+    retired_on: "2026-11-26"
+    reason: "Leaves zero headroom for OS, MTP weights, and KV cache on 16GB+64GB."
+    replaced_by: qwen3.8-27b
