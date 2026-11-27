@@ -1,3 +1,3 @@
-"""AI Swiss Knife — Typed Headless Core."""
+"""AI Swiss Knife — Open-Closed Headless Kernel."""
 
-__version__ = "5.0.0-beta.1"
+__version__ = "6.0.0-beta.1"

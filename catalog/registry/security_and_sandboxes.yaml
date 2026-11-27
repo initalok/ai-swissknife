@@ -1,0 +1,63 @@
+entries:
+  - id: safeagents
+    kind: tool
+    name: "Hugging Face safeagents Proxy"
+    summary: "Transparent OpenAI/Anthropic runtime proxy auditing every tool call via fast local scanning (atif-scan, ~10-20ms on Apple Silicon) and optional decision-model judges."
+    when_to_use: "Auditing autonomous coding harnesses and unfiltered local LoRAs at the tool-call layer."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/huggingface/safeagents"
+    tags: [security]
+    capabilities: [safety]
+    relations:
+      guards: ["*"]
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+      last_reviewed_release: "v0.3.0"
+      launch_recipe: "safeagents start http://127.0.0.1:8080 --plugin hf://harness-hub/qwen-safeagents-plugin"
+    limitations:
+      - "Audits API tool calls rather than isolating local OS binaries; pair with gondolin or nono for filesystem isolation."
+
+  - id: gondolin
+    kind: tool
+    name: "earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)"
+    summary: "Lightweight local Linux micro-VM (libkrun natively on Apple Silicon macOS and Linux KVM) where the host injects real secrets only on HTTP traffic to allow-listed domains."
+    when_to_use: "Rung 2 of the Pi Ricing Journey when executing untrusted code or defending against .env secret exfiltration."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/earendil-works/gondolin"
+    tags: [security]
+    capabilities: [safety]
+    relations:
+      guards: [pi]
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+      footprint: "~200 MB Alpine guest image (zero Docker required on Mac)"
+    limitations:
+      - "Cannot run macOS-only host toolchains (xcodebuild/swift); use nono for native macOS builds."
+
+  - id: nono
+    kind: tool
+    name: "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)"
+    summary: "Zero-VM Rust capability sandbox wrapping agent processes in native macOS Seatbelt or Linux Landlock policies plus nono-proxy network filtering."
+    when_to_use: "Least-privilege local sandboxing when the agent needs native macOS tools (Xcode, Homebrew, local files)."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/nolabs-ai/nono"
+    tags: [security]
+    capabilities: [safety]
+    relations:
+      guards: ["*"]
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+    limitations:
+      - "Shares the host kernel; for heavily untrusted code or strict zero-secret isolation, prefer gondolin's micro-VM boundary."

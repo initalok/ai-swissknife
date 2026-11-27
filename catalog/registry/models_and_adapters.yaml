@@ -1,0 +1,243 @@
+entries:
+  - id: qwen3.8-27b
+    kind: model
+    name: "Qwen3.8-27B (Dense Vision + Text)"
+    summary: "Apache-2.0 27B dense model serving as the primary 16GB VRAM and Apple Silicon coding backbone, hosting both Hugging Face's RL harness adapters and compact uncensored LoRAs on one frozen file."
+    when_to_use: "Daily-driver local coding, strict instruction following, and single-backbone multi-LoRA serving."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Qwen/Qwen3.8-27B"
+    tags: [local-mature]
+    capabilities: [coding, research, reverse-eng, social, unfiltered]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "14.5 GB (IQ4_XS, Zone 1 16GB VRAM) / ~16 GB (Mac MLX 4-bit)"
+      launch_recipe: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080"
+      mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
+      sanity_check: "curl -s http://127.0.0.1:8080/health"
+    limitations:
+      - "On 16GB GPUs, keep quantization at IQ4_XS with Q8 KV cache so weights never spill over PCIe."
+      - "Avoid Ollama's /v1/chat/completions endpoint with qwen3.8:27b due to reported hangs; use llama-server or mlx_lm.server."
+      - "Not suited for 8GB-12GB student laptops; use $0 Cloud or Gemma 4 12B on smaller hardware."
+
+  - id: qwen3-coder-next
+    kind: model
+    name: "Qwen3-Coder-Next (80B-A3B Sparse MoE)"
+    summary: "Sparse 512-expert Mixture-of-Experts coding model activating only 3B parameters per token, making 80B-class capacity practical in 16GB VRAM + 64GB DDR5 hybrid mode."
+    when_to_use: "Deeper multi-file repository reasoning on 16GB GPU + 64GB RAM workstations or 64GB+ Macs."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF"
+    tags: [local-mature]
+    capabilities: [coding, reverse-eng, game-dev]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "49 GB (UD-Q4_K_XL, Zone 2 16GB VRAM + 64GB RAM)"
+      launch_recipe: "GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080 --temp 0"
+    limitations:
+      - "Keep -ngl 99 so Attention and KV cache stay in GPU VRAM; offload cold experts only via --n-cpu-moe."
+
+  - id: gemma-4
+    kind: model
+    name: "Gemma 4 Family (12B Tri-Modal & 26B-A4B Vision)"
+    summary: "Fast Apache-2.0 open-weight family providing a clean 8.5 GB laptop/student off-ramp (12B with native audio) and ~140 tok/s text+vision throughput on 16GB VRAM (26B-A4B)."
+    when_to_use: "8GB-12GB laptops needing local chat/audio, or ultra-fast 16GB vision and general chat."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://ai.google.dev/gemma"
+    tags: [local-mature]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "8.5 GB (12B) to 14 GB (26B-A4B)"
+    limitations:
+      - "Only E2B, E4B, and 12B process audio; the 26B-A4B MoE checkpoint is Text + Vision only."
+
+  - id: hermes-4
+    kind: model
+    name: "NousResearch Hermes 4 (14B / 4.3-36B Neutral)"
+    summary: "Neutral-aligned open-weight checkpoints designed to follow operator-defined system prompt policies cleanly without weight-surgery degradation."
+    when_to_use: "Self-hosted deployments needing predictable operator-controlled behavior rather than abliteration."
+    evidence_tier: vendor-claim
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/NousResearch/Hermes-4-14B"
+    tags: [local-mature]
+    capabilities: [unfiltered]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "9 GB (14B Q4) / 22 GB (36B Hybrid)"
+      launch_recipe: "llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --host 127.0.0.1 --port 8080"
+    limitations:
+      - "Always author explicit safety policies in your system prompt if exposing the endpoint beyond solo local use."
+
+  - id: inkling-2-mini
+    kind: model
+    name: "Inkling 2 Mini (26.4B Looped Transformer MoE)"
+    summary: "Experimental looped-layer MoE iterating its middle 12 layers three times (3.4B base / 5.4B effective active, 1M context), natively supported in mainline llama.cpp (#32218) and Unsloth."
+    when_to_use: "Testing high-efficiency looped coding architectures inside 16GB-18GB memory budgets."
+    evidence_tier: vendor-claim
+    lifecycle: experimental
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"
+    tags: [local-experimental]
+    capabilities: [coding, game-dev]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: "Apache-2.0 + AUP"
+      footprint: "13-18 GB (UD-Q3/Q4)"
+      launch_recipe: "llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --host 127.0.0.1 --port 8080"
+    limitations:
+      - "Published 79.2% SWE-bench Verified and 48.2% DeepSWE v1.1 figures are lab-reported; trails Qwen3.8-27B on strict chat."
+      - "Can enter repetitive debug loops; cap max turns and run inside a sandbox."
+
+  - id: laya-05
+    kind: model
+    name: "Laya 0.5 (Multimodal System-1 Decision Model)"
+    summary: "Compact non-autoregressive scorer evaluating up to 64 typed decisions in a single forward pass (<100-500ms on CPU/NPU/WebGPU), auto-discovered by Pi via llama.cpp /v1/systemone."
+    when_to_use: "Fast zero-output-token tool-safety gating, routing, and memory relevance checks without using GPU VRAM."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/NandhaKishorM/laya"
+    tags: [local-decision, security]
+    capabilities: [decisions, safety]
+    relations:
+      runs_on: [gpu-pc, mac]
+      guards: ["*"]
+    meta:
+      license: Apache-2.0
+      footprint: "678-846 MB (CPU / NPU / WebGPU)"
+      last_reviewed_release: "v0.5.0"
+      launch_recipe: "pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
+    limitations:
+      - "Threshold decisions on calibrated probabilities rather than raw confidence scores; optional vegaml-learn add-on is non-commercial."
+
+  - id: qwen38-pi-lora
+    kind: adapter
+    name: "Qwen3.8-27B Pi Specialist LoRA (~319 MB)"
+    summary: "Single-harness RL LoRA trained directly inside unmodified Pi, delivering the highest thinking-off pass@1 lift and cutting average Terminal-Bench tokens from 2.9K down to 1.5K/task."
+    when_to_use: "Rung 1 of the Pi Ricing Journey when running Pi with thinking mode OFF on local Qwen3.8-27B."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF"
+    tags: [rl-research]
+    capabilities: [coding, reverse-eng]
+    relations:
+      adapts: [qwen3.8-27b, pi]
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "+319 MB LoRA on frozen Qwen3.8-27B"
+      launch_recipe: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080"
+    limitations:
+      - "HF BF16 vLLM evals jumped 39.2% -> 64.7% SWE-Pro and 39% -> 55% TB2.1, but GGUF quants have not been formally re-evaluated in llama.cpp (Q8_0 stays closer to BF16 than Q4)."
+      - "For thinking-on (xhigh) or multi-harness fleets, use the rank-96 super-adapter instead."
+
+  - id: qwen38-super-adapter
+    kind: adapter
+    name: "Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)"
+    summary: "Zero-retraining orthogonal rank-96 merge (PEFT combination_type=cat, weight 0.5) combining Pi, Hermes, and OpenCode RL LoRAs on one frozen Qwen3.8-27B backbone."
+    when_to_use: "Serving multiple harnesses from one 15 GB base model, or running with thinking mode enabled (xhigh)."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter"
+    tags: [rl-research]
+    capabilities: [coding, reverse-eng]
+    relations:
+      adapts: [qwen3.8-27b, pi, hermes-agent, opencode]
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "+912 MiB LoRA (+304-319 MiB for single-harness specialist)"
+      launch_recipe: "llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080"
+      mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
+      eval_tables:
+        - title: "Reproduced SWE-bench Pro & Terminal-Bench 2.1 Results (Qwen3.8-27B)"
+          headers: ["Evaluation Mode", "Base Qwen3.8-27B", "Specialist LoRA", "Rank-96 Super-Adapter", "Tool-Call Reduction"]
+          rows:
+            - ["Thinking Off (mean across 6 harness-bench pairs)", "39.5%", "pi SWE-Pro: 64.7% (vs 39.2%)", "49.0% (beats base 6/6)", "-53% to -73% calls"]
+            - ["Thinking On / xhigh (mean across 6 pairs)", "55.5%", "Trained with thinking off", "63.5% (wins 5/6, ties 1)", "-31% to -48% SWE-Pro"]
+            - ["Cross-Harness Transfer (pi LoRA -> other loops)", "44.8% OC / 46.3% Hermes", "54.0% OC / 56.1% Hermes", "Also transfers to Swift-1.5", "~45% fewer calls"]
+        - title: "Out-of-Distribution Control: 300 AutomationBench Tasks (Non-SWE Agent Loop)"
+          headers: ["Model Variant", "pass@1 (All Assertions)", "vs. Base", "Partial Credit", "vs. Base"]
+          rows:
+            - ["Base Qwen3.8-27B", "23.0%", "—", "62.2%", "—"]
+            - ["pi Specialist (step 160)", "27.0%", "+4.0", "66.2%", "+4.0"]
+            - ["OpenCode Specialist (step 150)", "25.3%", "+2.3", "65.2%", "+3.0"]
+            - ["Rank-96 Merged Super-Adapter", "23.7%", "+0.7", "60.6%", "-1.6"]
+            - ["Hermes Specialist (step 160)", "17.7%", "-5.3", "56.6%", "-5.6"]
+    limitations:
+      - "When running a single harness with thinking off, prefer its specialist LoRA (e.g., pi 64.0% vs 46.0% SWE-Pro hard-51)."
+      - "Trained on BF16 weights; expect brief pre-tool thinking leakage (arXiv:2610.14270) and slight optimistic bias on TB2.1 where merge weight 0.5 was selected."
+
+  - id: qwen38-abliterated-lora
+    kind: adapter
+    name: "Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)"
+    summary: "Lightweight 26 MB rank-3 LoRA removing built-in refusals on top of the exact same frozen Qwen3.8-27B checkpoint."
+    when_to_use: "Authorized security testing or unfiltered local experimentation without duplicating 15 GB of base weights."
+    evidence_tier: field-note
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated"
+    tags: [rl-research]
+    capabilities: [unfiltered]
+    relations:
+      adapts: [qwen3.8-27b]
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "+26 MB LoRA on frozen Qwen3.8-27B"
+    limitations:
+      - "Abliterated adapters cannot refuse destructive tool actions; always isolate behind safeagents and Laya 0.5."
+
+  - id: hf-in-harness-rl
+    kind: tool
+    name: "In-Harness RL Recipe & HF Collection (OpenEnv + Harbor + TRL AsyncGRPO)"
+    summary: "Reusable reinforcement-learning pipeline and public Hugging Face collection training LoRAs inside unmodified shipping harnesses via a token/logprob capture proxy."
+    when_to_use: "Reproducing harness-specific RL on private codebases or tracking newly published harness adapters."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/collections/harness-hub/qwen38-27b-harness-adapters"
+    tags: [rl-research]
+    capabilities: [adaptation]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: Apache-2.0
+      upstream_docs_url: "https://huggingface.co/blog/harness-adapters-at-scale"
+      eval_tables:
+        - title: "TB2.1 Difficulty-Filtering Ablation (Qwen3.8-27B · LoRA AsyncGRPO · 32 tasks/arm · 8xH200 · Base TB2.1: 35.9%)"
+          headers: ["Experimental Arm", "Task Filtering Rule", "Steps Completed", "Train Reward (Steps 1-5 -> Last 5)"]
+          rows:
+            - ["A1 Unvalidated", "24 accepted + 8 failed openenv validate", "40 (timed out at step 48)", "0.64 -> 0.67"]
+            - ["A2 Validated", "32 validated, no difficulty filter", "50 (completed)", "0.56 -> 0.70"]
+            - ["A3 Unqualified", "32 validated base always or never solves", "25 (timed out at step 26)", "0.60 -> 0.63"]
+            - ["A4 Qualified", "32 validated base solves sometimes", "50 (completed)", "0.62 -> 0.81"]
+    limitations:
+      - "Requires all-linear LoRA, LR 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and excluding all-pass/all-fail tasks."

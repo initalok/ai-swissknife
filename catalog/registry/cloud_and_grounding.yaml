@@ -1,0 +1,271 @@
+entries:
+  - id: google-ai-studio
+    kind: gateway
+    name: "Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)"
+    summary: "Google's primary card-free developer API gateway serving Gemini 4 Hydrogen with a 1,048,576-token unified context window, multimodal inputs, and four thinking levels alongside Gemini Decision 1."
+    when_to_use: "Default zero-card cloud gateway for multi-step coding agents, full-repository ingestion, and multimodal reasoning."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://aistudio.google.com/"
+    tags: [cloud-free]
+    capabilities: [coding, research, media, social]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: GEMINI_API_KEY
+      base_url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+      default_model: "gemini-4-hydrogen"
+      quota: "No card: Free Tier (gemini-4-hydrogen 1M unified ctx, implicit caching) + Decision 1 (200 RPM / 10K RPD)"
+      upstream_docs_url: "https://ai.google.dev/gemini-api/docs"
+    limitations:
+      - "Free Tier prompts are used to improve products outside EU/UK/CH; never paste secrets or proprietary source code."
+      - "Search Grounding, Maps Grounding, Batch API, and explicit context caching are paid-tier only on Gemini 4 Hydrogen."
+      - "Passing thinking_level=minimal or out-of-range temperature/top_p/top_k returns HTTP 400 on gemini-4-hydrogen."
+
+  - id: zhipu-bigmodel
+    kind: gateway
+    name: "Z.ai BigModel (GLM-4.7-Flash)"
+    summary: "Card-free developer API offering a permanently free MIT-licensed GLM-4.7-Flash endpoint with a 200K context window and 128K output cap."
+    when_to_use: "Secondary card-free backup for long-context coding and tool-use loops when Google AI Studio limits are hit."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://open.bigmodel.cn/"
+    tags: [cloud-free]
+    capabilities: [coding]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: ZHIPU_API_KEY
+      base_url: "https://open.bigmodel.cn/api/paas/v4/"
+      default_model: "glm-4.7-flash"
+      quota: "No card: permanently free GLM-4.7-Flash tier (200K ctx / 128K out)"
+    limitations:
+      - "Only glm-4.7-flash is permanently free; newer GLM-5.x endpoints are billed and fail on $0 accounts."
+
+  - id: nvidia-nim
+    kind: gateway
+    name: "NVIDIA NIM Developer Catalog"
+    summary: "Serverless developer catalog hosting rack-scale open-weight checkpoints—including 552B DeepSeek-V4.1-Flash and Nemotron-3.5-Super-VL—without requiring a credit card."
+    when_to_use: "Prototyping giant 300B-550B open-weight models that exceed consumer workstation memory."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://build.nvidia.com/"
+    tags: [cloud-free]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: NVIDIA_API_KEY
+      base_url: "https://integrate.api.nvidia.com/v1"
+      default_model: "deepseek-ai/deepseek-v4.1-flash"
+      quota: "No card: ~40 RPM developer prototyping catalog"
+    limitations:
+      - "Restricted to developer prototyping rather than production workloads, with occasional cold-start queues on large MoEs."
+
+  - id: openrouter-free
+    kind: gateway
+    name: "OpenRouter (:free Routes)"
+    summary: "Unified OpenAI-compatible aggregator routing community-sponsored free model endpoints behind one API key."
+    when_to_use: "Quick side-by-side model comparisons and light fallback routing across diverse open weights."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://openrouter.ai/"
+    tags: [cloud-free]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: OPENROUTER_API_KEY
+      base_url: "https://openrouter.ai/api/v1"
+      default_model: "openrouter/free"
+      quota: "20 RPM, 50 RPD ($0 balance) -> 1,000 RPD (>=10 credits balance)"
+    limitations:
+      - "50 RPD on unverified $0 accounts runs out in roughly three multi-step coding tasks; negative balances return HTTP 402 even on :free routes."
+
+  - id: groq-cloud
+    kind: gateway
+    name: "Groq Cloud LPU"
+    summary: "Ultra-low-latency LPU inference offering free tiers for compact LLMs (qwen/qwen3.8-27b) and high-quota Whisper-Large-v3 speech transcription."
+    when_to_use: "Sub-second small-prompt JSON routing (<6K tokens) and free audio transcription (2,000 requests/day)."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://console.groq.com/"
+    tags: [cloud-free]
+    capabilities: [fast-json, media]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: GROQ_API_KEY
+      base_url: "https://api.groq.com/openai/v1"
+      default_model: "qwen/qwen3.8-27b"
+      quota: "No card: LLMs 30 RPM / 1K RPD / 8K TPM; Whisper 2K RPD / 28.8K audio sec/day"
+    limitations:
+      - "Strict 8,000 TPM cap on free LLMs causes immediate HTTP 429 failures on 20K-token coding agent prompts."
+
+  - id: cloudflare-workers-ai
+    kind: gateway
+    name: "Cloudflare Workers AI (Clef & Clairic)"
+    summary: "Edge inference offering 10,000 daily free Neurons for non-autoregressive Clef decision models and Clairic structured span extraction."
+    when_to_use: "Zero-output-token edge classification, moderation, and typed extraction."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://developers.cloudflare.com/workers-ai/"
+    tags: [cloud-free]
+    capabilities: [decisions]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: CLOUDFLARE_API_TOKEN
+      base_url: "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1"
+      default_model: "@cf/cloudflare/clef"
+      quota: "No card: 10,000 Neurons/day free (resets 00:00 UTC)"
+    limitations:
+      - "Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410)."
+
+  - id: pollinations
+    kind: gateway
+    name: "Pollinations AI"
+    summary: "Keyless community OpenAI-compatible text and FLUX image endpoint requiring zero signup or authentication."
+    when_to_use: "Last-resort keyless fallback for throwaway public sandbox tests where no API keys exist."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://pollinations.ai/"
+    tags: [cloud-free]
+    capabilities: [coding]
+    relations:
+      runs_on: [cloud]
+    meta:
+      env_key: null
+      base_url: "https://text.pollinations.ai/openai"
+      default_model: "openai"
+      quota: "Keyless fair-use IP quota (text and image)"
+    limitations:
+      - "Shared public community service; never transmit private code, credentials, or personal data."
+
+  - id: firecrawl
+    kind: tool
+    name: "Firecrawl"
+    summary: "JavaScript-capable webpage-to-Markdown crawler with an agent onboarding skill and low token overhead on OpenBenchmarks."
+    when_to_use: "Turning modern dynamic documentation sites into clean Markdown for research and RAG."
+    evidence_tier: primary-eval
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://www.firecrawl.dev/"
+    tags: [grounding, research]
+    capabilities: [research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      quota: "Keyless onboarding skill + 500 starter credits"
+    limitations:
+      - "Keyless usage is strictly IP-rate-limited; create a free API key for multi-page crawls."
+
+  - id: jina-reader
+    kind: tool
+    name: "Jina Reader (r.jina.ai / s.jina.ai)"
+    summary: "Zero-SDK URL prefix service turning web pages and PDFs into clean LLM-ready Markdown."
+    when_to_use: "One-line URL reading inside shell scripts and lightweight agents."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://jina.ai/reader/"
+    tags: [grounding, research]
+    capabilities: [research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      quota: "Keyless prefix + 10M free tokens with free API key"
+    limitations:
+      - "Unauthenticated prefix requests throttle quickly under automated batch loops."
+
+  - id: exa-search
+    kind: tool
+    name: "Exa 3.0 Neural Search"
+    summary: "Semantic web search API built specifically for AI retrieval, renewing $10/month in free credits on the 1st of every month."
+    when_to_use: "High-precision web discovery for research agents and technical literature scouting."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://exa.ai/"
+    tags: [grounding, research]
+    capabilities: [research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      quota: "No card: $10/mo recurring credits (~2,500 Lite searches)"
+    limitations:
+      - "Deep search modes exhaust monthly free credits much faster than Lite searches."
+
+  - id: openalex
+    kind: tool
+    name: "OpenAlex Academic Graph"
+    summary: "Open scholarly index covering 250M+ academic works, citation graphs, and open-access PDF links with zero API keys required."
+    when_to_use: "Primary literature review, DOI verification, and academic citation mapping."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://openalex.org/"
+    tags: [grounding, research]
+    capabilities: [research]
+    relations:
+      runs_on: [cloud]
+    meta:
+      quota: "Keyless: 100,000 requests/day forever"
+    limitations:
+      - "Pass ?mailto=you@domain.com in queries to enter the fast polite pool."
+
+  - id: gpt-researcher
+    kind: tool
+    name: "GPT Researcher"
+    summary: "Open-source research synthesizer (MCP + skill) covering both live web sources and local PDF/CSV folders."
+    when_to_use: "Generating structured, cited background reports over mixed web and local documents."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/assafelovic/gpt-researcher"
+    tags: [research]
+    capabilities: [research]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+    limitations:
+      - "Audit every cited claim, date, and quantitative metric against primary sources before publishing."
+
+  - id: deerflow
+    kind: tool
+    name: "DeerFlow 2.0"
+    summary: "Open-source deep research harness executing web gathering, code analysis, and synthesis inside an isolated Docker sandbox."
+    when_to_use: "Multi-step deep research reports when you want container-isolated execution."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/bytedance/deer-flow"
+    tags: [research]
+    capabilities: [research]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Requires Docker and careful prompt/token budgeting to avoid runaway web fetches."

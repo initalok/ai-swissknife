@@ -1,5 +1,5 @@
-name: Propose a New Tool, Model, or Guide Update
-description: Suggest an addition backed by a canonical URL, evidence tier, and explicit limitations.
+name: Propose a Tool, Model, or Guide Addition
+description: Propose an addition backed by a canonical URL, evidence tier, and explicit limitations.
 labels: ["proposal"]
 body:
   - type: input
@@ -14,8 +14,8 @@ body:
     attributes:
       label: Evidence Tier
       options:
-        - primary-eval (independent or reproduced benchmark)
-        - official-docs (primary documentation / release notes)
+        - primary-eval (independent or reproduced evaluation)
+        - official-docs (primary documentation or release notes)
         - vendor-claim (lab-reported metric)
         - field-note (reproducible community workflow)
     validations:
@@ -24,6 +24,6 @@ body:
     id: limits
     attributes:
       label: Explicit Limitations / When NOT to use it
-      placeholder: "Every entry in AI Swiss Knife must state its real-world trade-offs."
+      placeholder: "Every entry must state real-world boundary conditions."
     validations:
       required: true

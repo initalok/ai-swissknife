@@ -1,43 +1,40 @@
+---
+title: "Research & Writing"
+section: guides
+summary: "Cited literature synthesis combining OpenAlex academic graphs, Exa 3.0 neural search, Firecrawl Markdown extraction, and open research harnesses."
+order: 5
+---
+
 [Home](../README.md) / Guides / Research & Writing
 
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md))*
+<!-- swissknife:begin status-banner -->
+*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+<!-- swissknife:end -->
 
 # Research & Writing
 
-High-precision literature synthesis combining open academic graphs, semantic search, and cited draft generation.
+Reliable AI-assisted research separates **source gathering** (verifiable DOIs, primary docs, and clean Markdown extraction) from **synthesis and human verification**.
 
-## Recommended Stack
+## Verified Research & Grounding Stack
 
-The components below are selected for this workflow based on verified compatibility and current link health.
-
-### Models & Cloud Gateways
-
-- **[Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)](https://aistudio.google.com/)** — Default zero-card cloud gateway for multi-step coding agents, full-repository ingestion, and multimodal reasoning. *(Official documentation)*
-- **[NVIDIA NIM Developer Catalog](https://build.nvidia.com/)** — Testing giant 300B-550B open-weight models that cannot fit inside consumer workstation memory. *(Official documentation)*
-- **[OpenRouter (:free Routes)](https://openrouter.ai/)** — Quick model comparisons and light fallback routing across diverse open weights. *(Official documentation)*
-- **[Qwen3.8-27B (Dense Vision + Text)](https://huggingface.co/Qwen/Qwen3.8-27B)** — Daily-driver local coding, strict instruction following, and single-backbone multi-LoRA serving. *(Primary evaluation)*
-- **[Gemma 4 Family (26B-A4B Vision & 12B Tri-Modal)](https://ai.google.dev/gemma)** — High-speed local general chat, vision inspection, or local audio analysis. *(Official documentation)*
-
-### Agent Harnesses
-
-- **[Pi Coding Agent (+ @earendil-works/pi-durable)](https://github.com/earendil-works/pi)** — When you want full control over context assembly, clean compaction, and the highest-scoring official target for Hugging Face's RL harness adapters. *(Primary evaluation)*
-- **[Hermes Agent (v0.23.4)](https://github.com/NousResearch/hermes-agent)** — Always-on background assistants, scheduled research digests, and multi-surface personal operations. *(Official documentation)*
-
-## Supporting Domain Tools
-
-- **[GPT Researcher](https://github.com/assafelovic/gpt-researcher)** — Open-source research synthesizer (gptr-mcp and skill) covering both web sources and local PDF/CSV folders.
-- **[DeerFlow 2.0](https://github.com/bytedance/deer-flow)** — Open-source deep research harness running inside an isolated Docker sandbox.
+<!-- swissknife:begin table tag=research -->
+| Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
+| :--- | :--- | :--- | :--- | :--- |
+| [Firecrawl](https://www.firecrawl.dev/) | Turning modern dynamic documentation sites into clean Markdown for research and RAG. | Keyless onboarding skill + 500 starter credits | Primary evaluation | Keyless usage is strictly IP-rate-limited; create a free API key for multi-page crawls. |
+| [Jina Reader (r.jina.ai / s.jina.ai)](https://jina.ai/reader/) | One-line URL reading inside shell scripts and lightweight agents. | Keyless prefix + 10M free tokens with free API key | Official documentation | Unauthenticated prefix requests throttle quickly under automated batch loops. |
+| [Exa 3.0 Neural Search](https://exa.ai/) | High-precision web discovery for research agents and technical literature scouting. | No card: $10/mo recurring credits (~2,500 Lite searches) | Official documentation | Deep search modes exhaust monthly free credits much faster than Lite searches. |
+| [OpenAlex Academic Graph](https://openalex.org/) | Primary literature review, DOI verification, and academic citation mapping. | Keyless: 100,000 requests/day forever | Official documentation | Pass ?mailto=you@domain.com in queries to enter the fast polite pool. |
+| [GPT Researcher](https://github.com/assafelovic/gpt-researcher) | Generating structured, cited background reports over mixed web and local documents. | Apache-2.0 | Official documentation | Audit every cited claim, date, and quantitative metric against primary sources before publishing. |
+| [DeerFlow 2.0](https://github.com/bytedance/deer-flow) | Multi-step deep research reports when you want container-isolated execution. | MIT | Official documentation | Requires Docker and careful prompt/token budgeting to avoid runaway web fetches. |
+<!-- swissknife:end -->
 
 ## Step-by-Step Workflow
 
-1. Gather primary scholarly works and DOIs from OpenAlex (polite pool) and current technical documentation via Exa 3.0 or Firecrawl.
-2. Run GPT Researcher or DeerFlow 2.0 across retrieved web pages and local PDF/CSV source folders.
-3. Audit every cited claim, date, and quantitative figure against primary sources before publishing.
-
-## Limitations & Trade-Offs
-
-- Never treat autonomous research syntheses as publication-ready without checking primary DOIs and URLs manually.
+1. **Start with primary graphs, not raw web noise:** Pull peer-reviewed papers, DOIs, and citation graphs via **OpenAlex** (100,000 keyless requests/day; pass `?mailto=you@domain.com` for the polite pool).
+2. **Extract live technical documentation cleanly:** Use **Exa 3.0** ($10/mo renewing free credits) for semantic discovery and **Firecrawl** or **Jina Reader** (`r.jina.ai/<url>`) for low-token Markdown extraction.
+3. **Synthesize over mixed web + local sources:** Run **GPT Researcher** or container-isolated **DeerFlow 2.0** across gathered pages and local PDF/CSV folders, filing curated takeaways into your [Plain-Markdown Knowledge Vault](memory-and-knowledge.md).
+4. **Audit every primary source manually:** Never publish quantitative claims, benchmarks, or dates without checking the primary URL or DOI yourself.
 
 ---
 
-**Continue reading:** [Local AI Workstation Guide](local-ai-workstation.md) · [Specialist Domains](specialist-domains.md)
+**Continue reading:** [Zero-Card Cloud](../worlds/cloud.md) · [Persistent Memory & Knowledge Loops](memory-and-knowledge.md)

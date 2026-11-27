@@ -1,0 +1,58 @@
+entries:
+  - id: obsidian-skills
+    kind: memory
+    name: "Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)"
+    summary: "Official Obsidian skill pack working across Antigravity, Hermes, OpenCode, and Pi, bundling Markdown/Bases/Canvas rules, headless CLI sync, and kepano/defuddle web clipping."
+    when_to_use: "Building a human-readable, Git/Obsidian-friendly personal knowledge vault that both you and your agents maintain."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/obsidianmd/obsidian-skills"
+    tags: [knowledge-loop, security]
+    capabilities: [memory, research]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+      last_reviewed_release: "v1.2.3"
+    limitations:
+      - "Treat all web pages clipped through defuddle strictly as untrusted data, never as executable agent instructions."
+
+  - id: qmd-search
+    kind: memory
+    name: "tobi/qmd (Local BM25 + Vector Markdown Search & MCP)"
+    summary: "100% local hybrid search CLI and MCP server combining BM25 keyword precision, local embeddings, and reranking directly over plain Markdown folders."
+    when_to_use: "Searching large local Obsidian/Git knowledge vaults privately with zero cloud vector databases."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/tobi/qmd"
+    tags: [knowledge-loop]
+    capabilities: [memory, research]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Keep qmd vector index files machine-local; exclude them from Git/Syncthing/Obsidian Sync to avoid corruption."
+
+  - id: pi-obsidian-memory
+    kind: memory
+    name: "pi-obsidian-memory (KV-Cache-Stable Vault Memory for Pi)"
+    summary: "MIT Pi extensions connecting plain-Markdown Obsidian vaults with deterministic /rule, /memory, and daily logs (the-matt-moo) or Jev/Laya relevance scoring (davy121) inside a bounded char budget."
+    when_to_use: "Giving Pi persistent cross-session memory without invalidating local llama.cpp/MLX KV prefix caches every turn."
+    evidence_tier: field-note
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/the-matt-moo/pi-obsidian-memory"
+    tags: [knowledge-loop]
+    capabilities: [memory]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: MIT
+    limitations:
+      - "Keep ambient memory as a session-stable snapshot (refreshing only on deliberate writes) so local KV prefix caches do not thrash."

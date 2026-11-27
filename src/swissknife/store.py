@@ -6,16 +6,21 @@ from typing import Any
 import yaml
 
 from swissknife.models import (
-    Catalog,
-    Edges,
+    DecisionRecord,
     Entry,
-    ExternalLink,
-    GuideSpec,
-    HardwareProfile,
+    ExternalRef,
+    Relations,
     RetiredItem,
-    SpecialistSpec,
+    Slot,
+    Specialist,
+    Taxonomy,
+    TaxonomyItem,
     WatchItem,
+    Workspace,
 )
+from swissknife.pages import scan_pages
+
+DEFAULT_KINDS = ["gateway", "model", "adapter", "harness", "runtime", "tool", "mcp", "memory", "fabric", "mobile"]
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -25,180 +30,218 @@ def _load_yaml(path: Path) -> dict[str, Any]:
         return yaml.safe_load(fp) or {}
 
 
-def _parse_link(raw: dict[str, Any]) -> ExternalLink:
-    return ExternalLink(
+def _parse_tax_items(items: list[dict[str, Any]]) -> dict[str, TaxonomyItem]:
+    out: dict[str, TaxonomyItem] = {}
+    for idx, raw in enumerate(items):
+        tid = raw.get("id")
+        if tid:
+            out[str(tid)] = TaxonomyItem(
+                id=str(tid),
+                name=str(raw.get("name", tid)),
+                summary=str(raw.get("summary", "")),
+                order=int(raw.get("order", idx)),
+            )
+    return out
+
+
+def _parse_ref(raw: dict[str, Any]) -> ExternalRef:
+    return ExternalRef(
         id=str(raw.get("id", "")),
         name=str(raw.get("name", "")),
         url=str(raw.get("url", "")),
         summary=str(raw.get("summary", "")),
-        evidence_tier=str(raw.get("evidence_tier", "official-docs")),
     )
 
 
-def load_catalog(root: str | Path = ".") -> Catalog:
+def load_workspace(root: str | Path = ".") -> Workspace:
     root_path = Path(root)
     cdir = root_path / "catalog"
     errors: list[str] = []
 
-    profiles_raw = _load_yaml(cdir / "profiles.yaml")
-    profiles = {
-        p["id"]: HardwareProfile(id=p["id"], name=p["name"], summary=p["summary"])
-        for p in profiles_raw.get("profiles", [])
-        if p.get("id")
-    }
-
-    models_cloud = _load_yaml(cdir / "models_and_cloud.yaml")
-    harnesses_tools = _load_yaml(cdir / "harnesses_and_tools.yaml")
+    tax_raw = _load_yaml(cdir / "taxonomy.yaml")
+    taxonomy = Taxonomy(
+        allowed_kinds=list(tax_raw.get("allowed_kinds") or DEFAULT_KINDS),
+        tracks=_parse_tax_items(tax_raw.get("tracks", [])),
+        worlds=_parse_tax_items(tax_raw.get("worlds", [])),
+        sections=_parse_tax_items(tax_raw.get("sections", [])),
+        non_goals=list(tax_raw.get("non_goals", [])),
+    )
 
     entries: dict[str, Entry] = {}
-    for rel, raw in (
-        ("catalog/models_and_cloud.yaml", models_cloud),
-        ("catalog/harnesses_and_tools.yaml", harnesses_tools),
-    ):
-        for item in raw.get("entries", []):
-            eid = item.get("id")
-            if not eid:
-                errors.append(f"{rel}: entry missing 'id'")
-                continue
-            if eid in entries:
-                errors.append(f"{rel}: duplicate entry id '{eid}'")
-                continue
-            e_raw = item.get("edges") or {}
-            entries[eid] = Entry(
-                id=eid,
-                kind=str(item.get("kind", "")),
-                category=str(item.get("category", "")),
-                name=str(item.get("name", "")),
-                summary=str(item.get("summary", "")),
-                when_to_use=str(item.get("when_to_use", "")),
-                limitations=list(item.get("limitations", [])),
-                evidence_tier=str(item.get("evidence_tier", "")),
-                lifecycle=str(item.get("lifecycle", "")),
-                decay_class=str(item.get("decay_class", "")),
-                last_verified=str(item.get("last_verified", "")),
-                url=str(item.get("url", "")),
-                capabilities=list(item.get("capabilities", [])),
-                edges=Edges(
-                    runs_on=list(e_raw.get("runs_on", [])),
-                    adapts=list(e_raw.get("adapts", [])),
-                    guards=list(e_raw.get("guards", [])),
-                ),
-                license=item.get("license"),
-                footprint=item.get("footprint"),
-                quota=item.get("quota"),
-                env_key=item.get("env_key"),
-                base_url=item.get("base_url"),
-                default_model=item.get("default_model"),
-                role=item.get("role"),
-                evidence_notes=list(item.get("evidence_notes", [])),
-                eval_tables=list(item.get("eval_tables", [])),
-                launch_recipe=item.get("launch_recipe"),
-                mac_launch_recipe=item.get("mac_launch_recipe"),
-                source_file=rel,
-            )
-
-    guides_raw = _load_yaml(cdir / "guides.yaml")
-    guides: dict[str, GuideSpec] = {}
-    for g in guides_raw.get("guides", []):
-        gid = g.get("id")
-        if not gid:
-            errors.append("catalog/guides.yaml: guide missing 'id'")
-            continue
-        c = g.get("constraints") or {}
-        guides[gid] = GuideSpec(
-            id=gid,
-            title=str(g.get("title", "")),
-            summary=str(g.get("summary", "")),
-            last_verified=str(g.get("last_verified", "")),
-            decay_class=str(g.get("decay_class", "operational")),
-            capabilities=list(c.get("capabilities", [])),
-            privacy=str(c.get("privacy", "any")),
-            require_guard=bool(c.get("require_guard", False)),
-            pin_entries=list(g.get("pin_entries", [])),
-            tools=[_parse_link(t) for t in g.get("tools", [])],
-            steps=list(g.get("steps", [])),
-            limitations=list(g.get("limitations", [])),
-        )
-
-    spec_raw = _load_yaml(cdir / "specialists.yaml")
-    specialists: dict[str, SpecialistSpec] = {}
-    for s in spec_raw.get("specialists", []):
-        sid = s.get("id")
-        if not sid:
-            errors.append("catalog/specialists.yaml: specialist missing 'id'")
-            continue
-        c = s.get("constraints") or {}
-        specialists[sid] = SpecialistSpec(
-            id=sid,
-            title=str(s.get("title", "")),
-            summary=str(s.get("summary", "")),
-            last_verified=str(s.get("last_verified", "")),
-            capabilities=list(c.get("capabilities", [])),
-            privacy=str(c.get("privacy", "any")),
-            require_guard=bool(c.get("require_guard", False)),
-            direct_picks=[_parse_link(p) for p in s.get("direct_picks", [])],
-            upstream_directory=_parse_link(s.get("upstream_directory") or {}),
-            guardrails=list(s.get("guardrails", [])),
-        )
-
-    watch_raw = _load_yaml(cdir / "watch.yaml")
-    watch_frontier = [
-        WatchItem(
-            id=str(w.get("id", "")),
-            bucket="frontier",
-            name=str(w.get("name", "")),
-            url=str(w.get("url", "")),
-            last_verified=str(w.get("last_verified", "")),
-            evidence_tier=str(w.get("evidence_tier", "vendor-claim")),
-            summary=str(w.get("summary", "")),
-            limitations=list(w.get("limitations", [])),
-        )
-        for w in watch_raw.get("frontier", [])
-    ]
-    watch_community = [
-        WatchItem(
-            id=str(w.get("id", "")),
-            bucket="community",
-            name=str(w.get("name", "")),
-            url=str(w.get("url", "")),
-            last_verified=str(w.get("last_verified", "")),
-            evidence_tier=str(w.get("evidence_tier", "field-note")),
-            summary=str(w.get("summary", "")),
-            limitations=list(w.get("limitations", [])),
-        )
-        for w in watch_raw.get("community", [])
-    ]
-
-    retired_raw = _load_yaml(cdir / "retired.yaml")
+    slots: dict[str, Slot] = {}
+    specialists: dict[str, Specialist] = {}
+    watch_frontier: list[WatchItem] = []
+    watch_community: list[WatchItem] = []
+    seen_watch: set[tuple[str, str]] = set()
     retired: list[RetiredItem] = []
-    for cat in ("cloud", "local"):
-        for r in retired_raw.get(cat, []):
-            retired.append(
-                RetiredItem(
-                    category=cat,
-                    name=str(r.get("name", "")),
-                    match_pattern=str(r.get("match_pattern", "")),
-                    retired_on=str(r.get("retired_on", "")),
-                    reason=str(r.get("reason", "")),
-                    replaced_by=r.get("replaced_by"),
+
+    reg_dir = cdir / "registry"
+    if reg_dir.exists():
+        for path in sorted(reg_dir.rglob("*.yaml")):
+            rel = path.relative_to(root_path).as_posix()
+            raw = _load_yaml(path)
+
+            for item in raw.get("entries", []):
+                eid = item.get("id")
+                if not eid:
+                    errors.append(f"{rel}: entry missing 'id'")
+                    continue
+                if eid in entries:
+                    errors.append(f"{rel}: duplicate entry id '{eid}'")
+                    continue
+                r_raw = item.get("relations") or {}
+                entries[str(eid)] = Entry(
+                    id=str(eid),
+                    kind=str(item.get("kind", "")),
+                    name=str(item.get("name", "")),
+                    summary=str(item.get("summary", "")),
+                    when_to_use=str(item.get("when_to_use", "")),
+                    limitations=list(item.get("limitations", [])),
+                    evidence_tier=str(item.get("evidence_tier", "")),
+                    lifecycle=str(item.get("lifecycle", "")),
+                    decay_class=str(item.get("decay_class", "")),
+                    last_verified=str(item.get("last_verified", "")),
+                    url=str(item.get("url", "")),
+                    tags=list(item.get("tags", [])),
+                    capabilities=list(item.get("capabilities", [])),
+                    relations=Relations(
+                        runs_on=list(r_raw.get("runs_on", [])),
+                        adapts=list(r_raw.get("adapts", [])),
+                        guards=list(r_raw.get("guards", [])),
+                    ),
+                    meta=dict(item.get("meta") or {}),
+                    source_file=rel,
                 )
-            )
+
+            for s in raw.get("slots", []):
+                sid = s.get("id")
+                if not sid:
+                    errors.append(f"{rel}: slot missing 'id'")
+                    continue
+                if sid in slots:
+                    errors.append(f"{rel}: duplicate slot id '{sid}'")
+                    continue
+                slots[str(sid)] = Slot(
+                    id=str(sid),
+                    title=str(s.get("title", "")),
+                    role=str(s.get("role", "")),
+                    primary=str(s.get("primary", "")),
+                    experimental=s.get("experimental"),
+                    fallbacks=list(s.get("fallbacks", [])),
+                    decision_id=s.get("decision_id"),
+                    world=s.get("world"),
+                    source_file=rel,
+                )
+
+            for sp in raw.get("specialists", []):
+                spid = sp.get("id")
+                if not spid:
+                    errors.append(f"{rel}: specialist missing 'id'")
+                    continue
+                if spid in specialists:
+                    errors.append(f"{rel}: duplicate specialist id '{spid}'")
+                    continue
+                c = sp.get("constraints") or {}
+                specialists[str(spid)] = Specialist(
+                    id=str(spid),
+                    title=str(sp.get("title", "")),
+                    summary=str(sp.get("summary", "")),
+                    last_verified=str(sp.get("last_verified", "")),
+                    capabilities=list(c.get("capabilities", [])),
+                    privacy=str(c.get("privacy", "any")),
+                    require_guard=bool(c.get("require_guard", False)),
+                    direct_picks=[_parse_ref(p) for p in sp.get("direct_picks", [])],
+                    upstream_hub=_parse_ref(sp.get("upstream_hub") or {}),
+                    guardrails=list(sp.get("guardrails", [])),
+                    source_file=rel,
+                )
+
+            watch_raw = raw.get("watch") or {}
+            for bucket, dest in (("frontier", watch_frontier), ("community", watch_community)):
+                for w in watch_raw.get(bucket, []):
+                    wid = str(w.get("id", ""))
+                    if not wid:
+                        errors.append(f"{rel}: watch:{bucket} item missing 'id'")
+                        continue
+                    if (bucket, wid) in seen_watch:
+                        errors.append(f"{rel}: duplicate watch id '{bucket}:{wid}'")
+                        continue
+                    seen_watch.add((bucket, wid))
+                    dest.append(
+                        WatchItem(
+                            id=wid,
+                            bucket=bucket,
+                            name=str(w.get("name", "")),
+                            url=str(w.get("url", "")),
+                            last_verified=str(w.get("last_verified", "")),
+                            evidence_tier=str(w.get("evidence_tier", "vendor-claim" if bucket == "frontier" else "field-note")),
+                            summary=str(w.get("summary", "")),
+                            limitations=list(w.get("limitations", [])),
+                            source_file=rel,
+                        )
+                    )
+
+            for r in raw.get("retired", []):
+                retired.append(
+                    RetiredItem(
+                        area=str(r.get("area", "general")),
+                        name=str(r.get("name", "")),
+                        match_pattern=str(r.get("match_pattern", "")),
+                        retired_on=str(r.get("retired_on", "")),
+                        reason=str(r.get("reason", "")),
+                        replaced_by=r.get("replaced_by"),
+                    )
+                )
+
+    decisions: dict[str, DecisionRecord] = {}
+    dec_dir = cdir / "decisions"
+    if dec_dir.exists():
+        for path in sorted(dec_dir.rglob("*.yaml")):
+            rel = path.relative_to(root_path).as_posix()
+            raw = _load_yaml(path)
+            items = raw.get("decisions") or ([raw["decision"]] if "decision" in raw else [])
+            for d in items:
+                did = d.get("id")
+                if not did:
+                    errors.append(f"{rel}: decision missing 'id'")
+                    continue
+                if did in decisions:
+                    errors.append(f"{rel}: duplicate decision id '{did}'")
+                    continue
+                decisions[str(did)] = DecisionRecord(
+                    id=str(did),
+                    title=str(d.get("title", "")),
+                    status=str(d.get("status", "accepted")),
+                    date=str(d.get("date", "")),
+                    job=str(d.get("job", "")),
+                    anchor_ids=list(d.get("anchor_ids", [])),
+                    alternatives=list(d.get("alternatives", [])),
+                    rationale=str(d.get("rationale", "")),
+                    exceptions=list(d.get("exceptions", [])),
+                    reversal_trigger=str(d.get("reversal_trigger", "")),
+                    slot_ids=list(d.get("slot_ids", [])),
+                    superseded_by=d.get("superseded_by"),
+                    source_file=rel,
+                )
+
+    pages, page_errs = scan_pages(root_path, taxonomy)
+    errors.extend(page_errs)
 
     health_path = root_path / "health" / "state.json"
     health_state: dict[str, dict[str, Any]] = {}
     if health_path.exists():
-        with health_path.open("r", encoding="utf-8") as fp:
-            health_state = json.load(fp)
+        health_state = json.loads(health_path.read_text(encoding="utf-8"))
 
-    return Catalog(
-        profiles=profiles,
+    return Workspace(
+        taxonomy=taxonomy,
         entries=entries,
-        routing_chains=dict(models_cloud.get("routing_chains", {})),
-        guides=guides,
+        slots=slots,
         specialists=specialists,
+        decisions=decisions,
         watch_frontier=watch_frontier,
         watch_community=watch_community,
         retired=retired,
+        pages=pages,
         health_state=health_state,
         load_errors=errors,
     )

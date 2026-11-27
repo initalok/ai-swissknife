@@ -1,0 +1,195 @@
+entries:
+  - id: google-antigravity
+    kind: harness
+    name: "Google Antigravity ($0 Individual Tier)"
+    summary: "Zero-install agentic coding suite spanning native desktop App, IDE extensions, and agy CLI with unlimited Tab/Command completions and weekly free agent quota."
+    when_to_use: "Fastest 5-minute guided entry into agentic coding for newcomers and students on any laptop."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://antigravity.google/"
+    tags: [newcomer-anchor]
+    capabilities: [coding]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      role: "Zero-Install Cloud IDE & CLI"
+      quota: "$0/mo Individual: unlimited Tab & Command + weekly Work-Done agent quota"
+    limitations:
+      - "Free agent quota resets weekly with no rollover; managed Google Workspace or .edu accounts may hit entitlement walls (use a personal Google account)."
+      - "No official first-party mobile companion app as of Nov 2026."
+
+  - id: opencode
+    kind: harness
+    name: "OpenCode CLI & Desktop"
+    summary: "Mature, vendor-agnostic coding harness with 1-line install, built-in per-action approval prompts, offline share-disabled mode, and an official HF Qwen3.8-27B adapter."
+    when_to_use: "Default local coding harness for newcomers and teams wanting safe out-of-the-box permission prompts."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/anomalyco/opencode"
+    tags: [newcomer-anchor]
+    capabilities: [coding, unfiltered]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      role: "Mature Newcomer & Team CLI"
+      license: MIT
+      last_reviewed_release: "v2.2.7"
+      upstream_docs_url: "https://opencode.ai/docs/providers"
+      config_title: "Working opencode.json for local llama-server (avoids the 4 beginner traps)"
+      config_lang: json
+      config_snippet: |
+        {
+          "$schema": "https://opencode.ai/config.json",
+          "share": "disabled",
+          "provider": {
+            "local": {
+              "npm": "@ai-sdk/openai-compatible",
+              "name": "Local llama.cpp",
+              "options": {
+                "baseURL": "http://127.0.0.1:8080/v1",
+                "apiKey": "sk-local"
+              },
+              "models": {
+                "qwen3.8-27b": {
+                  "name": "Qwen3.8-27B Local",
+                  "limit": { "context": 32768, "output": 8192 }
+                }
+              }
+            }
+          },
+          "model": "local/qwen3.8-27b"
+        }
+      sanity_check: "opencode debug config && opencode models local"
+    limitations:
+      - "Place baseURL strictly inside options, name the file opencode.json (no leading dot), and never name your custom provider 'openai'."
+      - "opencode serve starts without a password by default; set OPENCODE_SERVER_PASSWORD before exposing beyond 127.0.0.1."
+
+  - id: pi
+    kind: harness
+    name: "Pi Coding Agent (+ @earendil-works/pi-durable)"
+    summary: "Minimal, hackable agent kernel with built-in /llama router support, /v1/systemone decision-model discovery, /tree DAG branching, MCP + Codemode JS sandbox, and SQLite durability."
+    when_to_use: "Flagship developer anchor: run naked in 5 minutes, or optionally rice across 6 modular rungs (LoRA, sandbox, smart MCP, durability, mobile HITL, ComfyUI)."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/earendil-works/pi"
+    tags: [dev-anchor]
+    capabilities: [coding, research, reverse-eng, game-dev, media, social, unfiltered]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      role: "Flagship Mod-Able Developer Kernel"
+      license: MIT
+      last_reviewed_release: "v1.6.1"
+      upstream_docs_url: "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/llama-cpp.md"
+      launch_recipe: "curl -fsSL https://pi.dev/install.sh | sh && pi"
+      sanity_check: "pi --version"
+    limitations:
+      - "Intentionally omits built-in per-tool approval prompts; pair with gondolin, nono, or safeagents before autonomous runs."
+      - "Requires Node 22.19+; built-in MCP keeps enabled servers alive all session unless replaced with pi-mcp-adapter."
+
+  - id: deepseek-harness
+    kind: harness
+    name: "DeepSeek Harness (dsh)"
+    summary: "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and sub-agent plugins."
+    when_to_use: "Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://github.com/deepseek-ai/deepseek-harness"
+    capabilities: [coding, media]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      role: "Swappable-Loop Plugin Platform"
+      license: MIT
+      last_reviewed_release: "0.2.3-alpha.2"
+      launch_recipe: "npx @deepseek-ai/dsh web"
+    limitations:
+      - "Rapidly iterating developer preview; pin plugin peer versions against breaking interface changes."
+
+  - id: hermes-agent
+    kind: harness
+    name: "Hermes Agent"
+    summary: "Persistent self-improving daemon featuring cross-session memory, autonomous skill authoring, cron scheduling, native Telegram/WhatsApp bridges, and HF adapter support."
+    when_to_use: "Always-on background ops daemons and scheduled digests where you want messaging built in from day one."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/NousResearch/hermes-agent"
+    capabilities: [coding, research, social]
+    relations:
+      runs_on: [cloud, mac, gpu-pc]
+    meta:
+      role: "Self-Improving Persistent Daemon"
+      license: MIT
+      last_reviewed_release: "v0.23.4"
+    limitations:
+      - "Does not auto-compact aggressively like Pi by default; cap context lengths on massive repositories."
+
+  - id: llama-cpp
+    kind: runtime
+    name: "llama.cpp (Mainline GGUF Server & Router)"
+    summary: "Universal CUDA, Metal, Vulkan, and ROCm serving engine supporting hybrid MoE offloading (--n-cpu-moe), runtime --lora loading, router mode (llama serve), and Inkling looped layers (#32218)."
+    when_to_use: "Primary local serving engine on NVIDIA workstations and built-in /llama backend for Pi."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/ggml-org/llama.cpp"
+    capabilities: [coding]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: MIT
+      last_reviewed_release: "b7200"
+      launch_recipe: "llama serve --no-models-autoload -ngl all -c 32768 --host 127.0.0.1 --port 9931"
+      sanity_check: "curl -s http://127.0.0.1:9931/health"
+    limitations:
+      - "--sleep-idle-seconds leaves ~600 MiB of dormant CUDA context VRAM attached per model (llama.cpp#19379); explicitly Unload via Pi /llama before heavy ComfyUI renders."
+      - "--no-mmap is deprecated; use --load-mode none instead."
+
+  - id: mlx-lm
+    kind: runtime
+    name: "Apple MLX (mlx-lm)"
+    summary: "Apple Silicon native unified-memory inference framework beating llama.cpp by 46% to 3x on Apple GPUs with ~65 tok/s on 4-bit Qwen3.8-27B builds."
+    when_to_use: "Primary local LLM serving engine on Apple Silicon Macs (Mac mini, MacBook Pro, Mac Studio)."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://github.com/ml-explore/mlx-lm"
+    capabilities: [coding]
+    relations:
+      runs_on: [mac]
+    meta:
+      license: MIT
+      last_reviewed_release: "v0.34.0"
+      mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
+    limitations:
+      - "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for 27B coding sessions."
+
+  - id: unsloth-runtime
+    kind: runtime
+    name: "Unsloth Runtime & Studio"
+    summary: "Optimized local runtime offering fast VRAM-exceeding MoE execution, Decision API hosting for Laya, Anthropic-compatible local endpoints, and lower-memory 4-bit LoRA training."
+    when_to_use: "Serving Dynamic v3.1 GGUFs, local Laya decision endpoints, or running local LoRA fine-tunes."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://github.com/unslothai/unsloth"
+    capabilities: [coding, decisions]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+    limitations:
+      - "Keep Studio updated alongside mainline llama.cpp when adopting newly released quantization formats."

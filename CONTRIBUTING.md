@@ -1,18 +1,17 @@
 # Contributing to AI Swiss Knife
 
-Thank you for helping keep this field guide accurate, calm, and source-verified.
+Thank you for helping keep this handbook clear, calm, and forward-moving.
 
-## Editorial & Technical Standards
-1. **Plain English over tag dumps:** Write clear `summary` and `when_to_use` sentences in `catalog/*.yaml`. Never place HTML (`<br>`, `<sub>`, `<kbd>`) inside YAML.
-2. **Name the evidence:** Every entry must carry a valid `evidence_tier` (`primary-eval`, `official-docs`, `vendor-claim`, or `field-note`) and at least one explicit limitation.
-3. **Canonical URLs only:** Link directly to a verifiable GitHub repository, Hugging Face repo, or official documentation URL (no `/topics/`, generic `/models`, or subreddit homepages).
-4. **Edit data, compile docs:** Never hand-edit `README.md`, `STATUS.md`, `docs/`, `guides/`, `reference/`, `research/`, or `llms*.txt`.
+## How Editing Works (Single-Source Managed Blocks)
+- **Fixing prose or adding a new page:** Edit Markdown directly in `docs/`, `worlds/`, `guides/`, `reference/`, or `research/` (using YAML frontmatter with `title`, `section`, `summary`, `order`). Never edit inside `<!-- swissknife:begin ... -->` ... `<!-- swissknife:end -->` blocks.
+- **Adding or updating tools, models, slots, or decisions:** Edit `catalog/registry/*.yaml` or `catalog/decisions/*.yaml`.
+- **Standards:** Every entry requires plain-English `summary` and `when_to_use`, a canonical URL (no `/topics/`, generic `/models`, or subreddit homepages), an explicit `evidence_tier`, and at least one real-world limitation.
 
-## Verification Commands Before Opening a PR
+## Verification Gate Before Opening a PR
 ```zsh
 source .venv/bin/activate
 pip install -e .
 python -m unittest discover -s tests -t . -v
 swissknife validate
-swissknife build
+swissknife sync
 ```
