@@ -1,0 +1,101 @@
+specialists:
+  - id: reverse-engineering
+    title: "Reverse Engineering & Binary Triage"
+    summary: "Run air-gapped local coding models wired to decompiler MCPs for rapid static renaming and triage while keeping dynamic debugging human-led."
+    last_verified: "2026-11-27"
+    constraints:
+      capabilities: [reverse-eng]
+      privacy: local-only
+      require_guard: true
+    direct_picks:
+      - id: ghidra-mcp
+        name: "LaurieWired GhidraMCP"
+        url: "https://github.com/LaurieWired/GhidraMCP"
+        summary: "Widely adopted Ghidra MCP server for interactive function renaming, xref mapping, and triage."
+      - id: oghidra
+        name: "LLNL OGhidra"
+        url: "https://github.com/LLNL/OGhidra"
+        summary: "Adaptive reverse-engineering loop over Ghidra with automated MITRE ATT&CK malware pattern alerts."
+    upstream_directory:
+      id: awesome-ai-reveng
+      name: "zhuyansen/awesome-ai-reverse-engineering"
+      url: "https://github.com/zhuyansen/awesome-ai-reverse-engineering"
+      summary: "Security-graded catalog of 122 AI reverse-engineering tools (IDA, Binary Ninja, JADX, Radare2)."
+    guardrails:
+      - "Disable all outbound cloud API endpoints before analyzing proprietary or sensitive binaries."
+      - "Strictly audit binaries or APKs you own or have explicit legal authorization to analyze."
+
+  - id: game-dev-3d
+    title: "Game Development & Local 16GB 3D Assets"
+    summary: "Connect local sparse coding models to engine MCP bridges and generate MIT-licensed 3D blockout meshes locally inside 16GB VRAM."
+    last_verified: "2026-11-27"
+    constraints:
+      capabilities: [game-dev]
+      privacy: any
+      require_guard: true
+    direct_picks:
+      - id: unity-mcp
+        name: "CoplayDev Unity MCP"
+        url: "https://github.com/CoplayDev/unity-mcp"
+        summary: "MIT-licensed Unity bridge enabling agents to inspect and modify scene hierarchies and scripts."
+      - id: blender-mcp
+        name: "ahujasid Blender MCP"
+        url: "https://github.com/ahujasid/blender-mcp"
+        summary: "Live Blender integration for constructing, texturing, and iterating 3D scenes from an agent."
+    upstream_directory:
+      id: microsoft-trellis
+      name: "Microsoft TRELLIS v1 (MIT 16GB 3D)"
+      url: "https://github.com/microsoft/TRELLIS"
+      summary: "MIT-licensed structured 3D latent asset generator fitting inside 16GB VRAM."
+    guardrails:
+      - "Commit binary scene files before automated MCP edits; TRELLIS.2 requires 24GB VRAM officially (use v1 on 16GB)."
+
+  - id: growth-and-social
+    title: "Social Media, Launch Promotion & Growth"
+    summary: "Pair persistent agents with an open-source multi-network approval calendar and copy-polishing skills while keeping a human gate on publishing."
+    last_verified: "2026-11-27"
+    constraints:
+      capabilities: [social]
+      privacy: any
+      require_guard: true
+    direct_picks:
+      - id: postiz
+        name: "Postiz"
+        url: "https://github.com/gitroomhq/postiz-app"
+        summary: "Self-hostable scheduler for 30+ social networks with REST API, agent CLI, and visual human approval queue."
+      - id: humanizer
+        name: "blader/humanizer"
+        url: "https://github.com/blader/humanizer"
+        summary: "Skill that strips repetitive AI phrasing from drafts before human review."
+    upstream_directory:
+      id: ai-marketing-skills
+      name: "ericosiu/ai-marketing-skills"
+      url: "https://github.com/ericosiu/ai-marketing-skills"
+      summary: "Upstream collection of SEO/AEO, CRO, launch, and growth SKILL.md modules."
+    guardrails:
+      - "Always route agent drafts through Postiz's human approval calendar; audit third-party outbound skills for CAN-SPAM and GDPR compliance."
+
+  - id: unfiltered-sovereign
+    title: "Unfiltered & Operator-Aligned Local Stacks"
+    summary: "Skip brittle jailbreak prompts: use neutral-aligned Hermes 4 for operator-controlled policies, or load a 26 MB abliterated LoRA on frozen Qwen3.8-27B behind mandatory safety proxies."
+    last_verified: "2026-11-27"
+    constraints:
+      capabilities: [unfiltered]
+      privacy: local-only
+      require_guard: true
+    direct_picks:
+      - id: hermes-4-neutral
+        name: "NousResearch Hermes 4 (Neutral Alignment)"
+        url: "https://huggingface.co/NousResearch/Hermes-4-14B"
+        summary: "Obeys custom operator system prompts cleanly without weight-surgery degradation."
+      - id: qwen38-26mb-lora
+        name: "Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA"
+        url: "https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated"
+        summary: "Rank-3 hot-swappable LoRA sharing the same frozen Qwen3.8-27B base weights."
+    upstream_directory:
+      id: huihui-abliterated
+      name: "huihui-ai/Huihui-Qwen3.8-27B-abliterated"
+      url: "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated"
+      summary: "Full abliterated Qwen3.8-27B weights preserving MTP and vision layers."
+    guardrails:
+      - "Abliterated weights cannot refuse destructive commands; never wire them to local shell tools without safeagents and Laya 0.5."

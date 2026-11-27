@@ -1,50 +1,47 @@
-# ⚡ AI Swiss Knife (`v4.0.0-beta`)
-> A lean, Hub-and-Spoke, self-policing AI Field Book with built-in live health, implicit graph state, and freshness-gated agent manifests.
+# AI Swiss Knife
 
-**🏠 Hub** &nbsp;·&nbsp; [☁️ Cloud](book/cloud.md) &nbsp;·&nbsp; [🖥️ Local](book/local.md) &nbsp;·&nbsp; [⚙️ Harnesses & RL](book/harnesses-and-rl.md) &nbsp;·&nbsp; [📘 Playbooks](book/playbooks.md) &nbsp;·&nbsp; [🧭 Spokes](book/spokes.md) &nbsp;·&nbsp; [📡 Radar](book/radar.md) &nbsp;·&nbsp; [🪦 Graveyard](book/graveyard.md)
+A practical, source-verified field guide to building with zero-cost cloud APIs, local AI hardware, and open agent harnesses—continuously checked against link rot and outdated advice.
 
-**Live Pulse (`2026-11-27`):** `31` Core Nodes (`31` agent-eligible) · `3` Deep Playbooks · `4` Upstreamed Spokes · Alerts: `0` Aging / `0` Stale / `0` Upstream / `0` Degraded
+*Last verified: 2026-11-27 · All tracked links healthy ([System Status](STATUS.md)) · [For AI Agents (`llms.txt`)](llms.txt)*
 
-**Agent Surface (Freshness-Gated):** [`llms.txt`](llms.txt) · [`llms-full.txt`](llms-full.txt) · [`dist/graph.json`](dist/graph.json)
+**New to local models or agent harnesses?** Start with [How a Modern AI Stack Fits Together](docs/mental-model.md)—a 3-minute plain-English primer explaining models, runtimes, harnesses, and adapters.
 
-## 🖥️ Start From Your Hardware Profile
-> Entry points below are data-driven (`graph/profiles.yaml`) and expandable without code changes.
+## Start Here
 
-| Profile | Hardware Envelope | Active Core Nodes | Jump In |
-| :--- | :--- | :---: | :--- |
-| **Zero-Card Cloud** (`zero-card-cloud`) | Verified $0 cloud gateways, System-1 decisions, and keyless RAG requiring no credit card. | `15` | [**Open Blueprint →**](book/cloud.md) |
-| **16GB VRAM + 64GB RAM Workstation** (`16vram-64ram`) | Zone 1 pure 16GB VRAM dense brains + Zone 2 64GB DDR5 sparse MoE hybrid. | `17` | [**Open Blueprint →**](book/local.md) |
-| **Apple Silicon Mac (Unified Memory / MLX)** (`mac-apple-silicon`) | Unified memory local inference via MLX and llama.cpp Metal (zero PCIe cliff). | `16` | [**Open Blueprint →**](book/local.md) |
+| If you want to... | Go to |
+| :--- | :--- |
+| Use capable AI APIs right now for **$0 (no credit card)** | [Zero-Card Cloud APIs](reference/cloud-free-tiers.md) |
+| Run AI privately on a **16GB GPU + 64GB RAM** PC or **Apple Silicon Mac** | [Local AI Workstation Guide](guides/local-ai-workstation.md) |
+| Build web, CLI, or mobile software with coding agents | [Coding & Apps](guides/coding-and-apps.md) |
+| Synthesize cited research or build a local media studio | [Research & Writing](guides/research-and-writing.md) · [Local Media Studio](guides/local-media-studio.md) |
+| Explore specialist domains *(Reverse Engineering, Game Dev, Growth, Unfiltered Local)* | [Specialist Domains](guides/specialist-domains.md) |
+| Read primary benchmark evidence or track fast-moving changes | [Harness Adapters Research](research/harness-adapters.md) · [21-Day Watch List](research/watch-list.md) |
 
-## 🧭 Hub-and-Spoke Topology
+## Full Contents
 
-```mermaid
-flowchart LR
-    HUB["⚡ OWNED CORE (Canonical Nodes)<br/>Cloud · Local (Mature vs Edge) · Harnesses · RL Adapters"]
-    PB["📘 3 DEEP PLAYBOOKS<br/>Coding & Apps · Research · Local Media Studio"]
-    SP["🧭 4 UPSTREAMED SPOKES<br/>Reverse Eng · Game Dev · Growth & Social · Unfiltered"]
-    RAD["📡 CAPPED 21d RADAR<br/>Monitor-Only Frontier (<=5) · Community IRL (<=5)"]
-    HUB --> PB & SP
-    RAD -.-> HUB
-```
+### Orientation
+- [How a Modern AI Stack Fits Together](docs/mental-model.md) — Plain-English concepts and system layers.
+- [How This Guide Is Maintained](docs/architecture.md) — For contributors: verification rules, data schema, and live link checks.
 
-## 🗺️ Directory Map
+### Practical Guides
+- [Local AI Workstation Guide](guides/local-ai-workstation.md) — Hardware memory zones, mature vs. experimental tracks, Ollama pitfalls, and CUDA/MLX launch commands.
+- [Coding & Apps](guides/coding-and-apps.md) — End-to-end engineering workflow pairing verified models and harnesses with live documentation lookup, browser QA, and Apple mobile build tools.
+- [Local Media Studio](guides/local-media-studio.md) — Unified local creative pipeline for 16GB video synthesis, transparent RGBA image editing, code-driven motion graphics, NLE automation, and browser voiceovers.
+- [Research & Writing](guides/research-and-writing.md) — High-precision literature synthesis combining open academic graphs, semantic search, and cited draft generation.
+- [Specialist Domains](guides/specialist-domains.md) — Curated starting tools and monitored upstream directories for focused fields.
 
-### Owned Core (Domain-Native Blueprints)
-- **☁️ [Cloud Gateways & Grounding](book/cloud.md)** — Verified zero-card APIs, Gemini 4 Hydrogen, System-1 Decisions & RAG routing circuit.
-- **🖥️ [Local AI Blueprints](book/local.md)** — Track A (*Mature Riced*) vs. Track B (*Cutting-Edge*), hot-swappable LoRAs, & System-1 `Laya 0.5`.
-- **⚙️ [Harnesses, Backends & RL Lab Dossier](book/harnesses-and-rl.md)** — `Pi` Kernel, `DeepSeek Harness`, `Hermes Agent`, `safeagents`, & HF Harness Adapters lab tables.
+### Reference
+- [Zero-Card Cloud Free Tiers](reference/cloud-free-tiers.md) — Verified card-free gateways, coding-agent token math, quotas, and fallback order.
+- [Local Models](reference/local-models.md) — Mature daily drivers, experimental architectures, and non-autoregressive decision models.
+- [Harnesses & Inference Runtimes](reference/harnesses-and-runtimes.md) — Agent harnesses, safety proxies, and serving engines.
+- [Retired & Disqualified Tools](reference/retired.md) — What stopped working, why it was cut, and what replaced it.
 
-### Horizons & Monitoring
-- **📘 [3 Deep Owned Playbooks](book/playbooks.md)** — End-to-end runbooks for *Coding & Apps*, *Research & Grounding*, and *Local Media Studio*.
-- **🧭 [4 Upstreamed Horizon Spokes](book/spokes.md)** — Lean, live-monitored entry points into *Reverse Engineering*, *Game Dev & 3D*, *Growth & Social*, and *Unfiltered Sovereign*.
-- **📡 [Capped 21-Day Radar](book/radar.md)** — Monitor-Only Frontier Watch & Community IRL Field Log.
-- **🪦 [The Graveyard](book/graveyard.md)** — CI-enforced cut list with live replacement pointers.
+### Research & Horizon
+- [Harness Adapters & In-Harness RL](research/harness-adapters.md) — Primary evidence for lightweight per-harness LoRAs, difficulty filtering, and out-of-distribution controls.
+- [21-Day Watch List](research/watch-list.md) — Strictly capped radar of frontier ceilings (monitor-only) and community field observations.
 
-## 🤖 Implicit State CLI
-```bash
-python scripts/cli.py validate                                   # Canonical URL Law + Budgets + 4-Edge check
-python scripts/cli.py resolve coding-and-apps --profile 16vram-64ram
-python scripts/cli.py resolve reverse-engineering --profile 16vram-64ram
-python scripts/cli.py build                                      # Compile GitHub Views, llms*.txt & graph.json
-```
+## Editorial Standards
+
+1. **Every claim names its evidence:** Entries distinguish between *Primary evaluation*, *Official documentation*, *Vendor / lab claim*, and *Field observation*.
+2. **Every tool states its limits:** Nothing is listed without explicit boundary conditions explaining when *not* to use it.
+3. **Stale advice is automatically hidden from agents:** Automated link and review-window checks gate expired entries out of [`llms.txt`](llms.txt) until re-verified. See [System Status](STATUS.md).

@@ -1,12 +1,8 @@
-# AI Swiss Knife — Agent Operating Protocol (`v4.0.0-beta`)
+# AI Swiss Knife — Agent Usage & Maintenance Protocol (`v5.0.0-beta.1`)
 
-Lean Hub-and-Spoke, headless-first, self-policing AI Field Book:
-- **Edit ONLY:** the 7 headless YAML files in `graph/*.yaml` (zero HTML/Markdown; 100% canonical URLs).
-- **Never hand-edit:** `README.md`, `book/*.md`, `llms.txt`, `llms-full.txt`, or `dist/graph.json`.
-- **Freshness Gating:** Expired (`volatile: 21d`, `operational: 60d`, `stable: 120d`) or archived nodes are automatically gated out of `llms.txt` and `resolve` commands until re-verified.
-
-## Agent CLI Commands
-- `python scripts/cli.py resolve coding-and-apps --profile 16vram-64ram`
-- `python scripts/cli.py resolve reverse-engineering --profile 16vram-64ram`
-- `python scripts/cli.py resolve unfiltered-sovereign --profile 16vram-64ram`
-- `python scripts/cli.py validate && python scripts/cli.py build`
+- **Consume:** Read `llms.txt` for freshness-gated active recommendations, `llms-full.txt` for the complete annotated index, or `dist/catalog.json` for structured queries.
+- **Query via CLI:**
+  - `swissknife resolve coding-and-apps --profile 16vram-64ram`
+  - `swissknife resolve coding-and-apps --profile mac-apple-silicon`
+  - `swissknife resolve reverse-engineering --profile 16vram-64ram`
+- **Maintainer rule:** Edit ONLY `catalog/*.yaml` (plain prose, canonical URLs, explicit `evidence_tier` and `limitations`, zero HTML). Never hand-edit compiled Markdown or `llms*.txt`; always run `python -m unittest discover -s tests -t . -v && swissknife validate && swissknife build`.

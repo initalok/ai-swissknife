@@ -1,14 +1,14 @@
-# AI Swiss Knife — Freshness-Gated Agent Router (v4.0.0-beta)
-> Snapshot: 2026-11-27 | Active Agent-Eligible Nodes: 31 | Stale/Degraded Auto-Excluded: 0
-> Monitor-only Frontier Watch entries (book/radar.md) are excluded from routing.
+# AI Swiss Knife — Agent Router (v5.0.0-beta.1)
+> Verified: 2026-11-27 | Active entries: 31 | Stale/degraded auto-excluded: 0
+> Monitor-only frontier entries (research/watch-list.md) are intentionally excluded.
 
-## Hardware Profiles (`python scripts/cli.py resolve <horizon> --profile <id>`)
-- [zero-card-cloud] Zero-Card Cloud: Verified $0 cloud gateways, System-1 decisions, and keyless RAG requiring no credit card.
-- [16vram-64ram] 16GB VRAM + 64GB RAM Workstation: Zone 1 pure 16GB VRAM dense brains + Zone 2 64GB DDR5 sparse MoE hybrid.
-- [mac-apple-silicon] Apple Silicon Mac (Unified Memory / MLX): Unified memory local inference via MLX and llama.cpp Metal (zero PCIe cliff).
+## Hardware Profiles (`swissknife resolve <target> --profile <id>`)
+- [zero-card-cloud] Zero-Card Cloud: Verified $0 cloud gateways, non-autoregressive decision endpoints, and keyless RAG requiring no credit card.
+- [16vram-64ram] 16GB VRAM + 64GB RAM Workstation: Zone 1 pure 16GB VRAM dense models paired with Zone 2 64GB DDR5 sparse MoE offloading.
+- [mac-apple-silicon] Apple Silicon Mac (Unified Memory / MLX): Unified memory local inference via Apple MLX and llama.cpp Metal without a PCIe split.
 
-## Active Zero-Card Cloud Gateways (Fresh Only)
-- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-3.8-flash | verified:2026-11-27
+## Active Zero-Card Cloud Gateways
+- [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-4-hydrogen | verified:2026-11-27
 - [zhipu-bigmodel] env:ZHIPU_API_KEY | base_url:https://open.bigmodel.cn/api/paas/v4/ | model:glm-4.7-flash | verified:2026-11-27
 - [nvidia-nim] env:NVIDIA_API_KEY | base_url:https://integrate.api.nvidia.com/v1 | model:deepseek-ai/deepseek-v4.1-flash | verified:2026-11-27
 - [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free | verified:2026-11-27
@@ -16,19 +16,21 @@
 - [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef | verified:2026-11-27
 - [pollinations] env:KEYLESS | base_url:https://text.pollinations.ai/openai | model:openai | verified:2026-11-27
 
-## Active Local Launch Profiles (Fresh Only)
-- [qwen3.8-27b] [mature] profiles:16vram-64ram,mac-apple-silicon | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0`
-- [qwen3-coder-next] [mature] profiles:16vram-64ram,mac-apple-silicon | cmd: `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
-- [hermes-4] [mature] profiles:16vram-64ram,mac-apple-silicon | cmd: `llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768`
-- [inkling-2-mini] [experimental] profiles:16vram-64ram,mac-apple-silicon | cmd: `llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M`
-- [laya-05] [mature] profiles:16vram-64ram,mac-apple-silicon | cmd: `unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
-- [qwen38-super-adapter] [mature] profiles:16vram-64ram,mac-apple-silicon | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+## Active Local Launch Profiles
+- [qwen3.8-27b] (mature, primary-eval) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --port 8000`
+- [qwen3.8-27b:mac] (mature, primary-eval) profiles:mac-apple-silicon | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000`
+- [qwen3-coder-next] (mature, official-docs) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 120000 --load-mode none --n-cpu-moe 29 -ctk q8_0 -ctv q8_0 --temp 0`
+- [hermes-4] (mature, vendor-claim) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Hermes-4-14B-Q4_K_M.gguf -ngl 99 -fa on -c 32768 --port 8000`
+- [inkling-2-mini] (experimental, vendor-claim) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -hf unsloth/Inkling-2-Mini-GGUF:UD-Q4_K_M --port 8000`
+- [laya-05] (mature, official-docs) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888`
+- [qwen38-super-adapter] (mature, primary-eval) profiles:16vram-64ram,mac-apple-silicon | cuda/llama: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0`
+- [qwen38-super-adapter:mac] (mature, primary-eval) profiles:mac-apple-silicon | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --port 8000`
 
-## Core Playbooks & Upstreamed Spokes
-- [playbook:coding-and-apps] book/playbooks.md | tools: playwright-mcp, context7, mobile-build-mcp, superpowers
-- [playbook:local-media-studio] book/playbooks.md | tools: hyperframes, davinci-mcp-free, phonon-31m
-- [playbook:research-and-grounding] book/playbooks.md | tools: gpt-researcher, openalex, exa, firecrawl
-- [spoke:game-dev-3d] book/spokes.md | upstream: https://github.com/microsoft/TRELLIS
-- [spoke:growth-and-social] book/spokes.md | upstream: https://github.com/ericosiu/ai-marketing-skills
-- [spoke:reverse-engineering] book/spokes.md | upstream: https://github.com/zhuyansen/awesome-ai-reverse-engineering
-- [spoke:unfiltered-sovereign] book/spokes.md | upstream: https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated
+## Guides & Specialist Directories
+- [guide:coding-and-apps] guides/coding-and-apps.md
+- [guide:local-media-studio] guides/local-media-studio.md
+- [guide:research-and-writing] guides/research-and-writing.md
+- [specialist:game-dev-3d] guides/specialist-domains.md | upstream: https://github.com/microsoft/TRELLIS
+- [specialist:growth-and-social] guides/specialist-domains.md | upstream: https://github.com/ericosiu/ai-marketing-skills
+- [specialist:reverse-engineering] guides/specialist-domains.md | upstream: https://github.com/zhuyansen/awesome-ai-reverse-engineering
+- [specialist:unfiltered-sovereign] guides/specialist-domains.md | upstream: https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated

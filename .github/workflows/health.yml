@@ -1,0 +1,43 @@
+name: Rolling Live Link Health & Digest
+on:
+  schedule:
+    - cron: "0 6 * * 1,4"
+  workflow_dispatch:
+
+jobs:
+  rolling-health:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e .
+      - name: Probe 20 oldest canonical URLs (GitHub + HF + HTTP) & rebuild
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          swissknife health --probe 20 > /dev/null
+          swissknife build
+          swissknife digest > /tmp/health_digest.md
+      - name: Commit updated health ledger & compiled docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add health/state.json README.md STATUS.md docs/ guides/ reference/ research/ llms.txt llms-full.txt dist/catalog.json
+          git diff --staged --quiet || git commit -m "chore(health): rolling URL probe and freshness rebuild"
+          git push
+      - name: Update single rolling Health Digest issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NUM=$(gh issue list --label "health-digest" --state open --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then
+            gh issue edit "$NUM" --body-file /tmp/health_digest.md
+          else
+            gh label create "health-digest" --color "FBCA04" --force
+            gh issue create --title "[Health Digest] AI Swiss Knife Live Freshness Ledger" --label "health-digest" --body-file /tmp/health_digest.md
+          fi
