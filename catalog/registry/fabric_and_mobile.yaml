@@ -29,7 +29,7 @@ entries:
     lifecycle: experimental
     decay_class: volatile
     last_verified: "2026-11-28"
-    url: "https://lmstudio.ai/docs/app/basics/lm-link"
+    url: "https://lmstudio.ai/docs/lmlink"
     capabilities: [fabric]
     relations:
       runs_on: [mac, gpu-pc]

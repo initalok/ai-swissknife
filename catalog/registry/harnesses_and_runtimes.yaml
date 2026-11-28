@@ -37,7 +37,7 @@ entries:
     meta:
       role: "Mature Newcomer & Team CLI"
       license: MIT
-      last_reviewed_release: "v2.2.7"
+      last_reviewed_release: "v2.4.2"
       upstream_docs_url: "https://opencode.ai/docs/providers"
       config_title: "Working opencode.json for local llama-server (avoids the 4 beginner traps)"
       config_lang: json
@@ -85,7 +85,7 @@ entries:
     meta:
       role: "Flagship Mod-Able Developer Kernel"
       license: MIT
-      last_reviewed_release: "v1.6.1"
+      last_reviewed_release: "v1.7.0"
       upstream_docs_url: "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/llama-cpp.md"
       launch_recipe: "curl -fsSL https://pi.dev/install.sh | sh && pi"
       sanity_check: "pi --version"
@@ -130,9 +130,9 @@ entries:
     meta:
       role: "Self-Improving Persistent Daemon"
       license: MIT
-      last_reviewed_release: "v0.23.4"
+      last_reviewed_release: "v0.23.5"
     limitations:
-      - "Does not auto-compact aggressively like Pi by default; cap context lengths on massive repositories."
+      - "Foreground sessions do not auto-compact aggressively like Pi by default (though idle gateway chats now background-compact in v0.23.5); cap context lengths on massive repositories."
 
   - id: llama-cpp
     kind: runtime
@@ -149,7 +149,7 @@ entries:
       runs_on: [gpu-pc, mac]
     meta:
       license: MIT
-      last_reviewed_release: "b7200"
+      last_reviewed_release: "v1.1.0"
       launch_recipe: "llama serve --no-models-autoload -ngl all -c 32768 --host 127.0.0.1 --port 9931"
       sanity_check: "curl -s http://127.0.0.1:9931/health"
     limitations:
@@ -171,7 +171,7 @@ entries:
       runs_on: [mac]
     meta:
       license: MIT
-      last_reviewed_release: "v0.34.0"
+      last_reviewed_release: "v0.32.2"
       mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
     limitations:
       - "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for 27B coding sessions."

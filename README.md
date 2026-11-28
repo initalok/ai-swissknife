@@ -3,7 +3,7 @@
 A practical, source-verified field guide to building with zero-cost cloud APIs, local AI hardware, open agent harnesses, and a private multi-device AI fabric—continuously checked against link rot and upstream drift.
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](STATUS.md)) · [For AI Agents (`llms.txt`)](llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy · 1 upstream release(s) queued ([System Status](STATUS.md)) · [For AI Agents (`llms.txt`)](llms.txt)*
 <!-- swissknife:end -->
 
 ## Choose Your Track

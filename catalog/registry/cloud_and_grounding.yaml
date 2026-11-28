@@ -55,7 +55,7 @@ entries:
     lifecycle: operational
     decay_class: volatile
     last_verified: "2026-11-28"
-    url: "https://build.nvidia.com/"
+    url: "https://docs.api.nvidia.com/nim/docs/introduction"
     tags: [cloud-free]
     capabilities: [coding, research]
     relations:
@@ -64,7 +64,7 @@ entries:
       env_key: NVIDIA_API_KEY
       base_url: "https://integrate.api.nvidia.com/v1"
       default_model: "deepseek-ai/deepseek-v4.1-flash"
-      quota: "No card: ~40 RPM developer prototyping catalog"
+      quota: "No card: ~40 RPM developer prototyping catalog (keys generated at build.nvidia.com)"
     limitations:
       - "Restricted to developer prototyping rather than production workloads, with occasional cold-start queues on large MoEs."
 
@@ -222,7 +222,7 @@ entries:
     lifecycle: mature
     decay_class: stable
     last_verified: "2026-11-28"
-    url: "https://openalex.org/"
+    url: "https://docs.openalex.org/"
     tags: [grounding, research]
     capabilities: [research]
     relations:

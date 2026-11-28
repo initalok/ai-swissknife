@@ -126,7 +126,7 @@ entries:
     meta:
       license: Apache-2.0
       footprint: "678-846 MB (CPU / NPU / WebGPU)"
-      last_reviewed_release: "v0.5.0"
+      last_reviewed_release: "v0.5.6"
       launch_recipe: "pip install -U laya && unsloth serve-decision convaiinnovations/laya-typed-decisions --port 8888"
     limitations:
       - "Threshold decisions on calibrated probabilities rather than raw confidence scores; optional vegaml-learn add-on is non-commercial."

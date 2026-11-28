@@ -9,7 +9,7 @@ order: 2
 [Home](../README.md) / Orientation / Seasoned Developer Fast-Track
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy · 1 upstream release(s) queued ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Seasoned Developer Fast-Track
@@ -54,7 +54,7 @@ Minimal, hackable agent kernel with built-in /llama router support, /v1/systemon
 | [OpenCode CLI & Desktop](https://github.com/anomalyco/opencode) | Default local coding harness for newcomers and teams wanting safe out-of-the-box permission prompts. | Mature Newcomer & Team CLI | Primary evaluation | Place baseURL strictly inside options, name the file opencode.json (no leading dot), and never name your custom provider 'openai'. |
 | [Pi Coding Agent (+ @earendil-works/pi-durable)](https://github.com/earendil-works/pi) | Flagship developer anchor: run naked in 5 minutes, or optionally rice across 6 modular rungs (LoRA, sandbox, smart MCP, durability, mobile HITL, ComfyUI). | Flagship Mod-Able Developer Kernel | Primary evaluation | Intentionally omits built-in per-tool approval prompts; pair with gondolin, nono, or safeagents before autonomous runs. |
 | [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) | Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions. | Swappable-Loop Plugin Platform | Official documentation | Rapidly iterating developer preview; pin plugin peer versions against breaking interface changes. |
-| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Always-on background ops daemons and scheduled digests where you want messaging built in from day one. | Self-Improving Persistent Daemon | Official documentation | Does not auto-compact aggressively like Pi by default; cap context lengths on massive repositories. |
+| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Always-on background ops daemons and scheduled digests where you want messaging built in from day one. | Self-Improving Persistent Daemon | Official documentation | Foreground sessions do not auto-compact aggressively like Pi by default (though idle gateway chats now background-compact in v0.23.5); cap context lengths on massive repositories. |
 <!-- swissknife:end -->
 
 ---

@@ -8,7 +8,7 @@ order: 6
 [Home](../README.md) / Guides / Specialist Domains
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy · 1 upstream release(s) queued ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Specialist Domains
@@ -25,7 +25,7 @@ Connect local sparse coding models to engine MCP bridges and generate MIT-licens
 - **Direct starting tools (max 2):**
   - **[CoplayDev Unity MCP](https://github.com/CoplayDev/unity-mcp)** — MIT-licensed Unity bridge enabling agents to inspect and modify scene hierarchies and scripts.
   - **[ahujasid Blender MCP](https://github.com/ahujasid/blender-mcp)** — Live Blender integration for constructing, texturing, and iterating 3D scenes from an agent.
-- **Monitored upstream directory:** **[Microsoft TRELLIS v1 (MIT 16GB 3D)](https://github.com/microsoft/TRELLIS)**
+- **Monitored upstream directory:** **[Microsoft TRELLIS v1 (MIT 16GB 3D)](https://github.com/microsoft/TRELLIS)** *(upstream updated 2026-10-27)*
 - **Guardrail:** Commit binary scene files before automated MCP edits; TRELLIS.2 requires 24GB VRAM officially (use v1 on 16GB).
 
 ### Social Media, Launch Promotion & Growth
@@ -37,7 +37,7 @@ Pair persistent agents with an open-source multi-network approval calendar and c
 - **Direct starting tools (max 2):**
   - **[Postiz](https://github.com/gitroomhq/postiz-app)** — Self-hostable scheduler for 30+ social networks with REST API, agent CLI, and visual human approval queue.
   - **[blader/humanizer](https://github.com/blader/humanizer)** — Skill that strips repetitive AI phrasing from drafts before human review.
-- **Monitored upstream directory:** **[ericosiu/ai-marketing-skills](https://github.com/ericosiu/ai-marketing-skills)**
+- **Monitored upstream directory:** **[ericosiu/ai-marketing-skills](https://github.com/ericosiu/ai-marketing-skills)** *(upstream updated 2026-11-26)*
 - **Guardrail:** Always route agent drafts through Postiz's human approval calendar; audit outbound skills for CAN-SPAM and GDPR compliance.
 
 ### Reverse Engineering & Binary Triage
@@ -50,7 +50,7 @@ Run air-gapped local coding models wired to decompiler MCPs for rapid static ren
 - **Direct starting tools (max 2):**
   - **[LaurieWired GhidraMCP](https://github.com/LaurieWired/GhidraMCP)** — Interactive Ghidra MCP bridge for function renaming, xref mapping, and triage.
   - **[LLNL OGhidra](https://github.com/LLNL/OGhidra)** — Adaptive Ghidra analysis loop with automated MITRE ATT&CK pattern alerts.
-- **Monitored upstream directory:** **[zhuyansen/awesome-ai-reverse-engineering](https://github.com/zhuyansen/awesome-ai-reverse-engineering)**
+- **Monitored upstream directory:** **[zhuyansen/awesome-ai-reverse-engineering](https://github.com/zhuyansen/awesome-ai-reverse-engineering)** *(upstream updated 2026-11-27)*
 - **Guardrail:** Disable all outbound cloud API endpoints before analyzing proprietary or sensitive binaries.
 - **Guardrail:** Strictly audit binaries or APKs you own or have explicit legal authorization to analyze.
 
@@ -64,7 +64,7 @@ Skip brittle jailbreak prompts: use neutral-aligned Hermes 4 for operator-contro
 - **Direct starting tools (max 2):**
   - **[NousResearch Hermes 4 (Neutral Alignment)](https://huggingface.co/NousResearch/Hermes-4-14B)** — Obeys custom operator system prompts cleanly without weight-surgery degradation.
   - **[Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated)** — Rank-3 hot-swappable LoRA sharing the same frozen Qwen3.8-27B base weights.
-- **Monitored upstream directory:** **[huihui-ai/Huihui-Qwen3.8-27B-abliterated](https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated)**
+- **Monitored upstream directory:** **[huihui-ai/Huihui-Qwen3.8-27B-abliterated](https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated)** *(upstream updated 2026-08-24)*
 - **Guardrail:** Abliterated weights cannot refuse destructive commands; never wire them to local shell tools without safeagents and Laya 0.5.
 <!-- swissknife:end -->
 
