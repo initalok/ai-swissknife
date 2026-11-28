@@ -38,6 +38,7 @@ entries:
       role: "Mature Newcomer & Team CLI"
       license: MIT
       last_reviewed_release: "v2.4.2"
+      release_strategy: highest-semver
       upstream_docs_url: "https://opencode.ai/docs/providers"
       config_title: "Working opencode.json for local llama-server (avoids the 4 beginner traps)"
       config_lang: json

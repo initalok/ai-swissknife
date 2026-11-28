@@ -10,18 +10,12 @@ This ledger is maintained automatically by the rolling link and upstream release
 
 | Signal | Count | Meaning |
 | :--- | :---: | :--- |
-| Upstream release updates | 1 | Tracked anchor shipped a newer GitHub release than last reviewed. |
+| Upstream release updates | 0 | Tracked anchor shipped a newer GitHub release than last reviewed. |
 | Decision records to review | 0 | An accepted ADR's anchor degraded, went stale, or had a breaking release. |
 | Upstream dependency alerts | 0 | A base model or harness adapted by a LoRA has changed or degraded. |
 | Needs re-verification | 0 | Past review window; automatically omitted from `llms.txt`. |
 | Approaching review window | 0 | Past 75% of scheduled review interval; still active. |
 | Degraded / retirement queue | 0 | Upstream archived or unreachable for 3+ checks. |
-
-## Queued Upstream Release Updates
-
-| Anchor | Last Reviewed | Latest Upstream | Breaking Keyword? |
-| :--- | :--- | :--- | :---: |
-| [OpenCode CLI & Desktop](https://github.com/anomalyco/opencode) | `v2.4.2` | `v1.19.6` | No |
 
 ## Core Registry Entries
 
@@ -48,7 +42,7 @@ This ledger is maintained automatically by the rolling link and upstream release
 | [dzianisv/opencode-mobile (Android HITL Client)](https://github.com/dzianisv/opencode-mobile) | `mobile` | `fresh` | 2026-11-28 | 60d | 2026-11-26 |
 | [ntfy (One-Way HOOTL Awareness Pings)](https://github.com/binwiederhier/ntfy) | `mobile` | `fresh` | 2026-11-28 | 120d | 2026-11-27 |
 | [Google Antigravity ($0 Individual Tier)](https://antigravity.google/) | `harness` | `fresh` | 2026-11-28 | 21d | Not yet probed |
-| [OpenCode CLI & Desktop](https://github.com/anomalyco/opencode) | `harness` | `fresh` | 2026-11-28 | 120d | `v1.19.6` |
+| [OpenCode CLI & Desktop](https://github.com/anomalyco/opencode) | `harness` | `fresh` | 2026-11-28 | 120d | `v2.4.2` |
 | [Pi Coding Agent (+ @earendil-works/pi-durable)](https://github.com/earendil-works/pi) | `harness` | `fresh` | 2026-11-28 | 120d | `v1.7.0` |
 | [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) | `harness` | `fresh` | 2026-11-28 | 21d | 2026-11-22 |
 | [Hermes Agent](https://github.com/NousResearch/hermes-agent) | `harness` | `fresh` | 2026-11-28 | 60d | `v0.23.5` |

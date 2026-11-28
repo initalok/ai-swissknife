@@ -1,16 +1,7 @@
 {
   "as_of": "2026-11-28",
   "deltas": {
-    "release_updates": [
-      {
-        "id": "opencode",
-        "name": "OpenCode CLI & Desktop",
-        "reviewed_release": "v2.4.2",
-        "latest_release": "v1.19.6",
-        "breaking_signal": false,
-        "url": "https://github.com/anomalyco/opencode"
-      }
-    ],
+    "release_updates": [],
     "decision_reviews": [],
     "reverify_upstream": [],
     "stale": [],

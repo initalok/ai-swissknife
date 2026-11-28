@@ -291,11 +291,11 @@
   "entry:opencode": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
-    "latest_release_tag": "v1.19.6",
-    "release_breaking_signal": false,
+    "last_checked": "2026-11-28T08:24:10Z",
+    "latest_release_tag": "v2.4.2",
+    "release_breaking_signal": true,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T08:00:49Z"
+    "upstream_pushed_at": "2026-11-28T08:08:12Z"
   },
   "entry:opencode-mobile": {
     "consecutive_fails": 0,

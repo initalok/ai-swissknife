@@ -9,7 +9,7 @@ order: 1
 [Home](../README.md) / Guides / Pi Ricing Workshop
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-28 · All tracked links healthy · 1 upstream release(s) queued ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Pi Ricing Workshop (Optional 6-Rung Ladder)

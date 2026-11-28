@@ -6,7 +6,7 @@ from datetime import date
 from pathlib import Path
 
 from swissknife.engine import build_snapshot, evaluate_workspace, query_entries, resolve_slot, resolve_specialist
-from swissknife.probes import HF_COLLECTION_RE
+from swissknife.probes import BREAKING_KEYWORDS_RE, HF_COLLECTION_RE, SEMVER_TAG_RE
 from swissknife.store import load_workspace
 from swissknife.validate import validate_workspace
 
@@ -285,6 +285,17 @@ entries:
             ws = load_workspace(root)
             errs = validate_workspace(ws)
             self.assertTrue(any("unknown slot id 'nonexistent'" in e for e in errs))
+
+    def test_semver_and_breaking_regex(self) -> None:
+        m = SEMVER_TAG_RE.match("v2.4.2")
+        self.assertIsNotNone(m)
+        self.assertEqual(tuple(int(g) for g in m.groups()), (2, 4, 2))
+        self.assertIsNotNone(SEMVER_TAG_RE.match("1.2.3"))
+        self.assertIsNone(SEMVER_TAG_RE.match("manager-v0.1.21"))
+        self.assertIsNone(SEMVER_TAG_RE.match("v2.0.0-alpha.1"))
+
+        self.assertIsNotNone(BREAKING_KEYWORDS_RE.search("Breaking Change: removed telemetry"))
+        self.assertIsNone(BREAKING_KEYWORDS_RE.search("when a profile is renamed, moved or removed"))
 
 
 if __name__ == "__main__":

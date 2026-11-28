@@ -19,9 +19,14 @@ DECAY_TTL_DAYS = {
 GH_REPO_RE = re.compile(r"^https?://github\.com/([^/]+)/([^/#?]+)")
 HF_COLLECTION_RE = re.compile(r"^https?://huggingface\.co/collections/([^/]+/[^/#?]+)")
 HF_MODEL_RE = re.compile(r"^https?://huggingface\.co/(?!datasets/|spaces/|collections/|blog/)([^/]+/[^/#?]+)")
-BREAKING_KEYWORDS_RE = re.compile(r"\b(breaking|deprecated|built-in|renamed|removed|superseded|archived)\b", re.IGNORECASE)
+SEMVER_TAG_RE = re.compile(r"^v?(\d+)\.(\d+)\.(\d+)$")
+BREAKING_KEYWORDS_RE = re.compile(
+    r"(breaking\s+change|breaking:|deprecated|removed\s+support|no\s+longer\s+needed|superseded|archived)",
+    re.IGNORECASE,
+)
+HTTP_HEADERS = {"User-Agent": "ai-swissknife-health-probe/6.0 (+https://github.com/initalok/ai-swissknife)"}
 
-ProbeFunc = Callable[[str, dict[str, Any], bool], dict[str, Any] | None]
+ProbeFunc = Callable[[str, dict[str, Any], str | None], dict[str, Any] | None]
 
 
 def compute_freshness(
@@ -80,7 +85,7 @@ def compute_freshness(
     )
 
 
-def _probe_github(url: str, prev: dict[str, Any], track_releases: bool) -> dict[str, Any] | None:
+def _probe_github(url: str, prev: dict[str, Any], release_strategy: str | None) -> dict[str, Any] | None:
     m = GH_REPO_RE.match(url)
     if not m:
         return None
@@ -102,7 +107,29 @@ def _probe_github(url: str, prev: dict[str, Any], track_releases: bool) -> dict[
         archived = bool(j.get("archived", False))
         pushed_at = j.get("pushed_at")
         fails = 0
-        if track_releases:
+        if release_strategy == "highest-semver":
+            rr = requests.get(
+                f"https://api.github.com/repos/{owner}/{repo}/releases?per_page=15",
+                headers=headers,
+                timeout=10,
+            )
+            if rr.status_code == 200:
+                best: tuple[tuple[int, int, int], dict[str, Any]] | None = None
+                for rj in rr.json():
+                    if rj.get("draft") or rj.get("prerelease"):
+                        continue
+                    tag_name = rj.get("tag_name") or ""
+                    sm = SEMVER_TAG_RE.match(tag_name)
+                    if not sm:
+                        continue
+                    ver = (int(sm.group(1)), int(sm.group(2)), int(sm.group(3)))
+                    if best is None or ver > best[0]:
+                        best = (ver, rj)
+                if best is not None:
+                    best_rj = best[1]
+                    latest_tag = best_rj.get("tag_name")
+                    release_breaking = bool(BREAKING_KEYWORDS_RE.search(best_rj.get("body") or ""))
+        elif release_strategy:
             rr = requests.get(f"https://api.github.com/repos/{owner}/{repo}/releases/latest", headers=headers, timeout=10)
             if rr.status_code == 200:
                 rj = rr.json()
@@ -121,7 +148,7 @@ def _probe_github(url: str, prev: dict[str, Any], track_releases: bool) -> dict[
     }
 
 
-def _probe_hf_collection(url: str, prev: dict[str, Any], track_releases: bool) -> dict[str, Any] | None:
+def _probe_hf_collection(url: str, prev: dict[str, Any], release_strategy: str | None) -> dict[str, Any] | None:
     m = HF_COLLECTION_RE.match(url)
     if not m:
         return None
@@ -149,7 +176,7 @@ def _probe_hf_collection(url: str, prev: dict[str, Any], track_releases: bool) -
     }
 
 
-def _probe_huggingface(url: str, prev: dict[str, Any], track_releases: bool) -> dict[str, Any] | None:
+def _probe_huggingface(url: str, prev: dict[str, Any], release_strategy: str | None) -> dict[str, Any] | None:
     m = HF_MODEL_RE.match(url)
     if not m:
         return None
@@ -176,11 +203,11 @@ def _probe_huggingface(url: str, prev: dict[str, Any], track_releases: bool) -> 
     }
 
 
-def _probe_http(url: str, prev: dict[str, Any], track_releases: bool) -> dict[str, Any]:
+def _probe_http(url: str, prev: dict[str, Any], release_strategy: str | None) -> dict[str, Any]:
     fails = int(prev.get("consecutive_fails", 0))
-    r = requests.head(url, allow_redirects=True, timeout=10)
+    r = requests.head(url, headers=HTTP_HEADERS, allow_redirects=True, timeout=10)
     if r.status_code in (403, 405):
-        r = requests.get(url, stream=True, allow_redirects=True, timeout=10)
+        r = requests.get(url, headers=HTTP_HEADERS, stream=True, allow_redirects=True, timeout=10)
     if 200 <= r.status_code < 400:
         fails = 0
     elif r.status_code != 429:
@@ -198,40 +225,41 @@ def _probe_http(url: str, prev: dict[str, Any], track_releases: bool) -> dict[st
 PROBE_CHAIN: list[ProbeFunc] = [_probe_github, _probe_hf_collection, _probe_huggingface, _probe_http]
 
 
-def collect_targets(ws: Workspace) -> list[tuple[str, str, bool]]:
-    targets: list[tuple[str, str, bool]] = []
+def collect_targets(ws: Workspace) -> list[tuple[str, str, str | None]]:
+    targets: list[tuple[str, str, str | None]] = []
     for eid, entry in ws.entries.items():
         track = bool(entry.meta.get("last_reviewed_release") or entry.meta.get("track_releases"))
-        targets.append((f"entry:{eid}", entry.url, track))
+        strategy = str(entry.meta.get("release_strategy", "latest")) if track else None
+        targets.append((f"entry:{eid}", entry.url, strategy))
     for spid, sp in ws.specialists.items():
         for pick in sp.direct_picks:
-            targets.append((f"specialist:{spid}:{pick.id}", pick.url, False))
-        targets.append((f"specialist:{spid}:upstream", sp.upstream_hub.url, False))
+            targets.append((f"specialist:{spid}:{pick.id}", pick.url, None))
+        targets.append((f"specialist:{spid}:upstream", sp.upstream_hub.url, None))
     for w in (*ws.watch_frontier, *ws.watch_community):
-        targets.append((f"watch:{w.bucket}:{w.id}", w.url, False))
+        targets.append((f"watch:{w.bucket}:{w.id}", w.url, None))
     return targets
 
 
 def run_lru_probe(ws: Workspace, root: str | Path = ".", limit: int = 20, dry_run: bool = False) -> dict[str, Any]:
     state = dict(ws.health_state)
     candidates = [
-        (state.get(key, {}).get("last_checked", "1970-01-01T00:00:00Z"), key, url, track)
-        for key, url, track in collect_targets(ws)
+        (state.get(key, {}).get("last_checked", "1970-01-01T00:00:00Z"), key, url, strategy)
+        for key, url, strategy in collect_targets(ws)
     ]
     candidates.sort(key=lambda x: x[0])
     batch = candidates[:limit]
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     results: list[dict[str, Any]] = []
 
-    for _, key, url, track in batch:
+    for _, key, url, strategy in batch:
         if dry_run:
-            results.append({"key": key, "url": url, "track_releases": track, "action": "would_probe"})
+            results.append({"key": key, "url": url, "release_strategy": strategy, "action": "would_probe"})
             continue
         prev = state.get(key, {})
         rec: dict[str, Any] | None = None
         try:
             for probe in PROBE_CHAIN:
-                rec = probe(url, prev, track)
+                rec = probe(url, prev, strategy)
                 if rec is not None:
                     break
         except Exception:

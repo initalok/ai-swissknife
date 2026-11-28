@@ -1396,6 +1396,7 @@
         "role": "Mature Newcomer & Team CLI",
         "license": "MIT",
         "last_reviewed_release": "v2.4.2",
+        "release_strategy": "highest-semver",
         "upstream_docs_url": "https://opencode.ai/docs/providers",
         "config_title": "Working opencode.json for local llama-server (avoids the 4 beginner traps)",
         "config_lang": "json",
@@ -1412,9 +1413,9 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T08:00:49Z",
-        "latest_release_tag": "v1.19.6",
-        "release_delta": true,
+        "upstream_pushed_at": "2026-11-28T08:08:12Z",
+        "latest_release_tag": "v2.4.2",
+        "release_delta": false,
         "breaking_signal": false,
         "eligible_for_agents": true,
         "retirement_candidate": false,
@@ -5409,6 +5410,7 @@
           "role": "Mature Newcomer & Team CLI",
           "license": "MIT",
           "last_reviewed_release": "v2.4.2",
+          "release_strategy": "highest-semver",
           "upstream_docs_url": "https://opencode.ai/docs/providers",
           "config_title": "Working opencode.json for local llama-server (avoids the 4 beginner traps)",
           "config_lang": "json",
@@ -5425,9 +5427,9 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T08:00:49Z",
-          "latest_release_tag": "v1.19.6",
-          "release_delta": true,
+          "upstream_pushed_at": "2026-11-28T08:08:12Z",
+          "latest_release_tag": "v2.4.2",
+          "release_delta": false,
           "breaking_signal": false,
           "eligible_for_agents": true,
           "retirement_candidate": false,
@@ -5470,6 +5472,7 @@
           "role": "Mature Newcomer & Team CLI",
           "license": "MIT",
           "last_reviewed_release": "v2.4.2",
+          "release_strategy": "highest-semver",
           "upstream_docs_url": "https://opencode.ai/docs/providers",
           "config_title": "Working opencode.json for local llama-server (avoids the 4 beginner traps)",
           "config_lang": "json",
@@ -5486,9 +5489,9 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T08:00:49Z",
-          "latest_release_tag": "v1.19.6",
-          "release_delta": true,
+          "upstream_pushed_at": "2026-11-28T08:08:12Z",
+          "latest_release_tag": "v2.4.2",
+          "release_delta": false,
           "breaking_signal": false,
           "eligible_for_agents": true,
           "retirement_candidate": false,
@@ -7197,9 +7200,9 @@
               "age_days": 0,
               "consecutive_fails": 0,
               "upstream_archived": false,
-              "upstream_pushed_at": "2026-11-28T08:00:49Z",
-              "latest_release_tag": "v1.19.6",
-              "release_delta": true,
+              "upstream_pushed_at": "2026-11-28T08:08:12Z",
+              "latest_release_tag": "v2.4.2",
+              "release_delta": false,
               "breaking_signal": false,
               "eligible_for_agents": true,
               "retirement_candidate": false,
@@ -7740,21 +7743,21 @@
           "args": {
             "id": "agent-media-mcp"
           },
-          "line": 30
+          "line": 31
         },
         {
           "directive": "recipe",
           "args": {
             "id": "comfy-mcp"
           },
-          "line": 41
+          "line": 43
         },
         {
           "directive": "table",
           "args": {
             "tag": "media"
           },
-          "line": 56
+          "line": 58
         }
       ]
     },
@@ -8876,16 +8879,7 @@
     }
   ],
   "deltas": {
-    "release_updates": [
-      {
-        "id": "opencode",
-        "name": "OpenCode CLI & Desktop",
-        "reviewed_release": "v2.4.2",
-        "latest_release": "v1.19.6",
-        "breaking_signal": false,
-        "url": "https://github.com/anomalyco/opencode"
-      }
-    ],
+    "release_updates": [],
     "decision_reviews": [],
     "reverify_upstream": [],
     "stale": [],
