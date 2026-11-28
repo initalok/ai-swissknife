@@ -235,7 +235,7 @@ def collect_targets(ws: Workspace) -> list[tuple[str, str, str | None]]:
         for pick in sp.direct_picks:
             targets.append((f"specialist:{spid}:{pick.id}", pick.url, None))
         targets.append((f"specialist:{spid}:upstream", sp.upstream_hub.url, None))
-    for w in (*ws.watch_frontier, *ws.watch_community):
+    for w in (*ws.watch_frontier, *ws.watch_models, *ws.watch_community):
         targets.append((f"watch:{w.bucket}:{w.id}", w.url, None))
     return targets
 

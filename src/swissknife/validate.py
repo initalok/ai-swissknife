@@ -24,8 +24,9 @@ FORBIDDEN_URL_PATTERNS = (
 )
 
 BUDGETS = {
-    "max_watch_frontier": 5,
-    "max_watch_community": 5,
+    "max_watch_frontier": 8,
+    "max_watch_models": 10,
+    "max_watch_community": 8,
     "max_specialist_direct_picks": 2,
 }
 
@@ -178,16 +179,18 @@ def validate_workspace(ws: Workspace) -> list[str]:
 
     if len(ws.watch_frontier) > BUDGETS["max_watch_frontier"]:
         errors.append(f"[watch:frontier] exceeds cap: {len(ws.watch_frontier)} > {BUDGETS['max_watch_frontier']}")
+    if len(ws.watch_models) > BUDGETS["max_watch_models"]:
+        errors.append(f"[watch:models] exceeds cap: {len(ws.watch_models)} > {BUDGETS['max_watch_models']}")
     if len(ws.watch_community) > BUDGETS["max_watch_community"]:
         errors.append(f"[watch:community] exceeds cap: {len(ws.watch_community)} > {BUDGETS['max_watch_community']}")
-    for w in (*ws.watch_frontier, *ws.watch_community):
+    for w in (*ws.watch_frontier, *ws.watch_models, *ws.watch_community):
         owner = f"watch:{w.bucket}:{w.id}"
         if w.evidence_tier not in VALID_EVIDENCE_TIERS:
             errors.append(f"[{owner}] invalid evidence_tier '{w.evidence_tier}'")
         errors.extend(_check_date(w.last_verified, owner))
         errors.extend(_check_url(w.url, owner))
         errors.extend(_check_leaks(to_dict(w), owner))
-        if w.bucket == "community":
+        if w.bucket in ("models", "community"):
             errors.extend(_check_retired(f"{w.id} {w.name} {w.url}", retired_patterns, owner))
 
     for r in ws.retired:

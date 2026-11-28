@@ -72,6 +72,8 @@ Built-in upstream check: `comfy-mcp --help`
 | [Qwen-Image-2.1 (7B DiT Native RGBA)](https://huggingface.co/Qwen/Qwen-Image-2.1) | Non-commercial design assets, typography, and layered transparent image editing. | 4.2-9.1 GB VRAM (INT8 / leejet GGUF) | Official documentation | Non-commercial license; swap to Apache-2.0 FLUX.2 Klein for commercial production graphics. |
 | [HeyGen Hyperframes](https://github.com/heygen-com/hyperframes) | Code-driven product demos and technical videos where diffusion flicker is undesirable. | MIT | Official documentation | Designed for structured UI/data motion graphics rather than photorealistic live-action video. |
 | [Gradium Phonon 31M WebGPU TTS](https://github.com/blixt/phonon) | Instant zero-install local speech synthesis for students, Mac users, and browser workflows. | 64.5 MB (Browser WebGPU) | Official documentation | Compact English voice model; heavier multilingual dramatic acting requires larger server-side TTS models. |
+| [Fish Audio Drama 3 (35B-A3B Multi-Speaker TTS)](https://huggingface.co/fishaudio/drama-3) | Studio-grade local multi-speaker narration and expressive TTS on 32GB-80GB GPUs (or Hybrid RAM). | 32-80 GB GPU (SGLang-Omni / vLLM-Omni) | Official documentation | Too heavy for a 16GB GPU alongside an LLM; use Phonon 31M for zero-GPU/laptop speech. |
+| [Lightricks LTX-2.5 (22B Distilled Video + Synchronized Audio)](https://huggingface.co/Lightricks/LTX-2.5) | Local video generation with synchronized audio on 8GB-24GB NVIDIA GPUs. | 5.9-8.1 GiB (WanGP) / 16-24 GiB (ComfyUI) | Official documentation | Gated Hugging Face license acceptance required; use Wan 2.2 when strict Apache-2.0 licensing is mandatory. |
 <!-- swissknife:end -->
 
 ## Critical Hardware & Licensing Boundaries

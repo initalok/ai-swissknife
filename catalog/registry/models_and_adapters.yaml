@@ -9,7 +9,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://huggingface.co/Qwen/Qwen3.8-27B"
-    tags: [local-mature]
+    tags: [local-mature, tier-16-24gb]
     capabilities: [coding, research, reverse-eng, social, unfiltered]
     relations:
       runs_on: [gpu-pc, mac]
@@ -34,7 +34,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF"
-    tags: [local-mature]
+    tags: [local-mature, tier-hybrid-80gb]
     capabilities: [coding, reverse-eng, game-dev]
     relations:
       runs_on: [gpu-pc, mac]
@@ -55,7 +55,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://ai.google.dev/gemma"
-    tags: [local-mature]
+    tags: [local-mature, tier-edge-mac, tier-16-24gb, mac-16gb]
     capabilities: [coding, research]
     relations:
       runs_on: [gpu-pc, mac]
@@ -75,7 +75,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://huggingface.co/NousResearch/Hermes-4-14B"
-    tags: [local-mature]
+    tags: [local-mature, tier-16-24gb]
     capabilities: [unfiltered]
     relations:
       runs_on: [gpu-pc, mac]
@@ -96,7 +96,7 @@ entries:
     decay_class: operational
     last_verified: "2026-11-28"
     url: "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"
-    tags: [local-experimental]
+    tags: [local-experimental, tier-16-24gb]
     capabilities: [coding, game-dev]
     relations:
       runs_on: [gpu-pc, mac]
@@ -118,7 +118,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://github.com/NandhaKishorM/laya"
-    tags: [local-decision, security]
+    tags: [local-decision, security, tier-edge-mac, mac-16gb]
     capabilities: [decisions, safety]
     relations:
       runs_on: [gpu-pc, mac]
@@ -241,3 +241,264 @@ entries:
             - ["A4 Qualified", "32 validated base solves sometimes", "50 (completed)", "0.62 -> 0.81"]
     limitations:
       - "Requires all-linear LoRA, LR 2e-5 (1e-4 collapses rollouts), tool bonus 0.1, and excluding all-pass/all-fail tasks."
+
+  - id: qwen3.5-9b
+    kind: model
+    name: "Qwen3.5-9B (Multimodal Hybrid DeltaNet)"
+    summary: "Compact 9B Apache-2.0 vision-language checkpoint (262K native context, Gated DeltaNet + MTP) weighing ~5.6 GB at 4-bit MLX—fitting effortlessly inside a 16GB M4 Mac mini's ~10.7 GB wired GPU budget."
+    when_to_use: "Fast local helper, screenshot triage, and offline coding/edits on a base 16GB M4 Mac mini or 8GB-12GB GPU laptop."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Qwen/Qwen3.5-9B"
+    tags: [local-mature, tier-edge-mac, mac-16gb]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      license: Apache-2.0
+      footprint: "~5.6 GB (4-bit MLX / Q4 GGUF, 262K native ctx)"
+      mac_launch_recipe: "mlx_lm.server --model mlx-community/Qwen3.5-9B-4bit --host 127.0.0.1 --port 8080"
+    limitations:
+      - "Trails 27B+ backbones on complex multi-file refactors; route heavy coding tasks to GPU PC or $0 Cloud."
+
+  - id: gpt-oss-20b
+    kind: model
+    name: "OpenAI gpt-oss-20b (Native MXFP4 MoE)"
+    summary: "Apache-2.0 21B MoE (3.6B active) post-trained natively in MXFP4 (~12.8 GB) with a tiny KV cache footprint and three controllable reasoning effort levels."
+    when_to_use: "Fast 16GB GPU reasoning, function calling, and browser/agent workflows with generous 32K-64K context headroom."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/openai/gpt-oss-20b"
+    tags: [local-mature, tier-16-24gb]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: Apache-2.0
+      footprint: "~12.8 GB (Native MXFP4; 16GB GPU or Mac w/ wired_limit_mb tuning)"
+    limitations:
+      - "Requires the Harmony response format (handled automatically by modern llama.cpp/vLLM chat templates); text-only."
+
+  - id: muse-glimmer-30b
+    kind: model
+    name: "Meta Muse Glimmer 30B (+ DFlash 16-Token Drafter)"
+    summary: "Apache-2.0 30B multimodal agentic model distilled from 816B Muse Spark, pairing <20 GB 4-bit weights with a DFlash block-diffusion drafter predicting 16 tokens per pass."
+    when_to_use: "24GB-32GB VRAM workstations or 32GB+ Macs wanting high-speed local multimodal agents with controllable reasoning strength."
+    evidence_tier: vendor-claim
+    lifecycle: experimental
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+    tags: [tier-16-24gb]
+    capabilities: [coding, research]
+    relations:
+      runs_on: []
+    meta:
+      license: Apache-2.0
+      footprint: "<20 GB (4-bit K-Quant + Perception Encoder + DFlash; 24GB-32GB envelope)"
+    limitations:
+      - "Needs a 24GB-32GB VRAM or unified-memory envelope alongside KV cache and DFlash; exceeds a single 16GB card without RAM spill."
+
+  - id: diffusiongemma-26b
+    kind: model
+    name: "Google DiffusionGemma 26B-A4B (Block-Diffusion LLM)"
+    summary: "Apache-2.0 26B-A4B discrete text-diffusion MoE denoising 256-token canvases in parallel rather than strictly left-to-right, enabling parallel block generation and native infilling."
+    when_to_use: "24GB+ GPUs researching non-autoregressive parallel code/layout generation and fast canvas infilling."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/google/diffusiongemma-26B-A4B-it"
+    tags: [tier-16-24gb, tier-special-model]
+    capabilities: [coding]
+    relations:
+      runs_on: []
+    meta:
+      license: Apache-2.0
+      footprint: "~18 GB quantized (24GB+ VRAM recommended)"
+    limitations:
+      - "Requires diffusion-aware sampling (entropy-bounded denoising) and works best on well-structured tasks rather than open-ended prose."
+
+  - id: qwen3.8-flash-next
+    kind: model
+    name: "Qwen3.8-Flash-Next (180B / 6B Active + 51B N-Gram)"
+    summary: "Preview of Qwen4's hybrid architecture combining Gated DeltaNet, Qwen Sparse Attention (QSA), 125B MoE (6B active), 51B RAM-prefetchable N-gram embeddings, and 4B MTP."
+    when_to_use: "High-memory workstations (64GB-128GB RAM + 16GB+ VRAM via Unsloth Dynamic v3.1 UD-IQ1_M/UD-Q2_0) or SGLang/vLLM servers."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+    tags: [tier-hybrid-80gb]
+    capabilities: [coding, research]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: qwen-community-1.0
+      footprint: "66-70 GB (Unsloth Dynamic v3.1 UD-IQ1_M / UD-Q2_0) or multi-GPU BF16"
+    limitations:
+      - "Custom qwen-community-1.0 license; avoid the oversized 79.6 GB UD-Q2_K_XL quant on 16GB+64GB systems."
+
+  - id: gpt-oss-120b
+    kind: model
+    name: "OpenAI gpt-oss-120b (Single-80GB MXFP4 Reasoning)"
+    summary: "Apache-2.0 117B MoE (5.1B active) natively post-trained in MXFP4 so full high-reasoning capacity fits inside a single 80GB H100/MI300X GPU or 96GB+ Apple Silicon Studio."
+    when_to_use: "Single-80GB server deployments wanting strong Apache-2.0 reasoning and tool calling without multi-GPU tensor parallelism."
+    evidence_tier: official-docs
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/openai/gpt-oss-120b"
+    tags: [tier-hybrid-80gb]
+    capabilities: [coding, research]
+    relations:
+      runs_on: []
+    meta:
+      license: Apache-2.0
+      footprint: "~65-80 GB (Single 80GB H100/MI300X or 96GB+ Unified RAM)"
+    limitations:
+      - "Exceeds 16GB+64GB consumer rigs; requires Harmony prompt formatting."
+
+  - id: nemotron-3.5-super-vl
+    kind: model
+    name: "NVIDIA Nemotron 3.5 Super VL (120B-A12B Mamba-2 Hybrid)"
+    summary: "OpenMDW-1.1 120B (12B active) Mamba-2 + Transformer MoE with C-RADIO vision/video encoder, 1M context, native MTP speculative decoding, and NVFP4 builds for DGX Spark / servers."
+    when_to_use: "Video/document understanding and long-context multimodal agents on DGX Spark or multi-GPU servers."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
+    tags: [tier-hybrid-80gb]
+    capabilities: [research]
+    relations:
+      runs_on: []
+    meta:
+      license: OpenMDW-1.1
+      footprint: "NVFP4 on DGX Spark / 4xH100 (BF16)"
+    limitations:
+      - "Datacenter / DGX Spark class footprint; prototype card-free via NVIDIA NIM if you lack server GPUs."
+
+  - id: deepseek-v4.1-flash-1017
+    kind: model
+    name: "DeepSeek-V4.1-Flash-1017 (552B · 4x KV Compression)"
+    summary: "MIT-licensed 552B multimodal MoE (1M ctx, 77.0% DeepSWE v1.1, 60.5% Automation-Bench) pioneering 4x global KV-cache compression vs V4-Flash and Rust deepseek-recipe prompt encoding."
+    when_to_use: "Cluster hosting, NVIDIA NIM cloud prototyping, and tracking KV-compression breakthroughs trickling down to smaller local models."
+    evidence_tier: vendor-claim
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    tags: [tier-frontier-open]
+    capabilities: [coding, research]
+    relations:
+      runs_on: []
+    meta:
+      license: MIT
+      footprint: "Multi-GPU FP8/INT4 cluster (prototype free via NVIDIA NIM)"
+    limitations:
+      - "No Jinja chat template (uses encoding.py or Rust deepseek-recipe); far beyond single-workstation memory."
+
+  - id: mistral-large-4
+    kind: model
+    name: "Mistral Large 4 (1T-A52B + Embedded DSpark Drafter)"
+    summary: "Western open-weight frontier MoE (~1T total / 52B active, 1M ctx, Pixtral vision, embedded DSpark speculative head) standing out on cybersecurity (93% Cybench) and token-efficient coding."
+    when_to_use: "Cluster/512GB-Ultra deployments and tracking embedded DSpark speculative decoding for future smaller Mistral releases."
+    evidence_tier: vendor-claim
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+    tags: [tier-frontier-open]
+    capabilities: [coding, research]
+    relations:
+      runs_on: []
+    meta:
+      license: "Mistral Ecosystem Open-Weight (MaaS restrictions)"
+      footprint: "8x GPU NVFP4 or 512GB Mac Ultra (Q2_K)"
+    limitations:
+      - "Reasoning cannot be disabled (defaults to high); custom license restricts commercial Model-as-a-Service hosting."
+
+  - id: kimi-k3
+    kind: model
+    name: "Moonshot Kimi-K3 (2.8T-A104B · First Open 3T-Class)"
+    summary: "Native multimodal 2.8T MoE built on Kimi Delta Attention (KDA), Attention Residuals (AttnRes), and native MXFP4 QAT across a 1M context window."
+    when_to_use: "Research reference for frontier architectures (AttnRes already trickled down into Inkling 2 Mini) and multi-node deployments."
+    evidence_tier: vendor-claim
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/moonshotai/Kimi-K3"
+    tags: [tier-frontier-open]
+    capabilities: [coding, research]
+    relations:
+      runs_on: []
+    meta:
+      license: "Kimi K3 Open License"
+      footprint: "Multi-node cluster (native MXFP4/MXFP8)"
+    limitations:
+      - "Research/cluster scale only; tracked for architectural trickle-down."
+
+  - id: deepseek-ocr-2
+    kind: model
+    name: "DeepSeek-OCR-2 (3B Visual Causal Flow)"
+    summary: "MIT-licensed 3B document OCR checkpoint (76.3 olmOCR-bench) applying human reading-order visual causal attention to convert dense PDFs, tables, and scans into clean Markdown."
+    when_to_use: "Local private PDF/scan-to-Markdown ingestion into Obsidian knowledge vaults on any 6GB-16GB GPU or Mac."
+    evidence_tier: primary-eval
+    lifecycle: mature
+    decay_class: stable
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+    tags: [tier-special-model, tier-edge-mac]
+    capabilities: [research]
+    relations:
+      runs_on: [gpu-pc, mac]
+    meta:
+      license: MIT
+      footprint: "~2-6 GB (GGUF / vLLM)"
+    limitations:
+      - "Specialized for document layout and OCR rather than general multi-turn chat."
+
+  - id: fish-drama-3
+    kind: model
+    name: "Fish Audio Drama 3 (35B-A3B Multi-Speaker TTS)"
+    summary: "Open-weight MoE speech model with 10-codebook MTP decoding supporting 16-speaker scenes, paralinguistic tags ([sighs], [laughs]), single-word audio inpainting, and SGLang-Omni/vLLM-Omni serving."
+    when_to_use: "Studio-grade local multi-speaker narration and expressive TTS on 32GB-80GB GPUs (or Hybrid RAM)."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/fishaudio/drama-3"
+    tags: [tier-special-model, media]
+    capabilities: [media]
+    relations:
+      runs_on: []
+    meta:
+      license: "Fish Community v1.0 (free <$500K/yr revenue)"
+      footprint: "32-80 GB GPU (SGLang-Omni / vLLM-Omni)"
+    limitations:
+      - "Too heavy for a 16GB GPU alongside an LLM; use Phonon 31M for zero-GPU/laptop speech."
+
+  - id: ltx-2.5
+    kind: model
+    name: "Lightricks LTX-2.5 (22B Distilled Video + Synchronized Audio)"
+    summary: "Open-weight distilled video-and-audio model shipping split ComfyUI-ready safetensors and running inside 5.9-8.1 GiB VRAM via WanGP."
+    when_to_use: "Local video generation with synchronized audio on 8GB-24GB NVIDIA GPUs."
+    evidence_tier: official-docs
+    lifecycle: operational
+    decay_class: operational
+    last_verified: "2026-11-28"
+    url: "https://huggingface.co/Lightricks/LTX-2.5"
+    tags: [tier-special-model, media]
+    capabilities: [media]
+    relations:
+      runs_on: [gpu-pc]
+    meta:
+      license: "LTX Community (free <$10M/yr revenue)"
+      footprint: "5.9-8.1 GiB (WanGP) / 16-24 GiB (ComfyUI)"
+    limitations:
+      - "Gated Hugging Face license acceptance required; use Wan 2.2 when strict Apache-2.0 licensing is mandatory."

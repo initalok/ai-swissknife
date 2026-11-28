@@ -37,7 +37,7 @@ Before installing local models, match your actual machine so you do not hit an o
 
 | Your Machine | Best Starting Path |
 | :--- | :--- |
-| **Any laptop (8GB–16GB RAM, no dedicated GPU, or Chromebook)** | Start with **Path A ($0 Cloud)**. If you want offline local chat/audio on an 8GB–12GB laptop, use [`Gemma 4 12B`](../reference/models-and-harnesses.md) (~8.5 GB) instead of a 27B model. |
+| **Any laptop (8GB–16GB RAM, no dedicated GPU, or Chromebook)** | Start with **Path A ($0 Cloud)**. If you want offline local chat/audio on an 8GB–12GB laptop, use [`Gemma 4 12B`](../reference/models.md) (~8.5 GB) instead of a 27B model. |
 | **PC with 16GB NVIDIA GPU (or Apple Silicon Mac with 32GB+ memory)** | Try **Path A ($0 Cloud)** first if you want a 5-minute win, or jump straight to **Path B (Private Local Coding)**. |
 | **PC with 6GB–16GB NVIDIA GPU wanting Images, Video, or Audio** | Jump to **Path C (Turnkey Local Media Studio)**. |
 

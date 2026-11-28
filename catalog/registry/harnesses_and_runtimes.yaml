@@ -30,7 +30,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://github.com/anomalyco/opencode"
-    tags: [newcomer-anchor]
+    tags: [newcomer-anchor, mac-16gb]
     capabilities: [coding, unfiltered]
     relations:
       runs_on: [cloud, mac, gpu-pc]
@@ -79,7 +79,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://github.com/earendil-works/pi"
-    tags: [dev-anchor]
+    tags: [dev-anchor, mac-16gb]
     capabilities: [coding, research, reverse-eng, game-dev, media, social, unfiltered]
     relations:
       runs_on: [cloud, mac, gpu-pc]
@@ -93,27 +93,6 @@ entries:
     limitations:
       - "Intentionally omits built-in per-tool approval prompts; pair with gondolin, nono, or safeagents before autonomous runs."
       - "Requires Node 22.19+; built-in MCP keeps enabled servers alive all session unless replaced with pi-mcp-adapter."
-
-  - id: deepseek-harness
-    kind: harness
-    name: "DeepSeek Harness (dsh)"
-    summary: "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and sub-agent plugins."
-    when_to_use: "Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions."
-    evidence_tier: official-docs
-    lifecycle: experimental
-    decay_class: volatile
-    last_verified: "2026-11-28"
-    url: "https://github.com/deepseek-ai/deepseek-harness"
-    capabilities: [coding, media]
-    relations:
-      runs_on: [cloud, mac, gpu-pc]
-    meta:
-      role: "Swappable-Loop Plugin Platform"
-      license: MIT
-      last_reviewed_release: "0.2.3-alpha.2"
-      launch_recipe: "npx @deepseek-ai/dsh web"
-    limitations:
-      - "Rapidly iterating developer preview; pin plugin peer versions against breaking interface changes."
 
   - id: hermes-agent
     kind: harness
@@ -167,14 +146,16 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://github.com/ml-explore/mlx-lm"
+    tags: [mac-16gb]
     capabilities: [coding]
     relations:
       runs_on: [mac]
     meta:
       license: MIT
       last_reviewed_release: "v0.32.2"
-      mac_launch_recipe: "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
+      mac_launch_recipe: "mlx_lm.server --model mlx-community/Qwen3.5-9B-4bit --host 127.0.0.1 --port 8080"
     limitations:
+      - "On 16GB Macs (~10.7 GB default wired GPU limit), run 4B-12B MLX models locally; 27B MLX checkpoints require 24-32GB+ unified memory."
       - "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for 27B coding sessions."
 
   - id: unsloth-runtime
@@ -194,3 +175,26 @@ entries:
       license: Apache-2.0
     limitations:
       - "Keep Studio updated alongside mainline llama.cpp when adopting newly released quantization formats."
+
+  - id: rex
+    kind: tool
+    name: "Rex Terminal & Persistent Session Server (Superlogical)"
+    summary: "Native libghostty terminal and persistent server by Mitchell Hashimoto where agent tabs live on your Mac/Linux host, survive laptop disconnects, integrate natively with Pi (rex skill setup + OSC 7501 status tabs), and include built-in Tailscale networking."
+    when_to_use: "Running a 16GB M4 Mac mini as a 24/7 remote AI cockpit alongside Pi and @earendil-works/pi-durable."
+    evidence_tier: official-docs
+    lifecycle: experimental
+    decay_class: volatile
+    last_verified: "2026-11-28"
+    url: "https://www.superlogical.com/rex/docs/installation"
+    tags: [mac-16gb, coding-tool]
+    capabilities: [coding]
+    relations:
+      runs_on: [mac, gpu-pc]
+    meta:
+      role: "24/7 Persistent Agent Terminal Server (Pragmatic Exception)"
+      license: "Proprietary (Free Public Beta)"
+      launch_recipe: "rex skill setup && rex server tailscale on"
+      sanity_check: "rex --version"
+    limitations:
+      - "Proprietary software currently in invite/Discord public beta; pragmatic exception chosen for first-class Pi OSC 7501 integration."
+      - "Rex sessions survive closing your laptop/client but NOT a full host reboot—pair with @earendil-works/pi-durable for reboot durability."

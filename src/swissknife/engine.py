@@ -127,9 +127,9 @@ def evaluate_workspace(ws: Workspace, as_of: date | None = None) -> dict[str, An
             if ef.retirement_candidate:
                 deltas["retirement_candidates"].append({"id": key, "archived": ef.upstream_archived, "fails": ef.consecutive_fails})
 
-    watch_active: dict[str, list[dict[str, Any]]] = {"frontier": [], "community": []}
+    watch_active: dict[str, list[dict[str, Any]]] = {"frontier": [], "models": [], "community": []}
     watch_expired: list[dict[str, Any]] = []
-    for bucket, items in (("frontier", ws.watch_frontier), ("community", ws.watch_community)):
+    for bucket, items in (("frontier", ws.watch_frontier), ("models", ws.watch_models), ("community", ws.watch_community)):
         for w in items:
             wf = compute_freshness(
                 last_verified=w.last_verified,
@@ -385,7 +385,7 @@ def build_snapshot(ws: Workspace, as_of: date | None = None) -> dict[str, Any]:
     fmap: dict[str, Freshness] = st["freshness"]
 
     return {
-        "schema_version": "6.0.0-beta.1",
+        "schema_version": "6.0.0",
         "as_of": st["as_of"],
         "counts": {
             "worlds": len(ws.taxonomy.worlds),
@@ -395,7 +395,11 @@ def build_snapshot(ws: Workspace, as_of: date | None = None) -> dict[str, Any]:
             "decisions": len(ws.decisions),
             "specialists": len(ws.specialists),
             "pages": len(ws.pages),
-            "watch_active": len(st["watch_active"]["frontier"]) + len(st["watch_active"]["community"]),
+            "watch_active": (
+                len(st["watch_active"]["frontier"])
+                + len(st["watch_active"]["models"])
+                + len(st["watch_active"]["community"])
+            ),
             "watch_expired": len(st["watch_expired"]),
         },
         "taxonomy": to_dict(ws.taxonomy),

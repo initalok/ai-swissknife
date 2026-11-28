@@ -25,14 +25,13 @@ Reliable AI-assisted research separates **source gathering** (verifiable DOIs, p
 | [Exa 3.0 Neural Search](https://exa.ai/) | High-precision web discovery for research agents and technical literature scouting. | No card: $10/mo recurring credits (~2,500 Lite searches) | Official documentation | Deep search modes exhaust monthly free credits much faster than Lite searches. |
 | [OpenAlex Academic Graph](https://docs.openalex.org/) | Primary literature review, DOI verification, and academic citation mapping. | Keyless: 100,000 requests/day forever | Official documentation | Pass ?mailto=you@domain.com in queries to enter the fast polite pool. |
 | [GPT Researcher](https://github.com/assafelovic/gpt-researcher) | Generating structured, cited background reports over mixed web and local documents. | Apache-2.0 | Official documentation | Audit every cited claim, date, and quantitative metric against primary sources before publishing. |
-| [DeerFlow 2.0](https://github.com/bytedance/deer-flow) | Multi-step deep research reports when you want container-isolated execution. | MIT | Official documentation | Requires Docker and careful prompt/token budgeting to avoid runaway web fetches. |
 <!-- swissknife:end -->
 
 ## Step-by-Step Workflow
 
 1. **Start with primary graphs, not raw web noise:** Pull peer-reviewed papers, DOIs, and citation graphs via **OpenAlex** (100,000 keyless requests/day; pass `?mailto=you@domain.com` for the polite pool).
 2. **Extract live technical documentation cleanly:** Use **Exa 3.0** ($10/mo renewing free credits) for semantic discovery and **Firecrawl** or **Jina Reader** (`r.jina.ai/<url>`) for low-token Markdown extraction.
-3. **Synthesize over mixed web + local sources:** Run **GPT Researcher** or container-isolated **DeerFlow 2.0** across gathered pages and local PDF/CSV folders, filing curated takeaways into your [Plain-Markdown Knowledge Vault](memory-and-knowledge.md).
+3. **Synthesize over mixed web + local sources:** Run **GPT Researcher** across gathered pages and local PDF/CSV folders, filing curated takeaways into your [Plain-Markdown Knowledge Vault](memory-and-knowledge.md).
 4. **Audit every primary source manually:** Never publish quantitative claims, benchmarks, or dates without checking the primary URL or DOI yourself.
 
 ---

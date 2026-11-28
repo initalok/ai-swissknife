@@ -1,15 +1,15 @@
 {
-  "schema_version": "6.0.0-beta.1",
+  "schema_version": "6.0.0",
   "as_of": "2026-11-28",
   "counts": {
     "worlds": 4,
-    "entries": 57,
-    "agent_eligible": 57,
-    "slots": 12,
+    "entries": 68,
+    "agent_eligible": 68,
+    "slots": 13,
     "decisions": 10,
     "specialists": 4,
     "pages": 22,
-    "watch_active": 9,
+    "watch_active": 10,
     "watch_expired": 0
   },
   "taxonomy": {
@@ -142,7 +142,6 @@
         "openrouter-free",
         "groq-cloud",
         "cloudflare-workers-ai",
-        "pollinations",
         "firecrawl",
         "jina-reader",
         "exa-search",
@@ -152,7 +151,6 @@
         "google-antigravity",
         "opencode",
         "pi",
-        "deepseek-harness",
         "hermes-agent",
         "comfy-mcp",
         "context7",
@@ -160,7 +158,6 @@
       ],
       "mac": [
         "gpt-researcher",
-        "deerflow",
         "tailscale-serve",
         "lm-link",
         "pi-mobile-voice",
@@ -171,11 +168,11 @@
         "google-antigravity",
         "opencode",
         "pi",
-        "deepseek-harness",
         "hermes-agent",
         "llama-cpp",
         "mlx-lm",
         "unsloth-runtime",
+        "rex",
         "comfy-mcp",
         "comfyui-mcp",
         "hyperframes",
@@ -197,13 +194,15 @@
         "qwen38-pi-lora",
         "qwen38-super-adapter",
         "qwen38-abliterated-lora",
+        "qwen3.5-9b",
+        "gpt-oss-20b",
+        "deepseek-ocr-2",
         "safeagents",
         "gondolin",
         "nono"
       ],
       "gpu-pc": [
         "gpt-researcher",
-        "deerflow",
         "tailscale-serve",
         "lm-link",
         "pi-mobile-voice",
@@ -214,10 +213,10 @@
         "google-antigravity",
         "opencode",
         "pi",
-        "deepseek-harness",
         "hermes-agent",
         "llama-cpp",
         "unsloth-runtime",
+        "rex",
         "wangp",
         "comfyui",
         "comfy-mcp",
@@ -243,6 +242,11 @@
         "qwen38-super-adapter",
         "qwen38-abliterated-lora",
         "hf-in-harness-rl",
+        "qwen3.5-9b",
+        "gpt-oss-20b",
+        "qwen3.8-flash-next",
+        "deepseek-ocr-2",
+        "ltx-2.5",
         "safeagents",
         "gondolin",
         "nono"
@@ -585,59 +589,6 @@
         "upstream_alerts": []
       }
     },
-    "pollinations": {
-      "id": "pollinations",
-      "kind": "gateway",
-      "name": "Pollinations AI",
-      "summary": "Keyless community OpenAI-compatible text and FLUX image endpoint requiring zero signup or authentication.",
-      "when_to_use": "Last-resort keyless fallback for throwaway public sandbox tests where no API keys exist.",
-      "limitations": [
-        "Shared public community service; never transmit private code, credentials, or personal data."
-      ],
-      "evidence_tier": "official-docs",
-      "lifecycle": "operational",
-      "decay_class": "stable",
-      "last_verified": "2026-11-28",
-      "url": "https://pollinations.ai/",
-      "tags": [
-        "cloud-free"
-      ],
-      "capabilities": [
-        "coding"
-      ],
-      "relations": {
-        "runs_on": [
-          "cloud"
-        ],
-        "adapts": [],
-        "guards": []
-      },
-      "meta": {
-        "env_key": null,
-        "base_url": "https://text.pollinations.ai/openai",
-        "default_model": "openai",
-        "quota": "Keyless fair-use IP quota (text and image)"
-      },
-      "source_file": "catalog/registry/cloud_and_grounding.yaml",
-      "freshness": {
-        "status": "fresh",
-        "effective_status": "fresh",
-        "score": 100,
-        "decay_class": "stable",
-        "ttl_days": 120,
-        "age_days": 0,
-        "consecutive_fails": 0,
-        "upstream_archived": false,
-        "upstream_pushed_at": null,
-        "latest_release_tag": null,
-        "release_delta": false,
-        "breaking_signal": false,
-        "eligible_for_agents": true,
-        "retirement_candidate": false,
-        "collection_item_count": null,
-        "upstream_alerts": []
-      }
-    },
     "firecrawl": {
       "id": "firecrawl",
       "kind": "tool",
@@ -894,57 +845,6 @@
         "upstream_alerts": []
       }
     },
-    "deerflow": {
-      "id": "deerflow",
-      "kind": "tool",
-      "name": "DeerFlow 2.0",
-      "summary": "Open-source deep research harness executing web gathering, code analysis, and synthesis inside an isolated Docker sandbox.",
-      "when_to_use": "Multi-step deep research reports when you want container-isolated execution.",
-      "limitations": [
-        "Requires Docker and careful prompt/token budgeting to avoid runaway web fetches."
-      ],
-      "evidence_tier": "official-docs",
-      "lifecycle": "operational",
-      "decay_class": "operational",
-      "last_verified": "2026-11-28",
-      "url": "https://github.com/bytedance/deer-flow",
-      "tags": [
-        "research"
-      ],
-      "capabilities": [
-        "research"
-      ],
-      "relations": {
-        "runs_on": [
-          "mac",
-          "gpu-pc"
-        ],
-        "adapts": [],
-        "guards": []
-      },
-      "meta": {
-        "license": "MIT"
-      },
-      "source_file": "catalog/registry/cloud_and_grounding.yaml",
-      "freshness": {
-        "status": "fresh",
-        "effective_status": "fresh",
-        "score": 100,
-        "decay_class": "operational",
-        "ttl_days": 60,
-        "age_days": 0,
-        "consecutive_fails": 0,
-        "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T08:40:52Z",
-        "latest_release_tag": null,
-        "release_delta": false,
-        "breaking_signal": false,
-        "eligible_for_agents": true,
-        "retirement_candidate": false,
-        "collection_item_count": null,
-        "upstream_alerts": []
-      }
-    },
     "tailscale-serve": {
       "id": "tailscale-serve",
       "kind": "fabric",
@@ -960,7 +860,8 @@
       "last_verified": "2026-11-28",
       "url": "https://tailscale.com/kb/1312/serve",
       "tags": [
-        "security"
+        "security",
+        "mac-16gb"
       ],
       "capabilities": [
         "fabric"
@@ -1377,7 +1278,8 @@
       "last_verified": "2026-11-28",
       "url": "https://github.com/anomalyco/opencode",
       "tags": [
-        "newcomer-anchor"
+        "newcomer-anchor",
+        "mac-16gb"
       ],
       "capabilities": [
         "coding",
@@ -1413,7 +1315,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T08:08:12Z",
+        "upstream_pushed_at": "2026-11-28T10:03:26Z",
         "latest_release_tag": "v2.4.2",
         "release_delta": false,
         "breaking_signal": false,
@@ -1439,7 +1341,8 @@
       "last_verified": "2026-11-28",
       "url": "https://github.com/earendil-works/pi",
       "tags": [
-        "dev-anchor"
+        "dev-anchor",
+        "mac-16gb"
       ],
       "capabilities": [
         "coding",
@@ -1479,60 +1382,6 @@
         "upstream_archived": false,
         "upstream_pushed_at": "2026-11-28T01:32:07Z",
         "latest_release_tag": "v1.7.0",
-        "release_delta": false,
-        "breaking_signal": false,
-        "eligible_for_agents": true,
-        "retirement_candidate": false,
-        "collection_item_count": null,
-        "upstream_alerts": []
-      }
-    },
-    "deepseek-harness": {
-      "id": "deepseek-harness",
-      "kind": "harness",
-      "name": "DeepSeek Harness (dsh)",
-      "summary": "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and sub-agent plugins.",
-      "when_to_use": "Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions.",
-      "limitations": [
-        "Rapidly iterating developer preview; pin plugin peer versions against breaking interface changes."
-      ],
-      "evidence_tier": "official-docs",
-      "lifecycle": "experimental",
-      "decay_class": "volatile",
-      "last_verified": "2026-11-28",
-      "url": "https://github.com/deepseek-ai/deepseek-harness",
-      "tags": [],
-      "capabilities": [
-        "coding",
-        "media"
-      ],
-      "relations": {
-        "runs_on": [
-          "cloud",
-          "mac",
-          "gpu-pc"
-        ],
-        "adapts": [],
-        "guards": []
-      },
-      "meta": {
-        "role": "Swappable-Loop Plugin Platform",
-        "license": "MIT",
-        "last_reviewed_release": "0.2.3-alpha.2",
-        "launch_recipe": "npx @deepseek-ai/dsh web"
-      },
-      "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
-      "freshness": {
-        "status": "fresh",
-        "effective_status": "fresh",
-        "score": 100,
-        "decay_class": "volatile",
-        "ttl_days": 21,
-        "age_days": 0,
-        "consecutive_fails": 0,
-        "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-22T11:00:05Z",
-        "latest_release_tag": null,
         "release_delta": false,
         "breaking_signal": false,
         "eligible_for_agents": true,
@@ -1585,7 +1434,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T07:58:56Z",
+        "upstream_pushed_at": "2026-11-28T10:07:45Z",
         "latest_release_tag": "v0.23.5",
         "release_delta": false,
         "breaking_signal": false,
@@ -1638,7 +1487,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T07:59:52Z",
+        "upstream_pushed_at": "2026-11-28T10:00:23Z",
         "latest_release_tag": "v1.1.0",
         "release_delta": false,
         "breaking_signal": false,
@@ -1655,6 +1504,7 @@
       "summary": "Apple Silicon native unified-memory inference framework beating llama.cpp by 46% to 3x on Apple GPUs with ~65 tok/s on 4-bit Qwen3.8-27B builds.",
       "when_to_use": "Primary local LLM serving engine on Apple Silicon Macs (Mac mini, MacBook Pro, Mac Studio).",
       "limitations": [
+        "On 16GB Macs (~10.7 GB default wired GPU limit), run 4B-12B MLX models locally; 27B MLX checkpoints require 24-32GB+ unified memory.",
         "Prompt prefill lags dedicated NVIDIA Tensor Cores; 32GB+ unified memory is recommended for 27B coding sessions."
       ],
       "evidence_tier": "primary-eval",
@@ -1662,7 +1512,9 @@
       "decay_class": "stable",
       "last_verified": "2026-11-28",
       "url": "https://github.com/ml-explore/mlx-lm",
-      "tags": [],
+      "tags": [
+        "mac-16gb"
+      ],
       "capabilities": [
         "coding"
       ],
@@ -1676,7 +1528,7 @@
       "meta": {
         "license": "MIT",
         "last_reviewed_release": "v0.32.2",
-        "mac_launch_recipe": "mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080"
+        "mac_launch_recipe": "mlx_lm.server --model mlx-community/Qwen3.5-9B-4bit --host 127.0.0.1 --port 8080"
       },
       "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
       "freshness": {
@@ -1738,7 +1590,63 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T08:02:14Z",
+        "upstream_pushed_at": "2026-11-28T10:07:33Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "rex": {
+      "id": "rex",
+      "kind": "tool",
+      "name": "Rex Terminal & Persistent Session Server (Superlogical)",
+      "summary": "Native libghostty terminal and persistent server by Mitchell Hashimoto where agent tabs live on your Mac/Linux host, survive laptop disconnects, integrate natively with Pi (rex skill setup + OSC 7501 status tabs), and include built-in Tailscale networking.",
+      "when_to_use": "Running a 16GB M4 Mac mini as a 24/7 remote AI cockpit alongside Pi and @earendil-works/pi-durable.",
+      "limitations": [
+        "Proprietary software currently in invite/Discord public beta; pragmatic exception chosen for first-class Pi OSC 7501 integration.",
+        "Rex sessions survive closing your laptop/client but NOT a full host reboot\u2014pair with @earendil-works/pi-durable for reboot durability."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "experimental",
+      "decay_class": "volatile",
+      "last_verified": "2026-11-28",
+      "url": "https://www.superlogical.com/rex/docs/installation",
+      "tags": [
+        "mac-16gb",
+        "coding-tool"
+      ],
+      "capabilities": [
+        "coding"
+      ],
+      "relations": {
+        "runs_on": [
+          "mac",
+          "gpu-pc"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "role": "24/7 Persistent Agent Terminal Server (Pragmatic Exception)",
+        "license": "Proprietary (Free Public Beta)",
+        "launch_recipe": "rex skill setup && rex server tailscale on",
+        "sanity_check": "rex --version"
+      },
+      "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "volatile",
+        "ttl_days": 21,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": null,
         "latest_release_tag": null,
         "release_delta": false,
         "breaking_signal": false,
@@ -1848,7 +1756,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T06:23:15Z",
+        "upstream_pushed_at": "2026-11-28T09:31:57Z",
         "latest_release_tag": "v0.46.0",
         "release_delta": false,
         "breaking_signal": false,
@@ -2109,7 +2017,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T07:59:28Z",
+        "upstream_pushed_at": "2026-11-28T09:47:01Z",
         "latest_release_tag": null,
         "release_delta": false,
         "breaking_signal": false,
@@ -2602,7 +2510,8 @@
       "last_verified": "2026-11-28",
       "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
       "tags": [
-        "local-mature"
+        "local-mature",
+        "tier-16-24gb"
       ],
       "capabilities": [
         "coding",
@@ -2661,7 +2570,8 @@
       "last_verified": "2026-11-28",
       "url": "https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF",
       "tags": [
-        "local-mature"
+        "local-mature",
+        "tier-hybrid-80gb"
       ],
       "capabilities": [
         "coding",
@@ -2716,7 +2626,10 @@
       "last_verified": "2026-11-28",
       "url": "https://ai.google.dev/gemma",
       "tags": [
-        "local-mature"
+        "local-mature",
+        "tier-edge-mac",
+        "tier-16-24gb",
+        "mac-16gb"
       ],
       "capabilities": [
         "coding",
@@ -2769,7 +2682,8 @@
       "last_verified": "2026-11-28",
       "url": "https://huggingface.co/NousResearch/Hermes-4-14B",
       "tags": [
-        "local-mature"
+        "local-mature",
+        "tier-16-24gb"
       ],
       "capabilities": [
         "unfiltered"
@@ -2823,7 +2737,8 @@
       "last_verified": "2026-11-28",
       "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
       "tags": [
-        "local-experimental"
+        "local-experimental",
+        "tier-16-24gb"
       ],
       "capabilities": [
         "coding",
@@ -2878,7 +2793,9 @@
       "url": "https://github.com/NandhaKishorM/laya",
       "tags": [
         "local-decision",
-        "security"
+        "security",
+        "tier-edge-mac",
+        "mac-16gb"
       ],
       "capabilities": [
         "decisions",
@@ -3263,6 +3180,672 @@
         "upstream_alerts": []
       }
     },
+    "qwen3.5-9b": {
+      "id": "qwen3.5-9b",
+      "kind": "model",
+      "name": "Qwen3.5-9B (Multimodal Hybrid DeltaNet)",
+      "summary": "Compact 9B Apache-2.0 vision-language checkpoint (262K native context, Gated DeltaNet + MTP) weighing ~5.6 GB at 4-bit MLX\u2014fitting effortlessly inside a 16GB M4 Mac mini's ~10.7 GB wired GPU budget.",
+      "when_to_use": "Fast local helper, screenshot triage, and offline coding/edits on a base 16GB M4 Mac mini or 8GB-12GB GPU laptop.",
+      "limitations": [
+        "Trails 27B+ backbones on complex multi-file refactors; route heavy coding tasks to GPU PC or $0 Cloud."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "tags": [
+        "local-mature",
+        "tier-edge-mac",
+        "mac-16gb"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [
+          "mac",
+          "gpu-pc"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Apache-2.0",
+        "footprint": "~5.6 GB (4-bit MLX / Q4 GGUF, 262K native ctx)",
+        "mac_launch_recipe": "mlx_lm.server --model mlx-community/Qwen3.5-9B-4bit --host 127.0.0.1 --port 8080"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-03-02T00:51:43.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "gpt-oss-20b": {
+      "id": "gpt-oss-20b",
+      "kind": "model",
+      "name": "OpenAI gpt-oss-20b (Native MXFP4 MoE)",
+      "summary": "Apache-2.0 21B MoE (3.6B active) post-trained natively in MXFP4 (~12.8 GB) with a tiny KV cache footprint and three controllable reasoning effort levels.",
+      "when_to_use": "Fast 16GB GPU reasoning, function calling, and browser/agent workflows with generous 32K-64K context headroom.",
+      "limitations": [
+        "Requires the Harmony response format (handled automatically by modern llama.cpp/vLLM chat templates); text-only."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/openai/gpt-oss-20b",
+      "tags": [
+        "local-mature",
+        "tier-16-24gb"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [
+          "gpu-pc",
+          "mac"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Apache-2.0",
+        "footprint": "~12.8 GB (Native MXFP4; 16GB GPU or Mac w/ wired_limit_mb tuning)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2025-08-26T17:25:47.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "muse-glimmer-30b": {
+      "id": "muse-glimmer-30b",
+      "kind": "model",
+      "name": "Meta Muse Glimmer 30B (+ DFlash 16-Token Drafter)",
+      "summary": "Apache-2.0 30B multimodal agentic model distilled from 816B Muse Spark, pairing <20 GB 4-bit weights with a DFlash block-diffusion drafter predicting 16 tokens per pass.",
+      "when_to_use": "24GB-32GB VRAM workstations or 32GB+ Macs wanting high-speed local multimodal agents with controllable reasoning strength.",
+      "limitations": [
+        "Needs a 24GB-32GB VRAM or unified-memory envelope alongside KV cache and DFlash; exceeds a single 16GB card without RAM spill."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "experimental",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+      "tags": [
+        "tier-16-24gb"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Apache-2.0",
+        "footprint": "<20 GB (4-bit K-Quant + Perception Encoder + DFlash; 24GB-32GB envelope)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-18T23:58:48.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "diffusiongemma-26b": {
+      "id": "diffusiongemma-26b",
+      "kind": "model",
+      "name": "Google DiffusionGemma 26B-A4B (Block-Diffusion LLM)",
+      "summary": "Apache-2.0 26B-A4B discrete text-diffusion MoE denoising 256-token canvases in parallel rather than strictly left-to-right, enabling parallel block generation and native infilling.",
+      "when_to_use": "24GB+ GPUs researching non-autoregressive parallel code/layout generation and fast canvas infilling.",
+      "limitations": [
+        "Requires diffusion-aware sampling (entropy-bounded denoising) and works best on well-structured tasks rather than open-ended prose."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "experimental",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/google/diffusiongemma-26B-A4B-it",
+      "tags": [
+        "tier-16-24gb",
+        "tier-special-model"
+      ],
+      "capabilities": [
+        "coding"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Apache-2.0",
+        "footprint": "~18 GB quantized (24GB+ VRAM recommended)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-16T10:03:36.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "qwen3.8-flash-next": {
+      "id": "qwen3.8-flash-next",
+      "kind": "model",
+      "name": "Qwen3.8-Flash-Next (180B / 6B Active + 51B N-Gram)",
+      "summary": "Preview of Qwen4's hybrid architecture combining Gated DeltaNet, Qwen Sparse Attention (QSA), 125B MoE (6B active), 51B RAM-prefetchable N-gram embeddings, and 4B MTP.",
+      "when_to_use": "High-memory workstations (64GB-128GB RAM + 16GB+ VRAM via Unsloth Dynamic v3.1 UD-IQ1_M/UD-Q2_0) or SGLang/vLLM servers.",
+      "limitations": [
+        "Custom qwen-community-1.0 license; avoid the oversized 79.6 GB UD-Q2_K_XL quant on 16GB+64GB systems."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "experimental",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+      "tags": [
+        "tier-hybrid-80gb"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [
+          "gpu-pc"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "qwen-community-1.0",
+        "footprint": "66-70 GB (Unsloth Dynamic v3.1 UD-IQ1_M / UD-Q2_0) or multi-GPU BF16"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-07T04:42:40.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "gpt-oss-120b": {
+      "id": "gpt-oss-120b",
+      "kind": "model",
+      "name": "OpenAI gpt-oss-120b (Single-80GB MXFP4 Reasoning)",
+      "summary": "Apache-2.0 117B MoE (5.1B active) natively post-trained in MXFP4 so full high-reasoning capacity fits inside a single 80GB H100/MI300X GPU or 96GB+ Apple Silicon Studio.",
+      "when_to_use": "Single-80GB server deployments wanting strong Apache-2.0 reasoning and tool calling without multi-GPU tensor parallelism.",
+      "limitations": [
+        "Exceeds 16GB+64GB consumer rigs; requires Harmony prompt formatting."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/openai/gpt-oss-120b",
+      "tags": [
+        "tier-hybrid-80gb"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Apache-2.0",
+        "footprint": "~65-80 GB (Single 80GB H100/MI300X or 96GB+ Unified RAM)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2025-08-26T17:25:03.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "nemotron-3.5-super-vl": {
+      "id": "nemotron-3.5-super-vl",
+      "kind": "model",
+      "name": "NVIDIA Nemotron 3.5 Super VL (120B-A12B Mamba-2 Hybrid)",
+      "summary": "OpenMDW-1.1 120B (12B active) Mamba-2 + Transformer MoE with C-RADIO vision/video encoder, 1M context, native MTP speculative decoding, and NVFP4 builds for DGX Spark / servers.",
+      "when_to_use": "Video/document understanding and long-context multimodal agents on DGX Spark or multi-GPU servers.",
+      "limitations": [
+        "Datacenter / DGX Spark class footprint; prototype card-free via NVIDIA NIM if you lack server GPUs."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+      "tags": [
+        "tier-hybrid-80gb"
+      ],
+      "capabilities": [
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "OpenMDW-1.1",
+        "footprint": "NVFP4 on DGX Spark / 4xH100 (BF16)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-10-22T17:24:14.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "deepseek-v4.1-flash-1017": {
+      "id": "deepseek-v4.1-flash-1017",
+      "kind": "model",
+      "name": "DeepSeek-V4.1-Flash-1017 (552B \u00b7 4x KV Compression)",
+      "summary": "MIT-licensed 552B multimodal MoE (1M ctx, 77.0% DeepSWE v1.1, 60.5% Automation-Bench) pioneering 4x global KV-cache compression vs V4-Flash and Rust deepseek-recipe prompt encoding.",
+      "when_to_use": "Cluster hosting, NVIDIA NIM cloud prototyping, and tracking KV-compression breakthroughs trickling down to smaller local models.",
+      "limitations": [
+        "No Jinja chat template (uses encoding.py or Rust deepseek-recipe); far beyond single-workstation memory."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "tags": [
+        "tier-frontier-open"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "MIT",
+        "footprint": "Multi-GPU FP8/INT4 cluster (prototype free via NVIDIA NIM)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-10T02:22:56.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "mistral-large-4": {
+      "id": "mistral-large-4",
+      "kind": "model",
+      "name": "Mistral Large 4 (1T-A52B + Embedded DSpark Drafter)",
+      "summary": "Western open-weight frontier MoE (~1T total / 52B active, 1M ctx, Pixtral vision, embedded DSpark speculative head) standing out on cybersecurity (93% Cybench) and token-efficient coding.",
+      "when_to_use": "Cluster/512GB-Ultra deployments and tracking embedded DSpark speculative decoding for future smaller Mistral releases.",
+      "limitations": [
+        "Reasoning cannot be disabled (defaults to high); custom license restricts commercial Model-as-a-Service hosting."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+      "tags": [
+        "tier-frontier-open"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Mistral Ecosystem Open-Weight (MaaS restrictions)",
+        "footprint": "8x GPU NVFP4 or 512GB Mac Ultra (Q2_K)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-24T08:49:52.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "kimi-k3": {
+      "id": "kimi-k3",
+      "kind": "model",
+      "name": "Moonshot Kimi-K3 (2.8T-A104B \u00b7 First Open 3T-Class)",
+      "summary": "Native multimodal 2.8T MoE built on Kimi Delta Attention (KDA), Attention Residuals (AttnRes), and native MXFP4 QAT across a 1M context window.",
+      "when_to_use": "Research reference for frontier architectures (AttnRes already trickled down into Inkling 2 Mini) and multi-node deployments.",
+      "limitations": [
+        "Research/cluster scale only; tracked for architectural trickle-down."
+      ],
+      "evidence_tier": "vendor-claim",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3",
+      "tags": [
+        "tier-frontier-open"
+      ],
+      "capabilities": [
+        "coding",
+        "research"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Kimi K3 Open License",
+        "footprint": "Multi-node cluster (native MXFP4/MXFP8)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-24T08:03:25.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "deepseek-ocr-2": {
+      "id": "deepseek-ocr-2",
+      "kind": "model",
+      "name": "DeepSeek-OCR-2 (3B Visual Causal Flow)",
+      "summary": "MIT-licensed 3B document OCR checkpoint (76.3 olmOCR-bench) applying human reading-order visual causal attention to convert dense PDFs, tables, and scans into clean Markdown.",
+      "when_to_use": "Local private PDF/scan-to-Markdown ingestion into Obsidian knowledge vaults on any 6GB-16GB GPU or Mac.",
+      "limitations": [
+        "Specialized for document layout and OCR rather than general multi-turn chat."
+      ],
+      "evidence_tier": "primary-eval",
+      "lifecycle": "mature",
+      "decay_class": "stable",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+      "tags": [
+        "tier-special-model",
+        "tier-edge-mac"
+      ],
+      "capabilities": [
+        "research"
+      ],
+      "relations": {
+        "runs_on": [
+          "gpu-pc",
+          "mac"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "MIT",
+        "footprint": "~2-6 GB (GGUF / vLLM)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "stable",
+        "ttl_days": 120,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-02-03T00:33:19.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "fish-drama-3": {
+      "id": "fish-drama-3",
+      "kind": "model",
+      "name": "Fish Audio Drama 3 (35B-A3B Multi-Speaker TTS)",
+      "summary": "Open-weight MoE speech model with 10-codebook MTP decoding supporting 16-speaker scenes, paralinguistic tags ([sighs], [laughs]), single-word audio inpainting, and SGLang-Omni/vLLM-Omni serving.",
+      "when_to_use": "Studio-grade local multi-speaker narration and expressive TTS on 32GB-80GB GPUs (or Hybrid RAM).",
+      "limitations": [
+        "Too heavy for a 16GB GPU alongside an LLM; use Phonon 31M for zero-GPU/laptop speech."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/fishaudio/drama-3",
+      "tags": [
+        "tier-special-model",
+        "media"
+      ],
+      "capabilities": [
+        "media"
+      ],
+      "relations": {
+        "runs_on": [],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "Fish Community v1.0 (free <$500K/yr revenue)",
+        "footprint": "32-80 GB GPU (SGLang-Omni / vLLM-Omni)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-10-29T06:46:37.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
+    "ltx-2.5": {
+      "id": "ltx-2.5",
+      "kind": "model",
+      "name": "Lightricks LTX-2.5 (22B Distilled Video + Synchronized Audio)",
+      "summary": "Open-weight distilled video-and-audio model shipping split ComfyUI-ready safetensors and running inside 5.9-8.1 GiB VRAM via WanGP.",
+      "when_to_use": "Local video generation with synchronized audio on 8GB-24GB NVIDIA GPUs.",
+      "limitations": [
+        "Gated Hugging Face license acceptance required; use Wan 2.2 when strict Apache-2.0 licensing is mandatory."
+      ],
+      "evidence_tier": "official-docs",
+      "lifecycle": "operational",
+      "decay_class": "operational",
+      "last_verified": "2026-11-28",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5",
+      "tags": [
+        "tier-special-model",
+        "media"
+      ],
+      "capabilities": [
+        "media"
+      ],
+      "relations": {
+        "runs_on": [
+          "gpu-pc"
+        ],
+        "adapts": [],
+        "guards": []
+      },
+      "meta": {
+        "license": "LTX Community (free <$10M/yr revenue)",
+        "footprint": "5.9-8.1 GiB (WanGP) / 16-24 GiB (ComfyUI)"
+      },
+      "source_file": "catalog/registry/models_and_adapters.yaml",
+      "freshness": {
+        "status": "fresh",
+        "effective_status": "fresh",
+        "score": 100,
+        "decay_class": "operational",
+        "ttl_days": 60,
+        "age_days": 0,
+        "consecutive_fails": 0,
+        "upstream_archived": false,
+        "upstream_pushed_at": "2026-11-26T10:57:37.000Z",
+        "latest_release_tag": null,
+        "release_delta": false,
+        "breaking_signal": false,
+        "eligible_for_agents": true,
+        "retirement_candidate": false,
+        "collection_item_count": null,
+        "upstream_alerts": []
+      }
+    },
     "safeagents": {
       "id": "safeagents",
       "kind": "tool",
@@ -3278,7 +3861,8 @@
       "last_verified": "2026-11-28",
       "url": "https://github.com/huggingface/safeagents",
       "tags": [
-        "security"
+        "security",
+        "mac-16gb"
       ],
       "capabilities": [
         "safety"
@@ -3375,11 +3959,11 @@
     "nono": {
       "id": "nono",
       "kind": "tool",
-      "name": "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)",
-      "summary": "Zero-VM Rust capability sandbox wrapping agent processes in native macOS Seatbelt or Linux Landlock policies plus nono-proxy network filtering.",
-      "when_to_use": "Least-privilege local sandboxing when the agent needs native macOS tools (Xcode, Homebrew, local files).",
+      "name": "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)",
+      "summary": "Zero-VM Rust capability sandbox wrapping Pi and OpenCode in native macOS Seatbelt or Linux Landlock policies with official pack profiles (nolabs-ai/pi, nolabs-ai/opencode), macOS Keychain --credential secret injection, and --rollback session restore.",
+      "when_to_use": "Production-grade least-privilege sandboxing for 24/7 Mac mini servers and native macOS/Linux host toolchains.",
       "limitations": [
-        "Shares the host kernel; for heavily untrusted code or strict zero-secret isolation, prefer gondolin's micro-VM boundary."
+        "Shares the host kernel; for heavily untrusted code execution or strict zero-secret micro-VM isolation, pair with gondolin."
       ],
       "evidence_tier": "official-docs",
       "lifecycle": "operational",
@@ -3387,7 +3971,8 @@
       "last_verified": "2026-11-28",
       "url": "https://github.com/nolabs-ai/nono",
       "tags": [
-        "security"
+        "security",
+        "mac-16gb"
       ],
       "capabilities": [
         "safety"
@@ -3403,7 +3988,10 @@
         ]
       },
       "meta": {
-        "license": "Apache-2.0"
+        "license": "Apache-2.0",
+        "last_reviewed_release": "v0.82.0",
+        "launch_recipe": "nono pull nolabs-ai/pi && nono run --profile nolabs-ai/pi -- pi",
+        "sanity_check": "nono why --path ~/.ssh/id_rsa --op read"
       },
       "source_file": "catalog/registry/security_and_sandboxes.yaml",
       "freshness": {
@@ -3416,7 +4004,7 @@
         "consecutive_fails": 0,
         "upstream_archived": false,
         "upstream_pushed_at": "2026-11-27T15:16:31Z",
-        "latest_release_tag": null,
+        "latest_release_tag": "v0.82.0",
         "release_delta": false,
         "breaking_signal": false,
         "eligible_for_agents": true,
@@ -3762,7 +4350,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/earendil-works/pi",
         "tags": [
-          "dev-anchor"
+          "dev-anchor",
+          "mac-16gb"
         ],
         "capabilities": [
           "coding",
@@ -3826,7 +4415,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/earendil-works/pi",
         "tags": [
-          "dev-anchor"
+          "dev-anchor",
+          "mac-16gb"
         ],
         "capabilities": [
           "coding",
@@ -3874,60 +4464,7 @@
           "upstream_alerts": []
         }
       },
-      "experimental": {
-        "id": "deepseek-harness",
-        "kind": "harness",
-        "name": "DeepSeek Harness (dsh)",
-        "summary": "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and sub-agent plugins.",
-        "when_to_use": "Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions.",
-        "limitations": [
-          "Rapidly iterating developer preview; pin plugin peer versions against breaking interface changes."
-        ],
-        "evidence_tier": "official-docs",
-        "lifecycle": "experimental",
-        "decay_class": "volatile",
-        "last_verified": "2026-11-28",
-        "url": "https://github.com/deepseek-ai/deepseek-harness",
-        "tags": [],
-        "capabilities": [
-          "coding",
-          "media"
-        ],
-        "relations": {
-          "runs_on": [
-            "cloud",
-            "mac",
-            "gpu-pc"
-          ],
-          "adapts": [],
-          "guards": []
-        },
-        "meta": {
-          "role": "Swappable-Loop Plugin Platform",
-          "license": "MIT",
-          "last_reviewed_release": "0.2.3-alpha.2",
-          "launch_recipe": "npx @deepseek-ai/dsh web"
-        },
-        "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
-        "freshness": {
-          "status": "fresh",
-          "effective_status": "fresh",
-          "score": 100,
-          "decay_class": "volatile",
-          "ttl_days": 21,
-          "age_days": 0,
-          "consecutive_fails": 0,
-          "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-22T11:00:05Z",
-          "latest_release_tag": null,
-          "release_delta": false,
-          "breaking_signal": false,
-          "eligible_for_agents": true,
-          "retirement_candidate": false,
-          "collection_item_count": null,
-          "upstream_alerts": []
-        }
-      },
+      "experimental": null,
       "discovered_adapters": [
         {
           "id": "qwen38-pi-lora",
@@ -4186,7 +4723,8 @@
         "last_verified": "2026-11-28",
         "url": "https://tailscale.com/kb/1312/serve",
         "tags": [
-          "security"
+          "security",
+          "mac-16gb"
         ],
         "capabilities": [
           "fabric"
@@ -4240,7 +4778,8 @@
         "last_verified": "2026-11-28",
         "url": "https://tailscale.com/kb/1312/serve",
         "tags": [
-          "security"
+          "security",
+          "mac-16gb"
         ],
         "capabilities": [
           "fabric"
@@ -4481,7 +5020,8 @@
         "last_verified": "2026-11-28",
         "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
         "tags": [
-          "local-mature"
+          "local-mature",
+          "tier-16-24gb"
         ],
         "capabilities": [
           "coding",
@@ -4542,7 +5082,8 @@
         "last_verified": "2026-11-28",
         "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
         "tags": [
-          "local-mature"
+          "local-mature",
+          "tier-16-24gb"
         ],
         "capabilities": [
           "coding",
@@ -4602,7 +5143,8 @@
         "last_verified": "2026-11-28",
         "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
         "tags": [
-          "local-experimental"
+          "local-experimental",
+          "tier-16-24gb"
         ],
         "capabilities": [
           "coding",
@@ -4979,7 +5521,7 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T07:59:52Z",
+          "upstream_pushed_at": "2026-11-28T10:00:23Z",
           "latest_release_tag": "v1.1.0",
           "release_delta": false,
           "breaking_signal": false,
@@ -5032,7 +5574,7 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T07:59:52Z",
+          "upstream_pushed_at": "2026-11-28T10:00:23Z",
           "latest_release_tag": "v1.1.0",
           "release_delta": false,
           "breaking_signal": false,
@@ -5074,6 +5616,129 @@
         "needs_review": false,
         "review_triggers": []
       },
+      "skipped": []
+    },
+    "mac-server": {
+      "slot_id": "mac-server",
+      "title": "24/7 Mac Mini Remote AI Cockpit",
+      "role": "Persistent remote terminal server + crash/reboot-durable agent runtime on a power-efficient 16GB M4 Mac mini.",
+      "world_filter": "mac",
+      "fallback_used": false,
+      "configured_primary": {
+        "id": "rex",
+        "kind": "tool",
+        "name": "Rex Terminal & Persistent Session Server (Superlogical)",
+        "summary": "Native libghostty terminal and persistent server by Mitchell Hashimoto where agent tabs live on your Mac/Linux host, survive laptop disconnects, integrate natively with Pi (rex skill setup + OSC 7501 status tabs), and include built-in Tailscale networking.",
+        "when_to_use": "Running a 16GB M4 Mac mini as a 24/7 remote AI cockpit alongside Pi and @earendil-works/pi-durable.",
+        "limitations": [
+          "Proprietary software currently in invite/Discord public beta; pragmatic exception chosen for first-class Pi OSC 7501 integration.",
+          "Rex sessions survive closing your laptop/client but NOT a full host reboot\u2014pair with @earendil-works/pi-durable for reboot durability."
+        ],
+        "evidence_tier": "official-docs",
+        "lifecycle": "experimental",
+        "decay_class": "volatile",
+        "last_verified": "2026-11-28",
+        "url": "https://www.superlogical.com/rex/docs/installation",
+        "tags": [
+          "mac-16gb",
+          "coding-tool"
+        ],
+        "capabilities": [
+          "coding"
+        ],
+        "relations": {
+          "runs_on": [
+            "mac",
+            "gpu-pc"
+          ],
+          "adapts": [],
+          "guards": []
+        },
+        "meta": {
+          "role": "24/7 Persistent Agent Terminal Server (Pragmatic Exception)",
+          "license": "Proprietary (Free Public Beta)",
+          "launch_recipe": "rex skill setup && rex server tailscale on",
+          "sanity_check": "rex --version"
+        },
+        "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "latest_release_tag": null,
+          "release_delta": false,
+          "breaking_signal": false,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "collection_item_count": null,
+          "upstream_alerts": []
+        }
+      },
+      "active": {
+        "id": "rex",
+        "kind": "tool",
+        "name": "Rex Terminal & Persistent Session Server (Superlogical)",
+        "summary": "Native libghostty terminal and persistent server by Mitchell Hashimoto where agent tabs live on your Mac/Linux host, survive laptop disconnects, integrate natively with Pi (rex skill setup + OSC 7501 status tabs), and include built-in Tailscale networking.",
+        "when_to_use": "Running a 16GB M4 Mac mini as a 24/7 remote AI cockpit alongside Pi and @earendil-works/pi-durable.",
+        "limitations": [
+          "Proprietary software currently in invite/Discord public beta; pragmatic exception chosen for first-class Pi OSC 7501 integration.",
+          "Rex sessions survive closing your laptop/client but NOT a full host reboot\u2014pair with @earendil-works/pi-durable for reboot durability."
+        ],
+        "evidence_tier": "official-docs",
+        "lifecycle": "experimental",
+        "decay_class": "volatile",
+        "last_verified": "2026-11-28",
+        "url": "https://www.superlogical.com/rex/docs/installation",
+        "tags": [
+          "mac-16gb",
+          "coding-tool"
+        ],
+        "capabilities": [
+          "coding"
+        ],
+        "relations": {
+          "runs_on": [
+            "mac",
+            "gpu-pc"
+          ],
+          "adapts": [],
+          "guards": []
+        },
+        "meta": {
+          "role": "24/7 Persistent Agent Terminal Server (Pragmatic Exception)",
+          "license": "Proprietary (Free Public Beta)",
+          "launch_recipe": "rex skill setup && rex server tailscale on",
+          "sanity_check": "rex --version"
+        },
+        "source_file": "catalog/registry/harnesses_and_runtimes.yaml",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": null,
+          "latest_release_tag": null,
+          "release_delta": false,
+          "breaking_signal": false,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "collection_item_count": null,
+          "upstream_alerts": []
+        }
+      },
+      "experimental": null,
+      "discovered_adapters": [],
+      "decision": null,
       "skipped": []
     },
     "mobile-hitl-primary": {
@@ -5391,7 +6056,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/anomalyco/opencode",
         "tags": [
-          "newcomer-anchor"
+          "newcomer-anchor",
+          "mac-16gb"
         ],
         "capabilities": [
           "coding",
@@ -5427,7 +6093,7 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T08:08:12Z",
+          "upstream_pushed_at": "2026-11-28T10:03:26Z",
           "latest_release_tag": "v2.4.2",
           "release_delta": false,
           "breaking_signal": false,
@@ -5453,7 +6119,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/anomalyco/opencode",
         "tags": [
-          "newcomer-anchor"
+          "newcomer-anchor",
+          "mac-16gb"
         ],
         "capabilities": [
           "coding",
@@ -5489,7 +6156,7 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-28T08:08:12Z",
+          "upstream_pushed_at": "2026-11-28T10:03:26Z",
           "latest_release_tag": "v2.4.2",
           "release_delta": false,
           "breaking_signal": false,
@@ -5700,7 +6367,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/huggingface/safeagents",
         "tags": [
-          "security"
+          "security",
+          "mac-16gb"
         ],
         "capabilities": [
           "safety"
@@ -5755,7 +6423,8 @@
         "last_verified": "2026-11-28",
         "url": "https://github.com/huggingface/safeagents",
         "tags": [
-          "security"
+          "security",
+          "mac-16gb"
         ],
         "capabilities": [
           "safety"
@@ -6413,7 +7082,7 @@
           },
           {
             "id": "nono",
-            "name": "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)",
+            "name": "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)",
             "url": "https://github.com/nolabs-ai/nono",
             "freshness": {
               "status": "fresh",
@@ -6425,7 +7094,7 @@
               "consecutive_fails": 0,
               "upstream_archived": false,
               "upstream_pushed_at": "2026-11-27T15:16:31Z",
-              "latest_release_tag": null,
+              "latest_release_tag": "v0.82.0",
               "release_delta": false,
               "breaking_signal": false,
               "eligible_for_agents": true,
@@ -6634,7 +7303,7 @@
               "age_days": 0,
               "consecutive_fails": 0,
               "upstream_archived": false,
-              "upstream_pushed_at": "2026-11-28T07:58:56Z",
+              "upstream_pushed_at": "2026-11-28T10:07:45Z",
               "latest_release_tag": "v0.23.5",
               "release_delta": false,
               "breaking_signal": false,
@@ -6696,7 +7365,7 @@
           },
           {
             "id": "nono",
-            "name": "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)",
+            "name": "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)",
             "url": "https://github.com/nolabs-ai/nono",
             "freshness": {
               "status": "fresh",
@@ -6708,7 +7377,7 @@
               "consecutive_fails": 0,
               "upstream_archived": false,
               "upstream_pushed_at": "2026-11-27T15:16:31Z",
-              "latest_release_tag": null,
+              "latest_release_tag": "v0.82.0",
               "release_delta": false,
               "breaking_signal": false,
               "eligible_for_agents": true,
@@ -7002,7 +7671,7 @@
           },
           {
             "id": "nono",
-            "name": "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)",
+            "name": "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)",
             "url": "https://github.com/nolabs-ai/nono",
             "freshness": {
               "status": "fresh",
@@ -7014,7 +7683,7 @@
               "consecutive_fails": 0,
               "upstream_archived": false,
               "upstream_pushed_at": "2026-11-27T15:16:31Z",
-              "latest_release_tag": null,
+              "latest_release_tag": "v0.82.0",
               "release_delta": false,
               "breaking_signal": false,
               "eligible_for_agents": true,
@@ -7200,7 +7869,7 @@
               "age_days": 0,
               "consecutive_fails": 0,
               "upstream_archived": false,
-              "upstream_pushed_at": "2026-11-28T08:08:12Z",
+              "upstream_pushed_at": "2026-11-28T10:03:26Z",
               "latest_release_tag": "v2.4.2",
               "release_delta": false,
               "breaking_signal": false,
@@ -7310,7 +7979,7 @@
           },
           {
             "id": "nono",
-            "name": "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)",
+            "name": "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)",
             "url": "https://github.com/nolabs-ai/nono",
             "freshness": {
               "status": "fresh",
@@ -7322,7 +7991,7 @@
               "consecutive_fails": 0,
               "upstream_archived": false,
               "upstream_pushed_at": "2026-11-27T15:16:31Z",
-              "latest_release_tag": null,
+              "latest_release_tag": "v0.82.0",
               "release_delta": false,
               "breaking_signal": false,
               "eligible_for_agents": true,
@@ -7554,6 +8223,27 @@
             "tag": "security"
           },
           "line": 35
+        },
+        {
+          "directive": "recipe",
+          "args": {
+            "id": "nono"
+          },
+          "line": 55
+        },
+        {
+          "directive": "recipe",
+          "args": {
+            "id": "safeagents"
+          },
+          "line": 68
+        },
+        {
+          "directive": "recipe",
+          "args": {
+            "id": "laya-05"
+          },
+          "line": 79
         }
       ]
     },
@@ -7583,14 +8273,21 @@
           "args": {
             "kind": "harness"
           },
-          "line": 43
+          "line": 42
+        },
+        {
+          "directive": "table",
+          "args": {
+            "kind": "runtime"
+          },
+          "line": 53
         },
         {
           "directive": "slot",
           "args": {
             "id": "runtime-safety"
           },
-          "line": 62
+          "line": 72
         }
       ]
     },
@@ -7713,7 +8410,7 @@
           "args": {
             "tag": "coding-tool"
           },
-          "line": 48
+          "line": 47
         }
       ]
     },
@@ -7817,21 +8514,21 @@
           "args": {
             "id": "pi"
           },
-          "line": 33
+          "line": 32
         },
         {
           "directive": "recipe",
           "args": {
             "id": "qwen38-pi-lora"
           },
-          "line": 54
+          "line": 53
         },
         {
           "directive": "slot",
           "args": {
             "id": "agent-media-mcp"
           },
-          "line": 108
+          "line": 115
         }
       ]
     },
@@ -7880,10 +8577,10 @@
       ]
     },
     {
-      "path": "reference/models-and-harnesses.md",
-      "title": "Models, Harnesses & Runtimes Reference",
+      "path": "reference/models.md",
+      "title": "Models Reference (Across Hardware Tiers & Special Use Cases)",
       "section": "reference",
-      "summary": "Scannable factual index of all verified local models, agent harnesses, inference runtimes, and safety boundaries.",
+      "summary": "Core model fundamentals spanning Edge/16GB M4 Mac, 16-24GB GPUs, Hybrid/80GB servers, research-leading open frontier weights, and specialized OCR/speech/video/diffusion checkpoints.",
       "order": 1,
       "track": null,
       "world": null,
@@ -7896,23 +8593,37 @@
         {
           "directive": "table",
           "args": {
-            "kind": "model"
+            "tag": "tier-edge-mac"
           },
-          "line": 14
+          "line": 18
         },
         {
           "directive": "table",
           "args": {
-            "kind": "harness"
+            "tag": "tier-16-24gb"
           },
-          "line": 29
+          "line": 31
         },
         {
           "directive": "table",
           "args": {
-            "kind": "runtime"
+            "tag": "tier-hybrid-80gb"
           },
-          "line": 41
+          "line": 47
+        },
+        {
+          "directive": "table",
+          "args": {
+            "tag": "tier-frontier-open"
+          },
+          "line": 60
+        },
+        {
+          "directive": "table",
+          "args": {
+            "tag": "tier-special-model"
+          },
+          "line": 70
         }
       ]
     },
@@ -8004,9 +8715,9 @@
     },
     {
       "path": "worlds/apple-silicon.md",
-      "title": "Apple Silicon Mac",
+      "title": "Apple Silicon Mac (16GB M4 Mac mini 24/7 Server)",
       "section": "worlds",
-      "summary": "Running a silent ~15W always-on AI control plane with Apple MLX unified-memory inference, native sandboxes, and honest media limits.",
+      "summary": "Running a power-efficient 16GB M4 Mac mini as a 24/7 remote AI server built around Rex, Pi, Pi Durable, nono v0.82 sandboxing, and <=10 GB local MLX helpers.",
       "order": 2,
       "track": null,
       "world": "mac",
@@ -8017,18 +8728,32 @@
           "line": 4
         },
         {
+          "directive": "slot",
+          "args": {
+            "id": "mac-server"
+          },
+          "line": 19
+        },
+        {
           "directive": "recipe",
           "args": {
-            "id": "qwen3.8-27b"
+            "id": "rex"
           },
-          "line": 25
+          "line": 30
+        },
+        {
+          "directive": "recipe",
+          "args": {
+            "id": "mlx-lm"
+          },
+          "line": 49
         },
         {
           "directive": "table",
           "args": {
-            "world": "mac"
+            "tag": "mac-16gb"
           },
-          "line": 49
+          "line": 65
         }
       ]
     },
@@ -8066,7 +8791,7 @@
           "args": {
             "tag": "grounding"
           },
-          "line": 55
+          "line": 54
         }
       ]
     },
@@ -8087,16 +8812,23 @@
         {
           "directive": "recipe",
           "args": {
-            "id": "qwen3.8-27b"
+            "id": "llama-cpp"
           },
           "line": 42
         },
         {
           "directive": "recipe",
           "args": {
+            "id": "qwen3.8-27b"
+          },
+          "line": 55
+        },
+        {
+          "directive": "recipe",
+          "args": {
             "id": "qwen3-coder-next"
           },
-          "line": 64
+          "line": 77
         },
         {
           "directive": "table",
@@ -8104,7 +8836,7 @@
             "world": "gpu-pc",
             "kind": "model"
           },
-          "line": 77
+          "line": 90
         }
       ]
     },
@@ -8172,6 +8904,13 @@
             "id": "tailscale-serve"
           },
           "line": 49
+        },
+        {
+          "directive": "recipe",
+          "args": {
+            "id": "lm-link"
+          },
+          "line": 62
         }
       ]
     }
@@ -8627,50 +9366,19 @@
           "collection_item_count": null,
           "upstream_alerts": []
         }
-      },
-      {
-        "id": "deepseek-v41-flash",
-        "bucket": "frontier",
-        "name": "DeepSeek-V4.1-Flash (552B)",
-        "url": "https://www.deepseek.com/",
-        "last_verified": "2026-11-28",
-        "evidence_tier": "vendor-claim",
-        "summary": "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open weights adopting this KV compression.",
-        "limitations": [
-          "Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API."
-        ],
-        "source_file": "catalog/registry/specialists_watch_retired.yaml",
-        "freshness": {
-          "status": "monitor-only",
-          "effective_status": "monitor-only",
-          "score": 100,
-          "decay_class": "volatile",
-          "ttl_days": 21,
-          "age_days": 0,
-          "consecutive_fails": 0,
-          "upstream_archived": false,
-          "upstream_pushed_at": null,
-          "latest_release_tag": null,
-          "release_delta": false,
-          "breaking_signal": false,
-          "eligible_for_agents": false,
-          "retirement_candidate": false,
-          "collection_item_count": null,
-          "upstream_alerts": []
-        }
       }
     ],
-    "community": [
+    "models": [
       {
-        "id": "disler-durable-pi",
-        "bucket": "community",
-        "name": "disler/durable-pi Multi-Device Agent Showcase",
-        "url": "https://github.com/disler/durable-pi",
+        "id": "tml-varloop-research",
+        "bucket": "models",
+        "name": "Thinking Machines TML-d24-varloop-research (Variable-Pass Looped MoE)",
+        "url": "https://huggingface.co/thinkingmachines/TML-d24-varloop-research",
         "last_verified": "2026-11-28",
-        "evidence_tier": "field-note",
-        "summary": "Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live mid-run tool toggling on top of @earendil-works/pi-durable.",
+        "evidence_tier": "official-docs",
+        "summary": "Open-weight research counterpart to Inkling 2 Mini (26.4B, NVFP4/MXFP8, 1M ctx) letting you vary middle-layer passes (1-5 loops, 3.4B-7.4B effective active) at inference time.",
         "limitations": [
-          "Reference architecture; first-party @earendil-works/pi-durable lives inside the main Pi monorepo."
+          "Research checkpoint requiring ~20 GB VRAM (32GB+ card or 32GB+ Mac recommended)."
         ],
         "source_file": "catalog/registry/specialists_watch_retired.yaml",
         "freshness": {
@@ -8682,7 +9390,7 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-10-11T18:49:55Z",
+          "upstream_pushed_at": "2026-11-24T19:16:29.000Z",
           "latest_release_tag": null,
           "release_delta": false,
           "breaking_signal": false,
@@ -8693,15 +9401,15 @@
         }
       },
       {
-        "id": "hy-nomas-worlds",
-        "bucket": "community",
-        "name": "Tencent-Hunyuan/Hy-Nomas Walkable Worlds",
-        "url": "https://github.com/Tencent-Hunyuan/Hy-Nomas",
+        "id": "ling-3.2-air",
+        "bucket": "models",
+        "name": "inclusionAI Ling-3.2-air (124B-A5.5B Hybrid-Linear Workflow MoE)",
+        "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
         "last_verified": "2026-11-28",
-        "evidence_tier": "field-note",
-        "summary": "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping.",
+        "evidence_tier": "vendor-claim",
+        "summary": "Nov 23, 2026 multimodal MoE (35 KDA + 7 Gated MLA layers, only 5.5B active) jumping to 61% AutomationBench-AA and 1340 Elo on AA-Briefcase v1.1 for document/workflow automation.",
         "limitations": [
-          "Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only)."
+          "124B total parameters require high-RAM hybrid offloading or server GPUs; specialized toward document/workflow reasoning."
         ],
         "source_file": "catalog/registry/specialists_watch_retired.yaml",
         "freshness": {
@@ -8713,7 +9421,71 @@
           "age_days": 0,
           "consecutive_fails": 0,
           "upstream_archived": false,
-          "upstream_pushed_at": "2026-11-12T19:03:33Z",
+          "upstream_pushed_at": "2026-11-24T08:31:31.000Z",
+          "latest_release_tag": null,
+          "release_delta": false,
+          "breaking_signal": false,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "collection_item_count": null,
+          "upstream_alerts": []
+        }
+      },
+      {
+        "id": "muse-glimmer-collection",
+        "bucket": "models",
+        "name": "Meta Muse Glimmer Collection (BF16 + GGUF + ExecuTorch + DFlash)",
+        "url": "https://huggingface.co/collections/meta-models/muse-glimmer",
+        "last_verified": "2026-11-28",
+        "evidence_tier": "official-docs",
+        "summary": "Tracks Meta's 30B local agentic family and its 3B DFlash 16-token block-diffusion speculative drafter across GGUF and Apple Metal ExecuTorch formats.",
+        "limitations": [
+          "Watch for smaller 12B-16B DFlash derivatives that fit inside single 16GB cards."
+        ],
+        "source_file": "catalog/registry/specialists_watch_retired.yaml",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": "2026-08-10T11:28:08.533Z",
+          "latest_release_tag": "items:4",
+          "release_delta": false,
+          "breaking_signal": false,
+          "eligible_for_agents": true,
+          "retirement_candidate": false,
+          "collection_item_count": 4,
+          "upstream_alerts": []
+        }
+      }
+    ],
+    "community": [
+      {
+        "id": "deepseek-harness",
+        "bucket": "community",
+        "name": "DeepSeek Harness (dsh \u2014 Independent Swappable-Loop Platform)",
+        "url": "https://github.com/deepseek-ai/deepseek-harness",
+        "last_verified": "2026-11-28",
+        "evidence_tier": "official-docs",
+        "summary": "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and desktop/web preview. Demoted from active slots while maturing independently.",
+        "limitations": [
+          "Rapidly iterating developer preview; independent from our primary Pi/OpenCode spine."
+        ],
+        "source_file": "catalog/registry/specialists_watch_retired.yaml",
+        "freshness": {
+          "status": "fresh",
+          "effective_status": "fresh",
+          "score": 100,
+          "decay_class": "volatile",
+          "ttl_days": 21,
+          "age_days": 0,
+          "consecutive_fails": 0,
+          "upstream_archived": false,
+          "upstream_pushed_at": "2026-11-22T11:00:05Z",
           "latest_release_tag": null,
           "release_delta": false,
           "breaking_signal": false,

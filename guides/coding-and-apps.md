@@ -41,7 +41,6 @@ Minimal, hackable agent kernel with built-in /llama router support, /v1/systemon
 - **Upstream docs:** [Official setup & reference](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/llama-cpp.md)
 - **Evidence:** Primary evaluation · verified 2026-11-28
 - **Compatible adapters:** [Qwen3.8-27B Pi Specialist LoRA (~319 MB)](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF), [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter)
-- **Experimental challenger:** [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) — Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions.
 - **Why this pick:** [Pair OpenCode (Newcomer Anchor) with Pi (Flagship Developer Kernel)](../docs/why-this-stack.md#adr-why-pi-and-opencode)
 - **Limitation:** Intentionally omits built-in per-tool approval prompts; pair with gondolin, nono, or safeagents before autonomous runs.
 - **Limitation:** Requires Node 22.19+; built-in MCP keeps enabled servers alive all session unless replaced with pi-mcp-adapter.
@@ -54,6 +53,7 @@ Minimal, hackable agent kernel with built-in /llama router support, /v1/systemon
 <!-- swissknife:begin table tag=coding-tool -->
 | Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
 | :--- | :--- | :--- | :--- | :--- |
+| [Rex Terminal & Persistent Session Server (Superlogical)](https://www.superlogical.com/rex/docs/installation) | Running a 16GB M4 Mac mini as a 24/7 remote AI cockpit alongside Pi and @earendil-works/pi-durable. | 24/7 Persistent Agent Terminal Server (Pragmatic Exception) | Official documentation | Proprietary software currently in invite/Discord public beta; pragmatic exception chosen for first-class Pi OSC 7501 integration. |
 | [Microsoft Playwright MCP](https://github.com/microsoft/playwright-mcp) | Verifying web applications, forms, and visual regressions directly from Pi, OpenCode, or Antigravity. | Apache-2.0 | Official documentation | Accessibility snapshots cannot inspect inside closed Shadow DOM. |
 | [Upstash Context7 (ctx7 & @upstash/context7-pi)](https://github.com/upstash/context7) | Working with fast-moving web, Python, or mobile SDKs. | MIT | Primary evaluation | Pin local Context7 servers to >= 2.1.3 (CVE-2026-75130) and explicitly instruct agents in AGENTS.md to call it. |
 | [Sentry MobileBuildMCP](https://github.com/getsentry/MobileBuildMCP) | Native Apple Swift/iOS/macOS development on Apple Silicon Macs. | MIT | Official documentation | Stops at Apple builds and simulators; physical USB Android/iOS UI testing requires separate device tooling. |

@@ -138,33 +138,43 @@ watch:
       limitations:
         - "Current 2.4T checkpoint is cloud API only; await smaller open-weight checkpoints."
 
-    - id: deepseek-v41-flash
-      name: "DeepSeek-V4.1-Flash (552B)"
+  models:
+    - id: tml-varloop-research
+      name: "Thinking Machines TML-d24-varloop-research (Variable-Pass Looped MoE)"
+      last_verified: "2026-11-28"
+      evidence_tier: official-docs
+      url: "https://huggingface.co/thinkingmachines/TML-d24-varloop-research"
+      summary: "Open-weight research counterpart to Inkling 2 Mini (26.4B, NVFP4/MXFP8, 1M ctx) letting you vary middle-layer passes (1-5 loops, 3.4B-7.4B effective active) at inference time."
+      limitations:
+        - "Research checkpoint requiring ~20 GB VRAM (32GB+ card or 32GB+ Mac recommended)."
+
+    - id: ling-3.2-air
+      name: "inclusionAI Ling-3.2-air (124B-A5.5B Hybrid-Linear Workflow MoE)"
       last_verified: "2026-11-28"
       evidence_tier: vendor-claim
-      url: "https://www.deepseek.com/"
-      summary: "Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open weights adopting this KV compression."
+      url: "https://huggingface.co/inclusionAI/Ling-3.2-air"
+      summary: "Nov 23, 2026 multimodal MoE (35 KDA + 7 Gated MLA layers, only 5.5B active) jumping to 61% AutomationBench-AA and 1340 Elo on AA-Briefcase v1.1 for document/workflow automation."
       limitations:
-        - "Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API."
+        - "124B total parameters require high-RAM hybrid offloading or server GPUs; specialized toward document/workflow reasoning."
+
+    - id: muse-glimmer-collection
+      name: "Meta Muse Glimmer Collection (BF16 + GGUF + ExecuTorch + DFlash)"
+      last_verified: "2026-11-28"
+      evidence_tier: official-docs
+      url: "https://huggingface.co/collections/meta-models/muse-glimmer"
+      summary: "Tracks Meta's 30B local agentic family and its 3B DFlash 16-token block-diffusion speculative drafter across GGUF and Apple Metal ExecuTorch formats."
+      limitations:
+        - "Watch for smaller 12B-16B DFlash derivatives that fit inside single 16GB cards."
 
   community:
-    - id: disler-durable-pi
-      name: "disler/durable-pi Multi-Device Agent Showcase"
+    - id: deepseek-harness
+      name: "DeepSeek Harness (dsh — Independent Swappable-Loop Platform)"
       last_verified: "2026-11-28"
-      evidence_tier: field-note
-      url: "https://github.com/disler/durable-pi"
-      summary: "Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live mid-run tool toggling on top of @earendil-works/pi-durable."
+      evidence_tier: official-docs
+      url: "https://github.com/deepseek-ai/deepseek-harness"
+      summary: "Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and desktop/web preview. Demoted from active slots while maturing independently."
       limitations:
-        - "Reference architecture; first-party @earendil-works/pi-durable lives inside the main Pi monorepo."
-
-    - id: hy-nomas-worlds
-      name: "Tencent-Hunyuan/Hy-Nomas Walkable Worlds"
-      last_verified: "2026-11-28"
-      evidence_tier: field-note
-      url: "https://github.com/Tencent-Hunyuan/Hy-Nomas"
-      summary: "Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping."
-      limitations:
-        - "Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only)."
+        - "Rapidly iterating developer preview; independent from our primary Pi/OpenCode spine."
 
     - id: awesome-pi-directory
       name: "shaftoe/awesome-pi-coding-agent (CI-Updated Extension Index)"

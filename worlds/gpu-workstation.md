@@ -46,6 +46,19 @@ flowchart LR
 
 ## Starter Launch Recipes (Zone 1 & Zone 2)
 
+<!-- swissknife:begin recipe id=llama-cpp -->
+<details>
+<summary>Launch command — llama.cpp (Mainline GGUF Server & Router) (CUDA / llama.cpp / CLI)</summary>
+
+```bash
+llama serve --no-models-autoload -ngl all -c 32768 --host 127.0.0.1 --port 9931
+```
+
+</details>
+
+Built-in upstream check: `curl -s http://127.0.0.1:9931/health`
+<!-- swissknife:end -->
+
 <!-- swissknife:begin recipe id=qwen3.8-27b -->
 <details>
 <summary>Launch command — Qwen3.8-27B (Dense Vision + Text) (CUDA / llama.cpp / CLI)</summary>
@@ -92,6 +105,11 @@ GGML_CUDA_GRAPH_OPT=1 llama-server -m Qwen3-Coder-Next-UD-Q4_K_XL.gguf -ngl 99 -
 | [NousResearch Hermes 4 (14B / 4.3-36B Neutral)](https://huggingface.co/NousResearch/Hermes-4-14B) | Self-hosted deployments needing predictable operator-controlled behavior rather than abliteration. | 9 GB (14B Q4) / 22 GB (36B Hybrid) | Vendor / lab claim | Always author explicit safety policies in your system prompt if exposing the endpoint beyond solo local use. |
 | [Inkling 2 Mini (26.4B Looped Transformer MoE)](https://huggingface.co/unsloth/Inkling-2-Mini-GGUF) | Testing high-efficiency looped coding architectures inside 16GB-18GB memory budgets. | 13-18 GB (UD-Q3/Q4) | Vendor / lab claim | Published 79.2% SWE-bench Verified and 48.2% DeepSWE v1.1 figures are lab-reported; trails Qwen3.8-27B on strict chat. |
 | [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya) | Fast zero-output-token tool-safety gating, routing, and memory relevance checks without using GPU VRAM. | 678-846 MB (CPU / NPU / WebGPU) | Official documentation | Threshold decisions on calibrated probabilities rather than raw confidence scores; optional vegaml-learn add-on is non-commercial. |
+| [Qwen3.5-9B (Multimodal Hybrid DeltaNet)](https://huggingface.co/Qwen/Qwen3.5-9B) | Fast local helper, screenshot triage, and offline coding/edits on a base 16GB M4 Mac mini or 8GB-12GB GPU laptop. | ~5.6 GB (4-bit MLX / Q4 GGUF, 262K native ctx) | Official documentation | Trails 27B+ backbones on complex multi-file refactors; route heavy coding tasks to GPU PC or $0 Cloud. |
+| [OpenAI gpt-oss-20b (Native MXFP4 MoE)](https://huggingface.co/openai/gpt-oss-20b) | Fast 16GB GPU reasoning, function calling, and browser/agent workflows with generous 32K-64K context headroom. | ~12.8 GB (Native MXFP4; 16GB GPU or Mac w/ wired_limit_mb tuning) | Official documentation | Requires the Harmony response format (handled automatically by modern llama.cpp/vLLM chat templates); text-only. |
+| [Qwen3.8-Flash-Next (180B / 6B Active + 51B N-Gram)](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) | High-memory workstations (64GB-128GB RAM + 16GB+ VRAM via Unsloth Dynamic v3.1 UD-IQ1_M/UD-Q2_0) or SGLang/vLLM servers. | 66-70 GB (Unsloth Dynamic v3.1 UD-IQ1_M / UD-Q2_0) or multi-GPU BF16 | Official documentation | Custom qwen-community-1.0 license; avoid the oversized 79.6 GB UD-Q2_K_XL quant on 16GB+64GB systems. |
+| [DeepSeek-OCR-2 (3B Visual Causal Flow)](https://huggingface.co/deepseek-ai/DeepSeek-OCR-2) | Local private PDF/scan-to-Markdown ingestion into Obsidian knowledge vaults on any 6GB-16GB GPU or Mac. | ~2-6 GB (GGUF / vLLM) | Primary evaluation | Specialized for document layout and OCR rather than general multi-turn chat. |
+| [Lightricks LTX-2.5 (22B Distilled Video + Synchronized Audio)](https://huggingface.co/Lightricks/LTX-2.5) | Local video generation with synchronized audio on 8GB-24GB NVIDIA GPUs. | 5.9-8.1 GiB (WanGP) / 16-24 GiB (ComfyUI) | Official documentation | Gated Hugging Face license acceptance required; use Wan 2.2 when strict Apache-2.0 licensing is mandatory. |
 <!-- swissknife:end -->
 
 ---

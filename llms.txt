@@ -1,5 +1,5 @@
-# AI Swiss Knife — Freshness-Gated Agent Router (v6.0.0-beta.1)
-> Verified: 2026-11-28 | Active entries: 57 | Stale/degraded auto-excluded: 0
+# AI Swiss Knife — Freshness-Gated Agent Router (v6.0.0)
+> Verified: 2026-11-28 | Active entries: 68 | Stale/degraded auto-excluded: 0
 > Monitor-only frontier entries (research/watch-list.md) are intentionally excluded.
 
 ## Compute Worlds (`swissknife query --world <id>`)
@@ -16,6 +16,7 @@
 - [knowledge-vault] -> obsidian-skills (Obsidian Official Agent Skills (1.2.3 + defuddle + obsidian-headless)) | https://github.com/obsidianmd/obsidian-skills
 - [local-mature-coder] -> qwen3.8-27b (Qwen3.8-27B (Dense Vision + Text)) | https://huggingface.co/Qwen/Qwen3.8-27B
 - [local-runtime] -> llama-cpp (llama.cpp (Mainline GGUF Server & Router)) | https://github.com/ggml-org/llama.cpp
+- [mac-server] -> rex (Rex Terminal & Persistent Session Server (Superlogical)) | https://www.superlogical.com/rex/docs/installation
 - [mobile-hitl-primary] -> pi-mobile-voice (pi-mobile (Multi-Box Tailscale HTTPS & Voice Mode)) | https://pi.dev/packages/pi-mobile
 - [newcomer-cloud-ide] -> google-antigravity (Google Antigravity ($0 Individual Tier)) | https://antigravity.google/
 - [newcomer-local-harness] -> opencode (OpenCode CLI & Desktop) | https://github.com/anomalyco/opencode
@@ -29,7 +30,6 @@
 - [openrouter-free] env:OPENROUTER_API_KEY | base_url:https://openrouter.ai/api/v1 | model:openrouter/free | verified:2026-11-28
 - [groq-cloud] env:GROQ_API_KEY | base_url:https://api.groq.com/openai/v1 | model:qwen/qwen3.8-27b | verified:2026-11-28
 - [cloudflare-workers-ai] env:CLOUDFLARE_API_TOKEN | base_url:https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/v1 | model:@cf/cloudflare/clef | verified:2026-11-28
-- [pollinations] env:KEYLESS | base_url:https://text.pollinations.ai/openai | model:openai | verified:2026-11-28
 
 ## Active Local Launch Recipes
 - [qwen3.8-27b] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
@@ -41,6 +41,7 @@
 - [qwen38-pi-lora] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
 - [qwen38-super-adapter] (mature, primary-eval) worlds:gpu-pc,mac | cmd: `llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-super-adapter-F16.gguf -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0 --host 127.0.0.1 --port 8080`
 - [qwen38-super-adapter:mac] (mature, primary-eval) worlds:mac | mlx: `mlx_lm.server --model netprojects/Qwen3.8-27B-super-adapter-MLX-6bit --host 127.0.0.1 --port 8080`
+- [qwen3.5-9b:mac] (mature, official-docs) worlds:mac | mlx: `mlx_lm.server --model mlx-community/Qwen3.5-9B-4bit --host 127.0.0.1 --port 8080`
 
 ## Handbook Pages
 - [docs/start-here-newcomer.md] Newcomer & Student Onboarding: Six essential terms, a 30-second hardware check, and three zero-paralysis first wins ($0 Cloud, Local Coding, or Local Media).
@@ -55,12 +56,12 @@
 - [guides/memory-and-knowledge.md] Persistent Context, Memory & Knowledge Loops: Four clean layers for durable agent and personal memory using AGENTS.md/SKILL.md, Pi Durable, plain-Markdown Obsidian vaults, local qmd hybrid search, and KV-cache-stable injection.
 - [guides/research-and-writing.md] Research & Writing: Cited literature synthesis combining OpenAlex academic graphs, Exa 3.0 neural search, Firecrawl Markdown extraction, and open research harnesses.
 - [guides/specialist-domains.md] Specialist Domains: Upstream-federated starting stacks (max 2 direct picks + 1 monitored upstream directory) for Reverse Engineering, Game Dev & 3D, Growth & Social, and Unfiltered Local AI.
-- [reference/models-and-harnesses.md] Models, Harnesses & Runtimes Reference: Scannable factual index of all verified local models, agent harnesses, inference runtimes, and safety boundaries.
+- [reference/models.md] Models Reference (Across Hardware Tiers & Special Use Cases): Core model fundamentals spanning Edge/16GB M4 Mac, 16-24GB GPUs, Hybrid/80GB servers, research-leading open frontier weights, and specialized OCR/speech/video/diffusion checkpoints.
 - [reference/retired.md] Retired & Disqualified Tools: CI-enforced graveyard recording closed free tiers, archived extensions, and oversized models alongside their active replacements.
 - [research/harness-adapters.md] Harness Adapters & In-Harness RL: Primary empirical evidence showing why lightweight per-harness LoRAs on frozen Qwen3.8-27B outperform larger unadapted checkpoints, including difficulty ablations and AutomationBench controls.
 - [research/watch-list.md] 21-Day Watch List: Auto-expiring, hard-capped radar tracking frontier ceilings (monitor-only, excluded from llms.txt) and reproducible community field observations.
 - [worlds/cloud.md] Zero-Card Cloud: Verified $0 credit-card-free cloud gateways, coding-agent token math, search grounding APIs, and fallback order.
-- [worlds/apple-silicon.md] Apple Silicon Mac: Running a silent ~15W always-on AI control plane with Apple MLX unified-memory inference, native sandboxes, and honest media limits.
+- [worlds/apple-silicon.md] Apple Silicon Mac (16GB M4 Mac mini 24/7 Server): Running a power-efficient 16GB M4 Mac mini as a 24/7 remote AI server built around Rex, Pi, Pi Durable, nono v0.82 sandboxing, and <=10 GB local MLX helpers.
 - [worlds/gpu-workstation.md] Discrete GPU PC (16GB VRAM + 64GB RAM): Understanding the Zone 1 / Zone 2 memory split, llama-server router flags, Ollama's 4K context trap, and 16GB VRAM coexistence with ComfyUI.
 - [worlds/mobile-hitl.md] Mobile as Human Communicator (HITL): Using your phone strictly as a Human-in-the-Loop approval gate, voice steering surface, and capture bridge—never as a brute-force LLM runner.
 - [worlds/personal-ai-fabric.md] The Personal AI Fabric: How to connect Zero-Card Cloud, Apple Silicon Mac, Discrete GPU PC, and Mobile HITL privately with zero open router ports.

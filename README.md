@@ -23,7 +23,7 @@ Instead of forcing one machine to do everything, AI Swiss Knife separates work b
 | Compute World | What Its Physics Excels At | Guide |
 | :--- | :--- | :--- |
 | **Zero-Card Cloud** | 1M-token context, 500B+ MoE reasoning, zero-install onboarding, and burst speech/media trials with no credit card. | [Zero-Card Cloud](worlds/cloud.md) |
-| **Apple Silicon Mac** | Silent ~15W always-on control plane, unified-memory MLX inference (no PCIe split), and native Apple/Xcode builds. | [Apple Silicon Mac](worlds/apple-silicon.md) |
+| **Apple Silicon Mac** | Silent ~15W always-on control plane, unified-memory MLX inference (no PCIe split), and native Apple/Xcode builds. | [Apple Silicon Mac (16GB M4 Mac mini 24/7 Server)](worlds/apple-silicon.md) |
 | **Discrete GPU PC (16GB VRAM + 64GB RAM)** | Fast CUDA prefill, hybrid sparse MoE offloading, and all heavy local image, video, and 3D generation. | [Discrete GPU PC (16GB VRAM + 64GB RAM)](worlds/gpu-workstation.md) |
 | **Mobile (Human Communicator & HITL)** | Approval gates, voice steering, camera/share-sheet capture, and zero-port remote pings—never brute-force inference. | [Mobile as Human Communicator (HITL)](worlds/mobile-hitl.md) |
 <!-- swissknife:end -->
@@ -47,7 +47,7 @@ Want to bridge your Mac mini, discrete GPU PC, Android phone, and zero-card clou
 ### Compute Worlds & Fabric
 <!-- swissknife:begin nav section=worlds -->
 - **[Zero-Card Cloud](worlds/cloud.md)** — Verified $0 credit-card-free cloud gateways, coding-agent token math, search grounding APIs, and fallback order.
-- **[Apple Silicon Mac](worlds/apple-silicon.md)** — Running a silent ~15W always-on AI control plane with Apple MLX unified-memory inference, native sandboxes, and honest media limits.
+- **[Apple Silicon Mac (16GB M4 Mac mini 24/7 Server)](worlds/apple-silicon.md)** — Running a power-efficient 16GB M4 Mac mini as a 24/7 remote AI server built around Rex, Pi, Pi Durable, nono v0.82 sandboxing, and <=10 GB local MLX helpers.
 - **[Discrete GPU PC (16GB VRAM + 64GB RAM)](worlds/gpu-workstation.md)** — Understanding the Zone 1 / Zone 2 memory split, llama-server router flags, Ollama's 4K context trap, and 16GB VRAM coexistence with ComfyUI.
 - **[Mobile as Human Communicator (HITL)](worlds/mobile-hitl.md)** — Using your phone strictly as a Human-in-the-Loop approval gate, voice steering surface, and capture bridge—never as a brute-force LLM runner.
 - **[The Personal AI Fabric](worlds/personal-ai-fabric.md)** — How to connect Zero-Card Cloud, Apple Silicon Mac, Discrete GPU PC, and Mobile HITL privately with zero open router ports.
@@ -65,7 +65,7 @@ Want to bridge your Mac mini, discrete GPU PC, Android phone, and zero-card clou
 
 ### Reference
 <!-- swissknife:begin nav section=reference -->
-- **[Models, Harnesses & Runtimes Reference](reference/models-and-harnesses.md)** — Scannable factual index of all verified local models, agent harnesses, inference runtimes, and safety boundaries.
+- **[Models Reference (Across Hardware Tiers & Special Use Cases)](reference/models.md)** — Core model fundamentals spanning Edge/16GB M4 Mac, 16-24GB GPUs, Hybrid/80GB servers, research-leading open frontier weights, and specialized OCR/speech/video/diffusion checkpoints.
 - **[Retired & Disqualified Tools](reference/retired.md)** — CI-enforced graveyard recording closed free tiers, archived extensions, and oversized models alongside their active replacements.
 <!-- swissknife:end -->
 

@@ -54,7 +54,6 @@ Google's primary card-free developer API gateway serving Gemini 4 Hydrogen with 
 | [OpenRouter (:free Routes)](https://openrouter.ai/) | Quick side-by-side model comparisons and light fallback routing across diverse open weights. | 20 RPM, 50 RPD ($0 balance) -> 1,000 RPD (>=10 credits balance) | Official documentation | 50 RPD on unverified $0 accounts runs out in roughly three multi-step coding tasks; negative balances return HTTP 402 even on :free routes. |
 | [Groq Cloud LPU](https://console.groq.com/) | Sub-second small-prompt JSON routing (<6K tokens) and free audio transcription (2,000 requests/day). | No card: LLMs 30 RPM / 1K RPD / 8K TPM; Whisper 2K RPD / 28.8K audio sec/day | Official documentation | Strict 8,000 TPM cap on free LLMs causes immediate HTTP 429 failures on 20K-token coding agent prompts. |
 | [Cloudflare Workers AI (Clef & Clairic)](https://developers.cloudflare.com/workers-ai/) | Zero-output-token edge classification, moderation, and typed extraction. | No card: 10,000 Neurons/day free (resets 00:00 UTC) | Official documentation | Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410). |
-| [Pollinations AI](https://pollinations.ai/) | Last-resort keyless fallback for throwaway public sandbox tests where no API keys exist. | Keyless fair-use IP quota (text and image) | Official documentation | Shared public community service; never transmit private code, credentials, or personal data. |
 <!-- swissknife:end -->
 
 ## Search, Scraping & Academic Grounding
@@ -70,7 +69,7 @@ Google's primary card-free developer API gateway serving Gemini 4 Hydrogen with 
 
 ## Recommended Fallback Order by Task
 
-- **Coding agent loops:** Google AI Studio (`gemini-4-hydrogen`) $\rightarrow$ Z.ai BigModel (`glm-4.7-flash`) $\rightarrow$ OpenRouter `:free` $\rightarrow$ NVIDIA NIM $\rightarrow$ Pollinations
+- **Coding agent loops:** Google AI Studio (`gemini-4-hydrogen`) $\rightarrow$ Z.ai BigModel (`glm-4.7-flash`) $\rightarrow$ OpenRouter `:free` $\rightarrow$ NVIDIA NIM
 - **1M-token repo / PDF ingestion:** Google AI Studio $\rightarrow$ Z.ai BigModel
 - **Fast small-prompt JSON & Speech-to-Text:** Groq Cloud $\rightarrow$ Google AI Studio $\rightarrow$ Cloudflare Workers AI
 - **Decision gates:** Google AI Studio (Gemini Decision 1) $\rightarrow$ Cloudflare Workers AI (`Clef` / `Clairic`)
