@@ -9,7 +9,7 @@ order: 1
 [Home](../README.md) / Compute Worlds / Zero-Card Cloud
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Zero-Card Cloud
@@ -50,7 +50,7 @@ Google's primary card-free developer API gateway serving Gemini 4 Hydrogen with 
 | :--- | :--- | :--- | :--- | :--- |
 | [Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)](https://aistudio.google.com/) | Default zero-card cloud gateway for multi-step coding agents, full-repository ingestion, and multimodal reasoning. | No card: Free Tier (gemini-4-hydrogen 1M unified ctx, implicit caching) + Decision 1 (200 RPM / 10K RPD) | Official documentation | Free Tier prompts are used to improve products outside EU/UK/CH; never paste secrets or proprietary source code. |
 | [Z.ai BigModel (GLM-4.7-Flash)](https://open.bigmodel.cn/) | Secondary card-free backup for long-context coding and tool-use loops when Google AI Studio limits are hit. | No card: permanently free GLM-4.7-Flash tier (200K ctx / 128K out) | Official documentation | Only glm-4.7-flash is permanently free; newer GLM-5.x endpoints are billed and fail on $0 accounts. |
-| [NVIDIA NIM Developer Catalog](https://build.nvidia.com/) | Prototyping giant 300B-550B open-weight models that exceed consumer workstation memory. | No card: ~40 RPM developer prototyping catalog | Official documentation | Restricted to developer prototyping rather than production workloads, with occasional cold-start queues on large MoEs. |
+| [NVIDIA NIM Developer Catalog](https://docs.api.nvidia.com/nim/docs/introduction) | Prototyping giant 300B-550B open-weight models that exceed consumer workstation memory. | No card: ~40 RPM developer prototyping catalog (keys generated at build.nvidia.com) | Official documentation | Restricted to developer prototyping rather than production workloads, with occasional cold-start queues on large MoEs. |
 | [OpenRouter (:free Routes)](https://openrouter.ai/) | Quick side-by-side model comparisons and light fallback routing across diverse open weights. | 20 RPM, 50 RPD ($0 balance) -> 1,000 RPD (>=10 credits balance) | Official documentation | 50 RPD on unverified $0 accounts runs out in roughly three multi-step coding tasks; negative balances return HTTP 402 even on :free routes. |
 | [Groq Cloud LPU](https://console.groq.com/) | Sub-second small-prompt JSON routing (<6K tokens) and free audio transcription (2,000 requests/day). | No card: LLMs 30 RPM / 1K RPD / 8K TPM; Whisper 2K RPD / 28.8K audio sec/day | Official documentation | Strict 8,000 TPM cap on free LLMs causes immediate HTTP 429 failures on 20K-token coding agent prompts. |
 | [Cloudflare Workers AI (Clef & Clairic)](https://developers.cloudflare.com/workers-ai/) | Zero-output-token edge classification, moderation, and typed extraction. | No card: 10,000 Neurons/day free (resets 00:00 UTC) | Official documentation | Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410). |
@@ -65,7 +65,7 @@ Google's primary card-free developer API gateway serving Gemini 4 Hydrogen with 
 | [Firecrawl](https://www.firecrawl.dev/) | Turning modern dynamic documentation sites into clean Markdown for research and RAG. | Keyless onboarding skill + 500 starter credits | Primary evaluation | Keyless usage is strictly IP-rate-limited; create a free API key for multi-page crawls. |
 | [Jina Reader (r.jina.ai / s.jina.ai)](https://jina.ai/reader/) | One-line URL reading inside shell scripts and lightweight agents. | Keyless prefix + 10M free tokens with free API key | Official documentation | Unauthenticated prefix requests throttle quickly under automated batch loops. |
 | [Exa 3.0 Neural Search](https://exa.ai/) | High-precision web discovery for research agents and technical literature scouting. | No card: $10/mo recurring credits (~2,500 Lite searches) | Official documentation | Deep search modes exhaust monthly free credits much faster than Lite searches. |
-| [OpenAlex Academic Graph](https://openalex.org/) | Primary literature review, DOI verification, and academic citation mapping. | Keyless: 100,000 requests/day forever | Official documentation | Pass ?mailto=you@domain.com in queries to enter the fast polite pool. |
+| [OpenAlex Academic Graph](https://docs.openalex.org/) | Primary literature review, DOI verification, and academic citation mapping. | Keyless: 100,000 requests/day forever | Official documentation | Pass ?mailto=you@domain.com in queries to enter the fast polite pool. |
 <!-- swissknife:end -->
 
 ## Recommended Fallback Order by Task

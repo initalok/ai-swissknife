@@ -8,7 +8,7 @@ order: 4
 [Home](../README.md) / Orientation / Why This Stack
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Why This Stack (Decision Records)
@@ -60,7 +60,7 @@ Every decision below states **serious alternatives evaluated**, **valid situatio
 ### Split Local Media Into Turnkey Low-VRAM (WanGP) vs. Programmable Agent Engine (ComfyUI + MCP) (`Accepted`)
 
 - **The job:** Give newcomers an easy 6-16GB all-in-one local media studio while giving developers an agent-controllable node-graph server.
-- **Current anchor:** [WanGP v20.12 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP), [ComfyUI (Comfy-Org Programmable Node Graph)](https://github.com/Comfy-Org/ComfyUI), [Comfy-Org Official comfy-mcp (Local & Cloud)](https://github.com/Comfy-Org/comfy-mcp), [Wan 2.2 (5B & A14B Apache-2.0 Video)](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B)
+- **Current anchor:** [WanGP v20.21 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP), [ComfyUI (Comfy-Org Programmable Node Graph)](https://github.com/Comfy-Org/ComfyUI), [Comfy-Org Official comfy-mcp (Local & Cloud)](https://github.com/Comfy-Org/comfy-mcp), [Wan 2.2 (5B & A14B Apache-2.0 Video)](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B)
 - **Alternatives evaluated:** ComfyUI alone, Separate standalone video/image/TTS repos, Closed cloud video APIs (Wan 3.0)
 - **Why this leads today:** Head-to-head benchmarks show WanGP holding video generation to 5.9-14.3 GiB VRAM where ComfyUI peaks at 22.7-23.5 GiB, with guided installers starting at 6 GB VRAM. Meanwhile, Comfy-Org/ComfyUI (v0.46+) plus first-party comfy-mcp (Nov 2026) and artokun/comfyui-mcp excel as a programmable node-graph server driven remotely by Pi over Tailscale. Wan 2.2 provides an Apache-2.0 commercial-safe base.
 - **When to choose an alternative:** For commercial still graphics, use Apache-2.0 FLUX.2 Klein rather than non-commercial Qwen-Image-2.1.
@@ -95,7 +95,7 @@ Every decision below states **serious alternatives evaluated**, **valid situatio
 ### Connect Compute Worlds via Loopback + Tailscale Serve (Dev) & LM Link (Zero-Config) (`Accepted`)
 
 - **The job:** Bridge Mac mini, discrete GPU PC, and mobile HITL clients securely with zero open router ports.
-- **Current anchor:** [Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)](https://tailscale.com/kb/1312/serve), [LM Link (Tailscale tsnet Zero-VPN GPU Sharing)](https://lmstudio.ai/docs/app/basics/lm-link)
+- **Current anchor:** [Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)](https://tailscale.com/kb/1312/serve), [LM Link (Tailscale tsnet Zero-VPN GPU Sharing)](https://lmstudio.ai/docs/lmlink)
 - **Alternatives evaluated:** Router port-forwarding, Binding 0.0.0.0 on LAN, Raw WireGuard / Headscale
 - **Why this leads today:** Binding local AI services strictly to 127.0.0.1 and publishing through tailscale serve provides automatic HTTPS, zero exposed LAN ports, and device ACL tags. LM Link (powered by tsnet) gives newcomers a zero-VPN bridge to borrow a home desktop GPU from a thin laptop.
 - **When to choose an alternative:** Self-hosted purists avoiding any third-party coordination server should run raw WireGuard or self-hosted Headscale.
@@ -117,7 +117,7 @@ Every decision below states **serious alternatives evaluated**, **valid situatio
 ### Keep Long-Term Agent Memory in Plain Markdown Vaults with KV-Cache-Stable Injection (`Accepted`)
 
 - **The job:** Build durable personal and project memory that humans can read, edit, and sync across devices without destroying local inference speed.
-- **Current anchor:** [Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills), [tobi/qmd (Local BM25 + Vector Markdown Search & MCP)](https://github.com/tobi/qmd), [pi-obsidian-memory (KV-Cache-Stable Vault Memory for Pi)](https://github.com/the-matt-moo/pi-obsidian-memory)
+- **Current anchor:** [Obsidian Official Agent Skills (1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills), [tobi/qmd (Local BM25 + Vector Markdown Search & MCP)](https://github.com/tobi/qmd), [pi-obsidian-memory (KV-Cache-Stable Vault Memory for Pi)](https://github.com/the-matt-moo/pi-obsidian-memory)
 - **Alternatives evaluated:** Opaque cloud memory SaaS, Per-turn system-prompt mutation, Synced binary vector databases
 - **Why this leads today:** Plain Markdown (AGENTS.md, SKILL.md, Obsidian vaults via obsidianmd/obsidian-skills) stays inspectable in Git and portable across 46+ agents. Pairing local tobi/qmd retrieval with KV-cache-stable session snapshots prevents llama.cpp and MLX from re-prefilling the entire prompt every turn, while keeping vector indexes machine-local prevents sync corruption.
 - **When to choose an alternative:** Large multi-user engineering teams may still need a shared server-backed wiki or issue tracker alongside repo-local AGENTS.md.

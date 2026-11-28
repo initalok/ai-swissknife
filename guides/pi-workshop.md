@@ -9,7 +9,7 @@ order: 1
 [Home](../README.md) / Guides / Pi Ricing Workshop
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Pi Ricing Workshop (Optional 6-Rung Ladder)
@@ -120,6 +120,7 @@ First-party open-source local MCP server (pip install comfy-mcp, zero account) a
 - **When to use:** Default agent-to-ComfyUI bridge for Pi, OpenCode, and Antigravity across local, Tailscale, or Comfy Cloud backends.
 - **Evidence:** Official documentation · verified 2026-11-28
 - **Why this pick:** [Split Local Media Into Turnkey Low-VRAM (WanGP) vs. Programmable Agent Engine (ComfyUI + MCP)](../docs/why-this-stack.md#adr-why-wangp-and-comfyui)
+- **Limitation:** Local launch/restart requires comfy-cli >= 1.14.0 (>= 1.16.0 for job watching), and v0.11.0 skips local launch/restart whenever COMFYUI_URL is set for remote Tailscale hosts.
 - **Limitation:** On a single 16GB GPU, explicitly unload the local LLM in Pi (/llama) before queuing heavy ComfyUI video workflows.
 <!-- swissknife:end -->
 

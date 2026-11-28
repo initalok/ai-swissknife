@@ -1,7 +1,7 @@
 entries:
   - id: wangp
     kind: runtime
-    name: "WanGP v20.12 (One-Stop Low-VRAM Media Studio)"
+    name: "WanGP v20.21 (One-Stop Low-VRAM Media Studio)"
     summary: "Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2.1, FLUX.2), Music, Speech, and 3D inside one browser UI starting at 6 GB VRAM, plus native MCP."
     when_to_use: "Default turnkey local media setup for newcomers and 6GB-16GB NVIDIA workstations (5.9-14.3 GiB video VRAM vs ComfyUI's 22.7-23.5 GiB)."
     evidence_tier: primary-eval
@@ -15,11 +15,13 @@ entries:
       runs_on: [gpu-pc]
     meta:
       license: Apache-2.0
+      app_version: "v20.21"
       footprint: "6-15 GB NVIDIA VRAM (MMGP v4 + Extreme Chunker)"
-      last_reviewed_release: "v20.12"
+      last_reviewed_release: "manager-v0.1.21"
     limitations:
       - "Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3)."
       - "Heavy local video synthesis targets NVIDIA GPUs; Mac users should route heavy video to a remote GPU PC or Comfy Cloud."
+      - "GitHub /releases/latest tracks WanGP Manager (manager-v0.1.21) while core studio wgp.py ships on main at v20.21."
 
   - id: comfyui
     kind: runtime
@@ -60,10 +62,11 @@ entries:
       runs_on: [mac, gpu-pc, cloud]
     meta:
       license: MIT
-      last_reviewed_release: "v0.10.0"
+      last_reviewed_release: "v0.11.0"
       launch_recipe: "pip install comfy-mcp && COMFYUI_URL=http://127.0.0.1:8188 comfy-mcp"
       sanity_check: "comfy-mcp --help"
     limitations:
+      - "Local launch/restart requires comfy-cli >= 1.14.0 (>= 1.16.0 for job watching), and v0.11.0 skips local launch/restart whenever COMFYUI_URL is set for remote Tailscale hosts."
       - "On a single 16GB GPU, explicitly unload the local LLM in Pi (/llama) before queuing heavy ComfyUI video workflows."
 
   - id: comfyui-mcp

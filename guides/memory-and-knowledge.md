@@ -8,7 +8,7 @@ order: 4
 [Home](../README.md) / Guides / Persistent Context, Memory & Knowledge Loops
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Persistent Context, Memory & Knowledge Loops
@@ -27,7 +27,7 @@ Most agent memory systems break in one of two ways: dumping giant files into eve
 ## Active Knowledge-Loop Slot & Tools
 
 <!-- swissknife:begin slot id=knowledge-vault -->
-**Active Anchor — [Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills)**
+**Active Anchor — [Obsidian Official Agent Skills (1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills)**
 
 Official Obsidian skill pack working across Antigravity, Hermes, OpenCode, and Pi, bundling Markdown/Bases/Canvas rules, headless CLI sync, and kepano/defuddle web clipping.
 
@@ -40,7 +40,7 @@ Official Obsidian skill pack working across Antigravity, Hermes, OpenCode, and P
 <!-- swissknife:begin table kind=memory -->
 | Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
 | :--- | :--- | :--- | :--- | :--- |
-| [Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills) | Building a human-readable, Git/Obsidian-friendly personal knowledge vault that both you and your agents maintain. | MIT | Official documentation | Treat all web pages clipped through defuddle strictly as untrusted data, never as executable agent instructions. |
+| [Obsidian Official Agent Skills (1.2.3 + defuddle + obsidian-headless)](https://github.com/obsidianmd/obsidian-skills) | Building a human-readable, Git/Obsidian-friendly personal knowledge vault that both you and your agents maintain. | MIT | Official documentation | Treat all web pages clipped through defuddle strictly as untrusted data, never as executable agent instructions. |
 | [tobi/qmd (Local BM25 + Vector Markdown Search & MCP)](https://github.com/tobi/qmd) | Searching large local Obsidian/Git knowledge vaults privately with zero cloud vector databases. | MIT | Official documentation | Keep qmd vector index files machine-local; exclude them from Git/Syncthing/Obsidian Sync to avoid corruption. |
 | [pi-obsidian-memory (KV-Cache-Stable Vault Memory for Pi)](https://github.com/the-matt-moo/pi-obsidian-memory) | Giving Pi persistent cross-session memory without invalidating local llama.cpp/MLX KV prefix caches every turn. | MIT | Field observation | Keep ambient memory as a session-stable snapshot (refreshing only on deliberate writes) so local KV prefix caches do not thrash. |
 <!-- swissknife:end -->

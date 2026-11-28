@@ -9,7 +9,7 @@ order: 1
 [Home](../README.md) / Orientation / Newcomer & Student Onboarding
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Newcomer & Student Onboarding
@@ -186,7 +186,7 @@ Built-in upstream check: `opencode debug config && opencode models local`
 Most beginners burn out on local media by juggling four conflicting Python installs. Start with **one guided app** on NVIDIA GPUs (`WanGP`, starting at 6 GB VRAM), or run instant browser speech synthesis (`Phonon 31M`) with zero GPU setup.
 
 <!-- swissknife:begin slot id=turnkey-media -->
-**Active Anchor — [WanGP v20.12 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP)**
+**Active Anchor — [WanGP v20.21 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP)**
 
 Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2.1, FLUX.2), Music, Speech, and 3D inside one browser UI starting at 6 GB VRAM, plus native MCP.
 
@@ -196,6 +196,7 @@ Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2
 - **Why this pick:** [Split Local Media Into Turnkey Low-VRAM (WanGP) vs. Programmable Agent Engine (ComfyUI + MCP)](why-this-stack.md#adr-why-wangp-and-comfyui)
 - **Limitation:** Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3).
 - **Limitation:** Heavy local video synthesis targets NVIDIA GPUs; Mac users should route heavy video to a remote GPU PC or Comfy Cloud.
+- **Limitation:** GitHub /releases/latest tracks WanGP Manager (manager-v0.1.21) while core studio wgp.py ships on main at v20.21.
 <!-- swissknife:end -->
 
 - **No NVIDIA GPU (or on a Mac/student laptop)?** Try [Gradium Phonon 31M](https://github.com/blixt/phonon) right in your browser (64.5 MB WebGPU English speech), or read [Local Media Studio](../guides/media-studio.md) for code-driven videos (`Hyperframes`) and remote rendering options.

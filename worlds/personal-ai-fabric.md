@@ -8,7 +8,7 @@ order: 5
 [Home](../README.md) / Compute Worlds / The Personal AI Fabric
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # The Personal AI Fabric
@@ -22,7 +22,7 @@ flowchart TB
 
     subgraph MESH ["PRIVATE ENCRYPTED MESH (Loopback 127.0.0.1 + Tailscale Serve / LM Link)"]
         MAC["APPLE SILICON MAC (~15W Control Plane)<br/>Pi (+ pi-durable) · mlx_lm.server · gondolin / nono · Vault"]
-        GPU["16GB NVIDIA GPU PC (Heavy Compute & Media Muscle)<br/>llama-server Router · ComfyUI + comfy-mcp · WanGP v20.12"]
+        GPU["16GB NVIDIA GPU PC (Heavy Compute & Media Muscle)<br/>llama-server Router · ComfyUI + comfy-mcp · WanGP v20.21"]
         MAC <-->|"Remote LLM (LLAMA_BASE_URL)<br/>Remote Media MCP (COMFYUI_URL)"| GPU
     end
 
@@ -49,7 +49,7 @@ Zero-port WireGuard overlay exposing 127.0.0.1-bound local servers (llama-server
 | Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
 | :--- | :--- | :--- | :--- | :--- |
 | [Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)](https://tailscale.com/kb/1312/serve) | Developer standard for connecting Mac mini, NVIDIA GPU PC, and Android/iOS phones without opening router ports. | Encrypted Private Mesh (Dev Standard) | Official documentation | Automatic Let's Encrypt HTTPS certificates log machine.<tailnet>.ts.net hostnames in public CT logs; use neutral box names (e.g., box-a). |
-| [LM Link (Tailscale tsnet Zero-VPN GPU Sharing)](https://lmstudio.ai/docs/app/basics/lm-link) | Newcomers and students wanting to borrow their home desktop GPU from a thin laptop without configuring Tailscale ACLs. | Zero-Config Userspace GPU Bridge | Official documentation | Free during Preview; paid tiers are planned at General Availability (use Tailscale Serve for permanent open control). |
+| [LM Link (Tailscale tsnet Zero-VPN GPU Sharing)](https://lmstudio.ai/docs/lmlink) | Newcomers and students wanting to borrow their home desktop GPU from a thin laptop without configuring Tailscale ACLs. | Zero-Config Userspace GPU Bridge | Official documentation | Free during Preview; paid tiers are planned at General Availability (use Tailscale Serve for permanent open control). |
 <!-- swissknife:end -->
 
 <!-- swissknife:begin recipe id=tailscale-serve -->

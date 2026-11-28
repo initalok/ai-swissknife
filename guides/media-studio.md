@@ -8,7 +8,7 @@ order: 3
 [Home](../README.md) / Guides / Local Media Studio
 
 <!-- swissknife:begin status-banner -->
-*Last verified: 2026-11-27 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
+*Last verified: 2026-11-28 · All tracked links healthy ([System Status](../STATUS.md)) · [For AI Agents (`llms.txt`)](../llms.txt)*
 <!-- swissknife:end -->
 
 # Local Media Studio (`WanGP` & `ComfyUI`)
@@ -21,7 +21,7 @@ Instead of treating `WanGP` and `ComfyUI` as rivals, use each where its engineer
 ## Active Media Slots
 
 <!-- swissknife:begin slot id=turnkey-media -->
-**Active Anchor — [WanGP v20.12 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP)**
+**Active Anchor — [WanGP v20.21 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP)**
 
 Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2.1, FLUX.2), Music, Speech, and 3D inside one browser UI starting at 6 GB VRAM, plus native MCP.
 
@@ -31,6 +31,7 @@ Guided-installer local studio covering Video (Wan 2.2, H3), Images (Qwen-Image-2
 - **Why this pick:** [Split Local Media Into Turnkey Low-VRAM (WanGP) vs. Programmable Agent Engine (ComfyUI + MCP)](../docs/why-this-stack.md#adr-why-wangp-and-comfyui)
 - **Limitation:** Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3).
 - **Limitation:** Heavy local video synthesis targets NVIDIA GPUs; Mac users should route heavy video to a remote GPU PC or Comfy Cloud.
+- **Limitation:** GitHub /releases/latest tracks WanGP Manager (manager-v0.1.21) while core studio wgp.py ships on main at v20.21.
 <!-- swissknife:end -->
 
 <!-- swissknife:begin slot id=agent-media-mcp -->
@@ -41,6 +42,7 @@ First-party open-source local MCP server (pip install comfy-mcp, zero account) a
 - **When to use:** Default agent-to-ComfyUI bridge for Pi, OpenCode, and Antigravity across local, Tailscale, or Comfy Cloud backends.
 - **Evidence:** Official documentation · verified 2026-11-28
 - **Why this pick:** [Split Local Media Into Turnkey Low-VRAM (WanGP) vs. Programmable Agent Engine (ComfyUI + MCP)](../docs/why-this-stack.md#adr-why-wangp-and-comfyui)
+- **Limitation:** Local launch/restart requires comfy-cli >= 1.14.0 (>= 1.16.0 for job watching), and v0.11.0 skips local launch/restart whenever COMFYUI_URL is set for remote Tailscale hosts.
 - **Limitation:** On a single 16GB GPU, explicitly unload the local LLM in Pi (/llama) before queuing heavy ComfyUI video workflows.
 <!-- swissknife:end -->
 
@@ -62,9 +64,9 @@ Built-in upstream check: `comfy-mcp --help`
 <!-- swissknife:begin table tag=media -->
 | Entry | Best Used For | Key Specs | Evidence | Primary Limitation |
 | :--- | :--- | :--- | :--- | :--- |
-| [WanGP v20.12 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP) | Default turnkey local media setup for newcomers and 6GB-16GB NVIDIA workstations (5.9-14.3 GiB video VRAM vs ComfyUI's 22.7-23.5 GiB). | 6-15 GB NVIDIA VRAM (MMGP v4 + Extreme Chunker) | Primary evaluation | Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3). |
+| [WanGP v20.21 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP) | Default turnkey local media setup for newcomers and 6GB-16GB NVIDIA workstations (5.9-14.3 GiB video VRAM vs ComfyUI's 22.7-23.5 GiB). | 6-15 GB NVIDIA VRAM (MMGP v4 + Extreme Chunker) | Primary evaluation | Install WGPKernels 1.5.0 and SageGP 1.0.2 (PyTorch 2.10; Triton 3.6+ required for RTX 50-series adaptive Sage2/3). |
 | [ComfyUI (Comfy-Org Programmable Node Graph)](https://github.com/Comfy-Org/ComfyUI) | Developers building reproducible multi-stage media graphs or driving local/remote GPU rendering from Pi. | 8-24 GB NVIDIA VRAM (use Comfy-Org INT8 or leejet/ComfyUI-GGUF on 16GB) | Official documentation | Official ComfyUI docs explicitly advise Mac users away from heavy local video on Apple MPS (FP8 crashes MPS); target a remote NVIDIA box or Comfy Cloud. |
-| [Comfy-Org Official comfy-mcp (Local & Cloud)](https://github.com/Comfy-Org/comfy-mcp) | Default agent-to-ComfyUI bridge for Pi, OpenCode, and Antigravity across local, Tailscale, or Comfy Cloud backends. | MIT | Official documentation | On a single 16GB GPU, explicitly unload the local LLM in Pi (/llama) before queuing heavy ComfyUI video workflows. |
+| [Comfy-Org Official comfy-mcp (Local & Cloud)](https://github.com/Comfy-Org/comfy-mcp) | Default agent-to-ComfyUI bridge for Pi, OpenCode, and Antigravity across local, Tailscale, or Comfy Cloud backends. | MIT | Official documentation | Local launch/restart requires comfy-cli >= 1.14.0 (>= 1.16.0 for job watching), and v0.11.0 skips local launch/restart whenever COMFYUI_URL is set for remote Tailscale hosts. |
 | [artokun/comfyui-mcp (Power-User Control Plane)](https://github.com/artokun/comfyui-mcp) | Power users wanting automated workflow debugging, Mermaid graph conversion, and active VRAM management on 16GB rigs. | MIT | Field observation | Community-maintained; verify compatibility alongside Comfy-Org's first-party comfy-mcp updates. |
 | [Wan 2.2 (5B & A14B Apache-2.0 Video)](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Commercial-safe local video generation on consumer NVIDIA GPUs. | 6-15 GB VRAM via WanGP MMGP v4 | Official documentation | Newer Wan 3.0 and Wan 2.6 releases remain closed cloud APIs with no published local weights. |
 | [Qwen-Image-2.1 (7B DiT Native RGBA)](https://huggingface.co/Qwen/Qwen-Image-2.1) | Non-commercial design assets, typography, and layered transparent image editing. | 4.2-9.1 GB VRAM (INT8 / leejet GGUF) | Official documentation | Non-commercial license; swap to Apache-2.0 FLUX.2 Klein for commercial production graphics. |

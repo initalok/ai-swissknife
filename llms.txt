@@ -1,5 +1,5 @@
 # AI Swiss Knife — Freshness-Gated Agent Router (v6.0.0-beta.1)
-> Verified: 2026-11-27 | Active entries: 57 | Stale/degraded auto-excluded: 0
+> Verified: 2026-11-28 | Active entries: 57 | Stale/degraded auto-excluded: 0
 > Monitor-only frontier entries (research/watch-list.md) are intentionally excluded.
 
 ## Compute Worlds (`swissknife query --world <id>`)
@@ -13,14 +13,14 @@
 - [cloud-flagship] -> google-ai-studio (Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)) | https://aistudio.google.com/
 - [dev-harness] -> pi (Pi Coding Agent (+ @earendil-works/pi-durable)) | https://github.com/earendil-works/pi
 - [interconnect-fabric] -> tailscale-serve (Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)) | https://tailscale.com/kb/1312/serve
-- [knowledge-vault] -> obsidian-skills (Obsidian Official Agent Skills (v1.2.3 + defuddle + obsidian-headless)) | https://github.com/obsidianmd/obsidian-skills
+- [knowledge-vault] -> obsidian-skills (Obsidian Official Agent Skills (1.2.3 + defuddle + obsidian-headless)) | https://github.com/obsidianmd/obsidian-skills
 - [local-mature-coder] -> qwen3.8-27b (Qwen3.8-27B (Dense Vision + Text)) | https://huggingface.co/Qwen/Qwen3.8-27B
 - [local-runtime] -> llama-cpp (llama.cpp (Mainline GGUF Server & Router)) | https://github.com/ggml-org/llama.cpp
 - [mobile-hitl-primary] -> pi-mobile-voice (pi-mobile (Multi-Box Tailscale HTTPS & Voice Mode)) | https://pi.dev/packages/pi-mobile
 - [newcomer-cloud-ide] -> google-antigravity (Google Antigravity ($0 Individual Tier)) | https://antigravity.google/
 - [newcomer-local-harness] -> opencode (OpenCode CLI & Desktop) | https://github.com/anomalyco/opencode
 - [runtime-safety] -> safeagents (Hugging Face safeagents Proxy) | https://github.com/huggingface/safeagents
-- [turnkey-media] -> wangp (WanGP v20.12 (One-Stop Low-VRAM Media Studio)) | https://github.com/deepbeepmeep/WanGP
+- [turnkey-media] -> wangp (WanGP v20.21 (One-Stop Low-VRAM Media Studio)) | https://github.com/deepbeepmeep/WanGP
 
 ## Active Zero-Card Cloud Gateways
 - [google-ai-studio] env:GEMINI_API_KEY | base_url:https://generativelanguage.googleapis.com/v1beta/openai/ | model:gemini-4-hydrogen | verified:2026-11-28
