@@ -935,7 +935,7 @@
         "age_days": 0,
         "consecutive_fails": 0,
         "upstream_archived": false,
-        "upstream_pushed_at": "2026-11-28T06:21:06Z",
+        "upstream_pushed_at": "2026-11-28T08:40:52Z",
         "latest_release_tag": null,
         "release_delta": false,
         "breaking_signal": false,
