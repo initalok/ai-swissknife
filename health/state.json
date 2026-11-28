@@ -11,7 +11,7 @@
   "entry:comfy-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v0.11.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -20,7 +20,7 @@
   "entry:comfyui": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v0.46.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -29,7 +29,7 @@
   "entry:comfyui-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -38,7 +38,7 @@
   "entry:context7": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -182,11 +182,11 @@
   "entry:hermes-agent": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v0.23.5",
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T10:07:45Z"
+    "upstream_pushed_at": "2026-11-28T10:32:15Z"
   },
   "entry:hf-in-harness-rl": {
     "collection_item_count": 11,
@@ -201,11 +201,11 @@
   "entry:hyperframes": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T09:47:01Z"
+    "upstream_pushed_at": "2026-11-28T10:38:49Z"
   },
   "entry:inkling-2-mini": {
     "consecutive_fails": 0,
@@ -246,11 +246,11 @@
   "entry:llama-cpp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v1.1.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T10:00:23Z"
+    "upstream_pushed_at": "2026-11-28T10:09:29Z"
   },
   "entry:lm-link": {
     "consecutive_fails": 0,
@@ -282,7 +282,7 @@
   "entry:mlx-lm": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v0.32.2",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -291,7 +291,7 @@
   "entry:mobile-build-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -345,7 +345,7 @@
   "entry:obra-superpowers": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -354,7 +354,7 @@
   "entry:obsidian-skills": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "1.2.3",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -399,7 +399,7 @@
   "entry:phonon-31m": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -408,7 +408,7 @@
   "entry:pi": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "v1.7.0",
     "release_breaking_signal": true,
     "upstream_archived": false,
@@ -426,7 +426,7 @@
   "entry:pi-mcp-adapter": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -462,7 +462,7 @@
   "entry:playwright-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -480,7 +480,7 @@
   "entry:qwen-image-2.1": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -552,7 +552,7 @@
   "entry:rex": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -579,16 +579,16 @@
   "entry:unsloth-runtime": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T10:07:33Z"
+    "upstream_pushed_at": "2026-11-28T10:39:36Z"
   },
   "entry:wan-2.2": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -597,7 +597,7 @@
   "entry:wangp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T10:08:47Z",
+    "last_checked": "2026-11-28T10:41:19Z",
     "latest_release_tag": "manager-v0.1.21",
     "release_breaking_signal": false,
     "upstream_archived": false,
