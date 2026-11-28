@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Collapse machine-generated telemetry & snapshots in GitHub PR diffs
+# and keep GitHub's repository language bar accurate.
+dist/catalog.json linguist-generated=true
+health/state.json linguist-generated=true
+health/deltas.json linguist-generated=true
+llms-full.txt linguist-generated=true

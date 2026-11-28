@@ -1,0 +1,28 @@
+changelog:
+  exclude:
+    labels:
+      - "health-digest"
+      - "ignore-for-release"
+    authors:
+      - "github-actions[bot]"
+      - "dependabot[bot]"
+  categories:
+    - title: "Breaking Changes"
+      labels:
+        - "breaking"
+    - title: "Models, Hardware & Handbook"
+      labels:
+        - "handbook"
+        - "models"
+        - "enhancement"
+    - title: "Engine, Security & Automation"
+      labels:
+        - "ci"
+        - "security"
+        - "bug"
+    - title: "Dependencies"
+      labels:
+        - "dependencies"
+    - title: "Other Changes"
+      labels:
+        - "*"

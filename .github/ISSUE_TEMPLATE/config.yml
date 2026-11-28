@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Questions, Hardware Setups & Ideas (Discussions)"
+    url: https://github.com/initalok/ai-swissknife/discussions
+    about: "Ask questions, share your Mac/GPU/Mobile setup, or discuss new model trends."
+  - name: "Check Live Link & Upstream Health (STATUS.md)"
+    url: https://github.com/initalok/ai-swissknife/blob/main/STATUS.md
+    about: "View the latest automated link, release, and ADR health ledger before reporting a stale link."

@@ -6,6 +6,7 @@ import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
+
 import requests
 
 from swissknife.models import Freshness, Workspace

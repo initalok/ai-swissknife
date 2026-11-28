@@ -4,6 +4,7 @@ import re
 import shlex
 from pathlib import Path
 from typing import Any
+
 import yaml
 
 from swissknife.models import ManagedBlock, PageDoc, Taxonomy
