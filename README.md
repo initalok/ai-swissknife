@@ -1,5 +1,9 @@
 # AI Swiss Knife
 
+[![CI](https://github.com/initalok/ai-swissknife/actions/workflows/ci.yml/badge.svg)](https://github.com/initalok/ai-swissknife/actions/workflows/ci.yml)
+[![Health & Momentum](https://github.com/initalok/ai-swissknife/actions/workflows/health.yml/badge.svg)](https://github.com/initalok/ai-swissknife/actions/workflows/health.yml)
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-30363D.svg)](LICENSE)
+
 A practical, source-verified field guide to building with zero-cost cloud APIs, local AI hardware, open agent harnesses, and a private multi-device AI fabric—continuously checked against link rot and upstream drift.
 
 <!-- swissknife:begin status-banner -->

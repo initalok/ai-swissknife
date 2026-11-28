@@ -8117,52 +8117,52 @@
         {
           "directive": "status-banner",
           "args": {},
-          "line": 5
+          "line": 9
         },
         {
           "directive": "worlds-index",
           "args": {},
-          "line": 22
+          "line": 26
         },
         {
           "directive": "nav",
           "args": {
             "section": "docs"
           },
-          "line": 38
+          "line": 42
         },
         {
           "directive": "nav",
           "args": {
             "section": "worlds"
           },
-          "line": 48
+          "line": 52
         },
         {
           "directive": "nav",
           "args": {
             "section": "guides"
           },
-          "line": 57
+          "line": 61
         },
         {
           "directive": "nav",
           "args": {
             "section": "reference"
           },
-          "line": 67
+          "line": 71
         },
         {
           "directive": "nav",
           "args": {
             "section": "research"
           },
-          "line": 73
+          "line": 77
         },
         {
           "directive": "non-goals",
           "args": {},
-          "line": 84
+          "line": 88
         }
       ]
     },
