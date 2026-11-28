@@ -21,7 +21,7 @@ Rather than duplicating fast-moving niche tool directories—which quickly go st
 Connect local sparse coding models to engine MCP bridges and generate MIT-licensed 3D blockout meshes locally inside 16GB VRAM.
 
 - **Recommended base stack:** [Qwen3-Coder-Next (80B-A3B Sparse MoE)](https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF), [Inkling 2 Mini (26.4B Looped Transformer MoE)](https://huggingface.co/unsloth/Inkling-2-Mini-GGUF)
-- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
+- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
 - **Direct starting tools (max 2):**
   - **[CoplayDev Unity MCP](https://github.com/CoplayDev/unity-mcp)** — MIT-licensed Unity bridge enabling agents to inspect and modify scene hierarchies and scripts.
   - **[ahujasid Blender MCP](https://github.com/ahujasid/blender-mcp)** — Live Blender integration for constructing, texturing, and iterating 3D scenes from an agent.
@@ -33,7 +33,7 @@ Connect local sparse coding models to engine MCP bridges and generate MIT-licens
 Pair persistent agents with an open-source multi-network approval calendar and copy-polishing skills while keeping a human gate on publishing.
 
 - **Recommended base stack:** [Google AI Studio (Gemini 4 Hydrogen & 3.8 Flash)](https://aistudio.google.com/), [Qwen3.8-27B (Dense Vision + Text)](https://huggingface.co/Qwen/Qwen3.8-27B)
-- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
+- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
 - **Direct starting tools (max 2):**
   - **[Postiz](https://github.com/gitroomhq/postiz-app)** — Self-hostable scheduler for 30+ social networks with REST API, agent CLI, and visual human approval queue.
   - **[blader/humanizer](https://github.com/blader/humanizer)** — Skill that strips repetitive AI phrasing from drafts before human review.
@@ -46,7 +46,7 @@ Run air-gapped local coding models wired to decompiler MCPs for rapid static ren
 
 - **Recommended base stack:** [Qwen3.8-27B (Dense Vision + Text)](https://huggingface.co/Qwen/Qwen3.8-27B), [Qwen3-Coder-Next (80B-A3B Sparse MoE)](https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF)
 - **Compatible adapters:** [Qwen3.8-27B Pi Specialist LoRA (~319 MB)](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF), [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter)
-- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
+- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
 - **Direct starting tools (max 2):**
   - **[LaurieWired GhidraMCP](https://github.com/LaurieWired/GhidraMCP)** — Interactive Ghidra MCP bridge for function renaming, xref mapping, and triage.
   - **[LLNL OGhidra](https://github.com/LLNL/OGhidra)** — Adaptive Ghidra analysis loop with automated MITRE ATT&CK pattern alerts.
@@ -60,7 +60,7 @@ Skip brittle jailbreak prompts: use neutral-aligned Hermes 4 for operator-contro
 
 - **Recommended base stack:** [Qwen3.8-27B (Dense Vision + Text)](https://huggingface.co/Qwen/Qwen3.8-27B), [NousResearch Hermes 4 (14B / 4.3-36B Neutral)](https://huggingface.co/NousResearch/Hermes-4-14B)
 - **Compatible adapters:** [Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated)
-- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
+- **Mandatory safety layer:** [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin), [Laya 0.5 (Multimodal System-1 Decision Model)](https://github.com/NandhaKishorM/laya), [nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono), [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents)
 - **Direct starting tools (max 2):**
   - **[NousResearch Hermes 4 (Neutral Alignment)](https://huggingface.co/NousResearch/Hermes-4-14B)** — Obeys custom operator system prompts cleanly without weight-surgery degradation.
   - **[Securelayer7 Qwen3.8-27B 26MB Uncensored LoRA](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated)** — Rank-3 hot-swappable LoRA sharing the same frozen Qwen3.8-27B base weights.

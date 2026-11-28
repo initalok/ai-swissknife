@@ -9,7 +9,7 @@ entries:
     decay_class: operational
     last_verified: "2026-11-28"
     url: "https://github.com/huggingface/safeagents"
-    tags: [security]
+    tags: [security, mac-16gb]
     capabilities: [safety]
     relations:
       guards: ["*"]
@@ -44,20 +44,23 @@ entries:
 
   - id: nono
     kind: tool
-    name: "nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)"
-    summary: "Zero-VM Rust capability sandbox wrapping agent processes in native macOS Seatbelt or Linux Landlock policies plus nono-proxy network filtering."
-    when_to_use: "Least-privilege local sandboxing when the agent needs native macOS tools (Xcode, Homebrew, local files)."
+    name: "nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)"
+    summary: "Zero-VM Rust capability sandbox wrapping Pi and OpenCode in native macOS Seatbelt or Linux Landlock policies with official pack profiles (nolabs-ai/pi, nolabs-ai/opencode), macOS Keychain --credential secret injection, and --rollback session restore."
+    when_to_use: "Production-grade least-privilege sandboxing for 24/7 Mac mini servers and native macOS/Linux host toolchains."
     evidence_tier: official-docs
     lifecycle: operational
     decay_class: operational
     last_verified: "2026-11-28"
     url: "https://github.com/nolabs-ai/nono"
-    tags: [security]
+    tags: [security, mac-16gb]
     capabilities: [safety]
     relations:
       guards: ["*"]
       runs_on: [mac, gpu-pc]
     meta:
       license: Apache-2.0
+      last_reviewed_release: "v0.82.0"
+      launch_recipe: "nono pull nolabs-ai/pi && nono run --profile nolabs-ai/pi -- pi"
+      sanity_check: "nono why --path ~/.ssh/id_rsa --op read"
     limitations:
-      - "Shares the host kernel; for heavily untrusted code or strict zero-secret isolation, prefer gondolin's micro-VM boundary."
+      - "Shares the host kernel; for heavily untrusted code execution or strict zero-secret micro-VM isolation, pair with gondolin."

@@ -71,6 +71,7 @@ def load_workspace(root: str | Path = ".") -> Workspace:
     slots: dict[str, Slot] = {}
     specialists: dict[str, Specialist] = {}
     watch_frontier: list[WatchItem] = []
+    watch_models: list[WatchItem] = []
     watch_community: list[WatchItem] = []
     seen_watch: set[tuple[str, str]] = set()
     retired: list[RetiredItem] = []
@@ -157,7 +158,8 @@ def load_workspace(root: str | Path = ".") -> Workspace:
                 )
 
             watch_raw = raw.get("watch") or {}
-            for bucket, dest in (("frontier", watch_frontier), ("community", watch_community)):
+            default_tiers = {"frontier": "vendor-claim", "models": "official-docs", "community": "field-note"}
+            for bucket, dest in (("frontier", watch_frontier), ("models", watch_models), ("community", watch_community)):
                 for w in watch_raw.get(bucket, []):
                     wid = str(w.get("id", ""))
                     if not wid:
@@ -174,7 +176,7 @@ def load_workspace(root: str | Path = ".") -> Workspace:
                             name=str(w.get("name", "")),
                             url=str(w.get("url", "")),
                             last_verified=str(w.get("last_verified", "")),
-                            evidence_tier=str(w.get("evidence_tier", "vendor-claim" if bucket == "frontier" else "field-note")),
+                            evidence_tier=str(w.get("evidence_tier", default_tiers[bucket])),
                             summary=str(w.get("summary", "")),
                             limitations=list(w.get("limitations", [])),
                             source_file=rel,
@@ -239,6 +241,7 @@ def load_workspace(root: str | Path = ".") -> Workspace:
         specialists=specialists,
         decisions=decisions,
         watch_frontier=watch_frontier,
+        watch_models=watch_models,
         watch_community=watch_community,
         retired=retired,
         pages=pages,

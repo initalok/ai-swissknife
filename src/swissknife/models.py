@@ -176,6 +176,7 @@ class Workspace:
     specialists: dict[str, Specialist]
     decisions: dict[str, DecisionRecord]
     watch_frontier: list[WatchItem]
+    watch_models: list[WatchItem]
     watch_community: list[WatchItem]
     retired: list[RetiredItem]
     pages: list[PageDoc]

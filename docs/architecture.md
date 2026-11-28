@@ -41,6 +41,18 @@ Example managed-block syntax (ignored by the syncer when inside fenced code bloc
 - No museum of legacy options (one active anchor per Workflow Slot; superseded picks move cleanly to Retired and Superseded ADR history).
 <!-- swissknife:end -->
 
+## Pragmatic Exceptions
+
+Open-source software is our strong default across every slot. Best-in-class non-OSS infrastructure (`Tailscale` and `Rex`) is admitted only as an explicit **Pragmatic Exception** with transparent license disclosure and documented exit/open-source fallback paths.
+
+## Future Scope (Parked — Not Built Yet)
+
+To avoid speculative premature complexity, these four areas are intentionally parked until verified workflows justify dedicated slots:
+- **Agent Orchestrators** (multi-repo swarm supervisors beyond single durable `Pi` / `Rex` sessions)
+- **Multi-Model Routers** (automated local/cloud cost-latency routing proxies beyond explicit fallback chains)
+- **Virtual Models** (composite capability aliases masking dynamic backend swaps)
+- **Plugin Ecosystems** (cross-harness plugin marketplaces beyond verified `SKILL.md` packs and MCP servers)
+
 ## Local Maintainer Commands
 
 ```bash

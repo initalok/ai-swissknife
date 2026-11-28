@@ -318,37 +318,29 @@ def _render_specialists_index(snap: dict[str, Any]) -> str:
 
 
 def _render_watch(snap: dict[str, Any]) -> str:
-    lines = ["## Frontier Ceiling (Monitor-Only)", ""]
-    frontier = snap["watch"].get("frontier", [])
-    if not frontier:
-        lines.append("*No active frontier watch entries within the 21-day window.*\n")
-    for w in frontier:
-        f = w["freshness"]
-        left = max(0, f["ttl_days"] - f["age_days"])
-        lines.append(f"### {_link(w['name'], w['url'])}")
-        lines.append("")
-        lines.append(w["summary"])
-        lines.append("")
-        lines.append(f"- **Evidence:** {_evidence(w['evidence_tier'])} · **Window:** {left} days remaining")
-        for lim in w.get("limitations", []):
-            lines.append(f"- **Boundary:** {lim}")
-        lines.append("")
-
-    lines.extend(["## Community Field Observations", ""])
-    community = snap["watch"].get("community", [])
-    if not community:
-        lines.append("*No active community field notes within the 21-day window.*\n")
-    for w in community:
-        f = w["freshness"]
-        left = max(0, f["ttl_days"] - f["age_days"])
-        lines.append(f"### {_link(w['name'], w['url'])}{_health_note(f)}")
-        lines.append("")
-        lines.append(w["summary"])
-        lines.append("")
-        lines.append(f"- **Evidence:** {_evidence(w['evidence_tier'])} · **Window:** {left} days remaining")
-        for lim in w.get("limitations", []):
-            lines.append(f"- **Boundary:** {lim}")
-        lines.append("")
+    sections = (
+        ("Frontier Ceiling (Monitor-Only)", "frontier", "frontier watch"),
+        ("Model News & Development Radar", "models", "model news"),
+        ("Community & Independent Harnesses", "community", "community"),
+    )
+    lines: list[str] = []
+    for heading, bucket, empty_label in sections:
+        lines.extend([f"## {heading}", ""])
+        items = snap["watch"].get(bucket, [])
+        if not items:
+            lines.append(f"*No active {empty_label} entries within the 21-day window.*\n")
+            continue
+        for w in items:
+            f = w["freshness"]
+            left = max(0, f["ttl_days"] - f["age_days"])
+            lines.append(f"### {_link(w['name'], w['url'])}{_health_note(f)}")
+            lines.append("")
+            lines.append(w["summary"])
+            lines.append("")
+            lines.append(f"- **Evidence:** {_evidence(w['evidence_tier'])} · **Window:** {left} days remaining")
+            for lim in w.get("limitations", []):
+                lines.append(f"- **Boundary:** {lim}")
+            lines.append("")
     return "\n".join(lines).strip()
 
 

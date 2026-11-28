@@ -25,7 +25,6 @@ Minimal, hackable agent kernel with built-in /llama router support, /v1/systemon
 - **Upstream docs:** [Official setup & reference](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/llama-cpp.md)
 - **Evidence:** Primary evaluation · verified 2026-11-28
 - **Compatible adapters:** [Qwen3.8-27B Pi Specialist LoRA (~319 MB)](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF), [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter)
-- **Experimental challenger:** [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) — Experimenting with custom loop architectures, Creator Mode live UI plugins, or web/desktop sessions.
 - **Why this pick:** [Pair OpenCode (Newcomer Anchor) with Pi (Flagship Developer Kernel)](../docs/why-this-stack.md#adr-why-pi-and-opencode)
 - **Limitation:** Intentionally omits built-in per-tool approval prompts; pair with gondolin, nono, or safeagents before autonomous runs.
 - **Limitation:** Requires Node 22.19+; built-in MCP keeps enabled servers alive all session unless replaced with pi-mcp-adapter.
@@ -77,7 +76,11 @@ llama-server -m Qwen3.8-27B-IQ4_XS.gguf --lora Qwen3.8-27B-pi-lora-F16.gguf -ngl
 
 Before letting `Pi` run unsupervised, pick the isolation layer matching your workload:
 - **Untrusted code & strict secret protection:** [`gondolin`](https://github.com/earendil-works/gondolin) (`libkrun` micro-VM on Apple Silicon & Linux KVM; host injects real secrets only on allow-listed HTTP domains).
-- **Native macOS/Linux host builds (`xcodebuild`, `swift`, Homebrew):** [`nono`](https://github.com/nolabs-ai/nono) (macOS Seatbelt / Linux Landlock).
+- **Native macOS/Linux host builds (`xcodebuild`, `swift`, Homebrew):** [`nono v0.82.0`](https://github.com/nolabs-ai/nono) (macOS Seatbelt / Linux Landlock):
+  ```bash
+  nono pull nolabs-ai/pi && nono run --profile nolabs-ai/pi -- pi
+  nono why --path ~/.ssh/id_rsa --op read
+  ```
 - **Tool-call auditing across any harness:** [`safeagents`](https://github.com/huggingface/safeagents) proxy (`atif-scan` + plugin) and/or `Laya 0.5`.
 
 See [Security & Trust Boundaries](../docs/security-and-trust.md) for the complete trust matrix.
@@ -87,20 +90,24 @@ See [Security & Trust Boundaries](../docs/security-and-trust.md) for the complet
 ## Rung 3 · Skills, Live Docs & Smart MCP
 
 - **Disciplined engineering habits:** Add [`obra/superpowers`](https://github.com/obra/superpowers) (15 TDD/spec/verification skills) and [`@upstash/context7-pi`](https://github.com/upstash/context7) (pin local Context7 servers to `>= 2.1.3`).
-- **Context-friendly MCP:** Start with built-in `pi mcp add` + Codemode JS sandbox. Once you run 4+ MCP servers and want lazy startup, 10-minute idle shutdown, OS keychain OAuth, and semantic tool ranking, install [`nicobailon/pi-mcp-adapter`](https://github.com/nicobailon/pi-mcp-adapter).
+- **Context-friendly MCP:** Start with built-in `pi mcp add` + Codemode JS sandbox. Once you run 4+ MCP servers and want lazy startup, 10-minute idle shutdown, OS keychain OAuth, and semantic tool ranking, install [`nicobailon/pi-mcp-adapter`](https://github.com/nicobailon/pi-mcp-adapter):
+  ```bash
+  pi install npm:pi-mcp-adapter
+  # then inside Pi: /mcp-adapter setup
+  ```
 
 ---
 
-## Rung 4 · Durability (`Pi Durable`)
+## Rung 4 · Durability (`Pi Durable` + `Rex`)
 
-When multi-hour sessions need to survive crashes, reboots, and laptop sleeps, step up to first-party **`@earendil-works/pi-durable`** (SQLite/JSONL checkpoints, background compaction at 200K/250K, `search_history`, atomic shared JSON app state, and live mid-run Read-Only tool toggles). Reference multi-device showcase: [`disler/durable-pi`](https://github.com/disler/durable-pi).
+When multi-hour sessions need to survive crashes, reboots, and laptop sleeps, step up to first-party **`@earendil-works/pi-durable`** (SQLite/JSONL checkpoints, background compaction at 200K/250K, `search_history`, atomic shared JSON app state, and live mid-run Read-Only tool toggles). Pair **`Rex`** (survives laptop disconnects) with **`@earendil-works/pi-durable`** (survives full OS reboots) on 24/7 Mac mini servers.
 
 ---
 
 ## Rung 5 · Remote & Mobile HITL Steering
 
 Steer your home Mac mini or Linux rig from your pocket with zero open router ports:
-- **Multi-box Tailscale HTTPS + Voice Mode:** [`pi-mobile`](https://pi.dev/packages/pi-mobile) (`/remote add <box>`, unified *"who needs you"* queue, spoken summaries + verbal confirmations).
+- **Multi-box Tailscale HTTPS + Voice Mode:** [`pi-mobile`](https://pi.dev/packages/pi-mobile) (`pi install npm:pi-mobile`, `/remote add <box>`, unified *"who needs you"* queue, spoken summaries + verbal confirmations).
 - **Native Android Compose + `/tree` forking:** [`ayagmar/pi-mobile`](https://github.com/ayagmar/pi-mobile) over Tailscale `*.ts.net` QR pairing.
 - **Zero-extra-app durable Telegram:** [`smixs/pi-durable-telegram`](https://github.com/smixs/pi-durable-telegram) (outbound long-poll, photos/PDFs/voice notes/file delivery).
 

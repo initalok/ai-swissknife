@@ -2,7 +2,7 @@
   "entry:cloudflare-workers-ai": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -11,7 +11,7 @@
   "entry:comfy-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v0.11.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -20,16 +20,16 @@
   "entry:comfyui": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v0.46.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T06:23:15Z"
+    "upstream_pushed_at": "2026-11-28T09:31:57Z"
   },
   "entry:comfyui-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -38,34 +38,43 @@
   "entry:context7": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-28T07:44:45Z"
   },
-  "entry:deepseek-harness": {
+  "entry:deepseek-ocr-2": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-22T11:00:05Z"
+    "upstream_pushed_at": "2026-02-03T00:33:19.000Z"
   },
-  "entry:deerflow": {
+  "entry:deepseek-v4.1-flash-1017": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T08:40:52Z"
+    "upstream_pushed_at": "2026-11-10T02:22:56.000Z"
+  },
+  "entry:diffusiongemma-26b": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-16T10:03:36.000Z"
   },
   "entry:exa-search": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -74,16 +83,25 @@
   "entry:firecrawl": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": null
   },
+  "entry:fish-drama-3": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-10-29T06:46:37.000Z"
+  },
   "entry:gemma-4": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -92,7 +110,7 @@
   "entry:gondolin": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -101,7 +119,7 @@
   "entry:google-ai-studio": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -110,16 +128,34 @@
   "entry:google-antigravity": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": null
   },
+  "entry:gpt-oss-120b": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2025-08-26T17:25:03.000Z"
+  },
+  "entry:gpt-oss-20b": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2025-08-26T17:25:47.000Z"
+  },
   "entry:gpt-researcher": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -128,7 +164,7 @@
   "entry:groq-cloud": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -137,7 +173,7 @@
   "entry:hermes-4": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -146,17 +182,17 @@
   "entry:hermes-agent": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v0.23.5",
-    "release_breaking_signal": true,
+    "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T07:58:56Z"
+    "upstream_pushed_at": "2026-11-28T10:07:45Z"
   },
   "entry:hf-in-harness-rl": {
     "collection_item_count": 11,
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "items:11",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -165,16 +201,16 @@
   "entry:hyperframes": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T07:59:28Z"
+    "upstream_pushed_at": "2026-11-28T09:47:01Z"
   },
   "entry:inkling-2-mini": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -183,16 +219,25 @@
   "entry:jina-reader": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": null
   },
+  "entry:kimi-k3": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-24T08:03:25.000Z"
+  },
   "entry:laya-05": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v0.5.6",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -201,25 +246,43 @@
   "entry:llama-cpp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v1.1.0",
-    "release_breaking_signal": true,
+    "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T07:59:52Z"
+    "upstream_pushed_at": "2026-11-28T10:00:23Z"
   },
   "entry:lm-link": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": null
   },
+  "entry:ltx-2.5": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-26T10:57:37.000Z"
+  },
+  "entry:mistral-large-4": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-24T08:49:52.000Z"
+  },
   "entry:mlx-lm": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v0.32.2",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -228,17 +291,35 @@
   "entry:mobile-build-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-19T03:33:58Z"
   },
+  "entry:muse-glimmer-30b": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-18T23:58:48.000Z"
+  },
+  "entry:nemotron-3.5-super-vl": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-10-22T17:24:14.000Z"
+  },
   "entry:nono": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
-    "latest_release_tag": null,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": "v0.82.0",
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-27T15:16:31Z"
@@ -246,7 +327,7 @@
   "entry:ntfy-push": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -255,7 +336,7 @@
   "entry:nvidia-nim": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -264,7 +345,7 @@
   "entry:obra-superpowers": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -273,7 +354,7 @@
   "entry:obsidian-skills": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "1.2.3",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -282,7 +363,7 @@
   "entry:openalex": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -291,16 +372,16 @@
   "entry:opencode": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:24:10Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v2.4.2",
     "release_breaking_signal": true,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T08:08:12Z"
+    "upstream_pushed_at": "2026-11-28T10:03:26Z"
   },
   "entry:opencode-mobile": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -309,7 +390,7 @@
   "entry:openrouter-free": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -318,7 +399,7 @@
   "entry:phonon-31m": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -327,7 +408,7 @@
   "entry:pi": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "v1.7.0",
     "release_breaking_signal": true,
     "upstream_archived": false,
@@ -336,7 +417,7 @@
   "entry:pi-durable-telegram": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -345,7 +426,7 @@
   "entry:pi-mcp-adapter": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -354,7 +435,7 @@
   "entry:pi-mobile-android": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -363,7 +444,7 @@
   "entry:pi-mobile-voice": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -372,7 +453,7 @@
   "entry:pi-obsidian-memory": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -381,25 +462,16 @@
   "entry:playwright-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-27T22:43:57Z"
   },
-  "entry:pollinations": {
-    "consecutive_fails": 0,
-    "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
-    "latest_release_tag": null,
-    "release_breaking_signal": false,
-    "upstream_archived": false,
-    "upstream_pushed_at": null
-  },
   "entry:qmd-search": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -408,7 +480,7 @@
   "entry:qwen-image-2.1": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -417,25 +489,43 @@
   "entry:qwen3-coder-next": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-03-06T14:38:33.000Z"
   },
+  "entry:qwen3.5-9b": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-03-02T00:51:43.000Z"
+  },
   "entry:qwen3.8-27b": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-07T04:42:17.000Z"
   },
+  "entry:qwen3.8-flash-next": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-07T04:42:40.000Z"
+  },
   "entry:qwen38-abliterated-lora": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -444,7 +534,7 @@
   "entry:qwen38-pi-lora": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -453,16 +543,25 @@
   "entry:qwen38-super-adapter": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-27T13:38:31.000Z"
   },
+  "entry:rex": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": null
+  },
   "entry:safeagents": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -471,7 +570,7 @@
   "entry:tailscale-serve": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -480,16 +579,16 @@
   "entry:unsloth-runtime": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-28T08:02:14Z"
+    "upstream_pushed_at": "2026-11-28T10:07:33Z"
   },
   "entry:wan-2.2": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -498,7 +597,7 @@
   "entry:wangp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": "manager-v0.1.21",
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -507,7 +606,7 @@
   "entry:zhipu-bigmodel": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T09:07:58Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -516,7 +615,7 @@
   "specialist:game-dev-3d:blender-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -525,7 +624,7 @@
   "specialist:game-dev-3d:unity-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -534,7 +633,7 @@
   "specialist:game-dev-3d:upstream": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -543,7 +642,7 @@
   "specialist:growth-and-social:humanizer": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -552,7 +651,7 @@
   "specialist:growth-and-social:postiz": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -561,7 +660,7 @@
   "specialist:growth-and-social:upstream": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -570,7 +669,7 @@
   "specialist:reverse-engineering:ghidra-mcp": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -579,7 +678,7 @@
   "specialist:reverse-engineering:oghidra": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -588,7 +687,7 @@
   "specialist:reverse-engineering:upstream": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -597,7 +696,7 @@
   "specialist:unfiltered-sovereign:hermes-4-neutral": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -606,7 +705,7 @@
   "specialist:unfiltered-sovereign:qwen38-26mb-lora": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -615,7 +714,7 @@
   "specialist:unfiltered-sovereign:upstream": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -624,7 +723,7 @@
   "watch:community:agent-vault-poc": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -633,43 +732,25 @@
   "watch:community:awesome-pi-directory": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": "2026-11-28T04:52:57Z"
   },
-  "watch:community:disler-durable-pi": {
+  "watch:community:deepseek-harness": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
-    "upstream_pushed_at": "2026-10-11T18:49:55Z"
-  },
-  "watch:community:hy-nomas-worlds": {
-    "consecutive_fails": 0,
-    "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
-    "latest_release_tag": null,
-    "release_breaking_signal": false,
-    "upstream_archived": false,
-    "upstream_pushed_at": "2026-11-12T19:03:33Z"
+    "upstream_pushed_at": "2026-11-22T11:00:05Z"
   },
   "watch:frontier:claude-fable-mythos-52": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
-    "latest_release_tag": null,
-    "release_breaking_signal": false,
-    "upstream_archived": false,
-    "upstream_pushed_at": null
-  },
-  "watch:frontier:deepseek-v41-flash": {
-    "consecutive_fails": 0,
-    "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -678,7 +759,7 @@
   "watch:frontier:gemini-4-carbon-argon": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -687,7 +768,7 @@
   "watch:frontier:gpt-62-astra-sol": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
@@ -696,10 +777,38 @@
   "watch:frontier:qwen4-max-24t": {
     "consecutive_fails": 0,
     "http_status": 200,
-    "last_checked": "2026-11-28T08:05:36Z",
+    "last_checked": "2026-11-28T10:08:47Z",
     "latest_release_tag": null,
     "release_breaking_signal": false,
     "upstream_archived": false,
     "upstream_pushed_at": null
+  },
+  "watch:models:ling-3.2-air": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-24T08:31:31.000Z"
+  },
+  "watch:models:muse-glimmer-collection": {
+    "collection_item_count": 4,
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": "items:4",
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-08-10T11:28:08.533Z"
+  },
+  "watch:models:tml-varloop-research": {
+    "consecutive_fails": 0,
+    "http_status": 200,
+    "last_checked": "2026-11-28T10:08:47Z",
+    "latest_release_tag": null,
+    "release_breaking_signal": false,
+    "upstream_archived": false,
+    "upstream_pushed_at": "2026-11-24T19:16:29.000Z"
   }
 }

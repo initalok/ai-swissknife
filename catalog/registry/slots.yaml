@@ -3,7 +3,7 @@ slots:
     title: "Zero-Card Cloud Flagship Gateway"
     role: "Primary $0 card-free API able to sustain ~300K-token coding agent loops and 1M context."
     primary: google-ai-studio
-    fallbacks: [zhipu-bigmodel, openrouter-free, pollinations]
+    fallbacks: [zhipu-bigmodel, openrouter-free]
     decision_id: adr-why-google-cloud
     world: cloud
 
@@ -33,7 +33,6 @@ slots:
     title: "Flagship Mod-Able Developer Harness"
     role: "Minimal hackable agent kernel supporting a 6-rung optional ricing ladder."
     primary: pi
-    experimental: deepseek-harness
     fallbacks: [opencode, hermes-agent]
     decision_id: adr-why-pi-and-opencode
 
@@ -86,3 +85,10 @@ slots:
     primary: tailscale-serve
     fallbacks: [lm-link]
     decision_id: adr-why-tailscale-and-lm-link
+
+  - id: mac-server
+    title: "24/7 Mac Mini Remote AI Cockpit"
+    role: "Persistent remote terminal server + crash/reboot-durable agent runtime on a power-efficient 16GB M4 Mac mini."
+    primary: rex
+    fallbacks: [pi]
+    world: mac

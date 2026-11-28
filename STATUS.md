@@ -2,7 +2,7 @@
 
 # System Status & Upstream Momentum Ledger
 
-Snapshot date: **2026-11-28** · Tracked entries: **57** (57 eligible for `llms.txt`) · Workflow slots: **12** · Active decisions: **10**.
+Snapshot date: **2026-11-28** · Tracked entries: **68** (68 eligible for `llms.txt`) · Workflow slots: **13** · Active decisions: **10**.
 
 This ledger is maintained automatically by the rolling link and upstream release verifier. Healthy handbook pages stay quiet; release updates, stale links, and flagged decisions collect here.
 
@@ -27,13 +27,11 @@ This ledger is maintained automatically by the rolling link and upstream release
 | [OpenRouter (:free Routes)](https://openrouter.ai/) | `gateway` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [Groq Cloud LPU](https://console.groq.com/) | `gateway` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [Cloudflare Workers AI (Clef & Clairic)](https://developers.cloudflare.com/workers-ai/) | `gateway` | `fresh` | 2026-11-28 | 21d | Not yet probed |
-| [Pollinations AI](https://pollinations.ai/) | `gateway` | `fresh` | 2026-11-28 | 120d | Not yet probed |
 | [Firecrawl](https://www.firecrawl.dev/) | `tool` | `fresh` | 2026-11-28 | 60d | Not yet probed |
 | [Jina Reader (r.jina.ai / s.jina.ai)](https://jina.ai/reader/) | `tool` | `fresh` | 2026-11-28 | 120d | Not yet probed |
 | [Exa 3.0 Neural Search](https://exa.ai/) | `tool` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [OpenAlex Academic Graph](https://docs.openalex.org/) | `tool` | `fresh` | 2026-11-28 | 120d | Not yet probed |
 | [GPT Researcher](https://github.com/assafelovic/gpt-researcher) | `tool` | `fresh` | 2026-11-28 | 60d | 2026-11-23 |
-| [DeerFlow 2.0](https://github.com/bytedance/deer-flow) | `tool` | `fresh` | 2026-11-28 | 60d | 2026-11-28 |
 | [Tailscale Serve (Loopback-to-Tailnet HTTPS Mesh)](https://tailscale.com/kb/1312/serve) | `fabric` | `fresh` | 2026-11-28 | 120d | Not yet probed |
 | [LM Link (Tailscale tsnet Zero-VPN GPU Sharing)](https://lmstudio.ai/docs/lmlink) | `fabric` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [pi-mobile (Multi-Box Tailscale HTTPS & Voice Mode)](https://pi.dev/packages/pi-mobile) | `mobile` | `fresh` | 2026-11-28 | 21d | Not yet probed |
@@ -44,11 +42,11 @@ This ledger is maintained automatically by the rolling link and upstream release
 | [Google Antigravity ($0 Individual Tier)](https://antigravity.google/) | `harness` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [OpenCode CLI & Desktop](https://github.com/anomalyco/opencode) | `harness` | `fresh` | 2026-11-28 | 120d | `v2.4.2` |
 | [Pi Coding Agent (+ @earendil-works/pi-durable)](https://github.com/earendil-works/pi) | `harness` | `fresh` | 2026-11-28 | 120d | `v1.7.0` |
-| [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) | `harness` | `fresh` | 2026-11-28 | 21d | 2026-11-22 |
 | [Hermes Agent](https://github.com/NousResearch/hermes-agent) | `harness` | `fresh` | 2026-11-28 | 60d | `v0.23.5` |
 | [llama.cpp (Mainline GGUF Server & Router)](https://github.com/ggml-org/llama.cpp) | `runtime` | `fresh` | 2026-11-28 | 120d | `v1.1.0` |
 | [Apple MLX (mlx-lm)](https://github.com/ml-explore/mlx-lm) | `runtime` | `fresh` | 2026-11-28 | 120d | `v0.32.2` |
 | [Unsloth Runtime & Studio](https://github.com/unslothai/unsloth) | `runtime` | `fresh` | 2026-11-28 | 60d | 2026-11-28 |
+| [Rex Terminal & Persistent Session Server (Superlogical)](https://www.superlogical.com/rex/docs/installation) | `tool` | `fresh` | 2026-11-28 | 21d | Not yet probed |
 | [WanGP v20.21 (One-Stop Low-VRAM Media Studio)](https://github.com/deepbeepmeep/WanGP) | `runtime` | `fresh` | 2026-11-28 | 21d | `manager-v0.1.21` |
 | [ComfyUI (Comfy-Org Programmable Node Graph)](https://github.com/Comfy-Org/ComfyUI) | `runtime` | `fresh` | 2026-11-28 | 60d | `v0.46.0` |
 | [Comfy-Org Official comfy-mcp (Local & Cloud)](https://github.com/Comfy-Org/comfy-mcp) | `mcp` | `fresh` | 2026-11-28 | 21d | `v0.11.0` |
@@ -75,9 +73,22 @@ This ledger is maintained automatically by the rolling link and upstream release
 | [Qwen3.8-27B Rank-96 Super-Adapter (HF Harness Hub)](https://huggingface.co/harness-hub/Qwen3.8-27B-super-adapter) | `adapter` | `fresh` | 2026-11-28 | 120d | 2026-11-27 |
 | [Qwen3.8-27B 26MB Uncensored LoRA (Rank-3)](https://huggingface.co/Securelayer7/Qwen3.8-27B-Uncensored-Abliterated) | `adapter` | `fresh` | 2026-11-28 | 60d | 2026-08-21 |
 | [In-Harness RL Recipe & HF Collection (OpenEnv + Harbor + TRL AsyncGRPO)](https://huggingface.co/collections/harness-hub/qwen38-27b-harness-adapters) | `tool` | `fresh` | 2026-11-28 | 60d | `items:11` |
+| [Qwen3.5-9B (Multimodal Hybrid DeltaNet)](https://huggingface.co/Qwen/Qwen3.5-9B) | `model` | `fresh` | 2026-11-28 | 120d | 2026-03-02 |
+| [OpenAI gpt-oss-20b (Native MXFP4 MoE)](https://huggingface.co/openai/gpt-oss-20b) | `model` | `fresh` | 2026-11-28 | 120d | 2025-08-26 |
+| [Meta Muse Glimmer 30B (+ DFlash 16-Token Drafter)](https://huggingface.co/meta-models/Muse-Glimmer-30B) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-18 |
+| [Google DiffusionGemma 26B-A4B (Block-Diffusion LLM)](https://huggingface.co/google/diffusiongemma-26B-A4B-it) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-16 |
+| [Qwen3.8-Flash-Next (180B / 6B Active + 51B N-Gram)](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-07 |
+| [OpenAI gpt-oss-120b (Single-80GB MXFP4 Reasoning)](https://huggingface.co/openai/gpt-oss-120b) | `model` | `fresh` | 2026-11-28 | 120d | 2025-08-26 |
+| [NVIDIA Nemotron 3.5 Super VL (120B-A12B Mamba-2 Hybrid)](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16) | `model` | `fresh` | 2026-11-28 | 60d | 2026-10-22 |
+| [DeepSeek-V4.1-Flash-1017 (552B · 4x KV Compression)](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-10 |
+| [Mistral Large 4 (1T-A52B + Embedded DSpark Drafter)](https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-24 |
+| [Moonshot Kimi-K3 (2.8T-A104B · First Open 3T-Class)](https://huggingface.co/moonshotai/Kimi-K3) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-24 |
+| [DeepSeek-OCR-2 (3B Visual Causal Flow)](https://huggingface.co/deepseek-ai/DeepSeek-OCR-2) | `model` | `fresh` | 2026-11-28 | 120d | 2026-02-03 |
+| [Fish Audio Drama 3 (35B-A3B Multi-Speaker TTS)](https://huggingface.co/fishaudio/drama-3) | `model` | `fresh` | 2026-11-28 | 60d | 2026-10-29 |
+| [Lightricks LTX-2.5 (22B Distilled Video + Synchronized Audio)](https://huggingface.co/Lightricks/LTX-2.5) | `model` | `fresh` | 2026-11-28 | 60d | 2026-11-26 |
 | [Hugging Face safeagents Proxy](https://github.com/huggingface/safeagents) | `tool` | `fresh` | 2026-11-28 | 60d | 2026-11-27 |
 | [earendil-works/gondolin (libkrun Micro-VM + Secret Proxy)](https://github.com/earendil-works/gondolin) | `tool` | `fresh` | 2026-11-28 | 21d | 2026-11-27 |
-| [nolabs-ai/nono (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono) | `tool` | `fresh` | 2026-11-28 | 60d | 2026-11-27 |
+| [nolabs-ai/nono v0.82 (macOS Seatbelt & Linux Landlock Sandbox)](https://github.com/nolabs-ai/nono) | `tool` | `fresh` | 2026-11-28 | 60d | `v0.82.0` |
 
 ## Specialist Tools & Upstream Directories
 

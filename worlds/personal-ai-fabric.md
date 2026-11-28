@@ -65,6 +65,47 @@ tailscale serve --bg http://127.0.0.1:8080
 Built-in upstream check: `tailscale serve status`
 <!-- swissknife:end -->
 
+<!-- swissknife:begin recipe id=lm-link -->
+<details>
+<summary>Launch command — LM Link (Tailscale tsnet Zero-VPN GPU Sharing) (CUDA / llama.cpp / CLI)</summary>
+
+```bash
+lms link enable
+```
+
+</details>
+<!-- swissknife:end -->
+
+<details>
+<summary>Minimal Tailscale ACL Policy, Cross-Box Env Vars & ntfy Finish Ping</summary>
+
+```json
+{
+  "tagOwners": {
+    "tag:ai-node": ["autogroup:owner"],
+    "tag:admin-devices": ["autogroup:owner"]
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": ["tag:admin-devices", "tag:ai-node"],
+      "dst": ["tag:ai-node:443"]
+    }
+  ]
+}
+```
+
+```bash
+# Cross-box remote targeting over Tailscale Serve HTTPS (*.ts.net)
+export LLAMA_BASE_URL="https://gpu-1.<tailnet>.ts.net/v1"
+export COMFYUI_URL="https://gpu-1.<tailnet>.ts.net"
+
+# 1-line HOOTL finish ping when long builds or renders complete
+cmd && curl -d "Job complete" ntfy.sh/<private-topic>
+```
+
+</details>
+
 ---
 
 ## Five Hybrid Patterns Where Connecting Worlds Wins

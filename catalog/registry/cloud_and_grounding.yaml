@@ -134,28 +134,6 @@ entries:
     limitations:
       - "Legacy Workers AI generative catalog models were hard-retired on Nov 20, 2026 (HTTP 410)."
 
-  - id: pollinations
-    kind: gateway
-    name: "Pollinations AI"
-    summary: "Keyless community OpenAI-compatible text and FLUX image endpoint requiring zero signup or authentication."
-    when_to_use: "Last-resort keyless fallback for throwaway public sandbox tests where no API keys exist."
-    evidence_tier: official-docs
-    lifecycle: operational
-    decay_class: stable
-    last_verified: "2026-11-28"
-    url: "https://pollinations.ai/"
-    tags: [cloud-free]
-    capabilities: [coding]
-    relations:
-      runs_on: [cloud]
-    meta:
-      env_key: null
-      base_url: "https://text.pollinations.ai/openai"
-      default_model: "openai"
-      quota: "Keyless fair-use IP quota (text and image)"
-    limitations:
-      - "Shared public community service; never transmit private code, credentials, or personal data."
-
   - id: firecrawl
     kind: tool
     name: "Firecrawl"
@@ -250,22 +228,3 @@ entries:
       license: Apache-2.0
     limitations:
       - "Audit every cited claim, date, and quantitative metric against primary sources before publishing."
-
-  - id: deerflow
-    kind: tool
-    name: "DeerFlow 2.0"
-    summary: "Open-source deep research harness executing web gathering, code analysis, and synthesis inside an isolated Docker sandbox."
-    when_to_use: "Multi-step deep research reports when you want container-isolated execution."
-    evidence_tier: official-docs
-    lifecycle: operational
-    decay_class: operational
-    last_verified: "2026-11-28"
-    url: "https://github.com/bytedance/deer-flow"
-    tags: [research]
-    capabilities: [research]
-    relations:
-      runs_on: [mac, gpu-pc]
-    meta:
-      license: MIT
-    limitations:
-      - "Requires Docker and careful prompt/token budgeting to avoid runaway web fetches."

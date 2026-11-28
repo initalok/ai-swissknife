@@ -9,7 +9,7 @@ entries:
     decay_class: stable
     last_verified: "2026-11-28"
     url: "https://tailscale.com/kb/1312/serve"
-    tags: [security]
+    tags: [security, mac-16gb]
     capabilities: [fabric]
     relations:
       runs_on: [mac, gpu-pc, mobile-hitl]

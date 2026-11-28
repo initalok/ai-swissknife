@@ -13,7 +13,7 @@ order: 2
 
 # 21-Day Watch List
 
-Fast-moving developments are tracked here under strict hard caps (**maximum 5 frontier items and 5 community field notes**) and an **auto-expiring 21-day window**. Items exist to be promoted into an active Workflow Slot or dropped cleanly without accumulating sediment. Frontier items are strictly **monitor-only** and are automatically excluded from [`llms.txt`](../llms.txt).
+Fast-moving developments are tracked here under flexible 3-bucket caps (**up to 8 frontier ceilings, up to 10 Model News & Development Radar entries, and up to 8 community/independent harnesses**) and an **auto-expiring 21-day window**. Items exist to be promoted into an active Workflow Slot or dropped cleanly without accumulating sediment. Frontier items are strictly **monitor-only** and are automatically excluded from [`llms.txt`](../llms.txt).
 
 <!-- swissknife:begin watch -->
 ## Frontier Ceiling (Monitor-Only)
@@ -46,28 +46,37 @@ Leads autonomous workflow execution (53.9% AutomationBench) powering Spark Task 
 - **Evidence:** Official documentation · **Window:** 21 days remaining
 - **Boundary:** Current 2.4T checkpoint is cloud API only; await smaller open-weight checkpoints.
 
-### [DeepSeek-V4.1-Flash (552B)](https://www.deepseek.com/)
+## Model News & Development Radar
 
-Asymmetric Causal Encoder-Decoder (8B active in / 16B out) achieving a 1/4 HBM KV cache footprint; watch for smaller open weights adopting this KV compression.
+### [Thinking Machines TML-d24-varloop-research (Variable-Pass Looped MoE)](https://huggingface.co/thinkingmachines/TML-d24-varloop-research)
+
+Open-weight research counterpart to Inkling 2 Mini (26.4B, NVFP4/MXFP8, 1M ctx) letting you vary middle-layer passes (1-5 loops, 3.4B-7.4B effective active) at inference time.
+
+- **Evidence:** Official documentation · **Window:** 21 days remaining
+- **Boundary:** Research checkpoint requiring ~20 GB VRAM (32GB+ card or 32GB+ Mac recommended).
+
+### [inclusionAI Ling-3.2-air (124B-A5.5B Hybrid-Linear Workflow MoE)](https://huggingface.co/inclusionAI/Ling-3.2-air)
+
+Nov 23, 2026 multimodal MoE (35 KDA + 7 Gated MLA layers, only 5.5B active) jumping to 61% AutomationBench-AA and 1340 Elo on AA-Briefcase v1.1 for document/workflow automation.
 
 - **Evidence:** Vendor / lab claim · **Window:** 21 days remaining
-- **Boundary:** Exceeds 16GB VRAM + 64GB RAM local memory; accessible via NVIDIA NIM prototyping API.
+- **Boundary:** 124B total parameters require high-RAM hybrid offloading or server GPUs; specialized toward document/workflow reasoning.
 
-## Community Field Observations
+### [Meta Muse Glimmer Collection (BF16 + GGUF + ExecuTorch + DFlash)](https://huggingface.co/collections/meta-models/muse-glimmer)
 
-### [disler/durable-pi Multi-Device Agent Showcase](https://github.com/disler/durable-pi)
+Tracks Meta's 30B local agentic family and its 3B DFlash 16-token block-diffusion speculative drafter across GGUF and Apple Metal ExecuTorch formats.
 
-Demonstrates crash-resumable SQLite agent state, atomic shared app state, and live mid-run tool toggling on top of @earendil-works/pi-durable.
+- **Evidence:** Official documentation · **Window:** 21 days remaining
+- **Boundary:** Watch for smaller 12B-16B DFlash derivatives that fit inside single 16GB cards.
 
-- **Evidence:** Field observation · **Window:** 21 days remaining
-- **Boundary:** Reference architecture; first-party @earendil-works/pi-durable lives inside the main Pi monorepo.
+## Community & Independent Harnesses
 
-### [Tencent-Hunyuan/Hy-Nomas Walkable Worlds](https://github.com/Tencent-Hunyuan/Hy-Nomas)
+### [DeepSeek Harness (dsh — Independent Swappable-Loop Platform)](https://github.com/deepseek-ai/deepseek-harness)
 
-Single-GPU WASD-navigable world generator chained by indie creators with LTX-2.5 for video-conditioned audio prototyping.
+Cordis plugin-everything agent platform where even the core agent loop is a swappable plugin, shipping a read-only-by-default sandbox and desktop/web preview. Demoted from active slots while maturing independently.
 
-- **Evidence:** Field observation · **Window:** 21 days remaining
-- **Boundary:** Uses NVIDIA PixelUMM decoder (strictly non-commercial previs and pitch use only).
+- **Evidence:** Official documentation · **Window:** 21 days remaining
+- **Boundary:** Rapidly iterating developer preview; independent from our primary Pi/OpenCode spine.
 
 ### [shaftoe/awesome-pi-coding-agent (CI-Updated Extension Index)](https://github.com/shaftoe/awesome-pi-coding-agent)
 

@@ -297,6 +297,39 @@ entries:
         self.assertIsNotNone(BREAKING_KEYWORDS_RE.search("Breaking Change: removed telemetry"))
         self.assertIsNone(BREAKING_KEYWORDS_RE.search("when a profile is renamed, moved or removed"))
 
+    def test_three_bucket_watch_list_and_flexible_caps(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _build_fixture_repo(root)
+            watch_items = "\n".join(
+                f"    - id: m-{i}\n"
+                f"      name: Model {i}\n"
+                f"      url: https://huggingface.co/org/model-{i}\n"
+                f"      last_verified: '2026-11-28'\n"
+                f"      summary: Research model {i}."
+                for i in range(10)
+            )
+            (root / "catalog" / "registry" / "watch_models.yaml").write_text(
+                f"watch:\n  models:\n{watch_items}\n",
+                encoding="utf-8",
+            )
+            ws = load_workspace(root)
+            self.assertEqual(len(ws.watch_models), 10)
+            self.assertEqual(validate_workspace(ws), [])
+
+            snap = build_snapshot(ws, as_of=date(2026, 12, 27))
+            self.assertEqual(snap["watch"]["models"], [])
+            self.assertGreaterEqual(snap["counts"]["watch_expired"], 10)
+
+            (root / "catalog" / "registry" / "watch_models.yaml").write_text(
+                f"watch:\n  models:\n{watch_items}\n"
+                "    - id: m-10\n      name: Model 10\n      url: https://huggingface.co/org/model-10\n"
+                "      last_verified: '2026-11-28'\n      summary: Excess item.\n",
+                encoding="utf-8",
+            )
+            errs = validate_workspace(load_workspace(root))
+            self.assertTrue(any("[watch:models] exceeds cap: 11 > 10" in e for e in errs))
+
 
 if __name__ == "__main__":
     unittest.main()
